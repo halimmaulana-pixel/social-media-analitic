@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-label="figm4 sampling" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Empat sampling frame — dan bias yang menyertai masing-masing</text>
+<rect x="30" y="58" width="462" height="178" rx="10" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.5"/>
+<text x="46" y="84" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">KEYWORD SEARCH</text>
+<text x="46" y="106" font-size="12" fill="#141414" text-anchor="start">Sampel = post yang memuat query (hashtag/kata).</text>
+<text x="46" y="129" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: relevan langsung dgn topik.</text>
+<text x="46" y="147" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: query sempit = rantai kecil; platform bisa memotong</text>
+<text x="46" y="162" font-size="11.5" fill="#9B2C2C" text-anchor="start">query diam-diam.</text>
+<rect x="516" y="58" width="462" height="178" rx="10" fill="#F1FAF5" stroke="#009E73" stroke-width="1.5"/>
+<text x="532" y="84" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">TIMELINE (PER AKUN)</text>
+<text x="532" y="106" font-size="12" fill="#141414" text-anchor="start">Sampel = seluruh aktivitas akun yang dipilih.</text>
+<text x="532" y="129" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: konteks akun utuh, kronologis.</text>
+<text x="532" y="147" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: representatifnya akun, bukan pop; kurasi hidup</text>
+<text x="532" y="162" font-size="11.5" fill="#9B2C2C" text-anchor="start">manusia (bias kurator).</text>
+<rect x="30" y="260" width="462" height="178" rx="10" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.5"/>
+<text x="46" y="286" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">SNOWBALL (REPLY/MENTION)</text>
+<text x="46" y="308" font-size="12" fill="#141414" text-anchor="start">Sampel = perluasan via tautan dari sampel awal.</text>
+<text x="46" y="331" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: menemukan komunitas tersembunyi.</text>
+<text x="46" y="349" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: terjebak di satu kubu — lingkaran yang menutup diri.</text>
+<rect x="516" y="260" width="462" height="178" rx="10" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.5"/>
+<text x="532" y="286" font-size="13" fill="#7A4FA0" font-weight="bold" text-anchor="start">RANDOM (FIREHOSE SAMPLE)</text>
+<text x="532" y="308" font-size="12" fill="#141414" text-anchor="start">Sampel = cuplikan acak dari stream/firehose.</text>
+<text x="532" y="331" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: tak dibentuk algoritma recommendation per-halaman.</text>
+<text x="532" y="349" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: banyak tak relevan; users kecil terwakili,</text>
+<text x="532" y="364" font-size="11.5" fill="#9B2C2C" text-anchor="start">justifikasi window harus ditulis.</text>
+<rect x="30" y="446" width="940" height="56" rx="8" fill="#FFFFFF" stroke="#E69F00" stroke-width="1.4"/>
+<text x="46" y="468" font-size="12.5" fill="#E69F00" text-anchor="start">Pilih frame yang menjawab pertanyaan riset — bukan yang paling mudah. Kuota &amp; akses</text>
+<text x="46" y="488" font-size="12.5" fill="#E69F00" text-anchor="start">adalah bagian dari desain: backbone frame yang lemah tidak diselamatkan oleh jumlah halaman yang besar.</text>
+</svg>

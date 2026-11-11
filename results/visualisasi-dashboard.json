@@ -1,0 +1,49 @@
+{
+  "module_name": "Visualization and Dashboards: Networks, Time, Text, and Honest Charts",
+  "module_description": "Module 26 teaches analytical communication: graph visualization discipline (Gephi/igraph/ForceAtlas), temporal charts and small multiples for topic trends, honest charting (axes, uncertainty, sample sizes), and building interactive dashboards (Streamlit, Shiny, Power BI/Tableau, or Observable). Students produce a dashboard and a one-page insight memo - the standard entry-level job test format.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Visual encoding choices and honesty in charts",
+    "Network visualization and layout",
+    "Time series and topic-trend visualizations",
+    "Interactive dashboards (Streamlit/Shiny/BI)",
+    "Insight memos and data storytelling"
+  ],
+  "learning_outcomes": [
+    "C3 Produce a multi-panel visualization of a social dataset",
+    "C4 Build an interactive dashboard for a listening question",
+    "C5 Write an insight memo that only claims what the data supports"
+  ],
+  "methods_models": [
+    "Graph layouts (ForceAtlas), aggregation and smoothing, small multiples, interactive filtering, uncertainty display",
+    "Design review rubrics"
+  ],
+  "evaluation_metrics": "Not model metrics; rubric on clarity, honesty, and completeness; peer review scoring",
+  "pitfalls_limitations": "Cherry-picked windows, truncated axes, over-plotting, interpreting layout position as meaning, dashboards that hide uncertainty",
+  "tools_stack": "matplotlib/seaborn, plotly, igraph + Gephi, streamlit, shiny (R), tableau public or power BI (teaching licences vary)",
+  "commercial_platforms": "Tableau Public and Power BI demos",
+  "tools_access_cost": "BI teaching licences vary by institution; open-source tools are free",
+  "lab_activities": "Build a dashboard on the course dataset with at least one network view and one temporal view",
+  "datasets_apis": "Course dataset (any topic corpus)",
+  "assessment_methods": "Dashboard plus one-page insight memo, peer-reviewed against a rubric; graded on clarity, honesty and completeness",
+  "data_collection_workflow": "Collect -> clean -> aggregate per unit/time -> build dashboard -> write insight memo -> preserve data and code",
+  "textbooks": [
+    "Cleveland, Visualizing Data (1993)",
+    "Wilke, Fundamentals of Data Visualization (2019)",
+    "Healy, Data Visualization: A Practical Introduction (2018)"
+  ],
+  "key_papers": [
+    "2024-2026 dashboard/LLM-reporting practice guides"
+  ],
+  "trends_2024_2026": "2024-2026: LLM-generated narrative reports and agentic dashboards changed the analyst's job toward auditing generated claims, so visualization teaching now includes verification habits",
+  "industry_relevance": "Dashboard and insight-reporting skills are the most common entry-level requirement for analyst roles; students leave with a portfolio dashboard plus a one-page insight memo, which is the standard job-test format for insights teams.",
+  "localization_context": "Indonesian-language data (local issues, local brands) is used so the dashboard and narrative are in Bahasa Indonesia, matching the reporting language of local clients and courses' capstone sponsors.",
+  "ethics_regulation": "Honest charting (no truncated axes, no cherry-picked windows), privacy-safe display of user-level data, and clear separation of observed metrics from inferred claims.",
+  "case_study_scenarios": "Build a live dashboard tracking an Indonesian issue across platforms for a capstone client.",
+  "deliverable_format": "Dashboard app + insight memo",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

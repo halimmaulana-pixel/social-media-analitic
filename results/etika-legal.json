@@ -1,0 +1,50 @@
+{
+  "module_name": "Ethics, Law, and Governance in Social Media Analytics",
+  "module_description": "Module 28 is the ethics spine of the course: IRB/ethics review, data protection (UU PDP No. 27/2022, GDPR), the public-is-not-permissible principle for social data, anonymization and re-identification risk, algorithmic accountability and platform transparency, bias and fairness in models, and responsible publication (code/data sharing, replication). Students produce an ethics/data-management note for their own capstone.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Ethics frameworks for computational social research",
+    "Personal data protection law (UU PDP, GDPR) applied to platform data",
+    "Re-identification and anonymization risk",
+    "IRB/ethics review workflow for student research",
+    "Algorithmic accountability and bias in analytics models",
+    "Replication and data-sharing duties"
+  ],
+  "learning_outcomes": [
+    "C3 Apply legal and ethical criteria to an analytics plan",
+    "C4 Write an ethics/DPIA note for a capstone project",
+    "C5 Evaluate bias and fairness implications of an analytics model"
+  ],
+  "methods_models": [
+    "Risk assessment (DPIA-style), bias auditing of model outputs, anonymization evaluation (re-identification tests)",
+    "Policy analysis using platform documents as corpus"
+  ],
+  "evaluation_metrics": "Rubric-graded ethics memo; optional re-identification success rate as empirical check",
+  "pitfalls_limitations": "Treating public data as automatically usable, weak pseudonymization (usernames are identifiers), group-level harm from model errors, publishing identifiable graphs",
+  "tools_stack": "DPIA templates, anonymization/evaluation scripts, policy corpus tools",
+  "commercial_platforms": "None",
+  "tools_access_cost": "None (free methods)",
+  "lab_activities": "Draft and defend an ethics / DPIA note for a proposed capstone dataset; peer-reviewed against the course rubric",
+  "datasets_apis": "Policy documents, platform transparency reports and Terms of Service as a text corpus; no personal data collected",
+  "assessment_methods": "Ethics/DPIA note graded with a rubric; includes defence of sampling, retention, anonymisation and disclosure choices",
+  "data_collection_workflow": "Identify data and legal basis -> DPIA/risk assessment -> collect only what is needed -> anonymise -> document retention and disclosure -> preserve the ethics note",
+  "textbooks": [
+    "Zafarani et al., Social Media Mining, ethics chapter",
+    "AAAI/ACM ethics guidance for computational research",
+    "UU PDP text and guidance"
+  ],
+  "key_papers": [
+    "2024-2026 papers on data protection and platform research; AI-use disclosure guidance for research"
+  ],
+  "trends_2024_2026": "2024-2026: AI-use disclosure became a journal requirement, and platform data protection enforcement tightened, so analytics teaching must integrate compliance documentation",
+  "industry_relevance": "Ethics and governance are now screening criteria in research assistantships, editorial fact-checking units and trust-and-safety hiring; the module produces an IRB-ready data-management note that is directly reusable in capstone projects.",
+  "localization_context": "UU PDP No. 27/2022 obligations (legal basis, minimization, retention), Indonesian academic norms on student research ethics (kaji etik), and local debates on election data research are the worked examples.",
+  "ethics_regulation": "The module itself: data protection principles, consent and re-identification risk, IRB/ethics-review workflow, research reproducibility duties, algorithmic accountability (DSA/platform transparency), and consequences of violating platform Terms of Service.",
+  "case_study_scenarios": "Produce the ethics/DPIA note for your capstone and defend its sampling and retention choices.",
+  "deliverable_format": "Ethics/DPIA note + disclosure statement",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

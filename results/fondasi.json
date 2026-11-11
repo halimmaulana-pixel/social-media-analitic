@@ -1,0 +1,51 @@
+{
+  "module_name": "Foundations and Scope of Social Media Analytics",
+  "module_description": "Module 1 defines social media analytics (SMA) as the pipeline of collecting, processing and interpreting platform data, positioning it among market research, computational social science, and communication research. It introduces the data life cycle (access, collection, cleaning, analysis, preservation), and the descriptive/predictive/prescriptive maturity ladder that the rest of the course implements. It also sets course conventions: reproducibility, unit of analysis (post, user, conversation), and what an 'insight' must contain to be valid.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Definition and scope of social media analytics",
+    "Analytics maturity ladder (descriptive, predictive, prescriptive)",
+    "Data life cycle from access to preservation",
+    "Unit of analysis: post / user / conversation / network",
+    "Reproducibility and documentation standards"
+  ],
+  "learning_outcomes": [
+    "C2 Explain the scope, applications and limits of social media analytics",
+    "C3 Classify an analytics task into descriptive, predictive or prescriptive",
+    "C4 Sketch the data life cycle for a given question"
+  ],
+  "methods_models": [
+    "Taxonomy of analytics tasks (monitoring, comparing, predicting, explaining)",
+    "Problem framing into an answerable question",
+    "Study design types in platform research (observational, comparative, longitudinal)"
+  ],
+  "evaluation_metrics": "Not the focus of this module; students produce a written analysis plan instead of model metrics",
+  "pitfalls_limitations": "Confusing metrics with insights; generalizing from one platform or one time window; treating engagement counts as emotion",
+  "tools_stack": "pandas, Jupyter/Colab, Git/GitHub for documentation, Markdown reporting",
+  "lab_activities": "Live walkthrough of a commercial dashboard (Pulsar or Talkwalker trial) next to the same metric computed from raw API data",
+  "datasets_apis": "Course dataset: X (Twitter) recent-search archive or a public Reddit sample; store as raw JSON + tidy CSV",
+  "assessment_methods": "Written analysis plan (2-3 pages) plus in-class quiz on definitions and maturity levels",
+  "commercial_platforms": "Native platform analytics or a commercial listening dashboard (Pulsar / Talkwalker / Meltwater / Brandwatch / Sprout Social) used for read-only comparison",
+  "tools_access_cost": "Open-source tools are free; commercial listening seats are licensed per seat and usually out of university budget; API tiers vary per platform",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "Zafarani, Abbasi and Liu, Social Media Mining (Cambridge, 2014), ch. 1-2",
+    "Silge and Robinson, Text Mining with R (O'Reilly, 2017), ch. 1",
+    "Wasserman and Faust, Social Network Analysis (1994), ch. 1"
+  ],
+  "key_papers": [
+    "We Are Social / DataReportal Digital 2026 reports for platform-scale figures",
+    "Pew Research Center social media fact sheet (2026) for usage baselines"
+  ],
+  "trends_2024_2026": "2024-2026 positioning: analytics work shifted from 'brand listening' to audience insight and trust-and-safety; AI-generated content and short video changed what counts as a content unit",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "Students re-frame a client brief (e.g. 'is our brand perception worsening on TikTok?') into a measurable question and a sampling plan.",
+  "deliverable_format": "Analysis plan document (Markdown/PDF)",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "module_name": "Detecting Synthetic and AI-Generated Content",
+  "module_description": "Module 20 is the newest required module: detecting AI-generated text, images, audio and video (deepfakes) in social streams. It covers statistical and learned detectors, provenance/watermarking standards, human perception limits, and the practical analytics problem of measuring how much of a corpus is synthetic. Students train and evaluate a detector on a public synthetic/real dataset and learn its brittleness.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "AI-generated text detection (statistical, watermark, learned)",
+    "Image/video deepfake detection",
+    "Audio/synthetic voice detection",
+    "Provenance, watermarking and metadata standards",
+    "Limits of detection: false alarms, evasion, model drift"
+  ],
+  "learning_outcomes": [
+    "C3 Train and evaluate a synthetic-content detector",
+    "C4 Explain watermarking and provenance as policy/technical tools",
+    "C5 Quantify detection error and its consequences for analysis"
+  ],
+  "methods_models": [
+    "Detector training (fine-tuned classifiers, perplexity-based detectors, watermark detection), forensic features, ensemble with metadata checks",
+    "C2PA/provenance verification"
+  ],
+  "evaluation_metrics": "Accuracy, FPR/FNR, robustness under paraphrase and cross-model tests, human vs machine agreement",
+  "pitfalls_limitations": "Detectors degrade on paraphrased or unseen-generator content; false accusations against human writers; distribution shift with each new model; heavy class imbalance",
+  "tools_stack": "transformers, image forensics tooling, ROC analysis, watermark libraries where available",
+  "commercial_platforms": "Brief mention of commercial brand-safety/deepfake detection vendors",
+  "tools_access_cost": "Detector APIs priced per call; training a small model is free on free GPU tiers",
+  "lab_activities": "Train a text detector on a public human/AI corpus and test it on paraphrased text and a different generator",
+  "datasets_apis": "Public AI-generated text datasets, deepfake image/video datasets",
+  "assessment_methods": "Lab notebook plus graph figures and a short interpretation; graded on correctness of metrics and defensibility of substantive claims",
+  "data_collection_workflow": "Build the interaction graph from collected data -> deduplicate accounts and edges -> compute metrics -> cluster communities -> archive graph object and code",
+  "textbooks": [
+    "MDPI 2026 special issue paper on synthetic media (deepfakes and beyond)",
+    "AI Tracking Center / NewsGuard AI misinformation tracking reports"
+  ],
+  "key_papers": [
+    "ACM/Nature 2025-2026 empirical analyses of AI-generated misinformation on X",
+    "Scoping reviews of generative AI misinformation (2026)"
+  ],
+  "trends_2024_2026": "2024-2026: synthetic content became an analytics object in its own right; provenance and watermarking entered platform policy, so analytics now includes 'share of synthetic posts' as a metric",
+  "industry_relevance": "Directly used in short-form content strategy, creator-marketing measurement, and social-commerce analytics teams; the metrics in this module (watch time, completion, saves, CTR via video) are the same KPIs agencies report to clients.",
+  "localization_context": "Taught against the Indonesian short-video and live-commerce ecosystem (TikTok Shop, live shopping sessions, Shopee/Tokopedia live), which has different content formats and monetization mechanics from the US market.",
+  "ethics_regulation": "Disclosure of paid partnerships, sponsored content and affiliate links; UU PDP and platform rules on scraping engagement data; caution when profiling creators and audiences from public metrics.",
+  "case_study_scenarios": "Estimate what share of posts about a local issue are AI-generated and how confident you can be.",
+  "deliverable_format": "Detector + uncertainty report on a sample corpus",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

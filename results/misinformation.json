@@ -1,0 +1,50 @@
+{
+  "module_name": "Misinformation, Rumor Detection, and Trust & Safety",
+  "module_description": "Module 19 treats false information as an analytics problem: diffusion of rumors vs corrections, stance detection toward claims, claim matching and fact-checking pipelines, bot-amplified false claims, and platform content moderation as a data source. Students learn to build a claim-verification pipeline (retrieve, cluster, match to fact-checks) and to measure correction effectiveness.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Rumor vs misinformation vs disinformation taxonomy",
+    "Rumor diffusion curves and correction spread",
+    "Stance detection toward claims",
+    "Claim matching and fact-check integration",
+    "Veracity classification and its limits",
+    "Moderation and enforcement signals"
+  ],
+  "learning_outcomes": [
+    "C3 Build a stance detection pipeline for a claim corpus",
+    "C4 Measure correction effectiveness empirically",
+    "C5 Discuss limits of automatic veracity classification"
+  ],
+  "methods_models": [
+    "Stance classification (BERT-based), claim clustering and deduplication, temporal diffusion comparison (claim vs correction), credibility network features",
+    "Fact-check retrieval/ranking"
+  ],
+  "evaluation_metrics": "Accuracy/macro-F1 for stance and veracity, Agree/Disagree/No stance tri-class metrics, AUC-PR for rare claims, human spot-check of corrections",
+  "pitfalls_limitations": "Ground truth ambiguity (fact-check scope), temporal leakage, correction measurement confounded by platform reach, dialect/code-mixing hurting stance models",
+  "tools_stack": "transformers for stance, claim-cluster tools, fact-check API integrations (Google Fact Check API), returns",
+  "commercial_platforms": "Optional: newsroom fact-checking workflow demos",
+  "tools_access_cost": "Fact-check APIs are free; annotation work is the real cost",
+  "lab_activities": "Stance detection on an issue corpus, then compare diffusion of a claim vs its correction",
+  "datasets_apis": "Indonesian hoax/fact-check datasets plus live claim corpora",
+  "assessment_methods": "Lab notebook plus graph figures and a short interpretation; graded on correctness of metrics and defensibility of substantive claims",
+  "data_collection_workflow": "Build the interaction graph from collected data -> deduplicate accounts and edges -> compute metrics -> cluster communities -> archive graph object and code",
+  "textbooks": [
+    "Jurafsky & Martin, ch. on stance/NLP for social good",
+    "Misinformation survey papers (2024-2026)"
+  ],
+  "key_papers": [
+    "2024-2026 scoping reviews of generative AI and misinformation (e.g. Park 2026)",
+    "arXiv 2505.10266 characterizing AI-generated misinformation on X"
+  ],
+  "trends_2024_2026": "2024-2026: generative AI scaled both the volume and the credibility of false claims; detection shifted towards provenance, watermarking and behavioral signals rather than pure text classifiers",
+  "industry_relevance": "Used in disinformation/trust-and-safety teams, political-communication research units, community-management analytics, and influence-marketing measurement; network metrics are standard deliverables in crisis-mapping briefings.",
+  "localization_context": "Practised on Indonesian case networks (election-issue discussion, anti-hoax communities, local brand mentions) where the platform mix and language mix differ from US/EU benchmark datasets.",
+  "ethics_regulation": "Re-identification risk of pseudonymous accounts, doxxing risk when publishing ego-networks, and the ethical line between mapping influence and surveilling individuals; UU PDP applies to any data tied to identifiable accounts.",
+  "case_study_scenarios": "Track a local hoax claim, its spread and the effect of fact-checks.",
+  "deliverable_format": "Stance dataset + claim-correction analysis memo",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

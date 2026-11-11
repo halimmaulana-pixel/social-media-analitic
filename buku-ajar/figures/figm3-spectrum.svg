@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-label="figm3 spectrum" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="374" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Spektrum struktur: terstruktur - semi-terstruktur - tak terstruktur</text>
+<rect x="30" y="66" width="296" height="214" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="46" y="92" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">TERSTRUKTUR</text>
+<text x="46" y="120" font-size="12" fill="#5A5A5A" text-anchor="start">Contoh konten:</text>
+<text x="46" y="142" font-size="12.5" fill="#141414" text-anchor="start">engagement log, follower count, watch</text>
+<text x="46" y="158" font-size="12.5" fill="#141414" text-anchor="start">time, timestamp</text>
+<line x1="46" y1="168" x2="310" y2="168" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="46" y="192" font-size="12" fill="#5A5A5A" text-anchor="start">Implikasi tooling:</text>
+<text x="46" y="214" font-size="12" fill="#141414" text-anchor="start">tabel SQL/pandas; dtype tetap; skala</text>
+<text x="46" y="230" font-size="12" fill="#141414" text-anchor="start">besar pilih parquet</text>
+<rect x="352" y="66" width="296" height="214" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.8"/>
+<text x="368" y="92" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">SEMI-TERSTRUKTUR</text>
+<text x="368" y="120" font-size="12" fill="#5A5A5A" text-anchor="start">Contoh konten:</text>
+<text x="368" y="142" font-size="12.5" fill="#141414" text-anchor="start">objek API JSON (post, comment), HTML</text>
+<text x="368" y="158" font-size="12.5" fill="#141414" text-anchor="start">forum, XML feed</text>
+<line x1="368" y1="168" x2="632" y2="168" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="368" y="192" font-size="12" fill="#5A5A5A" text-anchor="start">Implikasi tooling:</text>
+<text x="368" y="214" font-size="12" fill="#141414" text-anchor="start">pandas/tidy + kolom entitas; simpan</text>
+<text x="368" y="230" font-size="12" fill="#141414" text-anchor="start">JSON asli untuk audit</text>
+<rect x="674" y="66" width="296" height="214" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.8"/>
+<text x="690" y="92" font-size="13.5" fill="#D55E00" font-weight="bold" text-anchor="start">TAK TERSTRUKTUR</text>
+<text x="690" y="120" font-size="12" fill="#5A5A5A" text-anchor="start">Contoh konten:</text>
+<text x="690" y="142" font-size="12.5" fill="#141414" text-anchor="start">teks bebas komentar, gambar, video,</text>
+<text x="690" y="158" font-size="12.5" fill="#141414" text-anchor="start">audio, live-stream</text>
+<line x1="690" y1="168" x2="954" y2="168" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="690" y="192" font-size="12" fill="#5A5A5A" text-anchor="start">Implikasi tooling:</text>
+<text x="690" y="214" font-size="12" fill="#141414" text-anchor="start">NLP/CV/ASR per kasus; simpan fitur</text>
+<text x="690" y="230" font-size="12" fill="#141414" text-anchor="start">hasil ekstraksi + penunjuk file mentah</text>
+<line x1="324" y1="254" x2="350" y2="254" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<line x1="646" y1="254" x2="672" y2="254" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<text x="22" y="300" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="start">Satu post biasa menjangkau ketiga band:</text>
+<text x="22" y="322" font-size="12.5" fill="#5A5A5A" text-anchor="start">metadata (JSON) + teks isi (teks bebas) + OCR on-screen (tak terstruktur).</text>
+<rect x="28" y="348" width="944" height="54" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="370" font-size="12.5" fill="#141414" text-anchor="start">Bacaan arah kanan: struktur menurun, biaya analisis naik, potensi insight justru justru paling besar</text>
+<text x="44" y="392" font-size="12.5" fill="#141414" text-anchor="start">di band tak terstruktur - karena di band tak terstruktur: tidak terbaca oleh hitungan sederhana saja.</text>
+</svg>

@@ -1,0 +1,49 @@
+{
+  "module_name": "Meta Content Library and Research Environments: Gated Access and Cost Reality",
+  "module_description": "Module 5 deals with the hardest access case: Meta. Students learn what Meta Content Library / Content Library API actually provides to academic institutions (near real-time public Facebook/Instagram content, gated to qualified institutions, no fee), how Meta Secure Research Environment and SOMAR-type enclaves work, and what changed when free research compute ended and per-team fees started in 2026. The module ends with cost-aware alternatives for labs.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Institutional gating and eligibility of Meta research access",
+    "Content Library API capabilities and limits",
+    "Secure research environments / virtual data enclaves",
+    "Budget reality for university labs in 2026",
+    "Fallbacks: open protocols, archives, third-party datasets"
+  ],
+  "learning_outcomes": [
+    "C3 Describe eligibility and process for Meta research access",
+    "C4 Evaluate cost and access options for a proposed study",
+    "C3 Explain enclave constraints (no raw data export) and workarounds"
+  ],
+  "methods_models": [
+    "Feasibility analysis of access route; budget/compute planning; metadata-first study design",
+    "Method emphasis: designing a study that is feasible without raw export"
+  ],
+  "evaluation_metrics": "Feasibility/design memo graded on completeness of access route and cost estimate",
+  "pitfalls_limitations": "Assuming access is automatic; assuming raw export is possible from enclaves; ignoring that Meta's release is selective and can be revoked",
+  "tools_stack": "Meta Content Library documentation, SOMAR/enclave tutorials, budget spreadsheet, request templates",
+  "commercial_platforms": "Walkthrough of the application form and eligibility criteria; costing exercise",
+  "tools_access_cost": "Meta Content Library is free for qualified academic institutions; free research compute in SOMAR's enclave ended 31 Dec 2025 with per-team monthly charges reported from Jan 2026 (about USD 371) - verify current terms before planning",
+  "lab_activities": "Submit a practice access request draft (eligibility statement, data need, security plan)",
+  "datasets_apis": "Meta-topic sample via a sponsored collaborator or a public export; otherwise substitute topic samples",
+  "assessment_methods": "Written analysis/design document plus a short quiz; graded on correctness of concepts and quality of justification",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "Meta research tools documentation",
+    "Guides on text and data mining with social media data (UNC/JHU library guides)"
+  ],
+  "key_papers": [
+    "Meta Content Library as a Research Tool (ACM, 2024-2025 papers)",
+    "Bellingcat toolkit note on Meta Content Library enclave pricing"
+  ],
+  "trends_2024_2026": "2024-2026: the field split into 'gatekeepers' (Meta, X commercial tiers) and 'open access' (Bluesky, archives); teaching feasibility is now a primary learning outcome",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "You need Facebook data for an election-disinformation study with a zero budget - what is your route?",
+  "deliverable_format": "Access request draft + feasibility memo",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

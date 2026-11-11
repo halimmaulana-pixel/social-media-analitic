@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-label="figm2 affordance" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="554" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="24" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Matriks affordance: apa yang bisa diambil dari tiap platform</text>
+<text x="272" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">teks</text>
+<text x="396" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">media</text>
+<text x="520" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">engagement</text>
+<text x="644" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">graf</text>
+<text x="768" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">firehose</text>
+<text x="892" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">retrospektif</text>
+<text x="1016" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">STATUS AKSES</text>
+<rect x="28" y="90" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="112" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">X</text>
+<rect x="226" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="93" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="1013" y="112" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="middle">berbayar</text>
+<rect x="28" y="136" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="158" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">TikTok</text>
+<rect x="226" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="139" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#E69F00" stroke-width="1.4"/>
+<text x="1013" y="158" font-size="11.5" fill="#E69F00" font-weight="bold" text-anchor="middle">terdaftar</text>
+<rect x="28" y="182" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="204" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Instagram</text>
+<rect x="226" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="185" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#7A4FA0" stroke-width="1.4"/>
+<text x="1013" y="204" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="middle">gated</text>
+<rect x="28" y="228" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="250" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">YouTube</text>
+<rect x="226" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="231" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#0072B2" stroke-width="1.4"/>
+<text x="1013" y="250" font-size="11.5" fill="#0072B2" font-weight="bold" text-anchor="middle">berkuota</text>
+<rect x="28" y="274" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="296" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Reddit</text>
+<rect x="226" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="277" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#0072B2" stroke-width="1.4"/>
+<text x="1013" y="296" font-size="11.5" fill="#0072B2" font-weight="bold" text-anchor="middle">berkuota</text>
+<rect x="28" y="320" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="342" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Bluesky</text>
+<rect x="226" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="323" width="102" height="28" rx="5" fill="#F1FAF5" stroke="#009E73" stroke-width="1.4"/>
+<text x="1013" y="342" font-size="11.5" fill="#009E73" font-weight="bold" text-anchor="middle">TERBUKA</text>
+<rect x="28" y="366" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="388" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Threads</text>
+<rect x="226" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="226" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="350" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="474" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="598" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="722" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="846" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="369" width="102" height="28" rx="5" fill="#F6F6F8" stroke="#5A5A5A" stroke-width="1.4"/>
+<text x="1013" y="388" font-size="11.5" fill="#5A5A5A" font-weight="bold" text-anchor="middle">tertutup</text>
+<text x="272" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">post/caption utama</text>
+<text x="396" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">gambar/video terekap</text>
+<text x="520" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">like/simpan/tonton</text>
+<text x="644" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">reply/follow/mention</text>
+<text x="768" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">stream realtime</text>
+<text x="892" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">unduh data lama</text>
+<rect x="28" y="482" width="946" height="74" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="508" font-size="12.5" fill="#141414" text-anchor="start">Kotak biru penuh = tersedia penuh  ·  setengah biru = tersedia sebagian  ·  putih = tidak tersedia</text>
+<text x="44" y="534" font-size="12.5" fill="#5A5A5A" text-anchor="start">Indikasi per 2026 - tier, kuota, dan field API berubah-ubah: selalu cek ulang tiap semester.</text>
+</svg>

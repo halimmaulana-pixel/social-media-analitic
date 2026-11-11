@@ -1,0 +1,51 @@
+{
+  "module_name": "LLMs as Annotators and Coders: Reliability, Bias, Human-in-the-Loop",
+  "module_description": "Module 13 addresses the newest standard practice: using LLMs to label/code large corpora (sentiment, frames, relevance, stance, ideology, topic labels). It teaches prompt/codebook design, multiple sampling and aggregation, validation against human gold sets, reliability gates (Cohen's kappa), bias and stereotype risks, cost/latency trade-offs, and when to distill to a smaller classifier. Includes the human-in-the-loop pattern now required for publication-grade work.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "LLM-based structured labeling (codebook-to-prompt)",
+    "Zero-shot vs few-shot vs fine-tuned coding",
+    "Reliability validation against human coders (kappa)",
+    "Aggregation, self-consistency, temperature effects",
+    "Bias, stereotype amplification, and logit/prompt sensitivity",
+    "Distillation to cheap classifiers for scale"
+  ],
+  "learning_outcomes": [
+    "C3 Design a prompt-based codebook for a coding task",
+    "C4 Validate LLM labels against a human gold set and report kappa",
+    "C5 Identify bias risks and mitigate with sampling and review"
+  ],
+  "methods_models": [
+    "Prompt engineering, structured output (JSON), self-consistency, batch APIs (OpenAI/Anthropic batch, VLLM/local), kappa agreement",
+    "Distillation training (student model on LLM labels)"
+  ],
+  "evaluation_metrics": "Cohen's kappa vs human coders, Krippendorff's alpha for multi-coder, F1 vs gold, consistency across prompt variants, cost per 1k items",
+  "pitfalls_limitations": "False confidence from high accuracy on easy items, bias on identity categories, prompt sensitivity, silent drift with model version updates, leakage of sensitive data into APIs",
+  "tools_stack": "LLM SDKs (OpenAI/Anthropic/open-source), DSPy-style optimization, Google Sheets/Excel for gold sets, kappa libraries",
+  "commercial_platforms": "Not applicable; this is a methods module that replaces manual annotation",
+  "tools_access_cost": "API pricing per token; local open models free but require hardware; reliability work requires human coder time",
+  "lab_activities": "Run a small coding task with LLM, human-code a 200-item gold set, report kappa, iterate prompts, then distill",
+  "datasets_apis": "Gold set from an Indonesian social corpus (e.g. stance on an issue)",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "Tornberg, 'Best practices for text annotation with LLMs' (2024)",
+    "Gilardi et al., 'LLMs outperform expert coders' (2024)",
+    "Bermejo et al. (2025) LLMs vs outsourced crowd coders"
+  ],
+  "key_papers": [
+    "Schroeder et al. (2025) human-in-the-loop for subjective coding tasks",
+    "Carlson (2025) LLM annotation in management research"
+  ],
+  "trends_2024_2026": "2024-2026: LLM annotation went from novelty to expected practice with mandatory validation and bias checks; batch APIs and prompt optimization (DSPy) made it scalable",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Code 10,000 Indonesian posts for stance on a policy issue using LLM + human validation and report reliability.",
+  "deliverable_format": "Codebook + gold set + kappa report + distilled classifier",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

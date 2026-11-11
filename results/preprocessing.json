@@ -1,0 +1,50 @@
+{
+  "module_name": "Preprocessing Social Data: Normalization, Deduplication, Bot Filtering, Emoji/Hashtag/Slang, Language Detection",
+  "module_description": "Module 7 turns raw platform data into analysis-ready text: normalization of informal Indonesian/English, hashtag segmentation, mention/URL/emoji handling, deduplication and near-duplicate detection, language detection and code-mixing, and bot/heuristic filtering. It also teaches API-induced sampling bias (top vs recent, since/until windows) - the bias that quietly invalidates many student projects.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Social-text tokenization (hashtag segmentation, mentions, emojis)",
+    "Normalization of informal and code-mixed text",
+    "Near-duplicate and retweet/reshare detection",
+    "Language detection and code-switching handling",
+    "Bot and low-quality account heuristics",
+    "Sampling bias from API parameters"
+  ],
+  "learning_outcomes": [
+    "C3 Clean a raw social dataset to an analysis-ready format",
+    "C4 Apply bot heuristics and quantify what was removed",
+    "C5 Identify sampling bias in an API sample and describe its consequence"
+  ],
+  "methods_models": [
+    "Regex-based tokenization, Unicode/emoji normalization, MinHash/LSH near-dedup, fastText/CLD language ID, classifier-based bot detection (optional)",
+    "Class-balancing and label-noise handling"
+  ],
+  "evaluation_metrics": "Preprocessing validation: leakage check (no test-time normalization differences), duplicate rate, language-ID accuracy on a gold subset",
+  "pitfalls_limitations": "Over-cleaning (removing negation and sentiment-bearing tokens), silent bot over-filtering, timezone errors, drops of non-English content that reduce insight scope",
+  "tools_stack": "re, unicodedata, emoji, fastText/l langid, datasketch (MinHash), pandas, clean-text or ekphrasis",
+  "commercial_platforms": "Not data-driven; demo of a bot-detection heuristic (Botometer) with caveats on availability",
+  "tools_access_cost": "Compute and storage costs of keeping raw + cleaned copies; free (local/library tools)",
+  "lab_activities": "Cleaning pipeline with a before/after report (counts, duplicate rate, language distribution)",
+  "datasets_apis": "Sample messy dataset with emojis, hashtags, code-mixed Indonesian, and duplicated replies",
+  "assessment_methods": "Written analysis/design document plus a short quiz; graded on correctness of concepts and quality of justification",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "Silge and Robinson, Text Mining with R, ch. 2-4",
+    "Jurafsky & Martin, Speech and Language Processing, ch. 2"
+  ],
+  "key_papers": [
+    "Papers on Indonesian informal text normalization and code-mixing detection (2024-2025)",
+    "Research on API-side filters and sampling bias (2025-2026)"
+  ],
+  "trends_2024_2026": "2024-2026: LLMs changed preprocessing (they tolerate noise but reward structure); datasets increasingly multimodal, so preprocessing includes OCR and transcript quality checks",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Clean a TikTok comment dump (emoji, slang, code-mixing, bots) and report what the cleaning removed.",
+  "deliverable_format": "Cleaned dataset + cleaning report + reproducible notebook",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

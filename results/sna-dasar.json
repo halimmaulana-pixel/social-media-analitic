@@ -1,0 +1,49 @@
+{
+  "module_name": "Social Network Analysis: Centrality, Community Detection, Brokerage",
+  "module_description": "Module 16 introduces network thinking for social data: graph construction from replies/mentions/follows/co-hashtags, centrality measures (degree, betweenness, eigenvector/PageRank), community detection (Louvain, Leiden, label propagation), brokerage/structural holes, and ego-network analysis. It links metrics to interpretation (who bridges communities) and covers visualization and layout discipline.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Graph construction from platform data",
+    "Centrality measures and what they actually imply",
+    "Community detection (Louvain/Leiden)",
+    "Brokerage, structural holes, echo chambers",
+    "Ego networks and sociograms"
+  ],
+  "learning_outcomes": [
+    "C3 Build a network from a social corpus",
+    "C4 Compute and interpret centrality and communities",
+    "C5 Relate network structure to substantive claims (echo chamber, bridge accounts)"
+  ],
+  "methods_models": [
+    "Graph building (igraph/networkx), Louvain/Leiden clustering, betweenness/eigenvector/betweenness-centrality, modularity and conductance, layout algorithms (ForceAtlas)",
+    "Statistical controls for account-size effects"
+  ],
+  "evaluation_metrics": "Modularity, conductance/NMI (when ground truth available), centralization, robustness of communities across resolutions",
+  "pitfalls_limitations": "Follow graph vs interaction graph conflation, self-loops from retweets/mentions, deleted accounts breaking paths, scale-vs-meaning asymmetry (degree is not influence), over-interpreting single clusters",
+  "tools_stack": "networkx, igraph, leidenalg, python-igraph, graph-tool (optional), Gephi, R: igraph/ggraph/tidygraph",
+  "commercial_platforms": "Gephi used for visualization and exploration; commercial tools not needed",
+  "tools_access_cost": "Free (open-source); large graph compute needs memory",
+  "lab_activities": "Build a mention/reply network on an issue, compute centralities, run Leiden, and write interpretation of the top bridges",
+  "datasets_apis": "Reply/mention network from X or Bluesky on a public issue",
+  "assessment_methods": "Lab notebook plus graph figures and a short interpretation; graded on correctness of metrics and defensibility of substantive claims",
+  "data_collection_workflow": "Build the interaction graph from collected data -> deduplicate accounts and edges -> compute metrics -> cluster communities -> archive graph object and code",
+  "textbooks": [
+    "Wasserman & Faust, Social Network Analysis",
+    "Barabasi, Network Science (2016), ch. on centrality/communities",
+    "Zafarani et al., Social Media Mining, ch. 4-5"
+  ],
+  "key_papers": [
+    "2024-2026 papers on coordinated networks, bridged communities, and network measures on Bluesky"
+  ],
+  "trends_2024_2026": "2024-2026: Bluesky's open graph made large-scale follow/interaction networks easy to build, renewing SNA in teaching and research",
+  "industry_relevance": "Used in disinformation/trust-and-safety teams, political-communication research units, community-management analytics, and influence-marketing measurement; network metrics are standard deliverables in crisis-mapping briefings.",
+  "localization_context": "Practised on Indonesian case networks (election-issue discussion, anti-hoax communities, local brand mentions) where the platform mix and language mix differ from US/EU benchmark datasets.",
+  "ethics_regulation": "Re-identification risk of pseudonymous accounts, doxxing risk when publishing ego-networks, and the ethical line between mapping influence and surveilling individuals; UU PDP applies to any data tied to identifiable accounts.",
+  "case_study_scenarios": "Map who bridges the pro and contra camps on a local policy discussion.",
+  "deliverable_format": "Network object + centrality table + community report + figure",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

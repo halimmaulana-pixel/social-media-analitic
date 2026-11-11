@@ -1,0 +1,47 @@
+<style>
+  :root{
+    --ink:#141414; --muted:#5A5A5A; --line:#D9D9D9; --bg:#FFFFFF;
+    --blue:#0072B2; --green:#009E73; --amber:#E69F00; --orange:#D55E00; --plum:#7A4FA0;
+    --softblue:#F2F8FD; --softgreen:#F1FAF5; --softamber:#FEF6E7; --softorange:#FDF1EA; --softgrey:#F6F6F8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#EEF0F2;color:var(--ink);
+       font-family:"Times New Roman", Georgia, serif;font-size:16px;line-height:1.55}
+  .page{max-width:1000px;margin:24px auto;background:var(--bg);padding:52px 60px 64px;
+        box-shadow:0 2px 14px rgba(0,0,0,.12)}
+  h1,h2,h3,h4,.sans{font-family:Helvetica,Arial,"DejaVu Sans",sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:19px;margin:34px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+  h3{font-size:16px;margin:22px 0 6px;color:#1F3A5F}
+  h4{font-size:14.5px;margin:16px 0 4px;color:#333}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:3px 0}
+  .cover{border:2px solid var(--ink);padding:26px 30px;margin-bottom:26px}
+  .cover .kicker{font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;color:var(--orange);text-transform:uppercase}
+  .cover h1{margin-top:8px}
+  .cover .sub{font-size:15px;color:var(--muted)}
+  table{border-collapse:collapse;width:100%;margin:12px 0 6px;font-size:13.5px}
+  caption{caption-side:top;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:13px;
+          font-weight:bold;color:#1F3A5F;padding:6px 0}
+  th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+  thead th{background:#EAF1F7;font-family:Helvetica,Arial,sans-serif;font-size:12.5px}
+  tbody tr:nth-child(even){background:#FAFBFC}
+  figure{margin:16px 0 22px;page-break-inside:avoid}
+  figure svg{width:100%;height:auto;border:1px solid var(--line);background:#fff}
+  figcaption{font-family:Helvetica,Arial,sans-serif;font-size:12.5px;color:var(--muted);margin-top:6px}
+  .box{border:1px solid var(--line);border-left:5px solid var(--blue);background:var(--softblue);
+       padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .box.warn{border-left-color:var(--orange);background:var(--softorange)}
+  .box.ok{border-left-color:var(--green);background:var(--softgreen)}
+  .box.note{border-left-color:var(--amber);background:var(--softamber)}
+  .box .h{font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13px;display:block;margin-bottom:4px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tag{display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:11px;padding:1px 7px;
+       border-radius:10px;border:1px solid var(--line);background:#fff;color:#333;margin-right:5px}
+  .small{font-size:12.5px;color:var(--muted)}
+  .toc{background:var(--softgrey);border:1px solid var(--line);padding:14px 22px;font-size:14px}
+  .toc ol{margin:6px 0 0 20px}
+  figure.pagebreak{page-break-before:always}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;padding:0}h2{page-break-after:avoid}}
+</style>

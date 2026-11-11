@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-label="figm2 openness" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="534" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Tangga keterbukaan akses riset data platform (2026)</text>
+<rect x="24" y="72" width="480" height="82" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="38" y="98" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">1. API / FIREHOSE TERBUKA</text>
+<text x="38" y="120" font-size="12.5" fill="#141414" text-anchor="start">Bluesky Jetstream - Mastodon</text>
+<rect x="520" y="72" width="408" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="534" y="102" font-size="12" fill="#5A5A5A" text-anchor="start">Gratis, tanpa penjajakan - riset graf skala besar &amp; reproducible</text>
+<line x1="256" y1="154" x2="256" y2="168" stroke="#009E73" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="46" y="168" width="480" height="82" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.8"/>
+<text x="60" y="194" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">2. API BERKUOTA</text>
+<text x="60" y="216" font-size="12.5" fill="#141414" text-anchor="start">YouTube Data API - Reddit API</text>
+<rect x="542" y="168" width="386" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="556" y="198" font-size="12" fill="#5A5A5A" text-anchor="start">Gratis, kuota harian: kuota harian dibagi membagi antar tim</text>
+<line x1="278" y1="250" x2="278" y2="264" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="68" y="264" width="480" height="82" rx="8" fill="#FDF1EA" stroke="#E69F00" stroke-width="1.8"/>
+<text x="82" y="290" font-size="13.5" fill="#E69F00" font-weight="bold" text-anchor="start">3. API TERDAFTAR</text>
+<text x="82" y="312" font-size="12.5" fill="#141414" text-anchor="start">TikTok Research API</text>
+<rect x="564" y="264" width="364" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="578" y="294" font-size="12" fill="#5A5A5A" text-anchor="start">Wajib daftar + uji riset; field &amp; kuota terbatas per request</text>
+<line x1="300" y1="346" x2="300" y2="360" stroke="#E69F00" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="90" y="360" width="480" height="82" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.8"/>
+<text x="104" y="386" font-size="13.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">4. GATED AKADEMIK</text>
+<text x="104" y="408" font-size="12.5" fill="#141414" text-anchor="start">Meta Content Library (+ Threads riset)</text>
+<rect x="586" y="360" width="342" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="600" y="390" font-size="12" fill="#5A5A5A" text-anchor="start">Gratis untuk kampus yang lolos; eksekusi di enclave, ekspor terbatas</text>
+<line x1="322" y1="442" x2="322" y2="456" stroke="#7A4FA0" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="112" y="456" width="480" height="82" rx="8" fill="#FBE9E9" stroke="#9B2C2C" stroke-width="1.8"/>
+<text x="126" y="482" font-size="13.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">5. API BERBAYAR</text>
+<text x="126" y="504" font-size="12.5" fill="#141414" text-anchor="start">X API v2 (tier berbayar)</text>
+<rect x="608" y="456" width="320" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="622" y="486" font-size="12" fill="#5A5A5A" text-anchor="start">Akses riset gratis dicabut 2023; anggaran wajib masuk rencana studi</text>
+<line x1="24" y1="560" x2="950" y2="560" stroke="#5A5A5A" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="24" y="584" font-size="12" fill="#5A5A5A" text-anchor="start">Membaca tangga dari kiri-atas ke kanan-bawah: makin ke bawah, makin mahal dan makin ribet perizinannya.</text>
+<text x="24" y="604" font-size="12" fill="#5A5A5A" text-anchor="start">Seluruhnya legal bagi riset; keputusannya adalah desain studi memilih anak tangga mana yang menopang pertanyaan.</text>
+</svg>

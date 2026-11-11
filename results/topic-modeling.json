@@ -1,0 +1,50 @@
+{
+  "module_name": "Topic Modeling for Social Corpora: LDA, NMF, BERTopic, Structural and Dynamic Topic Models",
+  "module_description": "Module 11 covers unsupervised discovery of themes at scale: LDA (Gensim/MALLET), NMF, and the modern default pipeline BERTopic (embeddings, UMAP/HDBSCAN, class-based TF-IDF) plus dynamic/stt variants for time and metadata. It trains students to validate topics with coherence metrics and human reading, and to use topics for framing and agenda analysis rather than decorative word clouds.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "LDA and generative assumptions",
+    "NMF as an interpretable alternative",
+    "BERTopic pipeline: embeddings, dimensionality reduction, clustering, c-TF-IDF",
+    "Dynamic and structural topic models (time, metadata covariates)",
+    "Coherence metrics and human validation"
+  ],
+  "learning_outcomes": [
+    "C3 Run LDA and BERTopic on a corpus and compare topics",
+    "C4 Validate topics with coherence and human coding",
+    "C5 Interpret topic prevalence over time for a real issue"
+  ],
+  "methods_models": [
+    "LDA (Gensim/MALLET), NMF (sklearn), BERTopic, STM/dynamic topic models, coherence (C_v, NPMI)",
+    "Topic prevalence estimation time series"
+  ],
+  "evaluation_metrics": "Coherence (C_v, NPMI), stability across seeds, human agreement on topic assignment, silhouette for clusters",
+  "pitfalls_limitations": "Number-of-topics arbitrariness, topic drift across data windows, seed instability, word clouds mistaken for meaning, hubness of embeddings",
+  "tools_stack": "gensim, mallet, bertopic, umap-learn, hdbscan, scikit-learn; R: stm, topicmodels",
+  "commercial_platforms": "Not applicable; thematic categorization is done in-house",
+  "tools_access_cost": "Free (open-source); compute is the cost for large corpora",
+  "lab_activities": "Two topic models on one corpus, coherence comparison, then human validation of 30 documents per topic",
+  "datasets_apis": "News/social corpus on a public issue; parliamentary/policy corpus for STM",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "Silge & Robinson, Text Mining with R, ch. 6",
+    "Blei, Ng, Jordan (2003) LDA paper",
+    "Grootendorst (2022) BERTopic paper"
+  ],
+  "key_papers": [
+    "2024-2026 papers on LLM-based topic modeling and topic-label generation",
+    "MDPI 2026 multi-modal account topic modeling (SMATM)"
+  ],
+  "trends_2024_2026": "2024-2026: BERTopic became the default; LLM-based labeling and hybrid neural topic models are the active research edge; STM remains standard in political communication",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Discover how a public issue's discussion on TikTok is thematically structured, and how it changed over a month.",
+  "deliverable_format": "Notebook + topic model artifact + human-validated topic labels",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

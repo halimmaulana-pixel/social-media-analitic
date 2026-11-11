@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-label="figm3 missingness" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="454" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Tiga jenis missing pada data social media - dan cara mencatatnya</text>
+<rect x="26" y="66" width="944" height="94" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="26" y="66" width="250" height="94" rx="8" fill="#FEF6E7" stroke="#D55E00" stroke-width="1.6"/>
+<text x="44" y="100" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">KONTEN TERHAPUS / DIEDIT</text>
+<text x="296" y="90" font-size="12" fill="#141414" text-anchor="start">Post dihapus atau admin menyembunyikan sebelum snapshot - missing 'tidak acak'.</text>
+<text x="296" y="116" font-size="12" fill="#9B2C2C" text-anchor="start">Risiko: sampel melewatkan konten paling kontroversial.</text>
+<text x="296" y="142" font-size="12" fill="#009E73" text-anchor="start">Mitigasi: snapshot saat tayang + laporkan jendela snapshot.</text>
+<rect x="26" y="174" width="944" height="94" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="26" y="174" width="250" height="94" rx="8" fill="#FEF6E7" stroke="#7A4FA0" stroke-width="1.6"/>
+<text x="44" y="208" font-size="13" fill="#7A4FA0" font-weight="bold" text-anchor="start">FIELD TIDAK DIJAMIN ADA</text>
+<text x="296" y="198" font-size="12" fill="#141414" text-anchor="start">Geotag hanya muncul bila pengguna memakai lokasi - pola berpola, bukan acak.</text>
+<text x="296" y="224" font-size="12" fill="#9B2C2C" text-anchor="start">Risiko: field kosong berimbang antar kelompok pengguna.</text>
+<text x="296" y="250" font-size="12" fill="#009E73" text-anchor="start">Mitigasi: lapor persentase null per field.</text>
+<rect x="26" y="282" width="944" height="94" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="26" y="282" width="250" height="94" rx="8" fill="#FEF6E7" stroke="#009E73" stroke-width="1.6"/>
+<text x="44" y="316" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">JENDELA METRIK TERBATAS</text>
+<text x="296" y="306" font-size="12" fill="#141414" text-anchor="start">Engagement log sering hanya diberikan untuk window waktu terbatas.</text>
+<text x="296" y="332" font-size="12" fill="#9B2C2C" text-anchor="start">Risiko: perbandingan antar-batch dibaca sebagai perbedaan asli.</text>
+<text x="296" y="358" font-size="12" fill="#009E73" text-anchor="start">Mitigasi: tulis jendela snapshot di laporan; jangan campur batch.</text>
+<rect x="26" y="398" width="944" height="62" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.2"/>
+<text x="44" y="422" font-size="12.5" fill="#141414" text-anchor="start">Aturan buku ini: setiap field di kamus harus menyebut kejadian missing yang mungkin -</text>
+<text x="44" y="444" font-size="12.5" fill="#141414" text-anchor="start">null yang sah, field yang bisa absent, atau metrik yang hanya diberikan per window waktu.</text>
+</svg>

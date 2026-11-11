@@ -1,0 +1,50 @@
+{
+  "module_name": "Information Diffusion and Virality: Cascades, Epidemic Models, Trending Prediction",
+  "module_description": "Module 17 models how content spreads: cascade trees, classical epidemic models (SIS/SIR on networks), branching process and Hawkes/temporal point process models for bursts, influence versus homophily as competing explanations, and prediction of what will trend. It connects to platform design (recommender amplification) so students can separate organic spread from algorithmic distribution.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Cascades and retweet trees",
+    "SIS/SIR epidemic models on networks",
+    "Independent cascade / linear threshold (IC/LT)",
+    "Hawkes and self-exciting point processes",
+    "Trending prediction and early-burst detection",
+    "Algorithmic amplification vs organic spread"
+  ],
+  "learning_outcomes": [
+    "C3 Reconstruct cascades and compute structural virality",
+    "C4 Fit a simple diffusion model and predict spread",
+    "C5 Discuss recommender amplification as a confound"
+  ],
+  "methods_models": [
+    "Cascade reconstruction, IC/LT simulation, Hawkes fitting, survival analysis of cascade size",
+    "Feature-based trending classifiers (early features -> later spread)"
+  ],
+  "evaluation_metrics": "Precision@k for trending prediction, cascade-size distribution fit, log-loss/ranking metrics, structural virality vs size correlation",
+  "pitfalls_limitations": "Sampling only surviving cascades, platform-side ranking effects misread as content quality, early engagement not being causal, deleted-content survivorship",
+  "tools_stack": "networkx, numpy/scipy, tick (Hawkes), lifelines, tweepy/Bluesky clients; R: igraph + survival packages",
+  "commercial_platforms": "Not applicable; modelling done in-house",
+  "tools_access_cost": "Free (open-source); simulator choice affects results",
+  "lab_activities": "Reconstruct cascades for a topic, compare with an SIR fit, build a trending predictor from early features",
+  "datasets_apis": "Public cascade data (X/Bluesky topic cascades, imitation dataset)",
+  "assessment_methods": "Lab notebook plus graph figures and a short interpretation; graded on correctness of metrics and defensibility of substantive claims",
+  "data_collection_workflow": "Build the interaction graph from collected data -> deduplicate accounts and edges -> compute metrics -> cluster communities -> archive graph object and code",
+  "textbooks": [
+    "Zafarani et al., Social Media Mining, ch. on diffusion",
+    "Barabasi, Network Science, ch. on epidemic spreading",
+    "Goel et al. (2016) 'The structural virality of online diffusion'"
+  ],
+  "key_papers": [
+    "2024-2026 papers on prediction of virality and on recommender-driven spread"
+  ],
+  "trends_2024_2026": "2024-2026: algorithm-driven feeds (TikTok For You) made pure 'organic virality' modelling harder; analysis now separates creator-side from platform-side amplification",
+  "industry_relevance": "Used in disinformation/trust-and-safety teams, political-communication research units, community-management analytics, and influence-marketing measurement; network metrics are standard deliverables in crisis-mapping briefings.",
+  "localization_context": "Practised on Indonesian case networks (election-issue discussion, anti-hoax communities, local brand mentions) where the platform mix and language mix differ from US/EU benchmark datasets.",
+  "ethics_regulation": "Re-identification risk of pseudonymous accounts, doxxing risk when publishing ego-networks, and the ethical line between mapping influence and surveilling individuals; UU PDP applies to any data tied to identifiable accounts.",
+  "case_study_scenarios": "Explain and predict which policy posts will spread widely on X next week.",
+  "deliverable_format": "Cascade dataset + diffusion model + prediction demo",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

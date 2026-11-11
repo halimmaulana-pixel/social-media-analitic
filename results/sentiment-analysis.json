@@ -1,0 +1,51 @@
+{
+  "module_name": "Sentiment and Emotion Analysis: Lexicon, Classical ML, Transformers, ABSA, Multilingual",
+  "module_description": "Module 9 escalates to supervised sentiment and emotion analysis: from lexicon and TF-IDF+SVC baselines to fine-tuned BERT/RoBERTa, plus multilingual models (XLM-R, mBERT) for cross-lingual transfer, aspect-based sentiment analysis (ABSA) for brands/products, emotion taxonomies (GoEmotions, Ekman), and the hard cases - sarcasm, negation, mixed sentiment. Evaluation under class imbalance is treated seriously.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Lexicon vs supervised sentiment",
+    "Fine-tuning transformers for sentiment",
+    "Multilingual and cross-lingual models",
+    "Aspect-based sentiment analysis (ABSA)",
+    "Emotion taxonomies and multi-label prediction",
+    "Sarcasm, negation, mixed polarity"
+  ],
+  "learning_outcomes": [
+    "C3 Fine-tune a transformer for sentiment on an Indonesian corpus",
+    "C4 Apply ABSA to product/brand aspects",
+    "C5 Evaluate a sentiment model fairly under imbalance and report per-class metrics"
+  ],
+  "methods_models": [
+    "Fine-tuning (Hugging Face Trainer), class weighting/resampling, cross-validation, per-class metrics, calibration",
+    "Human validation sample for model labels"
+  ],
+  "evaluation_metrics": "Accuracy, macro-F1, balanced accuracy, Cohen's kappa vs human coders, calibration (Brier), per-class precision/recall",
+  "pitfalls_limitations": "Aggregation of per-post sentiment to brand-level claims; sarcasm errors; translation artifacts; generalizing across topics and time",
+  "tools_stack": "transformers, datasets, evaluate, scikit-learn, accelerate; Indonesian checkpoints (IndoBERT/IndoRoBERTa, NusaBERT)",
+  "commercial_platforms": "Optional: commercial sentiment dashboards for benchmark comparison",
+  "tools_access_cost": "Training can be done on free Colab/Kaggle GPUs; commercial platforms demoed read-only",
+  "lab_activities": "Fine-tune IndoBERT on an Indonesian sentiment dataset; run ABSA on brand-tagged sentences; compare with an LLM zero-shot call",
+  "datasets_apis": "Indonesian sentiment corpus (SmSA/SMSSA), English GoEmotions for emotion, product review corpus for ABSA",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "Jurafsky & Martin, Speech and Language Processing, ch. 6 and sentiment chapters",
+    "Silge & Robinson, Text Mining with R, ch. 8 (sentiment)"
+  ],
+  "key_papers": [
+    "Gilardi et al. (2023/2024) LLMs outperform expert and crowd coders - and its critiques",
+    "Tornberg (2024) best practices for text annotation with LLMs",
+    "Comparisons of NusaBERT/IndoBERT for Indonesian sentiment (2024-2026)"
+  ],
+  "trends_2024_2026": "2024-2026: LLM zero-shot annotation is benchmarked against fine-tuned models; the curriculum teaches a bake-off with human validation rather than a single winner",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Measure sentiment of an Indonesian brand campaign across X and TikTok, including per-aspect breakdown.",
+  "deliverable_format": "Notebook + metrics table + human-validated sample",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

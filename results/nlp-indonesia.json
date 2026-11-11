@@ -1,0 +1,49 @@
+{
+  "module_name": "Indonesian NLP Localization: IndoBERT, NusaBERT, InSet, Local Datasets",
+  "module_description": "Module 10 is the localization module. Since the course serves Indonesian students and corpora, it teaches the local model and data landscape: IndoBERT/IndoRoBERTa and the Nusa language-model family (NusaBERT, NusaX), the InSet sentiment lexicon, Indonesian specific tasks (sentiment, emotion, abusive language, hoax, hate speech) and their datasets, and the practical problems of colloquial spelling, code-mixing and regional languages. Evaluation includes IndoNLU-style benchmarks and cross-temporal robustness.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Indonesian pretrained models (IndoBERT/IndoRoBERTa, NusaBERT/NusaX)",
+    "Indonesian lexicons (InSet)",
+    "Indonesian social tasks and datasets",
+    "Informal spelling, slang, code-mixing, regional languages",
+    "Benchmarks (IndoNLU) and cross-temporal generalization"
+  ],
+  "learning_outcomes": [
+    "C3 Select the appropriate Indonesian model for a social-media task",
+    "C4 Build a labelled Indonesian dataset for a specific task",
+    "C5 Report IndoNLU-style metrics and analyze errors on local data"
+  ],
+  "methods_models": [
+    "Fine-tuning Indonesian checkpoints, label-set design, annotation protocol with agreement (Cohen's kappa), cross-validation",
+    "Cross-temporal test split"
+  ],
+  "evaluation_metrics": "Macro-F1 (IndoNLU convention), Cohen's kappa between annotators and model, confusion analysis per class",
+  "pitfalls_limitations": "Dataset leakage, near-duplicate items across folds, class imbalance, over-reliance on one region's language, benchmark overfitting",
+  "tools_stack": "transformers, IndoNLU tooling, InSet, datasets (SmSA, cASA emotion, Indonesian hoax datasets), snscrape-collected local corpora",
+  "commercial_platforms": "Optional: commercial NLP APIs with Indonesian support for accuracy comparison",
+  "tools_access_cost": "Free models (Hugging Face); commercial API calls priced per token",
+  "lab_activities": "Build or reuse a labelled Indonesian set, fine-tune, and run error analysis on 50 misclassified samples",
+  "datasets_apis": "Indonesian corpora: SmSA (sentiment), emotion corpus, hoax/fact-check sets, collected X posts on a local issue",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "NusaX / NusaBERT papers (2023-2024)",
+    "InSet lexicon paper (2018) and Indonesian NLP survey papers"
+  ],
+  "key_papers": [
+    "Cross-temporal generalization of IndoBERT for Indonesian hoax news classification (2025)",
+    "2024-2026 papers comparing IndoBERT, IndoRoBERTa and NusaBERT on Indonesian social media tasks"
+  ],
+  "trends_2024_2026": "2024-2026: Indonesian LLMs and NusaBERT for regional languages entered mainstream use; zero-shot LLM annotation of Indonesian social text is now common but still under-validated",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Analyze public sentiment on a local policy issue (e.g. tuition increase, layoffs) using an Indonesian model and report error types.",
+  "deliverable_format": "Labelled dataset + fine-tuned model card + error analysis",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

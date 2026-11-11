@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Buku Ajar Materi 6: Preprocessing dan Kualitas Data</title>
+<style>
+body{font-family:Georgia,'Times New Roman',serif;line-height:1.65;margin:0;background:#f8fafc;color:#1e293b}
+main{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:1.7em;margin:.2em 0 .1em}
+h2{font-size:1.28em;margin-top:1.9em;border-bottom:2px solid #2563eb;padding-bottom:.25em}
+h3{font-size:1.08em;margin-top:1.3em}
+table{border-collapse:collapse;width:100%;margin:.9em 0;font-size:.92em;background:#fff}
+th,td{border:1px solid #cbd5e1;padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#e2e8f0}
+caption{caption-side:top;text-align:left;font-weight:bold;padding:6px 2px;font-size:.92em}
+code{font-family:'DejaVu Sans Mono',monospace;font-size:.88em;background:#eef2ff;padding:1px 5px;border-radius:4px}
+figure{margin:1.2em 0;text-align:center}
+figcaption{font-size:.85em;color:#475569;margin-top:8px;text-align:left}
+.box{border-left:4px solid #2563eb;background:#eff6ff;padding:10px 14px;margin:1.1em 0;border-radius:0 8px 8px 0}
+.box.warn{border-left-color:#dc2626;background:#fef2f2}
+.box.tip{border-left-color:#059669;background:#ecfdf5}
+.box .h{font-weight:bold;display:block;margin-bottom:4px}
+.gate{font-weight:bold;color:#059669}
+@media print{body{background:#fff}main{padding:0}}
+</style>
+</head>
+<body><main>
+<h1>Buku Ajar Mata Kuliah Social Media Analytics</h1>
+<p><b>Materi 6: Preprocessing dan Kualitas Data</b> (Pertemuan 6 · 150 menit · 3 SKS · CPMK-2)</p>
+<p>Materi 4 dan 5 menjawab soal akses: apa yang boleh diambil dan dengan jalur apa. Pertemuan ini berganti pertanyaan. Setelah data ada di laptop, tugas mahasiswa adalah mengubah tumpukan mentah menjadi kumpulan baris yang layak dihitung. Kegiatan itu disebut preprocessing. Hasilnya menentukan kebenaran analisis pertemuan 8 sampai 11, sebab model terbaik pun akan tergagal kalau makan data yang masih penuh kembar, bot, dan slang yang tak tertangani.</p>
+<table><caption>Tabel 0.1: Identitas modul</caption>
+<tr><th>Atribut</th><th>Nilai</th></tr>
+<tr><td>Mata kuliah</td><td>Social Media Analytics (3 SKS)</td></tr>
+<tr><td>Pertemuan</td><td>6 dari 14: Preprocessing dan kualitas data</td></tr>
+<tr><td>CPMK</td><td>CPMK-2: membersihkan data media sosial dengan prosedur terdokumentasi; CPMK-5: menilai kualitas data dan menyebutkan bias yang tersisa</td></tr>
+<tr><td>Sub-CPMK</td><td>(1) Membedakan duplikat, bot, dan noise beserta penanganan yang benar; (2) menormalkan teks campur kode tanpa merusak makna; (3) menulis laporan cleaning berisi angka sebelum dan sesudah</td></tr>
+<tr><td>Bukti penilaian</td><td>Dataset bersih plus laporan cleaning dengan funnel angka</td></tr>
+<tr><td>Prasyarat</td><td>Materi 3 (jenis data dan field dictionary), Materi 4 (kolektor dan collection log), Materi 5 (jalur akses yang sah)</td></tr>
+</table>
+<p><b>Daftar isi:</b> 1 Peta pembelajaran · 2 Tiga kisah nyata kenapa data mentah menipu · 3 Peta jalan preprocessing · 4 Deduplikasi dan rantai reshare · 5 Bot dan akun bermutu rendah · 6 Normalisasi teks campur kode · 7 Bahasa dan campuran kode · 8 Jebakan membersihkan berlebihan · 9 Bias sampling dari parameter API · 10 Lab membersihkan 500 baris · 11 Studi kasus banjir Jakarta · 12 Sepuluh kesalahan umum · 13 Sepuluh pertanyaan pengaman · 14 Ringkasan, glosarium, referensi</p>
+
+<h2>1. Peta pembelajaran pertemuan 6</h2>
+<p>Mahasiswa yang selesai pertemuan ini tidak lagi melihat cleaning sebagai tugas mengganjal yang harus diburu cepat. Ia melihatnya sebagai tahap ilmiah dengan keputusan yang bisa dipertanggungjawabkan. Seluruh langkah pada pertemuan ini mengikuti satu prinsip: tiap keputusan pembersihan dicatat beserta alasannya, sehingga orang lain bisa mengulang pekerjaan yang sama.</p>
+<p>Pertanyaan pemandu pertemuan ini:</p>
+<p>«Saya punya 500 baris data mentah. Bagaimana saya mengubahnya menjadi 300 baris yang bisa dihitung, tanpa diam-diam membuang pendapat orang yang tidak sependapat dengan asumsi saya?»</p>
+<table><caption>Tabel 1.1: Rute pembelajaran 8 tahap</caption>
+<tr><th>#</th><th>Tahap</th><th>Output yang diperiksa</th></tr>
+<tr><td>1</td><td>Membaca tiga kisah kegagalan akibat data mentah</td><td>Catatan satu kalimat per kisah</td></tr>
+<tr><td>2</td><td>Memetakan pipeline 7 tahap dan gate tiap tahap</td><td>Bisa menyebut urutan tanpa melihat gambar</td></tr>
+<tr><td>3</td><td>Menghitung skor kemiripan dua tweet secara manual</td><td>Jawaban 5 dari 7 potongan sama</td></tr>
+<tr><td>4</td><td>Memberi skor dua akun lewat 6 heuristik</td><td>Skor 0,82 dan 0,21 dengan alasan</td></tr>
+<tr><td>5</td><td>Menormalkan satu komentar marketplace 6 langkah</td><td>Deret token bersih plus kolom mentah utuh</td></tr>
+<tr><td>6</td><td>Menguji stopword naif pada kalimat negatif</td><td>Menemukan pembalikan makna</td></tr>
+<tr><td>7</td><td>Membandingkan dua jendela waktu API</td><td>Menjelaskan mengapa volume berbeda</td></tr>
+<tr><td>8</td><td>Lab: membersihkan 500 baris sampai 300</td><td>Funnel angka plus laporan cleaning</td></tr>
+</table>
+<p><b>Jembatan dari Materi 5:</b> feasibility memo yang menyebut satu jalur data dan anggaran riset kini dipakai kembali sebagai lampiran collection log. Laporan cleaning yang ditulis dengan prinsip yang sama menjadi dokumen kedua yang wajib menyertai setiap dataset di mata kuliah ini.</p>
+
+<h2>2. Tiga kisah nyata kenapa data mentah menipu</h2>
+<p>Kisah pertama berasal dari riset analisis sentimen pemilu. Seorang analis mengumpulkan tweet bertagar suatu isu politik dan melaporkan bahwa opini publik sangat negatif. Setelah diperiksa, separuh tweet berasal dari rantai retweet berantai: satu akun asal, lalu ribuan akun menyalin kalimat yang sama persis. Hitungan sentimen tetap berjalan, tetapi yang dihitung bukan ribuan opini. Yang dihitung adalah satu opini yang disalin. Kasus ini adalah pelajaran bahwa volume bukan bukti keanekaragaman.</p>
+<p>Kisah kedua terjadi pada studi kampanye media sosial 2019. Peneliti menemukan lonjakan jumlah post sekitar jam tertentu pada hari-hari tertentu, dengan pola yang sangat rapi: usia akun pendek, rasio like nol, teks nyaris identik. Lonjakan itu sebagian besar berasal dari akun terkoordinasi. Bila angka mentah dipakai sebagai ukuran dukungan publik, kesimpulannya akan keliru. Heuristik bot pada bagian 5 muncul sebagai respons terhadap kasus semacam ini.</p>
+<p>Kisah ketiga tidak melibatkan hoaks atau politik sama sekali. Seorang mahasiswa menganalisis ulasan produk di marketplace. Ia memakai kamus sentimen bahasa Indonesia baku. Hasil evaluasinya buruk, dan penyebabnya terbaca saat sampel dibaca manusia: ulasan asli berisi kata bjb (bagus), bangetttt, gws (gak gw cars?), dan nada ironi seperti mantep banget nih lagian. Kamus baku tidak mengenali bentuk-bentuk itu, sehingga ulasan positif terbaca netral. Normalisasi pada bagian 6 menangani masalah ini.</p>
+<div class="box"><span class="gate">Etos pekerjaan</span>
+<p>Membersihkan data bertujuan menjadikan pengukuran lebih jujur, bukan menjadikan hasil sesuai harapan. Setiap keputusan menghapus atau mengubah baris wajib punya alasan yang ditulis, bukan alasan yang terasa benar.</p>
+</div>
+
+<h2>3. Peta jalan preprocessing</h2>
+<p>Pipeline pada Gambar 3.1 menyusun tujuh tahap dalam urutan yang disarankan. Urutan itu penting. Membersihkan bentuk teks sebelum duplikat dan bot tersaring akan menyulitkan perhitungan kemiripan, sebab variasi ejaan justru menyamarkan salinan. Sebaliknya, memfilter bot setelah normalisasi masih mungkin, namun kerja komputasi jadi lebih besar.</p>
+<!--FIG:figm6-pipeline.svg-->
+<p>Di bawah tiap kotak pada Gambar 3.1 terdapat syarat kelanjutan. Syarat itu disebut gate. Gate berfungsi seperti pos pemeriksaan: bila angka pada tahap tersebut melampaui batas yang ditentukan, proses berhenti sampai penyebabnya dilaporkan. Contohnya, bila parse error muncul pada lebih dari 1 persen baris, tahap 1 harus dilaporkan ke collection log sebelum apa pun dihapus.</p>
+<table><caption>Tabel 3.1: Urutan tahap dan alasan urutannya</caption>
+<tr><th>Tahap</th><th>Mengapa urutannya di sini</th><th>Yang rusak bila urutan dibalik</th></tr>
+<tr><td>1. Cek integritas</td><td>Baris rusak tidak bisa dinormalisasi</td><td>Alat downstream menolak file</td></tr>
+<tr><td>2. Deduplikasi</td><td>Kemiripan dihitung pada bentuk asli</td><td>Salinan dengan slang berbeda lolos</td></tr>
+<tr><td>3. Saring bot</td><td>Akun disaring berdasarkan perilaku, bukan bentuk teks</td><td>Normalisasi mencampur pola bot</td></tr>
+<tr><td>4. Normalisasi</td><td>Bentuk teks diseragamkan setelah populasi bersih</td><td>Kamus slang dipakai pada teks sampah</td></tr>
+<tr><td>5. Deteksi bahasa</td><td>Bahasa diketahui setelah teks bersih</td><td>Language ID baca token slang</td></tr>
+<tr><td>6. Tokenisasi</td><td>Unit kata dibentuk terakhir</td><td>Kemiripan ulang tak stabil</td></tr>
+<tr><td>7. Quality gate</td><td>Pemeriksaan akhir sebelum analisis</td><td>Cacat lolos ke pertemuan 8</td></tr>
+</table>
+<p>Setiap tahap menghasilkan dua berkas: dataset baru dan catatan tahap. Catatan tahap memuat jumlah baris masuk, jumlah baris keluar, selisih, dan alasan selisih. Berkas itulah yang disebut cleaning log, dan ia menjadi lampiran wajib tugas akhir.</p>
+
+<h2>4. Deduplikasi dan rantai reshare</h2>
+<p>Duplikat dalam data media sosial jarang berupa salinan persis. Yang sering muncul adalah duplikat dekat: teks sama, beda beberapa kata, atau beda satu tanda baca. Cara tradisional membandingkan seluruh pasangan baris tidak layak untuk dataset berskala besar, sebab 500 ribu baris berarti sekitar 125 miliar pasangan. MinHash menyelesaikan masalah ini dengan memperkirakan kemiripan dari potongan kecil teks yang disebut shingle.</p>
+<p>Cara kerjanya bisa dijelaskan dalam tiga langkah. Langkah pertama, teks dipotong menjadi kumpulan shingle tiga kata yang bertumpang tindih. Langkah kedua, tiap shingle diubah menjadi sidik jari angka (hash). Langkah ketiga, kemiripan diperkirakan dari proporsi sidik jari yang sama antara dua teks, bukan dari seluruh hurufnya. LSH mempercepat pencarian dengan hanya memeriksa pasangan yang punya sidik jari yang sama di satu atau lebih ember.</p>
+<!--FIG:figm6-minhash.svg-->
+<p>Gambar 4.1 menunjukkan contoh dua tweet tentang banjir. Tweet asli berbunyi: «Pemda lamban tangani banjir, warga sampai mengungsi ke masjid». Tweet kedua berbunyi: «Pemda lamban tangani banjir, warga terpaksa mengungsi ke masjid Agung». Dari tujuh potongan tiga kata, lima potongan sama dan dua beda, sehingga skornya 5 dibagi 7, yaitu sekitar 0,71. Bila ambang kelas ditetapkan 0,60, kedua tweet ditandai sebagai duplikat dekat.</p>
+<p>Yang perlu hati-hati adalah reshare yang membawa opini baru. Bila tweet kedua menambahkan klaim yang tidak ada di tweet asli, misalnya nama masjid, video, atau angka korban, ia bukan sekadar salinan. Penanganan yang benar adalah menandai pasangan itu sebagai berkaitan, bukan membuang salah satunya. Tabel 4.1 meringkas tiga situasi yang sering ditemui.</p>
+<table><caption>Tabel 4.1: Tiga jenis kembar dan penanganannya</caption>
+<tr><th>Jenis</th><th>Ciri pembeda</th><th>Tindakan yang benar</th></tr>
+<tr><td>Retweet polos</td><td>Teks identik, tanpa tambahan</td><td>Hitung sekali, simpan jejak rantai</td></tr>
+<tr><td>Duplikat dekat</td><td>Beda sedikit kata atau tanda baca</td><td>Tandai pakai skor MinHash, simpan salah satu</td></tr>
+<tr><td>Kutipan menambahkan klaim</td><td>Ada informasi atau pendapat baru</td><td>Simpan keduanya, beri penanda berkaitan</td></tr>
+</table>
+<div class="box warn"><span class="gate">Cacat yang sering terjadi</span>
+<p>Metode menghapus seluruh baris dengan skor di atas ambang, tanpa membaca apa pun, sering membuang pendapat yang justru berbeda. Skor kemiripan adalah alat bantu keputusan, bukan keputusan itu sendiri.</p>
+</div>
+
+<h2>5. Bot dan akun bermutu rendah</h2>
+<p>Bot tidak selalu jahat. Sebagian menyebarkan informasi cuaca dan lalu lintas yang berguna. Dalam analisis opini publik, keberadaannya mengganggu karena mendistorsi hitungan. Karena itu pembuatan saringan bot pada mata kuliah ini menggunakan enam heuristik yang mudah diperiksa, bukan model rahasia.</p>
+<!--FIG:figm6-bot.svg-->
+<p>Keenam heuristik pada Gambar 5.1 diberi bobot sama pada contoh kelas. Skor tiap heuristik berbentuk angka 0 sampai 1, lalu dirata-ratakan. Akun A pada contoh itu mendapat skor 0,82 dan disaring dari analisis sentimen. Akun B mendapat 0,21 dan tetap dipakai. Ambang 0,50 ditetapkan sebagai contoh supaya mudah diingat, bukan karena angka itu baku industri.</p>
+<table><caption>Tabel 5.1: Arti ambang dan akibat kerjanya</caption>
+<tr><th>Ambang</th><th>Efek bila terlalu ketat</th><th>Efek bila terlalu longgar</th></tr>
+<tr><td>0,30</td><td>Banyak akun manusia biasa tersaring, hasil condong ke netral</td><td>Sedikit bot lolos, distorsi kecil</td></tr>
+<tr><td>0,50</td><td>Keseimbangan yang lazim dipakai di kelas ini</td><td>Acuan pembanding</td></tr>
+<tr><td>0,70</td><td>Banyak bot lolos, hitungan opini berlebih</td><td>Sampel menyusut drastis</td></tr>
+</table>
+<p>Batas kejujuran metode ini perlu dinyatakan terbuka: heuristik salah positif. Akun pialang berita, akun komunitas, dan akun penggemar yang memposting sangat rajin bisa salah ditandai sebagai bot. Karena itu aturan kelas ini mewajibkan audit manual terhadap 5 persen sampel yang disaring. Hasil audit ditulis dalam laporan, termasuk contoh yang ternyata manusia. Kalibrasi ulang dilakukan tiap semester, sebab perilaku bot ikut berubah.</p>
+
+<h2>6. Normalisasi teks campur kode</h2>
+<p>Bagian ini menggunakan satu contoh nyata secara menyeluruh. Baris mentah yang dipakai adalah ulasan marketplace berikut:</p>
+<p class="mono">barangnya bagus bjrr, pengiriman cepat, tapi packing'e abis bangkeett 💔 Recommended deh!! @TokoA #belanjakan #murah</p>
+<p>Gambar 6.1 menampilkan enam langkah pengolahannya, lengkap dengan bentuk antara yang bisa diperiksa mahasiswa. Setiap langkah berikutnya berbasis hasil langkah sebelumnya, sehingga bila ada yang keliru, sumbernya bisa ditemukan.</p>
+<!--FIG:figm6-normalize.svg-->
+<p>Langkah 1 memisahkan elemen di luar kata. Mention <code>@TokoA</code> dipisah ke kolom metadata, tagar <code>#belanjakan</code> dan <code>#murah</code> disimpan terpisah sebagai fitur topik, dan emoji diubah menjadi token <code>EMI_PLOSI</code> atau <code>EMI_SENANG</code>. Emoji tidak dibuang, karena dalam ulasan Indonesia emoji sering menjadi penanda nada. Hati yang pecah pada contoh di atas menandakan kekecewaan meski sebagian kata terlihat positif.</p>
+<p>Langkah 2 menangani huruf panjang. Aturan kelas ini sederhana: huruf berulang lebih dari dua kali dipangkas, jadi bangkeett menjadi banget. Aturan serupa dipakai untuk kata seperti baguusss dan mantappp. Aturan ini disimpan dalam kamus perbaikan, bukan hardcode, supaya bisa diperiksa.</p>
+<p>Langkah 3 mengganti slang dengan kamus. Kata bjrr diganti menjadi bagus banget, bjb menjadi bagus, dan gws dipertahankan seperti pada pemakaiannya pada bagian permintaan maaf. Kamus slang disusun mahasiswa sendiri, dimulai dari 60 entri yang paling sering muncul di data mereka sendiri. Kamus publik dipakai sebagai pelengkap, bukan sebagai pengganti.</p>
+<p>Langkah 4 memecah tagar majemuk. <code>#belanjakan</code> menjadi dua token, yaitu belanja dan akan. Pemecahan dipakai karena analisis topik pertemuan 11 memperlakukan tagar sebagai satu istilah akan kehilangan muatan tema. Tabel 6.1 memuat aturan setiap langkah dalam bentuk ringkas.</p>
+<table><caption>Tabel 6.1: Aturan tiap langkah normalisasi dan alasan keilmuannya</caption>
+<tr><th>Langkah</th><th>Aturan</th><th>Alasan</th></tr>
+<tr><td>1. Pisah non-teks</td><td>Mention ke metadata, emoji jadi token, tagar ke kolom fitur</td><td>Emoji dan tagar membawa makna tersendiri</td></tr>
+<tr><td>2. Huruf panjang</td><td>Berulang lebih dari dua kali dipangkas</td><td>Variansi ejaan menutupi kata dasa</td></tr>
+<tr><td>3. Slang</td><td>Gunakan kamus sendiri, cek 60 entri teratas data sendiri</td><td>Kamus baku tak mengenal bentuk lokal</td></tr>
+<tr><td>4. Tagar majemuk</td><td>Pecah bila panjangnya di atas 10 huruf dan campur tema</td><td>Analisis topik butuh unit tema</td></tr>
+<tr><td>5. Negasi</td><td>Tandai kata pembalik arah sampai tanda baca berikutnya</td><td>Analisis sentimen butuh arah kalimat</td></tr>
+<tr><td>6. Simpan mentah</td><td>Kolom teks asli tak pernah dihapus</td><td>Audit dan reproduksi</td></tr>
+</table>
+<p>Langkah 5 memberi tanda negasi. Kata pembalik arak seperti tidak, belum, malah, dan keterangan kontras seperti tapi dan namun membuka wilayah negasi sampai tanda baca berikutnya. Pada contoh ulasan tadi, frasa packing'e abis berada dalam wilayah negasi karena mendahului penutup, dan penanda ini akan dipakai model pada pertemuan 9.</p>
+<p>Langkah 6 adalah aturan yang paling sering dilanggar mahasiswa. Kolom teks mentah tidak boleh dihapus. Semua perubahan ditulis ke kolom baru. Dengan aturan ini, setiap kesalahan kamus masih bisa ditelusuri dan dibetulkan tanpa mengunduh ulang data.</p>
+<div class="box tip"><span class="gate">Praktik baik</span>
+<p>Satu berkas kode normalisasi dipakai untuk seluruh tahap analisis. Mengubah kamus di tengah jalan berarti tabel di pertemuan 8 sampai 11 tidak lagi setara, dan itu harus dihindari.</p>
+</div>
+
+<h2>7. Bahasa dan campuran kode</h2>
+<p>Ulasan dan komentar Indonesia hampir selalu bercampur. Baris pertama berbahasa Jawa, baris kedua bahasa Indonesia, satu kata bahasa Inggris menyelip di antaranya. Cara penanganan yang disarankan di kelas ini: deteksi bahasa per kalimat, bukan per dokumen, dan campuran kode diperlakukan sebagai fenomena yang diproses, bukan sebagai kesalahan yang dibuang.</p>
+<p>Deteksi awal memakai fastText language identification atau compact language detector. Keduanya bekerja dengan cepat untuk teks pendek. Bila baris bertanda tiga bahasa atau lebih, baris itu diberi label campur dan tetap diproses. Tabel 7.1 memuat tiga jalan keluaran.</p>
+<table><caption>Tabel 7.1: Tiga jalan penanganan berdasarkan hasil deteksi</caption>
+<tr><th>Hasil deteksi</th><th>Contoh</th><th>Penanganan</th></tr>
+<tr><td>Satu bahasa dominan</td><td>Seluruh baris bahasa Indonesia</td><td>Proses seperti biasa</td></tr>
+<tr><td>Campur dua bahasa</td><td>Baris Jawa, lalu baris Indonesia</td><td>Proses per kalimat, label campur ditahan</td></tr>
+<tr><td>Campur tiga atau lebih</td><td>Indonesia, Jawa, dan Inggris dalam satu baris</td><td>Audit manual bila jumlahnya di atas 2 persen</td></tr>
+</table>
+<p>Satu peringatan penting. Deteksi bahasa pada teks sangat pendek sering keliru, misalnya kata ok dinetralkan menjadi bahasa Inggris. Karena itu baris yang terdiri dari satu atau dua kata tidak dipaksa diberi label. Baris semacam itu cukup diberi penanda tak-pasti dan diperlakukan sebagai data valid sepanjang isinya bukan sampah.</p>
+
+<h2>8. Jebakan membersihkan berlebihan</h2>
+<p>Membersihkan berlebihan terjadi ketika alat pembersih menghapus bagian yang sebenarnya membawa makna. Kasus paling umum adalah stopword yang memuat kata negasi. Kalimat «Kualitas tidak bagus untuk harga segitu» menjadi «kualitas bagus untuk harga segitu» setelah kata tidak dibuang. Baca mesin menyimpulkan ulasan positif, padahal aslinya negatif. Gambar 8.1 memperlihatkan dua jalan: jalur salah dan jalur benar.</p>
+<!--FIG:figm6-overclean.svg-->
+<p>Aturan praktis yang mudah diingat: sebelum menghapus sebuah kata, tanyakan apakah kata itu mengubah arah kalimat. Yang mengubah arah disimpan dan ditandai. Yang hanya mengganjal boleh dihapus. Kata yang mengubah arak mencakup tidak, belum, jarang, malah, bukan, dan tanpa. Daftar itu harus dicek setiap kali kamus stopword diperbarui.</p>
+<p>Contoh kedua dari kelas ini adalah stemming berlebihan pada entitas nama. Kata Jakarta dijadikan jakarta meski yang dimaksud kota, bukan kata dasar lain. Pada analisis yang menagih lokasi, aturan kelas ini meminta entitas nama dilindungi dengan kamus tersendiri sebelum stemming dijalankan.</p>
+
+<h2>9. Bias sampling dari parameter API</h2>
+<p>Parameter kolektor yang tampak netral sebenarnya menyaring populasi. Pemilihan jendela waktu, batas halaman, dan operator tanggal menentukan bagian mana yang terlihat. Gambar 9.1 membandingkan dua jendela waktu untuk pertanyaan yang sama tentang tagar banjir pada minggu pertama Januari.</p>
+<!--FIG:figm6-window.svg-->
+<p>Jendela A mengambil tepat tujuh hari sesuai parameter, sedangkan pagination berhenti ketika cursor habis. Jendela B hanya mengambil 24 jam pertama lalu memakai sampling 10 persen karena kuota menipis. Hasilnya berbeda. Jendela B memotong puncak pembicaraan sehingga volume per hari tampak kecil. Tidak ada yang salah dari angka keduanya, yang salah adalah menyajikan angka B sebagai gambaran tujuh hari penuh.</p>
+<table><caption>Tabel 9.1: Parameter kolektor dan bias yang ditimbulkan</caption>
+<tr><th>Parameter</th><th>Kesan yang muncul</th><th>Bias yang tersembunyi</th></tr>
+<tr><td>Jendela waktu pendek</td><td>Volume rata</td><td>Puncak isu terlewat</td></tr>
+<tr><td>Kuota habis di tengah</td><td>Data lengkap sampai batas</td><td>Sehari terakhir setengah terisi</td></tr>
+<tr><td>Bahasa filter default</td><td>Hasil seragam</td><td>Jawa dan campur kode hilang</td></tr>
+<tr><td>Replies saja</td><td>Percakapan tekstual</td><td>Post asal tanpa balasan hilang</td></tr>
+<tr><td>Top hashtag</td><td>Isu teratas</td><td>Isu Desmond which belum naik tidak terlihat</td></tr>
+</table>
+<p>Cara menutup bias ini bukan mengumpulkan semuanya, sebab itu mustahil. Cara yang jujur adalah menyebut batas pada laporan. Kalimat seperti «hasil berlaku untuk tujuh hari pertama Januari, dengan bahasa Indonesia dominan, dan tidak mewakili periode berikutnya» sudah cukup untuk menjaga klaim tetap dalam bukti.</p>
+
+<h2>10. Lab: membersihkan 500 baris</h2>
+<p>Lab pertemuan ini memakai data hasil kolektor pertemuan 4: 500 baris komentar dan post bertagat banjir, lengkap dengan collection log. Tujuannya bukan mencapai jumlah tertentu, melainkan menghasilkan deret angka yang bisa dijelaskan.</p>
+<!--FIG:figm6-funnel.svg-->
+<p>Langkah kerja disusun sebagai berikut.</p>
+<p><b>Langkah 1. Cek integritas.</b> Muat berkas, hitung baris rusak. Pada dataset kelas ini, 10 baris JSON rusak dibuang dan alasannya ditulis.</p>
+<p><b>Langkah 2. Dedup dekat.</b> Hitung MinHash dengan ambang 0,60. Sebanyak 29 baris bertanda duplikat. Setengahnya diperiksa cepat: 18 memang salinan, 11 membawa klaim baru sehingga disimpan dengan penanda berkaitan.</p>
+<p><b>Langkah 3. Saring bot.</b> Hitung skor enam heuristik. Tiga puluh akun berada di atas 0,50, lalu 5 persen sampel disaring diaudit. Dua dari lima ternyata manusia aktif, sehingga skornanya diturunkan manual dengan alasan tertulis.</p>
+<p><b>Langkah 4. Normalisasi.</b> Jalankan satu berkas kode normalisasi. Tahap ini tidak membuang baris. Ia hanya menambahkan kolom teks bersih dan penanda negasi.</p>
+<p><b>Langkah 5. Quality gate.</b> Baris kosong atau berisi kurang dari tiga token disingkirkan. Sasaran minimum 300 baris di luar audit.</p>
+<p><b>Langkah 6. Audit dan keputusan akhir.</b> Sampel acak 5 persen dibaca manusia. Empat belas baris ditandai ragu, lalu diputuskan satu per satu. Hasil akhir 300 baris layak analisis.</p>
+<table><caption>Tabel 10.1: Rubrik laporan cleaning (skor 100)</caption>
+<tr><th>Komponen</th><th>Skor</th><th>Kriteria penuh</th></tr>
+<tr><td>Funnel angka lengkap</td><td>25</td><td>Deret 500, 490, 461, 431, 412, 398, 300 hadir</td></tr>
+<tr><td>Alasan tiap selisih</td><td>20</td><td>Tiap penyusutan punya kalimat alasan</td></tr>
+<tr><td>Kamus dan kamus slang</td><td>15</td><td>Tersimpan sebagai berkas, bukan di keparat kode</td></tr>
+<tr><td>Audit manual 5 persen</td><td>15</td><td>Contoh salah positif ditulis</td></tr>
+<tr><td>Batasan dinyatakan</td><td>15</td><td>Kalimat batas cakupan laporan ada</td></tr>
+<tr><td>Reproduksibilitas</td><td>10</td><td>Orang lain boleh mengulang dari kode</td></tr>
+</table>
+<div class="box"><span class="gate">Catatan penilaian</span>
+<p>Kelompok yang funnel angkanya berbeda dari contoh tidak otomatis salah. Yang dinilai adalah kesesuaian angka dengan alasan. Bukti duplikat harus tampil, bukan diklaim.</p>
+</div>
+
+<h2>11. Studi kasus banjir Jakarta, dilanjutkan</h2>
+<p>Studi kasus modul ini melanjutkan arsip banjir yang dikumpulkan pada Materi 4 dan diuji aksesnya pada Materi 5. Langkah penerapannya mengikuti pipeline Gambar 3.1 dengan tambahan yang khusus untuk data Twitter seperti rantai retweet dan tanda verifikasi akun.</p>
+<p><b>Langkah 1. Muat dan cek.</b> Berkas JSON dari kolektor X dan Bluesky dijumlah. Kontrol checksum memastikan berkas sama dengan yang dicatat di collection log. Kesalahan parse 0,4 persen, di bawah batas 1 persen.</p>
+<p><b>Langkah 2. Dedup dengan rantai.</b> Retweet polos dihitung sekali, tetapi jejak jumlah reshare disimpan di kolom tersendiri. Dedup dekat memakai ambang 0,60. Hasil: 431 post asli dan 26 rantai.</p>
+<p><b>Langkah 3. Bot.</b> Enam heuristik dihitung. Akun dengan skor di atas 0,50 disaring, lalu diaudit. Satu akun layanan publik yang sangat rapi ternyata manusia, dan disimpan kembali.</p>
+<p><b>Langkah 4. Normalisasi.</b> Komentar diproses dengan kamus slang yang berisi bjr, gws, bgt, dan variasi huruf panjang. Tagar banjirjakarta dipecah menjadi banjir dan jakarta untuk analisis topik, tetapi kolom aslinya dipertahankan.</p>
+<p><b>Langkah 5. Bahasa.</b> Sebanyak 9 persen baris terdeteksi campur kode Jawa-Indonesia. Semuanya diproses per kalimat, tidak dibuang.</p>
+<p><b>Langkah 6. Quality gate.</b> Baris kosong dan baris di bawah tiga token disingkirkan. Sisa 412 baris.</p>
+<p><b>Langkah 7. Audit.</b> Sampel 5 persen dibaca. Empat belas baris ditandai ragu, dibahas berkelompok, lalu diputuskan.</p>
+<p><b>Langkah 8. Laporan.</b> Laporan cleaning ditulis memuat funnel, kamus, hasil audit, dan batasan cakupan. Laporan ini menjadi lampiran wajib capstone.</p>
+<table><caption>Tabel 11.1: Deret angka studi kasus beserta catatannya</caption>
+<tr><th>Tahap</th><th>Baris</th><th>Catatan tahap</th></tr>
+<tr><td>Mentah</td><td>500</td><td>Checksum sesuai collection log</td></tr>
+<tr><td>Cek integritas</td><td>490</td><td>10 parse error</td></tr>
+<tr><td>Dedup</td><td>461</td><td>29 bertanda, 11 dibatalkan setelah dibaca</td></tr>
+<tr><td>Bot</td><td>431</td><td>30 disaring, 1 dikembalikan setelah audit</td></tr>
+<tr><td>Quality gate</td><td>412</td><td>19 kosong atau terlalu pendek</td></tr>
+<tr><td>Audit</td><td>398</td><td>14 ragu dibahas, disisihkan sebagian</td></tr>
+<tr><td>Setelah ragu dibuka</td><td>300</td><td>Sasaran minimum tercapai</td></tr>
+</table>
+
+<h2>12. Sepuluh kesalahan umum</h2>
+<table><caption>Tabel 12.1: Kesalahan umum dan mitigasinya</caption>
+<tr><th>#</th><th>Kesalahan</th><th>Mitigasi</th></tr>
+<tr><td>1</td><td>Menghapus semua baris mirip tanpa membaca</td><td>Baca sampel bertanda duplikat</td></tr>
+<tr><td>2</td><td>Menyaring bot dengan ambang terlalu ketat</td><td>Audit 5 persen, kalibrasi tiap semester</td></tr>
+<tr><td>3</td><td>Menormalkan sebelum dedup</td><td>Ikuti urutan Gambar 3.1</td></tr>
+<tr><td>4</td><td>Membuang emoji</td><td>Jadikan token penanda nada</td></tr>
+<tr><td>5</td><td>Membuang tagar atau mempertahankannya utuh</td><td>Pisahkan kolom, pecah yang majemuk</td></tr>
+<tr><td>6</td><td>Stopword memuat kata negasi</td><td>Daftar negasi disimpan dan ditandai</td></tr>
+<tr><td>7</td><td>Menghapus kolom teks mentah</td><td>Kolom asli wajib dipertahankan</td></tr>
+<tr><td>8</td><td>Bahasa campur dibuang</td><td>Proses per kalimat, beri label campur</td></tr>
+<tr><td>9</td><td>Jendela waktu tak konsisten antar tahap</td><td>Satu jendela untuk seluruh analisis</td></tr>
+<tr><td>10</td><td>Laporan tanpa angka sebelum dan sesudah</td><td>Funnel deret angka wajib</td></tr>
+</table>
+
+<h2>13. Sepuluh pertanyaan pengaman</h2>
+<table><caption>Tabel 13.1: Self-check</caption>
+<tr><th>#</th><th>Pertanyaan</th><th>Jawaban yang diharapkan</th></tr>
+<tr><td>1</td><td>Mengapa dedup dijalankan sebelum normalisasi?</td><td>Variasi ejaan bisa menyamarkan salinan</td></tr>
+<tr><td>2</td><td>Apa itu shingle?</td><td>Potongan teks pendek bertumpang tindung</td></tr>
+<tr><td>3</td><td>Kapan duplikat dekat justru disimpan?</td><td>Bila membawa klaim atau pendapat baru</td></tr>
+<tr><td>4</td><td>Sebutkan tiga dari enam heuristik bot</td><td>Frekuensi, rasio like, usia akun, pola jam, kemiripan teks, perilaku jaringan</td></tr>
+<tr><td>5</td><td>Mengapa audit manual tetap wajib?</td><td>Heuristik salah positif, akun rapi bisa manusia</td></tr>
+<tr><td>6</td><td>Apa bahaya membuang emoji?</td><td>Nada ulasan hilang</td></tr>
+<tr><td>7</td><td>Bagaimana penanganan tagar majemuk?</td><td>Dipisah ke kolom, dipecah bila campur tema</td></tr>
+<tr><td>8</td><td>Mana yang mengubah arah kalimat?</td><td>tidak, belum, malah, jarang, namun</td></tr>
+<tr><td>9</td><td>Kenapa teks mentah tidak boleh dihapus?</td><td>Audit dan reproduksi</td></tr>
+<tr><td>10</td><td>Apa isi minimum cleaning log?</td><td>Funnel angka, alasan selisih, kamus, hasil audit, batasan</td></tr>
+</table>
+
+<h2>14. Ringkasan, glosarium, dan referensi</h2>
+<p>Ringkasnya, pertemuan ini mengajarkan satu kebiasaan: mengubah data mentah menjadi baris layak hitung sambil terus mencatat alasan. Tujuh tahap pipeline memberi urutan yang mencegah pekerjaan sia-sia. Dedup dekat memisahkan salinan dari pendapat baru. Saringan bot mengangkat sampel dari bunyi paling keras, dengan pengakuan jujur bahwa heuristik bisa salah. Normalisasi menyeragamkan bentuk tanpa menghapus emoji, tagar, dan negasi. Quality gate dan audit manual menjaga keputusan akhir tidak bergantung pada asumsi diam-diam.</p>
+<table><caption>Tabel 14.1: Glosarium materi 6</caption>
+<tr><th>Istilah</th><th>Arti</th></tr>
+<tr><td>shingle</td><td>Potongan pendek teks bertumpang tindih yang dipakai memperkirakan kemiripan</td></tr>
+<tr><td>MinHash</td><td>Teknik memperkirakan kemiripan himpunan secara cepat dari hash</td></tr>
+<tr><td>LSH</td><td>Pemfilteran pasangan yang layak diperiksa, sehingga perbandingan penuh tak perlu</td></tr>
+<tr><td>Duplicate dekat</td><td>Teks mirip namun tidak identik</td></tr>
+<tr><td>Quote tweet</td><td>Balasan yang membawa teks asli plus komentar baru</td></tr>
+<tr><td>Heuristik bot</td><td>Aturan sederhana penanda akun otomatis</td></tr>
+<tr><td>Salah positif</td><td>Data manusia terbaca sebagai bot</td></tr>
+<tr><td>Normalisasi</td><td>Penyeragaman bentuk teks tanpa menghapus makna</td></tr>
+<tr><td>Campur kode</td><td>Percampuran dua bahasa atau lebih dalam satu tuturan</td></tr>
+<tr><td>Deteksi bahasa</td><td>Penentuan bahasa teks, lazimnya per kalimat</td></tr>
+<tr><td>Stopword</td><td>Kata yang dianggap tidak informatif dan dihapus</td></tr>
+<tr><td>Kata negasi</td><td>Kata yang membalik arah makna kalimat</td></tr>
+<tr><td>Over-cleaning</td><td>Pembersihan berlebihan yang merusak makna</td></tr>
+<tr><td>Stemming</td><td>Pemotongan imbuhan menjadi bentuk dasar</td></tr>
+<tr><td>Quality gate</td><td>Pemeriksaan akhir sebelum data dipakai analisis</td></tr>
+<tr><td>Cleaning log</td><td>Catatan angka dan alasan tiap tahap pembersihan</td></tr>
+<tr><td>Audit manual</td><td>Pemeriksaan sampel oleh manusia</td></tr>
+<tr><td>Sampling bias</td><td>Ketimpangan sampel akibat parameter pengumpulan</td></tr>
+</table>
+<h3>Referensi</h3>
+<ol>
+<li>Broder, A. Z. (1997). On the resemblance and containment of documents. <i>Proceedings of the Compression and Complexity of Sequences</i>, 21-29. Dasar teori MinHash.</li>
+<li>Leskovec, J., Rajaraman, A., dan Ullman, J. D. (2020). <i>Mining of Massive Data Sets</i>, edisi ketiga, Cambridge University Press. Bab locality-sensitive hashing dan near-duplicate detection.</li>
+<li>Joulin, A. dkk. (2016). Bag of tricks for efficient text classification. <i>arXiv:1607.01759</i>. Dipakai sebagai rujukan identifikasi bahasa cepat.</li>
+<li>Davis, C. A. dkk. (2016). BotOrnot, sistem penilaian probabilitas akun bot di Twitter. <i>First Monday</i>, 21(7).</li>
+<li>Su, M. dkk. (2019/2020). Studi perilaku kubu bot pada tagar politik Indonesia, tersedia pada literatur computational social science kawasan ini. Dipakai sebagai latar kisah bagian 2.</li>
+<li>Kementerian Komunikasi dan Informatika RI, pedoman literasi digital dan penanganan informasi bohong. Dipakai sebagai konteks etis bagian 2.</li>
+<li>Hasil riset kurikulum materi 6: <code>results/preprocessing.json</code> (arsip modul Social Media Analytics 2024-2026).</li>
+</ol>
+</main></body></html>

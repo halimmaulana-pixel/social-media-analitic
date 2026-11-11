@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img" aria-label="figm4 checkpoint" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Checkpoint &amp; checksum: koleksi yang selamat dari crash dan koneksi</text>
+<rect x="40" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.5"/>
+<text x="140" y="110" font-size="12.5" fill="#0072B2" text-anchor="middle">fetch</text>
+<text x="140" y="128" font-size="12.5" fill="#0072B2" text-anchor="middle">halaman</text>
+<line x1="242" y1="117" x2="272" y2="117" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="274" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#009E73" stroke-width="1.5"/>
+<text x="374" y="110" font-size="12.5" fill="#009E73" text-anchor="middle">tulis hanya-append</text>
+<text x="374" y="128" font-size="12.5" fill="#009E73" text-anchor="middle">raw_history.jsonl</text>
+<line x1="476" y1="117" x2="506" y2="117" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="508" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#E69F00" stroke-width="1.5"/>
+<text x="608" y="110" font-size="12.5" fill="#E69F00" text-anchor="middle">hash SHA-256</text>
+<text x="608" y="128" font-size="12.5" fill="#E69F00" text-anchor="middle">file baru</text>
+<line x1="710" y1="117" x2="740" y2="117" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="742" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#D55E00" stroke-width="1.5"/>
+<text x="842" y="110" font-size="12.5" fill="#D55E00" text-anchor="middle">update checkpoint.json</text>
+<line x1="140" y1="150" x2="140" y2="176" stroke="#D55E00" stroke-width="1.6"/>
+<line x1="140" y1="176" x2="842" y2="176" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<text x="140" y="196" font-size="12" fill="#D55E00" text-anchor="middle">kembali ke awal sampai next_token habis / kuota habis / target tercapai</text>
+<rect x="40" y="160" width="900" height="96" rx="10" fill="#FBE9E9" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="58" y="186" font-size="13" fill="#9B2C2C" font-weight="bold" text-anchor="start">SAAT RUN TERPUTUS (listrik, timeout, rate limit keras)</text>
+<text x="58" y="208" font-size="12" fill="#141414" text-anchor="start">•  raw app-only: file yang terlanjur terulis aman — tidak ada yang dikorbankan.</text>
+<text x="58" y="226" font-size="12" fill="#141414" text-anchor="start">•  checkpoint.json bilang: run_id, waktu, file terakhir, halaman terakhir → resume dari sini.</text>
+<text x="58" y="244" font-size="12" fill="#9B2C2C" text-anchor="start">•  kolektor NEMPARKAN jendela waktu sisa; jangan mulai dari nol seperti orang panik.</text>
+<rect x="40" y="272" width="440" height="130" rx="10" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="56" y="296" font-size="12.5" fill="#5A5A5A" font-weight="bold" text-anchor="start">nilai SHA-256 satu file (contoh)</text>
+<text x="56" y="320" font-size="12.5" fill="#141414" text-anchor="start">3f9a12c4…  raw_w03_part01.jsonl</text>
+<text x="56" y="344" font-size="12" fill="#5A5A5A" text-anchor="start">checksum = sidik jari file.</text>
+<text x="56" y="366" font-size="12" fill="#141414" text-anchor="start">file rusak/terpotong → hash beda → ditolak</text>
+<text x="56" y="382" font-size="12" fill="#141414" text-anchor="start">masuk analisis.</text>
+<rect x="500" y="272" width="440" height="130" rx="10" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="516" y="296" font-size="12.5" fill="#5A5A5A" font-weight="bold" text-anchor="start">jendela waktu sisa di checkpoint (contoh)</text>
+<text x="516" y="320" font-size="12" fill="#141414" text-anchor="start">"window": "2026-11-03 → 2026-11-07",</text>
+<text x="516" y="344" font-size="12" fill="#141414" text-anchor="start">"page": "halaman 23", "run_id": "run03",</text>
+<text x="516" y="368" font-size="12" fill="#5A5A5A" text-anchor="start">resume = mulai run03 dari halaman 23</text>
+</svg>

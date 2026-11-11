@@ -1,0 +1,49 @@
+{
+  "module_name": "Multimodal Analytics: Images, Video, Audio, OCR, Video LLMs",
+  "module_description": "Module 15 handles the non-text majority of social content: image and video models (CLIP, SigLIP, ViT), OCR for on-screen text, automatic speech transcription (Whisper and derivatives) for TikTok/Reels/Shorts, and video LLMs for scene and action description. Students learn to align modalities (post text + video + audio) and to evaluate transcription accuracy on accented/colloquial Indonesian audio.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Image classification and CLIP-style zero-shot",
+    "OCR on social images/video frames",
+    "ASR transcription for videos (Whisper)",
+    "Video LLMs and multimodal prompting",
+    "Modality alignment and fusion"
+  ],
+  "learning_outcomes": [
+    "C3 Transcribe and OCR a short-video dataset",
+    "C4 Build a zero-shot image or video classifier for a domain",
+    "C5 Evaluate transcription/OCR error rates on local-language content"
+  ],
+  "methods_models": [
+    "Whisper/pykeformer transcription (word error rate), OCR (Tesseract/PaddleOCR/EasyOCR), CLIP zero-shot image classification, video frame sampling, multimodal fusion",
+    "Cross-modal retrieval (text query over video)"
+  ],
+  "evaluation_metrics": "WER (word error rate), CER for Indonesian OCR, image classification precision/recall, human rating of descriptions",
+  "pitfalls_limitations": "ASR errors on slang/accented Indonesian; OCR on stylized overlays; frame-sampling bias; modality disagreement counted as noise",
+  "tools_stack": "openai-whisper / faster-whisper, transformers, CLIP/SigLIP, easyocr, tesseract, ffmpeg, yt-dlp",
+  "commercial_platforms": "Commercial transcription/vision APIs compared for Indonesian accuracy",
+  "tools_access_cost": "ASR/vision APIs priced per minute/minute; local Whisper free with GPU",
+  "lab_activities": "Transcribe 50 short videos, OCR sample frames, build a searchable video index for one brand campaign",
+  "datasets_apis": "Short-video sample from TikTok/YouTube on a topic; image corpus from a hashtag",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "Jurafsky & Martin, Speech and Language Processing, ch. on speech",
+    "CLIP and SigLIP papers"
+  ],
+  "key_papers": [
+    "MDPI 2026 SMATM (multi-modal social account topic modeling)",
+    "2024-2026 papers on video/audio LLMs for social video understanding"
+  ],
+  "trends_2024_2026": "2024-2026: short video made video+audio OCR analysis a first-class analytics task; multimodal models dropped cost and code complexity enough for student labs",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Analyze the visual and spoken content of a TikTok campaign and compare it with the written claims.",
+  "deliverable_format": "Transcription + OCR dataset + multimodal index + findings memo",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

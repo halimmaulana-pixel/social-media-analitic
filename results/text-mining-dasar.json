@@ -1,0 +1,48 @@
+{
+  "module_name": "Basic Text Mining: TF-IDF, N-grams, Lexicons, Keyword and Phrase Extraction",
+  "module_description": "Module 8 keeps classical text mining as the interpretable baseline students must be able to run and defend: bag-of-words, n-grams, TF-IDF features, keyphrase extraction (RAKE, TextRank), lexicon sentiment (VADER plus Indonesian InSet), co-occurrence and word-count summaries, plus a first unsupervised clustering of posts. The learning goal is a strong, explainable baseline before any transformer.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Bag-of-words and n-grams",
+    "TF-IDF and feature hashing",
+    "Lexicon-based approaches (VADER, InSet)",
+    "Keyphrase/keyword extraction (RAKE, TextRank)",
+    "Co-occurrence, k-means clustering as baseline"
+  ],
+  "learning_outcomes": [
+    "C3 Build and explain a TF-IDF baseline for topic or sentiment tasks",
+    "C4 Compare lexicon vs supervised vs transformer methods on the same data",
+    "C5 Interpret keyword output and its limits"
+  ],
+  "methods_models": [
+    "TF-IDF vectorization (unigram/bigram), chi-square feature selection, k-means, cosine similarity",
+    "Model comparison: lexicon vs TF-IDF+SVM vs transformer"
+  ],
+  "evaluation_metrics": "Baseline metrics: precision/recall/F1, agreement of lexicon with human labels, cluster silhouette/NMI",
+  "pitfalls_limitations": "Sparse data, out-of-vocabulary slang and misspellings, lexicon mismatch in code-mixed Indonesian, keyword output over-interpreted as meaning",
+  "tools_stack": "scikit-learn (TfidfVectorizer, KMeans, chi2), nltk, RAKE-nltk/rake-rapid, TextRank (PyTextRank), vaderSentiment, InSet (Indonesian lexicon)",
+  "commercial_platforms": "Optional commercial keyword/topic extraction dashboard for comparison",
+  "tools_access_cost": "Free (open-source); commercial platforms demoed without student licenses",
+  "lab_activities": "TF-IDF + keyword extraction on a topic corpus; lexicon sentiment on the same data with error inspection",
+  "datasets_apis": "Indonesian sentiment/emotion corpus (SmSA or SMSSA) and a topic corpus",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "Silge and Robinson, Text Mining with R, ch. 1-6",
+    "Zafarani et al., Social Media Mining, ch. 3"
+  ],
+  "key_papers": [
+    "2024-2026 comparisons of classical baselines vs LLMs on social text (including LLM-vs-expert coder studies)"
+  ],
+  "trends_2024_2026": "2024-2026: classical baselines remain the interpretable standard; LLMs are added as a candidate method in a bake-off, not as a replacement by default",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Establish a defensible classical baseline for brand sentiment before trying BERT - and compare.",
+  "deliverable_format": "Notebook + baseline metrics table",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

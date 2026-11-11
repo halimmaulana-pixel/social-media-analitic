@@ -1,0 +1,50 @@
+{
+  "module_name": "Platform Ecosystem: X, TikTok, Instagram, YouTube, Reddit, Bluesky/AT Protocol, Threads",
+  "module_description": "Module 2 compares platforms as data environments: what is publicly retrievable, what the API exposes, how ranking (For You vs follow graph) shapes what data even means, and why platform choice determines feasible questions. It includes the 2025-2026 landscape where decentralized/federated networks (Bluesky/ActivityPub) became uniquely analyzable due to open firehose access, and where TikTok's data affordances dominate short-form video analysis.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Platform data affordances: what each API returns",
+    "Ranking logic (recommender feed vs chronological vs follow graph)",
+    "Openness spectrum from open firehose to gated research access",
+    "Decentralized and federated social media (ActivityPub, AT Protocol)",
+    "Cross-platform comparisons and their validity"
+  ],
+  "learning_outcomes": [
+    "C4 Compare platforms on data availability, API openness and ranking logic",
+    "C3 Justify platform choice for a given research or business question",
+    "C5 Interpret why identical metrics mean different things across platforms"
+  ],
+  "methods_models": [
+    "Comparative affordance matrix per platform",
+    "Openness scoring based on API availability, rate limits and cost tiers",
+    "Feed-mechanics qualitative analysis"
+  ],
+  "evaluation_metrics": "Qualitative comparison graded with a rubric; metric reproduction exercise (compute a metric from raw data vs dashboard)",
+  "pitfalls_limitations": "Comparing counts across platforms without normalizing audience size; assuming chronological data from an algorithmic feed; ignoring that metrics are defined per-platform",
+  "tools_stack": "Bluesky Jetstream/public API, TikTokApi or TikTok Research API sandbox, Reddit API (praw), YouTube Data API, yt-dlp for public media",
+  "commercial_platforms": "Read-only demos of TikTok Creative Center, X analytics, YouTube Studio analytics side by side",
+  "tools_access_cost": "Platform API tiers and quotas; Meta Content Library is gated to academic institutions; some research environments started charging teams in 2026",
+  "lab_activities": "For each of 3 platforms, collect 1,000 posts on the same topic, tabulate available fields, and write a 1-page comparability note",
+  "datasets_apis": "Public topic corpora (e.g. disaster/topic hashtag on X and Bluesky) plus YouTube comment sample",
+  "assessment_methods": "Written analysis/design document plus a short quiz; graded on correctness of concepts and quality of justification",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "Zafarani et al., Social Media Mining, ch. 2 (data sources)",
+    "Bruns, Are Filter Bubbles Real? (2019) for feed logic"
+  ],
+  "key_papers": [
+    "arXiv 2505.09877 - Studying Digital Platforms in Scant Data Access Times (2025)",
+    "Documentation of Bluesky AT Protocol firehose for research"
+  ],
+  "trends_2024_2026": "2026 trend: platform divergence grew - open protocols (AT Protocol) vs closed enterprise access (Meta), with TikTok/Reels/Shorts as the default content surface for analytics on video",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "Which platform would you use to track an Indonesian election issue, and what can each platform actually tell you?",
+  "deliverable_format": "Comparative platform memo plus small multi-platform dataset (CSV/JSON)",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

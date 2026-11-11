@@ -1,0 +1,47 @@
+{
+  "module_name": "Case Studies and Capstone Project",
+  "module_description": "Module 29 is the integrative capstone: teams of 4-5 solve a real listening/analysis problem end-to-end - collect, clean, model, visualize, interpret, present - using an Indonesian public dataset. Deliverables: pipeline code, documented dataset, dashboard, insight presentation, and a short report with limitations and ethics note. Assessment uses a rubric covering data, method, insight, ethics and communication; sample scenarios include election discourse analysis, brand sentiment on TikTok, hoax/detection studies, and coordination analysis.",
+  "duration_weeks": 6,
+  "core_concepts": [
+    "End-to-end research pipeline management",
+    "Team roles and reproducibility",
+    "From descriptive numbers to defensible insights",
+    "Limitations, uncertainty and honest reporting",
+    "Presentation of analytics to non-technical clients"
+  ],
+  "learning_outcomes": [
+    "C6 Design and execute an end-to-end social media analytics project",
+    "C5 Evaluate and critique an analytics study (own and peer)",
+    "C4 Present insights and limitations to a non-technical audience"
+  ],
+  "methods_models": [
+    "Full pipeline: API/scrape collection, cleaning, topic/sentiment/network/engagement models, dashboard, report",
+    "Peer evaluation and rehearsal"
+  ],
+  "evaluation_metrics": "Rubric-based: data quality, method validity, insight quality, ethics, communication (each 0-4), plus reproducibility check of a clean run",
+  "pitfalls_limitations": "Scope creep, non-reproducible pipelines, over-claiming insights, unmanaged personal data, unequal team contribution",
+  "tools_stack": "Everything from the course stack; team Git repository and issue tracking; optional containers for reproducibility",
+  "commercial_platforms": "Capstone sponsors may be local NGOs, media or SMEs; commercial tools used only if a partner provides access",
+  "tools_access_cost": "Keep total spend near zero by using open protocols and public datasets; document any licensed access",
+  "lab_activities": "Weekly milestones (W1 problem, W2 data, W3-4 analysis, W5 dashboard, W6 report and presentation) with peer review",
+  "datasets_apis": "Indonesian public datasets: election discourse on X/Bluesky, TikTok brand comments, hoax corpora, creator metrics",
+  "assessment_methods": "Ethics/DPIA note graded with a rubric; includes defence of sampling, retention, anonymisation and disclosure choices",
+  "data_collection_workflow": "Identify data and legal basis -> DPIA/risk assessment -> collect only what is needed -> anonymise -> document retention and disclosure -> preserve the ethics note",
+  "textbooks": [
+    "Course texts as reference; capstone reading packs per scenario"
+  ],
+  "key_papers": [
+    "2024-2026 method papers cited in each module as the method baseline"
+  ],
+  "trends_2024_2026": "2024-2026: capstones increasingly involve video/short-video data, LLM-validated annotation, and agentic pipelines - reflecting current analyst practice",
+  "industry_relevance": "Capstone output mirrors what industry panels expect in entry-level screening: an end-to-end pipeline, a documented dataset, an interactive dashboard, and a 10-minute insight presentation; sponsors can be local NGOs, media, or SMEs.",
+  "localization_context": "Default capstone datasets are Indonesian (X/Bluesky politics discussions, TikTok brand sentiment, hoax-news corpora, local election discourse), with options for cross-lingual replication using English datasets.",
+  "ethics_regulation": "Every capstone must submit an ethics/DPIA note: which platform, which data, what was collected, retention plan, anonymization, and what conclusions are and are not supportable.",
+  "case_study_scenarios": "Team project on a real Indonesian issue or brand question with a sponsoring organization (or a clearly scoped public dataset).",
+  "deliverable_format": "Dashboard + reproducible repo + final report + 10-minute presentation",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

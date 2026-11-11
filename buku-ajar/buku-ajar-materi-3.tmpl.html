@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buku Ajar Materi 3 — Jenis Data &amp; Field Dictionary</title>
+<!--STYLE-->
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+<div class="kicker">Pertemuan 3 · 150 menit · CPMK-1</div>
+<h1>Materi 3 — Jenis Data &amp; Field Dictionary</h1>
+<div class="sub">Taksonomi unit data teks–media–interaksi–metadata–log, anatomi satu objek API, spektrum terstruktur hingga tak terstruktur, dan lima langkah merancang field dictionary.</div>
+</div>
+
+<table>
+<caption>Tabel 0.1 — Identitas materi</caption>
+<thead><tr><th>Aspek</th><th>Isi</th></tr></thead>
+<tbody>
+<tr><td>Mata kuliah</td><td>Social Media Analytics (3 SKS · semester 5)</td></tr>
+<tr><td>Pertemuan</td><td>3 dari 14 (jalur A — Fondasi; jembatan ke CPMK-2)</td></tr>
+<tr><td>Beban</td><td>150 menit: teori 60&prime; + implementasi 70&prime; + artefak 20&prime;</td></tr>
+<tr><td>CPMK</td><td>CPMK-1 dan CPMK-2: mengklasifikasikan unit data beserta cara pengolahannya (C3); merancang field dictionary untuk API pilihan (C4); menjelaskan mengapa log engagement dan teks membutuhkan metode berbeda (C3)</td></tr>
+<tr><td>Bukti penilaian</td><td>Kamus field satu platform (field, tipe, contoh, arti, missingness); kuis ringkas</td></tr>
+<tr><td>Dasar penyusunan</td><td>Arsip riset <code>results/jenis-data.json</code>; objek API nyata (X v2, TikTok, Reddit, Bluesky); literatur data-management 2024–2026</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<span class="h">Cara memakai buku ini</span>
+Lapis Teori terdapat di Bagian 2, 4, 5, dan 7; Lapis Implementasi di Bagian 3, 6, dan 8; Lapis Artefak (yang dinilai) di Bagian 6 (kamus field) dan Bagian 9 (studi kasus spesifikasi dataset). Glosarium dan referensi di Bagian 12–13. Semua contoh endpoint/field per 2026; verifikasi ulang saat lab.
+</div>
+
+<div class="toc">
+<b>Daftar isi</b>
+<ol>
+<li>Peta pembelajaran pertemuan 3</li>
+<li>Taksonomi lima keluarga data</li>
+<li>Anatomi satu objek API</li>
+<li>Spektrum terstruktur hingga tak terstruktur</li>
+<li>Multimodal sebagai satu unit</li>
+<li>Field dictionary dan granularitas baris</li>
+<li>Missingness, snapshot, dan jendela waktu</li>
+<li>Implementasi: lab klasifikasi data</li>
+<li>Studi kasus terpandu: dataset kampanye TikTok vs X</li>
+<li>Sepuluh kesalahan umum mahasiswa</li>
+<li>Etika: anonimisasi di tingkat field</li>
+<li>Latihan mandiri dan ringkasan</li>
+<li>Glosarium</li>
+<li>Referensi pokok</li>
+</ol>
+</div>
+
+<h2>1. Peta pembelajaran pertemuan 3</h2>
+
+<table>
+<caption>Tabel 1.1 — Sub-CPMK, indikator, dan rute pembelajaran</caption>
+<thead><tr><th>Tahap</th><th>Sub-CPMK (indikator)</th><th>Aktivitas</th><th>Alokasi</th></tr></thead>
+<tbody>
+<tr><td>T1</td><td>Mengklasifikasikan lima keluarga unit data dan bagian-bagian unitnya</td><td>Gambar 1 + diskusi unit asli</td><td>20&prime;</td></tr>
+<tr><td>T2</td><td>Membedah field sebuah objek API nyata</td><td>Lab bedah JSON (Bagian 3)</td><td>25&prime;</td></tr>
+<tr><td>T3</td><td>Menempatkan data pada spektrum terstruktur / semi / tidak terstruktur</td><td>Gambar 3 + tabel implikasi metode</td><td>15&prime;</td></tr>
+<tr><td>T4</td><td>Mengoperasi unit multimodal sebagai satu kumpulan data</td><td>Diskusi (Bagian 5)</td><td>10&prime;</td></tr>
+<tr><td>T5</td><td>Merancang field dictionary 1 platform</td><td>Lab lima langkah (Bagian 6)</td><td>60&prime;</td></tr>
+<tr><td>T6</td><td>Menyusun spesifikasi dataset kampanye TikTok vs X</td><td>Studi kasus (Bagian 9)</td><td>20&prime;</td></tr>
+</tbody>
+</table>
+
+<h2>2. Taksonomi lima keluarga data</h2>
+
+<!--FIG:figm3-taxonomy.svg-->
+<figcaption><b>Gambar 1.</b> Taksonomi unit data media sosial — lima keluarga yang hadir bersama-sama dalam satu objek post: teks, media, interaksi, metadata, dan log engagement. Pembahasan di kelas mengaitkan keluarga &rarr; metode (NLP, CV, timeseries, graf).</figcaption>
+
+<p>Unit data media sosial biasanya mendapat lima keluarga <b>data</b> yang hadir <b>bersama dalam post yang sama</b>. Pengelompokan bukan sekadar penamaan: tiap keluarga punya metode, sistem penyimpanan, dan risiko privasi yang berbeda. Tabel 2.1 mengaitkan keduanya:</p>
+
+<table>
+<caption>Tabel 2.1 — Keluarga unit data, metode peluang, dan risiko</caption>
+<thead><tr><th>Keluarga</th><th>Contoh isi</th><th>Metode khas</th><th>Risiko khusus</th></tr></thead>
+<tbody>
+<tr><td>teks</td><td>caption, komentar, hashtag, mention, emoji</td><td>NLP (tokenisasi, klasifikasi), konten analitika</td><td>sarkasme &amp; kode-campur; model bahasa berbeda</td></tr>
+<tr><td>media</td><td>gambar, frame video, teks on-screen, audio</td><td>CV &amp; OCR, transkripsi (ASR), multimodal fusion</td><td>beban penyimpanan &amp; waktu cetak besar</td></tr>
+<tr><td>interaksi</td><td>like, komentar, reply, share, save, follow</td><td>graph metrics, counter models</td><td>definisi per platform tidak sama (materi 2)</td></tr>
+<tr><td>metadata</td><td>timestamp, bahasa, di mana, perangkat</td><td>jendela waktu, sampel design, geo clustering</td><td>bisa mengidentifikasi pengguna (geo + waktu)</td></tr>
+<tr><td>log engagement</td><td>watch time, completion, scroll, click event</td><td>timeseries, timeseries &amp; retensi kurva</td><td>sangat tergantung akses platform; harus dijelaskan di laporan</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Lapis teori</span>
+Pengklasifikasian keluarga data sesuai standar deskripsi data dan data management plan: <b>struktur Peranan &rarr; penyimpanan &rarr; metode &rarr; etika</b>. Ini keterampilan yang juga dipakai di sains data umum &mdash; bukan hanya riset platform.
+</div>
+
+<h2>3. Anatomi satu objek API</h2>
+
+<!--FIG:figm3-anatomy.svg-->
+<figcaption><b>Gambar 2.</b> Anatomi satu objek API post: blok-blok field yang bersama-sama menandai satu unit data &mdash; identitas, kepengarangan, isi, metrik, dan media. Blok-blok ini menjadi kerangka field dictionary di Bagian 6.</figcaption>
+
+<p>Objek API adalah jendela memahami data platform: semua field yang ditawarkan dipasang dalam satu objek. Objeknya berkarakter <b>hidup</b>: field tidak selalu dijamin (bisa <code>null</code>), nilai bisa berubah, dan <i>timezone</i> sering berbeda. Aturan praktisnya: <b>identitas</b> per URL/pencarian, <b>kepengarangan</b> per akun riset, <b>isi</b> (teks/entities) untuk NLP, <b>metrik</b> per definisi engagement platform, dan <b>media</b> untuk model audio/visual.</p>
+
+<p>Ketiga lapis implementasi di kelas biasa menggunakan objek X v2, TikTok, Reddit, atau Bluesky &mdash; yang sesuai platform. Tiga hal yang harus dicatat tiap objek:</p>
+<ol>
+<li>Deterministik — JSON bisa dibaca ulang tanpa kehilangan makna; simpan raw seketika setelah koleksi.</li>
+<li>Heterogen — tak ada platform yang menjamin semua field di setiap objek: <code>null</code> dan <code>absent</code> perlu dibedakan.</li>
+<li>Berubah-ubah — field bisa ditambah/dihilangkan antar tahun; kamus field mencantumkan versi API dan tanggalnya.</li>
+</ol>
+
+<div class="box ok">
+<span class="h">Lapis implementasi</span>
+Praktik yang ada di lab: ambil 500 post satu platform, jalankan <code>pandas.json_normalize</code> atau <code>json.dumps</code>, lalu daftar field yang muncul beserta tipe datanya. Tiap platform berbeda: objek post X v2 umumnya 25–45 field unik, TikTok 10–20, Reddit 15–30 per objek komentar. Setelah langkah itu, putuskan field mana yang benar-benar punya alasan ilmiah dipakai — bukan sekadar muncul di objek.
+</div>
+
+<h2>4. Spektrum terstruktur hingga tak terstruktur</h2>
+
+<!--FIG:figm3-spectrum.svg-->
+<figcaption><b>Gambar 3.</b> Spektrum struktur konten — terstruktur (SQL/pandas), semi-terstruktur (JSON/HTML/XML), dan tak terstruktur (teks, gambar, audio, video). Satu objek post sering mencakup ketiga band sekaligus.</figcaption>
+
+<table>
+<caption>Tabel 4.1 — Band struktur, kata kunci metode, dan penyimpanan yang cocok</caption>
+<thead><tr><th>Band</th><th>Kata kunci</th><th>Penyimpanan</th><th>Catatan</th></tr></thead>
+<tbody>
+<tr><td>Terstruktur</td><td>count, timestamp, dtypes (integer, float, boolean)</td><td>tabel/SQL; skema tetap</td><td>mudah bila simpan ditabulasi; perangkat tabel terbatas</td></tr>
+<tr><td>Semi-terstruktur</td><td>JSON/XML/HTML; nested &amp; entitas</td><td>JSON asli + dataframe ekstraks</td><td>duck-DB-like saat skala menengah</td></tr>
+<tr><td>Tak terstruktur</td><td>alam bebas teks; media afidavit; audio transkrip</td><td>file utuh (JSON.gz/image/png/mp4) + kolom pointer</td><td>perlu audio-fith, OCR, ASR; ukuran data bila tak taut</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Lapis teori: keputusan penyimpanan</span>
+<b>Raw first, tabel second</b> — simpan JSON mentah apa adanya sebelum tabulasi; tabulasi bisa diulang kapan pun, raw yang hilang tak bisa dibangun kembali. Entah itu timestamp: simpan timezone asli dan UTC berpasangan.
+</div>
+
+<h2>5. Multimodal sebagai satu unit</h2>
+
+<p>Sejak 2024–2026, video media sosial menuntut perlakuan unit dan multimodal: satu video memuat beberapa modalitas sekaligus:</p>
+<ul>
+<li><b>Visual</b> — frame; binary CV (objek/gesture), CLIP embedding.</li>
+<li>Teks on-screen — hasil OCR dari frame; sering kritis karena di TikTok berisi kalimat penuh.</li>
+<li>Audio — hasil transkripsi (Whiser); penting untuk konten informal berbahasa Indonesia.</li>
+<li>Metadata — durasi, hashtag, kategori audio.</li>
+</ul>
+
+<p>Metode multimodal mendalam ada di elective (Materi 15–16). Untuk pertemuan ini kuncinya: data multimodal disimpan sebagai satu unit yang bertaut ke post ID yang sama — bukan beberapa berkas mandiri tanpa tautan.</p>
+
+<div class="box">
+<span class="h">Lapis implementasi</span>
+Contoh yang relevan: UMKM snack viral di TikTok — satu video memuat caption (teks), teks on-screen (OCR), audio yang ditranskripsi, plus metrik platform (watch time, save, share) — semuanya bertaut di satu unit post.
+</div>
+
+<h2>6. Field dictionary dan granularitas baris</h2>
+
+<!--FIG:figm3-dictionary.svg-->
+<figcaption><b>Gambar 4.</b> Lima langkah merancang field dictionary: ambil 500 objek, daftar field, tentukan tipe, tulis arti &amp; missingness, dan pilih granularitas baris. Contoh potongan kamus untuk objek post Bluesky.</figcaption>
+
+<table>
+<caption>Tabel 6.1 — Skema kamus field (format yang dipakai selama kuliah)</caption>
+<thead><tr><th>Field</th><th>Tipe</th><th>Contoh</th><th>Arti</th><th>Missingness</th></tr></thead>
+<tbody>
+<tr><td><code>id</code></td><td>string</td><td><code>at://bsky.app/post/3l...</code></td><td>id unik post</td><td>selalu ada</td></tr>
+<tr><td><code>created_at</code></td><td>timestamp</td><td><code>2026-10-25T02:14:05Z</code></td><td>waktu tayang (UTC)</td><td>selalu ada</td></tr>
+<tr><td><code>text</code></td><td>text</td><td>isi caption</td><td>bahan utama NLP</td><td>absen jika post hanya media</td></tr>
+<tr><td><code>reply_count</code></td><td>int</td><td>23</td><td>jumlah balasan</td><td>bisa <code>null</code> di firehose</td></tr>
+<tr><td><code>quote_count</code></td><td>int</td><td>95</td><td>jumlah kutipan</td><td>bisa <code>null</code></td></tr>
+<tr><td><code>author.id</code></td><td>string</td><td><code>did:plc:...</code></td><td>id pengguna (anonimisasi opsional)</td><td>selalu ada</td></tr>
+<tr><td><code>media[0].type</code></td><td>enum</td><td><code>video|image</code></td><td>jenis media utama</td><td>absen jika no media</td></tr>
+<tr><td><code>geo</code></td><td>float|null</td><td>&mdash;</td><td>lokasi (jarang di-share)</td><td>absen saat lokasi tak menyala</td></tr>
+</tbody>
+</table>
+
+<p>Pertanyaan desain akhirnya: <b>granularitas baris</b>. Dua opsi yang dinyatakan di awal sebagai <i>entitas data:</i></p>
+
+<ul>
+<li>Row per post — satu catatan per post (pilihan utama); mudah dipahami, tetapi data samping seperti log engagement dan thread balasan lebih aman di tabel terpisah yang bertaut ID.</li>
+<li>Row per event — satu catatan per event pengguna (klik, view, reply); cocok untuk data streaming, tetapi wajib bertaut ke post ID.</li>
+</ul>
+
+<div class="box">
+<span class="h">Lapis implementasi (alur kerja lab)</span>
+<ol>
+<li>Simpan <b>JSON asli</b> ke <code>data/raw/{platform}/</code>, diberi checksum SHA-256.</li>
+<li>Normalisasi JSON ke dataframe; kolom nested menjadi jalur penuh &mdash; <code>metrics.like</code> berubah menjadi <code>metrics_like</code>.</li>
+<li><b>Klasifikasi tipe</b> — timestamp, string, angka, enum, objek — ke kolom <code>dtype</code>.</li>
+<li>Tulis arti dan kolom missingness — <code>null</code> yang sah, <code>absent</code>, atau jendela terbatas.</li>
+<li>Cek konsistensi: casing nama field antar-platform, tanda list, dan timezone.</li>
+</ol>
+</div>
+
+<h2>7. Missingness, snapshot, dan jendela waktu</h2>
+
+<!--FIG:figm3-missingness.svg-->
+<figcaption><b>Gambar 5.</b> Tiga jenis kejadian missing di data social media — konten terhapus, field tidak dijamin ada, dan jendela metrik terbatas — beserta mitigasinya. Setiap kolom kamus harus menyatakan kejadian missingnya.</figcaption>
+
+<table>
+<caption>Tabel 7.1 — Implementasi mitigasi untuk setiap tipe missing</caption>
+<thead><tr><th>Jenis</th><th>Contoh di lapangan</th><th>Catatan di kamus</th><th>Penanganan di kode</th></tr></thead>
+<tbody>
+<tr><td>Konten terhapus</td><td>post yang dihapus admin/pengguna sebelum snapshot</td><td><code>missing_reason = deleted</code></td><td>wajib lapor jendela snapshot untuk mengurangi bias</td></tr>
+<tr><td>Field menghilang</td><td>geotag &amp; lang sesuai preferensi pengguna</td><td><code>missing_reason = optout</code></td><td>lapor persentase null per field</td></tr>
+<tr><td>Jendela time-limit</td><td>engagement log sering diberikan dalam batch</td><td><code>missing_reason = window</code></td><td>jendela waktu dicantumkan di metadata batch</td></tr>
+</tbody>
+</table>
+
+<h2>8. Implementasi: lab klasifikasi data</h2>
+
+<div class="box">
+<span class="h">Lapis implementasi (60 menit lab)</span>
+<ol>
+<li>Ambil 500 objek platform yang sudah dipakai di pertemuan 2 (versi raw JSON, jangan diedit lebih dulu).</li>
+<li><b>Daftarkan</b> semua field yang muncul di <code>500 objek</code> — beri <b>tipe</b> data sesuai hasil inspeksi.</li>
+<li>Klasifikasikan tiap field ke lima keluarga (teks / media / interaksi / metadata / log).</li>
+<li><b>Kamus field</b> — 12–15 baris field yang paling penting untuk riset group Anda (seperti Tabel 6.1).</li>
+<li>Granularitas — pilih <code>row per post</code> atau <code>row per event</code>; sebabkan alasannya.</li>
+</ol>
+</div>
+
+<p>Deliverable yang dinilai: <b>kamus field</b> satu platform (12–15 baris, file Markdown/CSV) yang ≥3 baris menyentuh keluarga <b>log engagement</b> atau <b>media</b> — supaya penilaian tidak berfokus pada teks saja.</p>
+
+<h2>9. Studi kasus terpandu: dataset kampanye TikTok vs X</h2>
+
+<p>Pertanyaan kasus: <b>"Merancang dataset penilaian performa satu kampanye pemasaran di TikTok versus X — apa unit data, apa field, dan bagaimana keduanya dibandingkan?"</b> Diskusi bersama; dosen memandu:</p>
+
+<table>
+<caption>Tabel 9.1 — Rencana dataset kampanye dua platform</caption>
+<thead><tr><th>Perhatian</th><th>TikTok</th><th>X</th></tr></thead>
+<tbody>
+<tr><td>Keluarga data khas</td><td>media + log engagement (watch time, save, share)</td><td>teks + graf retweet/quote + interaksi</td></tr>
+<tr><td>Unit dasar</td><td>satu video短 &mdash; caption/audio/on-screen log timestamps</td><td>satu post teks + reply chain</td></tr>
+<tr><td>Sampling</td><td>hashtag + audio, feed deterministic rerank sampel POV</td><td>kata kunci/hashtag; feed kronologis per pengguna tak tersedia</td></tr>
+<tr><td>Field mutlak</td><td>title, duration, view/watch metrics, hashtag list</td><td>id, text, entities, reply/quote/like counts</td></tr>
+<tr><td>Perbandingan</td><td>normalisasi per 1.000 tontonan</td><td>normalisasi per 1.000 followers</td></tr>
+<tr><td>Hukum &amp; etika</td><td>akun riset TikTok Research API, UU PDP</td><td>API berbayar, API berbayar, ToS, UU PDP</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Lapis artefak (di kelas, bersama)</span>
+Satu spesifikasi dataset gabungan, di kertas mahasiswa: kolom <i>unit data</i>, <i>field wajib</i>, <i>granularitas</i>, <i>metode pembersihan</i>, <i>risiko missing</i>, dan <i>preferensi etik</i>. Spesifikasi cukup 1 halaman; catat juga variabel yang berbeda antar dua platform.
+</div>
+
+<h2>10. Sepuluh kesalahan umum mahasiswa</h2>
+
+<table>
+<caption>Tabel 10.1 — Kesalahan umum saat merancang dan mengumpulkan data</caption>
+<thead><tr><th>#</th><th>Kesalahan</th><th>Konsekuensi</th><th>Cara mencegah</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Menyimpan hanya hasil tabulasi, bukan raw JSON</td><td>tabulasi bisa diulang, tetapi field yang tak tersimpan tak bisa dibangun kembali</td><td>simpan raw + checksum</td></tr>
+<tr><td>2</td><td><code>null</code> dan <code>absent</code> diperlakukan sama</td><td>metadata missing salah saat analisis</td><td>binarikan kolom presence (0/1)</td></tr>
+<tr><td>3</td><td>Timestamp tak diberi timezone</td><td>waktu tayang vs UTC bergeser hingga 7–8 jam</td><td>standarkan ISO 8601 UTC-0</td></tr>
+<tr><td>4</td><td>Field nested tidak dipetakan ke kolom</td><td>tabel tidak rapi; risiko duplikasi</td><td>normalisasi path)-> kolom (>1 kelas)</td></tr>
+<tr><td>5</td><td>Row per post dan row per event tercampur</td><td>penghitungan engagement ganda tanpa dasar yang jelas</td><td>pilih dan dokumentasikan granularitas</td></tr>
+<tr><td>6</td><td>Media disimpan berseliweran di folder riset</td><td>penyimpanan terampung berat dan berulang</td><td>simpan media di folder media/, jangan di folder riset</td></tr>
+<tr><td>7</td><td>Kamus field yang tidak bisa dipahami mahasiswa lain</td><td>kolaborasi gagal; kolom muncul tidak diketahui maknanya</td><td>tulis dalam istilah sederhana</td></tr>
+<tr><td>8</td><td>Unit analisis tidak disebut di kamus</td><td>unit analisis kabur antar metode (post/user/event)</td><td>tulis unit analisis di awal kamus</td></tr>
+<tr><td>9</td><td>Log engagement dibandingkan antar batch berkala</td><td>trend menyesatkan dari jendela yang tidak sama</td><td>dokumentasikan jendela di metadata dataset</td></tr>
+<tr><td>10</td><td>Field pribadi disimpan tanpa anonimisasi</td><td>risiko PDP dan sensitivitas sepanjang riset</td><td>hash dulu field identitas</td></tr>
+</tbody>
+</table>
+
+<h2>11. Etika: anonimisasi di tingkat field</h2>
+
+<p>Materi ini pendokumen kesepata transparan riset <b>UU PDP</b> dan etik riset: anonimisasi di tingkat <b>kolom</b>, bukan hanya menyembunyikan nama di display. Praktik pertama yang kedengarannya hideiak zaman-jauz:</p>
+
+<ul>
+<li>Modifikasikan field yang berpotensi identifikasi: <code>author.id</code> di-hash, <code>geo</code> dihapus atau digenereralisasi ke wilayah luas, timezone disimpan UTC.</li>
+<li>Simpan mapping ID&rarr;hash hanya di penyimpanan terkunci yang tak ikut dipublikasikan.</li>
+<li>Berikan tinjauan etik sebelum data keluar dari lab; folder penyimpanan diberi label privasi.</li>
+</ul>
+
+<div class="box warn">
+<span class="h">Prinsip yang tidak bisa dilanggar</span>
+Sebelum data dipublish/diupload ke tempat publik, <b>semua</b> field yang berpotensi identifikator pribadi (author ID, geo, timestamplist komponen yang dapat di-<i>de-anonymize</i>) harus dicoret atau disha-kin. Ini aturan yang dijalankan di Pertemuan 14 (capstone ethics note).
+</div>
+
+<h2>12. Latihan mandiri dan ringkasan</h2>
+
+<div class="box ok">
+<span class="h">Latihan mandiri</span>
+<ol>
+<li>Buat kamus field lengkap satu platform yang berbeda dengan pilihan lab (misal: lab Bluesky → latihan TikTok) 12 baris, tinjauan dosen.</li>
+<li>Desain dataset row-per-event untuk beberapa metrik short-video berbasis perilaku; gambar struktur tabelnya.</li>
+<li>Audit missingness: hitung persentase null tiap field di 500 objek dari Lab; tunjukkan field dengan lebih dari 20% null.</li>
+<li>Standarkan satu tipe data yang salah (misal timestamp ISO vs epoch) pada data dari Pertemuan 2, dengan skrip validasi.</li>
+</ol>
+</div>
+
+<p>Ringkasan inti. <b>Lima keluarga data</b> (teks, media, interaksi, metadata, log) hadir bersamaan karena <b>post adalah objek kaya</b>, bukan teks saja. <b>Spektrum struktur</b> menentukan metode dan penyimpanan; tiap band punya tooling pilihan. <b>Field dictionary</b> adalah dokumen hidup yang mencakup <b>objek API, granularitas, jendela waktu, dan missingness</b>. Data <b>raw</b> selalu disimpan dulu — tabulasi bisa dibuat ulang, raw yang hilang tidak bisa dibangun kembali.</p>
+
+<h2>13. Glosarium</h2>
+
+<ol>
+<li><b>Field dictionary</b> — dokumen kamus dataset: field, tipe, contoh, arti, missingness.</li>
+<li><b>Objek API</b> — satu paket field yang dikirim platform (post / user / media dll.).</li>
+<li><b>Nested field</b> — field bersarang; ditulis sebagai jalur penuh (<code>metrics.like</code>).</li>
+<li><b>Granularitas</b> — satuan satu baris: <i>row per post</i> atau <i>row per event</i>.</li>
+<li><b>Schema</b> — struktur resmi field yang disimpan platform &mdash; bisa berubah antar versi API.</li>
+<li><b>Unit multimodal</b> — satu konten yang pakai beberapa modalitas di post ID yang sama.</li>
+<li><b>On-screen text</b> — teks yang muncul di bingkai video atau sekitarnya.</li>
+<li><b>Watch time</b> — durasi tiap tontonan; kadang dijual sebagai detail ke-platform.</li>
+<li><b>Completion rate</b> — persentase video yg ditonton sampai akhir; produksi short-video.</li>
+<li><b>Retensi</b> — kurva jumlah penonton bertahan saat video berjalan.</li>
+<li><b>Jendela snapshot</b> — interval waktu kapan data benar-benar diberikan.</li>
+<li><b>Anonimisasi field</b> — menghapus/menghash field identitas pribadi sebelum dataset dipublikasikan.</li>
+<li><b>Checksum</b> — sidik digital file (SHA-256) yang membuktikan file tak rusak.</li>
+<li><b>ISO 8601</b> — format standard timestamp (YYYY-MM-DDTHH:MM:SSZ) dengan timezone.</li>
+<li><b>Normalization</b> — mengubah nilai ke satu skala agar revita bisa di pompale.</li>
+<li><b>Kolom identitas</b> — field yang bisa mengidentifikasi pengguna; wajib di-hash atau dihapus.</li>
+</ol>
+
+<h2>14. Referensi pokok</h2>
+
+<ol>
+<li>Zafarani, Abbasi, &amp; Liu (2014). <i>Social Media Mining</i>, ch. 2 — unit data dan skema platform.</li>
+<li>Russell (2019). <i>Mining the Social Web</i> (O&rsquo;Reilly) — data-model dan penyimpanan.</li>
+<li>Dokumen resmi dari objek API: <b>X API v2</b>, <b>TikTok Research API</b>, <b>Reddit API</b>, <b>Bluesky (AT Protocol)</b> — field konteks UI dan missingness.</li>
+<li>Dokumentasi Meta Content Library (2024–2026) — field arsip skala besar.</li>
+<li>MDPI (2026). <i>SMATM</i> — studi topic modeling multimodal untuk akun sosial.</li>
+<li>Wickham, Çetinkaya-Rundel &amp; Grolemund (2023). <i>R for Data Science</i>, ch. 12–13 — tidy data dan granularitas.</li>
+<li>UU PDP No. 27 Tahun 2022 — fondasi etika dataset dengan field identitas.</li>
+</ol>
+
+<div class="box">
+<span class="h">Jembatan ke Materi 4</span>
+Materi 4 memperluas akuisisi: bagaimana kelima-kelima field dictionary dari pertemuan ini dijejak sistem koleksi — <b>pagination, rate limit, quota, dan checksum</b> — plus praktik arsip yang reprodukibel.
+</div>
+
+</div>
+</body>
+</html>

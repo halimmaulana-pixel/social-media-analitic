@@ -1,0 +1,48 @@
+{
+  "module_name": "Web Scraping and Legal/ToS Constraints",
+  "module_description": "Module 6 covers non-API collection responsibly: HTTP scraping with requests/BeautifulSoup, headless browser automation, platform-specific scrapers, and the legal/ethical frame (platform Terms of Service, computer-access law, GDPR, UU PDP). Students practice rate limiting, polite crawling, and the distinction between public and permissible, plus reproducibility of scrapes.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Static vs dynamic pages; HTML parsing",
+    "Headless browser scraping (Playwright/Selenium)",
+    "Platform Terms of Service and computer-access law",
+    "Public vs permissible data",
+    "Politeness, rate limiting, and reproducibility of scrapes"
+  ],
+  "learning_outcomes": [
+    "C3 Build a respectful scraper for a permitted public source",
+    "C4 Evaluate the legality and ethics of a scraping plan",
+    "C5 Document a scrape so it can be reproduced"
+  ],
+  "methods_models": [
+    "requests + parsers, Playwright/Selenium automation, yt-dlp for media, proxy/rotation concepts (used only in discussion)",
+    "Ethical checklist applied before any collection"
+  ],
+  "evaluation_metrics": "Reproducibility score of the collection (version, timestamp, hash) rather than model metrics",
+  "pitfalls_limitations": "Scraping as a first resort; ignoring robots/ToS; breaking site stability; scraping personal data; treating scraped data as licensable",
+  "tools_stack": "requests, BeautifulSoup, lxml, Playwright, yt-dlp, trafilatura, hashlib for checksums",
+  "commercial_platforms": "Comparison of a permitted scrape vs API access for the same content; cost/benefit table",
+  "tools_access_cost": "Some platforms block or legally challenge scraping; research-friendly routes vary. Verify current terms per platform and per jurisdiction before any collection",
+  "lab_activities": "Scrape a permitted source (e.g. public news site or open directory), store with checksum and metadata",
+  "datasets_apis": "Public news pages or open directories used as practice (not gated platform content)",
+  "assessment_methods": "Written analysis/design document plus a short quiz; graded on correctness of concepts and quality of justification",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "Library guides on text and data mining for social media",
+    "Case-law summaries (e.g. hiQ v. LinkedIn) in data-law readers"
+  ],
+  "key_papers": [
+    "We Are Social / DataReportal 2026 report on platform data availability"
+  ],
+  "trends_2024_2026": "2024-2026: anti-scraping engineering (dynamic rendering, signed requests) tightened, while open protocols reduced the need for scraping in some ecosystems",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "A client wants 2 million Instagram comments but has no API access. What are the legal/ethical options?",
+  "deliverable_format": "Scrape script + immutable archive (hash + README)",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

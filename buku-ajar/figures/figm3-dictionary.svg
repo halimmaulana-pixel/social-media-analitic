@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-label="figm3 dictionary" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="534" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Lima langkah merancang field dictionary</text>
+<circle cx="58" cy="88" r="18" fill="#0072B2"/>
+<text x="58" y="93" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">1</text>
+<rect x="96" y="64" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="88" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Ambil 500 objek dari API</text>
+<text x="112" y="112" font-size="11.5" fill="#5A5A5A" text-anchor="start">sampel mentah, jangan diubah dahulu</text>
+<line x1="58" y1="108" x2="58" y2="154" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="188" r="18" fill="#0072B2"/>
+<text x="58" y="193" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">2</text>
+<rect x="96" y="164" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="188" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Daftar semua field yang muncul</text>
+<text x="112" y="212" font-size="11.5" fill="#5A5A5A" text-anchor="start">field bersarang pakai jalur penuh: metrics.like</text>
+<line x1="58" y1="208" x2="58" y2="254" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="288" r="18" fill="#0072B2"/>
+<text x="58" y="293" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">3</text>
+<rect x="96" y="264" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="288" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Isi tipe tiap field</text>
+<text x="112" y="312" font-size="11.5" fill="#5A5A5A" text-anchor="start">text / angka / timestamp / enum / objek</text>
+<line x1="58" y1="308" x2="58" y2="354" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="388" r="18" fill="#0072B2"/>
+<text x="58" y="393" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">4</text>
+<rect x="96" y="364" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="388" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Tulis arti &amp; missingness</text>
+<text x="112" y="412" font-size="11.5" fill="#5A5A5A" text-anchor="start">apa yang terjadi bila field tidak ada?</text>
+<line x1="58" y1="408" x2="58" y2="454" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="488" r="18" fill="#0072B2"/>
+<text x="58" y="493" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">5</text>
+<rect x="96" y="464" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="488" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Pilih granularity baris</text>
+<text x="112" y="512" font-size="11.5" fill="#5A5A5A" text-anchor="start">satu baris per post, atau per event engagement</text>
+<rect x="500" y="62" width="468" height="474" rx="8" fill="#FFFFFF" stroke="#5A5A5A" stroke-width="1.4"/>
+<text x="514" y="88" font-size="12.5" fill="#0072B2" font-weight="bold" text-anchor="start">POTONGAN KAMUS FIELD (contoh post Bluesky)</text>
+<text x="604" y="118" font-size="11" fill="#7A4FA0" font-weight="bold" text-anchor="start">FIELD</text>
+<text x="620" y="118" font-size="11" fill="#7A4FA0" font-weight="bold" text-anchor="start">TIPE</text>
+<text x="692" y="118" font-size="11" fill="#7A4FA0" font-weight="bold" text-anchor="start">CONTOH / ARTI</text>
+<line x1="514" y1="130" x2="952" y2="130" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="142" font-size="10.5" fill="#141414" text-anchor="start">uri</text>
+<text x="620" y="142" font-size="10.5" fill="#141414" text-anchor="start">string</text>
+<text x="692" y="142" font-size="10.5" fill="#141414" text-anchor="start">at://.../post/3l</text>
+<text x="692" y="156" font-size="10.5" fill="#141414" text-anchor="start">... - id unik</text>
+<text x="692" y="170" font-size="10.5" fill="#141414" text-anchor="start">post</text>
+<line x1="514" y1="164" x2="952" y2="164" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="176" font-size="10.5" fill="#141414" text-anchor="start">created_at</text>
+<text x="620" y="176" font-size="10.5" fill="#141414" text-anchor="start">timestamp</text>
+<text x="692" y="176" font-size="10.5" fill="#141414" text-anchor="start">2026-10-</text>
+<text x="692" y="190" font-size="10.5" fill="#141414" text-anchor="start">25T02:14:05Z -</text>
+<text x="692" y="204" font-size="10.5" fill="#141414" text-anchor="start">waktu</text>
+<line x1="514" y1="198" x2="952" y2="198" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="210" font-size="10.5" fill="#141414" text-anchor="start">reply_coun</text>
+<text x="604" y="224" font-size="10.5" fill="#141414" text-anchor="start">t</text>
+<text x="620" y="210" font-size="10.5" fill="#141414" text-anchor="start">int</text>
+<text x="692" y="210" font-size="10.5" fill="#141414" text-anchor="start">23 - jumlah</text>
+<text x="692" y="224" font-size="10.5" fill="#141414" text-anchor="start">balasan</text>
+<line x1="514" y1="232" x2="952" y2="232" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="244" font-size="10.5" fill="#141414" text-anchor="start">repost_cou</text>
+<text x="604" y="258" font-size="10.5" fill="#141414" text-anchor="start">nt</text>
+<text x="620" y="244" font-size="10.5" fill="#141414" text-anchor="start">int</text>
+<text x="692" y="244" font-size="10.5" fill="#141414" text-anchor="start">410 - posting</text>
+<text x="692" y="258" font-size="10.5" fill="#141414" text-anchor="start">ulang</text>
+<line x1="514" y1="266" x2="952" y2="266" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="278" font-size="10.5" fill="#141414" text-anchor="start">quote_coun</text>
+<text x="604" y="292" font-size="10.5" fill="#141414" text-anchor="start">t</text>
+<text x="620" y="278" font-size="10.5" fill="#141414" text-anchor="start">int</text>
+<text x="692" y="278" font-size="10.5" fill="#141414" text-anchor="start">95 - quote /</text>
+<text x="692" y="292" font-size="10.5" fill="#141414" text-anchor="start">kutipan</text>
+<line x1="514" y1="300" x2="952" y2="300" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="312" font-size="10.5" fill="#141414" text-anchor="start">author.id</text>
+<text x="620" y="312" font-size="10.5" fill="#141414" text-anchor="start">string</text>
+<text x="692" y="312" font-size="10.5" fill="#141414" text-anchor="start">did:plc:... - id</text>
+<text x="692" y="326" font-size="10.5" fill="#141414" text-anchor="start">pengguna</text>
+<line x1="514" y1="334" x2="952" y2="334" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="346" font-size="10.5" fill="#141414" text-anchor="start">record.tex</text>
+<text x="604" y="360" font-size="10.5" fill="#141414" text-anchor="start">t</text>
+<text x="620" y="346" font-size="10.5" fill="#141414" text-anchor="start">text</text>
+<text x="692" y="346" font-size="10.5" fill="#141414" text-anchor="start">isi post utama</text>
+<line x1="514" y1="368" x2="952" y2="368" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="380" font-size="10.5" fill="#141414" text-anchor="start">like_count</text>
+<text x="620" y="380" font-size="10.5" fill="#141414" text-anchor="start">int|null</text>
+<text x="692" y="380" font-size="10.5" fill="#141414" text-anchor="start">null - bisa</text>
+<text x="692" y="394" font-size="10.5" fill="#141414" text-anchor="start">tidak tersedia</text>
+<text x="514" y="438" font-size="11.5" fill="#5A5A5A" text-anchor="start">Aturan: kamus harus bisa dipakai mahasiswa lain</text>
+<text x="514" y="458" font-size="11.5" fill="#5A5A5A" text-anchor="start">tanpa membaca kode - itulah ujian keterbacaannya.</text>
+</svg>

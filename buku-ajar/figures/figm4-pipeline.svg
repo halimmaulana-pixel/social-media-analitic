@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img" aria-label="figm4 pipeline" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Alur akuisisi data: dari pertanyaan riset ke arsip yang bisa direproduksi</text>
+<rect x="30" y="78" width="215" height="116" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.6"/>
+<text x="42" y="104" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">1. PERTANYAAN RISET</text>
+<text x="42" y="126" font-size="12.5" fill="#141414" text-anchor="start">Satu kalimat yang bisa</text>
+<text x="42" y="145" font-size="12.5" fill="#141414" text-anchor="start">diuji; batas populasi</text>
+<text x="42" y="164" font-size="12.5" fill="#141414" text-anchor="start">post &amp; waktu ditulis</text>
+<line x1="247" y1="136" x2="261" y2="136" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="263" y="78" width="215" height="116" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.6"/>
+<text x="275" y="104" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">2. PLATFORM &amp; JALUR</text>
+<text x="275" y="126" font-size="12.5" fill="#141414" text-anchor="start">API resmi / firehose /</text>
+<text x="275" y="145" font-size="12.5" fill="#141414" text-anchor="start">arsip terbuka; kuota</text>
+<text x="275" y="164" font-size="12.5" fill="#141414" text-anchor="start">dan biaya dicatat</text>
+<line x1="480" y1="136" x2="494" y2="136" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="496" y="78" width="215" height="116" rx="8" fill="#FEF6E7" stroke="#E69F00" stroke-width="1.6"/>
+<text x="508" y="104" font-size="13.5" fill="#E69F00" font-weight="bold" text-anchor="start">3. KOLEKTOR</text>
+<text x="508" y="126" font-size="12.5" fill="#141414" text-anchor="start">query + pagination +</text>
+<text x="508" y="145" font-size="12.5" fill="#141414" text-anchor="start">rate limit + quota</text>
+<text x="508" y="164" font-size="12.5" fill="#141414" text-anchor="start">budget ala desain</text>
+<line x1="713" y1="136" x2="727" y2="136" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="729" y="78" width="215" height="116" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.6"/>
+<text x="741" y="104" font-size="13.5" fill="#D55E00" font-weight="bold" text-anchor="start">4. RAW JSONL</text>
+<text x="741" y="126" font-size="12.5" fill="#141414" text-anchor="start">disimpan apa adanya,</text>
+<text x="741" y="145" font-size="12.5" fill="#141414" text-anchor="start">sebelum dibersihkan</text>
+<text x="741" y="164" font-size="12.5" fill="#141414" text-anchor="start">(raw first)</text>
+<line x1="836" y1="194" x2="836" y2="222" stroke="#5A5A5A" stroke-width="1.4"/>
+<rect x="30" y="156" width="215" height="116" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.6"/>
+<text x="42" y="182" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">5. CHECKSUM</text>
+<text x="42" y="204" font-size="12.5" fill="#141414" text-anchor="start">SHA-256 tiap file;</text>
+<text x="42" y="223" font-size="12.5" fill="#141414" text-anchor="start">rusak/terpotong langsung</text>
+<text x="42" y="242" font-size="12.5" fill="#141414" text-anchor="start">ketahuan</text>
+<line x1="247" y1="214" x2="261" y2="214" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="263" y="156" width="215" height="116" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.6"/>
+<text x="275" y="182" font-size="13.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">6. CLEANING &amp; KAMUS</text>
+<text x="275" y="204" font-size="12.5" fill="#141414" text-anchor="start">dedup, filter bot, kamus</text>
+<text x="275" y="223" font-size="12.5" fill="#141414" text-anchor="start">field dari Materi 3;</text>
+<text x="275" y="242" font-size="12.5" fill="#141414" text-anchor="start">log sebelum-sesudah</text>
+<line x1="480" y1="214" x2="494" y2="214" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="496" y="156" width="215" height="116" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.6"/>
+<text x="508" y="182" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">7. ANALISIS &amp; PRESERVE</text>
+<text x="508" y="204" font-size="12.5" fill="#141414" text-anchor="start">dataset + collection log</text>
+<text x="508" y="223" font-size="12.5" fill="#141414" text-anchor="start">+ kode; siap dipakai</text>
+<text x="508" y="242" font-size="12.5" fill="#141414" text-anchor="start">ulang orang lain</text>
+<line x1="603" y1="194" x2="603" y2="154" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="30" y="296" width="940" height="92" rx="8" fill="#FFFFFF" stroke="#009E73" stroke-width="1.4"/>
+<text x="46" y="320" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">Prinsip yang diuji di lab pertemuan ini</text>
+<text x="46" y="344" font-size="13" fill="#141414" text-anchor="start">•  Setiap kotak mengeluarkan artefak nyata: file raw, checksum, collection log.</text>
+<text x="46" y="368" font-size="13" fill="#141414" text-anchor="start">•  Langkah yang tidak tercatat = keputusan yang tidak bisa dipertahankan saat review.</text>
+</svg>

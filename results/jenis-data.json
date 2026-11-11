@@ -1,0 +1,50 @@
+{
+  "module_name": "Types of Social Media Data: Text, Image, Video, Interaction Graph, Metadata, Engagement Logs",
+  "module_description": "Module 3 builds the field dictionary. Students learn to classify data units (post text, comment, image, video, like/share/save, follow edges, timestamps, engagement logs, live-chat bursts, group/channel membership) and to decide tooling per data type. It emphasizes the shift to multimodal data (video with audio + on-screen text + overlay) and to behavioural logs, which is now the default in 2025-2026 industry work.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Data-unit taxonomy: text, media, interaction, metadata, logs",
+    "Structured vs unstructured data in platform contexts",
+    "Per-platform schema / field dictionary",
+    "Multimodal content as one unit (video + audio + OCR text)",
+    "Velocity and scale characteristics of platform data"
+  ],
+  "learning_outcomes": [
+    "C3 Classify a dataset by data type and choose suitable processing",
+    "C4 Design a field dictionary for a chosen API",
+    "C3 Explain why engagement logs and text need different methods"
+  ],
+  "methods_models": [
+    "Schema modeling (JSON/relational mapping)",
+    "Feature typing (count, categorical, text, timestamp, network)",
+    "Storage decisions (row per post vs row per engagement event)"
+  ],
+  "evaluation_metrics": "Schema-design exercise graded by completeness and normalization choices",
+  "pitfalls_limitations": "Treating a like as equivalent to a comment or share; ignoring recency and timezone metadata; losing deleted or edited content in snapshot copies",
+  "tools_stack": "JSON/tidy data conventions, pandas dtypes, optional Parquet storage, SQLite for local storage",
+  "commercial_platforms": "Schema inspection with API console/sandbox (X API v2 object, TikTok object, Reddit submission JSON)",
+  "tools_access_cost": "Cost of storing raw vs processed data; video data is the largest storage and compute burden",
+  "lab_activities": "Pick one platform, fetch 500 items, write a field dictionary (field, type, example, meaning, missingness)",
+  "datasets_apis": "Sample of platform API objects saved as raw JSON plus tidy tables",
+  "assessment_methods": "Written analysis/design document plus a short quiz; graded on correctness of concepts and quality of justification",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "Russell, Mining the Social Web (O'Reilly, 2019), data-model chapters",
+    "Zafarani et al., Social Media Mining, ch. 2"
+  ],
+  "key_papers": [
+    "Meta Content Library documentation (2024-2026) for archive-scale fields",
+    "MDPI 2026 SMATM paper on multi-modal social account topic modeling"
+  ],
+  "trends_2024_2026": "2024-2026: engagement and watch-time logs became first-class analytics objects; video/audio data now needs transcript + on-screen text + gesture metadata",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "Design a dataset specification for measuring how a TikTok campaign performed versus one on X.",
+  "deliverable_format": "Field dictionary (table) + sample raw/processed files",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

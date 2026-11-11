@@ -1,0 +1,50 @@
+{
+  "module_name": "Modern NLP: Transformers, Embeddings, Semantic Search, Zero-shot",
+  "module_description": "Module 12 builds the general NLP toolkit used by all later modules: pretrained transformers (BERT/RoBERTa/DeBERTa/XLM-R), Hugging Face fine-tuning and evaluation, sentence embeddings (SBERT/KataBERT/BGE multilingual), dense retrieval and vector stores, zero-shot classification, and practical constraints (CPU/Colab budgets, quantization, small-student-lab reality). Emphasis on evaluation rigor and calibration, not just accuracy.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Transformer pretraining and fine-tuning",
+    "Tokenization and model selection per language",
+    "Sentence embeddings and semantic similarity",
+    "Dense retrieval / vector search",
+    "Zero-shot and few-shot classification",
+    "Efficiency: quantization, distillation, Colab limits"
+  ],
+  "learning_outcomes": [
+    "C3 Fine-tune and evaluate a transformer classifier",
+    "C4 Build a semantic search interface over a social corpus",
+    "C5 Report calibration and per-class metrics, not accuracy alone"
+  ],
+  "methods_models": [
+    "Fine-tuning with Trainer/Accelerate, embedding generation, vector index (FAISS/Chroma/LanceDB), zero-shot NLI pipelines",
+    "Cross-lingual transfer with XLM-R"
+  ],
+  "evaluation_metrics": "Accuracy, macro-F1, per-class PR, ECE calibration, retrieval MRR/recall@k, human agreement on sampled labels",
+  "pitfalls_limitations": "Benchmark leakage, contamination from pretraining data, overfitting on small corpora, hubness in embedding similarity, misleading accuracy on imbalanced data",
+  "tools_stack": "transformers, datasets, evaluate, accelerate, sentence-transformers (KataBERT for Indonesian), faiss, langchain/chroma (optional)",
+  "commercial_platforms": "Commercial embedding/NLP APIs compared for accuracy and cost",
+  "tools_access_cost": "Embedding APIs priced per million tokens; local models free but need GPU/CPU time",
+  "lab_activities": "Fine-tune a classifier on a small corpus and evaluate; build a semantic search demo over the course dataset",
+  "datasets_apis": "Any cleaned corpus from previous modules; Indonesian benchmark sets",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "Jurafsky & Martin, Speech and Language Processing, ch. 3-11",
+    "Hugging Face course materials"
+  ],
+  "key_papers": [
+    "2024-2026 multilingual embedding models and retrieval papers",
+    "LLM-as-coder validation studies (Gilardi, Tornberg)"
+  ],
+  "trends_2024_2026": "2024-2026: embedding-based semantic search and zero-shot LLM classification became standard components of analytics pipelines; local embedding models made this feasible on modest hardware",
+  "industry_relevance": "Core competency for social-listening analyst, insights researcher and content-strategy roles; employers (Pulsar, Talkwalker, Meltwater, Brandwatch) list sentiment/topic extraction as the default screening task for junior analysts.",
+  "localization_context": "Indonesia-specific models and lexicons (IndoBERT family, NusaBERT, InSet) plus local datasets (Indonesian sentiment/emotion/hoax sets) are used as the primary lab material, because English-oriented models underperform on code-mixed colloquial Indonesian.",
+  "ethics_regulation": "Annotation labor and consent, model reporting of error rates, and disclosure that automated affective labels on individuals can misrepresent them; UU PDP applies when the corpus contains identifiable user text.",
+  "case_study_scenarios": "Build a semantic search 'find similar complaints' tool over a customer-conversation corpus.",
+  "deliverable_format": "Fine-tuning notebook + retrieval demo + metrics report",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

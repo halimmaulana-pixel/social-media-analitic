@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="400" viewBox="0 0 1000 400" role="img" aria-label="figm2 timeline" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="334" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Timeline kebijakan akses data riset 2021-2026</text>
+<line x1="60" y1="250" x2="950" y2="250" stroke="#5A5A5A" stroke-width="2"/>
+<circle cx="202" cy="250" r="6" fill="#D55E00"/>
+<line x1="202" y1="250" x2="202" y2="278" stroke="#D55E00" stroke-width="1.4"/>
+<text x="194" y="294" font-size="11.5" fill="#D55E00" font-weight="bold" text-anchor="start">TikTok Research API</text>
+<text x="194" y="309" font-size="11.5" fill="#D55E00" font-weight="bold" text-anchor="start">mulai berlaku (2021-22)</text>
+<circle cx="433" cy="250" r="6" fill="#9B2C2C"/>
+<line x1="433" y1="250" x2="433" y2="210" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="425" y="194" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">X: akses riset gratis</text>
+<text x="425" y="209" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">dicabut (Feb-Apr 2023)</text>
+<circle cx="496" cy="250" r="6" fill="#E69F00"/>
+<line x1="496" y1="250" x2="496" y2="278" stroke="#E69F00" stroke-width="1.4"/>
+<text x="488" y="294" font-size="11.5" fill="#E69F00" font-weight="bold" text-anchor="start">Reddit: API membayar</text>
+<text x="488" y="309" font-size="11.5" fill="#E69F00" font-weight="bold" text-anchor="start">(Jun 2023)</text>
+<circle cx="629" cy="250" r="6" fill="#7A4FA0"/>
+<line x1="629" y1="250" x2="629" y2="278" stroke="#7A4FA0" stroke-width="1.4"/>
+<text x="621" y="294" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">Meta Content Library</text>
+<text x="621" y="309" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">dibuka (2024)</text>
+<circle cx="700" cy="250" r="6" fill="#009E73"/>
+<line x1="700" y1="250" x2="700" y2="278" stroke="#009E73" stroke-width="1.4"/>
+<text x="692" y="294" font-size="11.5" fill="#009E73" font-weight="bold" text-anchor="start">AT Protocol &amp; Jetstream</text>
+<text x="692" y="309" font-size="11.5" fill="#009E73" font-weight="bold" text-anchor="start">matang (2024)</text>
+<circle cx="958" cy="250" r="6" fill="#9B2C2C"/>
+<line x1="958" y1="250" x2="958" y2="210" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="950" y="194" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">Enclave riset mulai</text>
+<text x="950" y="209" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">berbayar (Jan 2026)</text>
+<text x="60" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2021</text>
+<text x="238" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2022</text>
+<text x="416" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2023</text>
+<text x="594" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2024</text>
+<text x="772" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2025</text>
+<text x="950" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2026</text>
+<text x="24" y="368" font-size="12.5" fill="#141414" text-anchor="start">Pesan utama: akses riset condong menyempit sejak 2023 - desain studi mesti pilih platform</text>
+<text x="24" y="388" font-size="12.5" fill="#141414" text-anchor="start">yang aksesnya masih jelas tanggal kebijakannya, bukan dipilih setelah pengeluaran biaya naik.</text>
+</svg>

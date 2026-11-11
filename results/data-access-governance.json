@@ -1,0 +1,48 @@
+{
+  "module_name": "Data Access Politics and Platform Governance",
+  "module_description": "Module 25 is a reflection module that ties the whole course together: why access changed after 2023 (X ending academic access, Meta gating, enclave charging), what DSA and transparency obligations mean for analysts, and how researchers design studies under access scarcity. Students write a data-access governance memo for their capstone, and study platform transparency reporting as a data source itself.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "History and consequences of API access changes",
+    "Regulated access: DSA, transparency reporting as data",
+    "Research environments and their constraints",
+    "Designing for scarcity: metadata-first studies",
+    "Replication and data-sharing obligations"
+  ],
+  "learning_outcomes": [
+    "C3 Explain the access landscape for each major platform in 2026",
+    "C4 Design a study that is feasible under access constraints",
+    "C5 Use platform transparency data as an analytic source"
+  ],
+  "methods_models": [
+    "Comparative policy analysis, feasibility scoring, metadata-only study designs",
+    "Documentation and replication planning"
+  ],
+  "evaluation_metrics": "Not applicable; rubric-graded policy/design memo",
+  "pitfalls_limitations": "Assuming free access persists; ignoring that access can be revoked; designing a study that cannot be replicated",
+  "tools_stack": "Access documentation, transparency-report datasets, policy texts as corpus",
+  "commercial_platforms": "None",
+  "tools_access_cost": "Enclave and API costs vary and change; brandwatch-style tools are licensed",
+  "lab_activities": "Write a data-access governance memo for your capstone: platform, route, cost, constraints, retention",
+  "datasets_apis": "Transparency reports and platform docs",
+  "assessment_methods": "Written analysis/design document plus a short quiz; graded on correctness of concepts and quality of justification",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "arXiv 2505.09877 (2025) 'Studying Digital Platforms in Scant Data Access Times'"
+  ],
+  "key_papers": [
+    "Meta Content Library documentation (gating)",
+    "Bluesky/AT Protocol open access documentation"
+  ],
+  "trends_2024_2026": "2024-2026: a two-tier world emerged - institutionally gated research access (paid) versus open protocols; students must plan for both",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "Design a reproducible study of a Meta or X question with a zero-to-low budget and document its limits.",
+  "deliverable_format": "Data-access governance memo",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

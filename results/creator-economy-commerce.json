@@ -1,0 +1,48 @@
+{
+  "module_name": "Creator Economy and Social Commerce Analytics",
+  "module_description": "Module 24 covers monetization analytics: creator marketing measurement (impressions, CPE/CPM, engagement-per-follower), fake-follower and engagement-pod detection, affiliate and live-commerce performance (GMV, conversion, live viewer metrics), brand-creator matching, and disclosure/compliance analytics. It is the direct revenue-facing module of the course and connects to marketing majors in the program.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Creator marketing metrics and measurement standards",
+    "Engagement quality vs following size",
+    "Affiliate and live-commerce analytics (GMV, conversion)",
+    "Brand-creator fit and audience overlap",
+    "Disclosure and compliance (paid partnership labels)"
+  ],
+  "learning_outcomes": [
+    "C3 Measure creator marketing performance honestly",
+    "C4 Compute engagement quality and flag fake-audience risk",
+    "C5 Analyze live-commerce conversion metrics"
+  ],
+  "methods_models": [
+    "Engagement quality indices, fake-follower scoring, cohort/conversion analysis, uplift vs simple attribution",
+    "Audience overlap for campaign planning"
+  ],
+  "evaluation_metrics": "Engagement rate and quality index, fake-follower rate, conversion rate, CPM/CPE, incremental lift where testable",
+  "pitfalls_limitations": "Engagement pods inflating rates, self-reported metrics from agencies, unverifiable GMV, treat sponsorship as endorsement, selection bias in creator sets",
+  "tools_stack": "pandas/scikit-learn, engagement-quality heuristics, optional API clients",
+  "commercial_platforms": "Brandwatch/Meltwater/creator-marketplace tools for comparison",
+  "tools_access_cost": "Creator-marketplace platforms charge brands/agencies; free alternatives for student analysis",
+  "lab_activities": "Assess 10 creators for a hypothetical brand campaign: audience overlap, engagement quality, and compliance",
+  "datasets_apis": "Public creator metrics and disclosure-labelled posts",
+  "assessment_methods": "Lab submission plus a short strategy recommendation memo; graded on metric validity and quality of reasoning",
+  "data_collection_workflow": "Collect short-video metadata and media -> transcribe/OCR -> extract retention and engagement features -> normalise by follower base -> analyse and report",
+  "textbooks": [
+    "Industry creator-economy measurement reports (2025-2026)",
+    "Platform creator/marketplace documentation"
+  ],
+  "key_papers": [
+    "2024-2026 creator-economy market analyses (market size and growth; live-commerce growth)"
+  ],
+  "trends_2024_2026": "2024-2026: creator economy crossed ~USD 250B and social commerce/live shopping became the growth channel, so measurement of creators and live conversion is now a core analytics skill",
+  "industry_relevance": "Directly used in short-form content strategy, creator-marketing measurement, and social-commerce analytics teams; the metrics in this module (watch time, completion, saves, CTR via video) are the same KPIs agencies report to clients.",
+  "localization_context": "Taught against the Indonesian short-video and live-commerce ecosystem (TikTok Shop, live shopping sessions, Shopee/Tokopedia live), which has different content formats and monetization mechanics from the US market.",
+  "ethics_regulation": "Disclosure of paid partnerships, sponsored content and affiliate links; UU PDP and platform rules on scraping engagement data; caution when profiling creators and audiences from public metrics.",
+  "case_study_scenarios": "Evaluate a creator campaign proposal with data: audience fit, quality of engagement, and compliance.",
+  "deliverable_format": "Creator evaluation report + measurement plan",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

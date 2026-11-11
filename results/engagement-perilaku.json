@@ -1,0 +1,48 @@
+{
+  "module_name": "Behavior and Engagement Analytics: Prediction, Temporal Patterns, Churn",
+  "module_description": "Module 21 moves from content to behavior: predicting engagement (likes/shares/comments/saves) from content features, temporal patterns (posting cadence, time-of-day effects, seasonality), session/watch behavior for video, and churn/follower-growth modeling. It teaches feature engineering from social data and honest evaluation with temporal splits to avoid leakage.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Engagement prediction from content and context features",
+    "Temporal patterns and seasonality",
+    "Video watch-time and completion behavior",
+    "User growth, retention and churn",
+    "Leakage control with temporal splits"
+  ],
+  "learning_outcomes": [
+    "C3 Build an engagement predictor and evaluate it honestly",
+    "C4 Analyze temporal behavior patterns in a corpus",
+    "C5 Interpret behavioral findings for content strategy"
+  ],
+  "methods_models": [
+    "Feature engineering (text stats, posting time, hashtags, author history), gradient boosting / regression, time-series features, survival analysis for retention",
+    "Temporal cross-validation"
+  ],
+  "evaluation_metrics": "MAE/RMSE for engagement counts, Spearman for ranking, AUC for churn, temporal-split validation (no shuffle)",
+  "pitfalls_limitations": "Leakage from using future information, engagement ratios confounded by platform distribution, popularity bias, small-sample overfitting, causal overreach (engagement != attitude)",
+  "tools_stack": "pandas, scikit-learn, lightgbm/xgboost, statsmodels, river (streaming optional)",
+  "commercial_platforms": "Comparison with native analytics dashboards (TikTok Studio, YouTube Studio) metrics definitions",
+  "tools_access_cost": "Free (open-source); no vendor access needed for native metric definitions",
+  "lab_activities": "Predict next-day engagement for a creator corpus; analyze watch-time curves for a video sample",
+  "datasets_apis": "Public engagement datasets (Kaggle-style) or collected author-level logs",
+  "assessment_methods": "Lab submission plus a short strategy recommendation memo; graded on metric validity and quality of reasoning",
+  "data_collection_workflow": "Collect short-video metadata and media -> transcribe/OCR -> extract retention and engagement features -> normalise by follower base -> analyse and report",
+  "textbooks": [
+    "Feature-engineering practice books (e.g. Zheng, Feature Engineering for Machine Learning)",
+    "Silge & Robinson, Text Mining with R, ch. 7"
+  ],
+  "key_papers": [
+    "2024-2026 papers on short-video watch-time prediction and on engagement metrics in algorithmic feeds"
+  ],
+  "trends_2024_2026": "2024-2026: watch time and completion replaced like-count as the core video metric; first-party consented data replaced third-party tracking in measurement practice",
+  "industry_relevance": "Directly used in short-form content strategy, creator-marketing measurement, and social-commerce analytics teams; the metrics in this module (watch time, completion, saves, CTR via video) are the same KPIs agencies report to clients.",
+  "localization_context": "Taught against the Indonesian short-video and live-commerce ecosystem (TikTok Shop, live shopping sessions, Shopee/Tokopedia live), which has different content formats and monetization mechanics from the US market.",
+  "ethics_regulation": "Disclosure of paid partnerships, sponsored content and affiliate links; UU PDP and platform rules on scraping engagement data; caution when profiling creators and audiences from public metrics.",
+  "case_study_scenarios": "What content features predict saves and shares for a local creator's posts?",
+  "deliverable_format": "Engagement model + behavioral analysis report",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

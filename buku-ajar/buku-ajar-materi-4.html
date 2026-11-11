@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buku Ajar Materi 4 — Akuisisi Data via API Resmi</title>
+<style>
+  :root{
+    --ink:#141414; --muted:#5A5A5A; --line:#D9D9D9; --bg:#FFFFFF;
+    --blue:#0072B2; --green:#009E73; --amber:#E69F00; --orange:#D55E00; --plum:#7A4FA0;
+    --softblue:#F2F8FD; --softgreen:#F1FAF5; --softamber:#FEF6E7; --softorange:#FDF1EA; --softgrey:#F6F6F8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#EEF0F2;color:var(--ink);
+       font-family:"Times New Roman", Georgia, serif;font-size:16px;line-height:1.55}
+  .page{max-width:1000px;margin:24px auto;background:var(--bg);padding:52px 60px 64px;
+        box-shadow:0 2px 14px rgba(0,0,0,.12)}
+  h1,h2,h3,h4,.sans{font-family:Helvetica,Arial,"DejaVu Sans",sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:19px;margin:34px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+  h3{font-size:16px;margin:22px 0 6px;color:#1F3A5F}
+  h4{font-size:14.5px;margin:16px 0 4px;color:#333}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:3px 0}
+  .cover{border:2px solid var(--ink);padding:26px 30px;margin-bottom:26px}
+  .cover .kicker{font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;color:var(--orange);text-transform:uppercase}
+  .cover h1{margin-top:8px}
+  .cover .sub{font-size:15px;color:var(--muted)}
+  table{border-collapse:collapse;width:100%;margin:12px 0 6px;font-size:13.5px}
+  caption{caption-side:top;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:13px;
+          font-weight:bold;color:#1F3A5F;padding:6px 0}
+  th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+  thead th{background:#EAF1F7;font-family:Helvetica,Arial,sans-serif;font-size:12.5px}
+  tbody tr:nth-child(even){background:#FAFBFC}
+  figure{margin:16px 0 22px;page-break-inside:avoid}
+  figure svg{width:100%;height:auto;border:1px solid var(--line);background:#fff}
+  figcaption{font-family:Helvetica,Arial,sans-serif;font-size:12.5px;color:var(--muted);margin-top:6px}
+  .box{border:1px solid var(--line);border-left:5px solid var(--blue);background:var(--softblue);
+       padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .box.warn{border-left-color:var(--orange);background:var(--softorange)}
+  .box.ok{border-left-color:var(--green);background:var(--softgreen)}
+  .box.note{border-left-color:var(--amber);background:var(--softamber)}
+  .box .h{font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13px;display:block;margin-bottom:4px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tag{display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:11px;padding:1px 7px;
+       border-radius:10px;border:1px solid var(--line);background:#fff;color:#333;margin-right:5px}
+  .small{font-size:12.5px;color:var(--muted)}
+  .toc{background:var(--softgrey);border:1px solid var(--line);padding:14px 22px;font-size:14px}
+  .toc ol{margin:6px 0 0 20px}
+  figure.pagebreak{page-break-before:always}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;padding:0}h2{page-break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+<div class="kicker">Pertemuan 4 · 150 menit · CPMK-2</div>
+<h1>Materi 4 — Akuisisi Data via API Resmi</h1>
+<div class="sub">Autentikasi, perancangan query, pagination, rate limit, checkpoint dan checksum, serta collection log — dari kredensial pertama hingga korpus yang dapat direproduksi.</div>
+</div>
+
+<table>
+<caption>Tabel 0.1 — Identitas materi</caption>
+<thead><tr><th>Aspek</th><th>Isi</th></tr></thead>
+<tbody>
+<tr><td>Mata kuliah</td><td>Social Media Analytics (3 SKS · semester 5)</td></tr>
+<tr><td>Pertemuan</td><td>4 dari 14 (jalur A — Fondasi; menutup CPMK-1, membuka jalur kerja CPMK-2)</td></tr>
+<tr><td>Beban</td><td>150 menit: teori 60&prime; + implementasi 70&prime; + artefak 20&prime;</td></tr>
+<tr><td>CPMK</td><td>CPMK-2: mengumpulkan sampel terdokumentasi dari minimal tiga platform (C3); membenarkan sampling frame dan menaksir biasnya (C4); menilai kuota API terhadap anggaran riset (C5)</td></tr>
+<tr><td>Bukti penilaian</td><td>Kolektor sederhana pada tiga platform, berkas raw (JSONL), CSV ringkasan, dan <i>collection log</i>; kuis ringkas konsep pagination–quota</td></tr>
+<tr><td>Dasar penyusunan</td><td>Arsip riset <code>results/akuisisi-api.json</code>; dokumentasi resmi X API v2, YouTube Data API v3, AT Protocol, Reddit API; UU No. 27/2022 (PDP); literatur sampling (Lohr); kajian kebijakan akses 2024–2026</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<span class="h">Cara memakai buku ini</span>
+Lapis Teori berada di Bagian 2, 4, 5, dan 6; Lapis Implementasi di Bagian 3, 7, dan 9; Lapis Artefak (yang dinilai) di Bagian 8 (collection log) dan Bagian 10 (studi kasus). Glosarium dan referensi berada di Bagian 13–14. Semua contoh endpoint, kuota, dan harga ditulis per 2026 dan <b>harus diverifikasi ulang</b> saat jadwal lab, karena dokumen harga dan kuota platform berubah sepanjang semester.
+</div>
+
+<div class="toc">
+<b>Daftar isi</b>
+<ol>
+<li>Peta pembelajaran pertemuan 4</li>
+<li>Mengapa akuisisi adalah kompetensi tersendiri</li>
+<li>Autentikasi: siapa yang membawa identitas kolektor</li>
+<li>Query dan sampling frame: mesin penanya</li>
+<li>Pagination: membaca halaman sampai token habis</li>
+<li>Rate limit, kuota, dan backoff</li>
+<li>Checkpoint dan checksum: koleksi yang selamat</li>
+<li>Collection log: bukti, bukan pelengkap</li>
+<li>Lab utama: kolektor mini tiga platform</li>
+<li>Studi kasus: arsip isu tujuh hari dalam anggaran sempit</li>
+<li>Sepuluh kesalahan umum dalam akuisisi API</li>
+<li>Ringkasan modul</li>
+<li>Glosarium</li>
+<li>Referensi</li>
+</ol>
+</div>
+
+<h2>1. Peta pembelajaran pertemuan 4</h2>
+<p>Pertemuan ini adalah pertemuan tangan: mayoritas waktu dihabiskan menulis kode kolektor, membaca jawaban API, dan mencatat keputusan selama proses berjalan. Meski demikian, lapisan teorinya tetap padat, karena kompetensi akuisisi tidak berhenti pada kemampuan memanggil API. Ujung dari kompetensi ini adalah kecakapan <b>merancang pengambilan sampel yang dapat dipertanggungjawabkan</b>: di tingkat sarjana, pertanggungjawabannya dibaca dosen penilai; di tingkat tesis, dibaca reviewer ilmiah; di tingkat industri, dibaca auditor data.</p>
+
+<table>
+<caption>Tabel 1.1 — Rute belajar delapan tahap pertemuan 4</caption>
+<thead><tr><th>Tahap</th><th>Aktivitas utama</th><th>Durasi</th></tr></thead>
+<tbody>
+<tr><td>1. Pembuka artefak</td><td>Membaca dua collection log contoh: mana yang memungkinkan reproduksi, mengapa yang lain tidak</td><td>15 mnt</td></tr>
+<tr><td>2. Teori: mengapa akuisisi adalah kompetensi tersendiri</td><td>Akses sebagai kendala utama 2024–2026; bias masuk lebih dahulu lewat koleksi</td><td>15 mnt</td></tr>
+<tr><td>3. Lab kredensial</td><td>Inisialisasi proyek, berkas pengaturan (env), empat kredensial platform</td><td>30&prime;</td></tr>
+<tr><td>4. Teori: sampling frame &amp; operator query</td><td>Query sebagai mesin penanya; empat sampling frame (keyword, timeline, snowball, acak)</td><td>20&prime;</td></tr>
+<tr><td>5. Teori: pagination, rate limit, dedup</td><td>Cursor vs potongan waktu; neraca kuota; backoff saat 429</td><td>25&prime;</td></tr>
+<tr><td>6. Lab inti</td><td>Membangun kolektor X + Bluesky untuk topik yang sama (tujuan 500 post per platform)</td><td>70&prime;</td></tr>
+<tr><td>7. Perluasan endpoint</td><td>Menambahkan YouTube Data API v3 sebagai kanal ketiga; menaikkan rubrik</td><td>45&prime;</td></tr>
+<tr><td>8. Tugas mingguan</td><td>Kolektor mini + collection log; kelompok 3–4 mahasiswa</td><td>10&prime;</td></tr>
+</tbody>
+</table>
+
+<div class="box ok">
+<span class="h">Jembatan dari Modul 3</span>
+Field dictionary yang dibangun pada Modul 3 kini berubah fungsi: ia menjadi <b>spesifikasi kolektor</b>. Env field yang tertulis di kamus tak lagi daftar abstrak seperti minggu lalu; minggu ini, setiap field harus diperoleh lewat query dan endpoint yang nyata. Mahasiswa yang melewati Modul 3 dengan kamus yang lengkap akan membangun kolektornya lebih cepat; yang hanya mengingat konsepnya akan menghabiskan awal sesi untuk menulis ulang kamusnya.
+</div>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img" aria-label="figm4 pipeline" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Alur akuisisi data: dari pertanyaan riset ke arsip yang bisa direproduksi</text>
+<rect x="30" y="78" width="215" height="116" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.6"/>
+<text x="42" y="104" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">1. PERTANYAAN RISET</text>
+<text x="42" y="126" font-size="12.5" fill="#141414" text-anchor="start">Satu kalimat yang bisa</text>
+<text x="42" y="145" font-size="12.5" fill="#141414" text-anchor="start">diuji; batas populasi</text>
+<text x="42" y="164" font-size="12.5" fill="#141414" text-anchor="start">post &amp; waktu ditulis</text>
+<line x1="247" y1="136" x2="261" y2="136" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="263" y="78" width="215" height="116" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.6"/>
+<text x="275" y="104" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">2. PLATFORM &amp; JALUR</text>
+<text x="275" y="126" font-size="12.5" fill="#141414" text-anchor="start">API resmi / firehose /</text>
+<text x="275" y="145" font-size="12.5" fill="#141414" text-anchor="start">arsip terbuka; kuota</text>
+<text x="275" y="164" font-size="12.5" fill="#141414" text-anchor="start">dan biaya dicatat</text>
+<line x1="480" y1="136" x2="494" y2="136" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="496" y="78" width="215" height="116" rx="8" fill="#FEF6E7" stroke="#E69F00" stroke-width="1.6"/>
+<text x="508" y="104" font-size="13.5" fill="#E69F00" font-weight="bold" text-anchor="start">3. KOLEKTOR</text>
+<text x="508" y="126" font-size="12.5" fill="#141414" text-anchor="start">query + pagination +</text>
+<text x="508" y="145" font-size="12.5" fill="#141414" text-anchor="start">rate limit + quota</text>
+<text x="508" y="164" font-size="12.5" fill="#141414" text-anchor="start">budget ala desain</text>
+<line x1="713" y1="136" x2="727" y2="136" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="729" y="78" width="215" height="116" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.6"/>
+<text x="741" y="104" font-size="13.5" fill="#D55E00" font-weight="bold" text-anchor="start">4. RAW JSONL</text>
+<text x="741" y="126" font-size="12.5" fill="#141414" text-anchor="start">disimpan apa adanya,</text>
+<text x="741" y="145" font-size="12.5" fill="#141414" text-anchor="start">sebelum dibersihkan</text>
+<text x="741" y="164" font-size="12.5" fill="#141414" text-anchor="start">(raw first)</text>
+<line x1="836" y1="194" x2="836" y2="222" stroke="#5A5A5A" stroke-width="1.4"/>
+<rect x="30" y="156" width="215" height="116" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.6"/>
+<text x="42" y="182" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">5. CHECKSUM</text>
+<text x="42" y="204" font-size="12.5" fill="#141414" text-anchor="start">SHA-256 tiap file;</text>
+<text x="42" y="223" font-size="12.5" fill="#141414" text-anchor="start">rusak/terpotong langsung</text>
+<text x="42" y="242" font-size="12.5" fill="#141414" text-anchor="start">ketahuan</text>
+<line x1="247" y1="214" x2="261" y2="214" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="263" y="156" width="215" height="116" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.6"/>
+<text x="275" y="182" font-size="13.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">6. CLEANING &amp; KAMUS</text>
+<text x="275" y="204" font-size="12.5" fill="#141414" text-anchor="start">dedup, filter bot, kamus</text>
+<text x="275" y="223" font-size="12.5" fill="#141414" text-anchor="start">field dari Materi 3;</text>
+<text x="275" y="242" font-size="12.5" fill="#141414" text-anchor="start">log sebelum-sesudah</text>
+<line x1="480" y1="214" x2="494" y2="214" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="496" y="156" width="215" height="116" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.6"/>
+<text x="508" y="182" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">7. ANALISIS &amp; PRESERVE</text>
+<text x="508" y="204" font-size="12.5" fill="#141414" text-anchor="start">dataset + collection log</text>
+<text x="508" y="223" font-size="12.5" fill="#141414" text-anchor="start">+ kode; siap dipakai</text>
+<text x="508" y="242" font-size="12.5" fill="#141414" text-anchor="start">ulang orang lain</text>
+<line x1="603" y1="194" x2="603" y2="154" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="30" y="296" width="940" height="92" rx="8" fill="#FFFFFF" stroke="#009E73" stroke-width="1.4"/>
+<text x="46" y="320" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">Prinsip yang diuji di lab pertemuan ini</text>
+<text x="46" y="344" font-size="13" fill="#141414" text-anchor="start">•  Setiap kotak mengeluarkan artefak nyata: file raw, checksum, collection log.</text>
+<text x="46" y="368" font-size="13" fill="#141414" text-anchor="start">•  Langkah yang tidak tercatat = keputusan yang tidak bisa dipertahankan saat review.</text>
+</svg>
+<figcaption><b>Gambar 1.1.</b> Alur akuisisi data media sosial: setiap tahap mengeluarkan artefak yang bisa diaudit (file raw, checksum, collection log).</figcaption>
+</figure>
+
+<h2>2. Mengapa akuisisi adalah kompetensi tersendiri</h2>
+<p>Tiga alasan menjadikan kepadatan modul ini patut mendapat perhatian. <i>Pertama</i>, akses data telah berubah menjadi kendala riset utama pada era 2024–2026. Beberapa platform menutup akses gratis bagi komunitas akademik atau memindahkannya ke lingkungan riset terdaftar (X sejak 2023; Meta Content Library yang hanya lewat approval lembaga); kajian yang menulis tentang kondisi ini memakai frasa <i>data access scarcity</i>. Konsekuensinya, mahasiswa yang menyusun rencana riset tanpa mempertimbangkan kuota membuang waktu pada desain yang sulit dilaksanakan.</p>
+<p><i>Kedua</i>, kesalahan pada tahap akuisisi menembus sampel dan tidak dapat dipulihkan pada tahap berikutnya. Analisis yang paling hati-hati tidak mengembalikan halaman yang hilang, tidak menyelamatkan jendela waktu yang salah, dan tidak memperbaiki query yang terpotong diam-diam. Dengan demikian, "pengumpulan yang buruk" menghasilkan riset yang buruk berapa pun baiknya model di bagian akhir.</p>
+<p><i>Ketiga</i>, bias memasuki proyek melalui pintu koleksi lebih dahulu. Logika feed platform (Modul 2) dan definisi field per platform (Modul 3) menentukan populasi yang tampil di sampel sebelum satu pun analitik berjalan. Karena itu, kolektor yang baik bukan sekadar kode yang berjalan; ia juga menuliskan keputusan eksplisit — frame apa yang diambil, mengapa secara teknik, dan sejauh mana frame itu membatasi apa yang bisa ditemukan di sampel.</p>
+
+<div class="box">
+<span class="h">Pernyataan patokan pertemuan 4</span>
+"Korpus yang bagus itu mahal; yang murah hanyalah reproduksi dari <i>collection log</i> yang rapi." Setiap langkah di modul ini mengejar satu hal yang sama: memastikan setiap keputusan riset terdokumentasi dengan buktinya sendiri.
+</div>
+
+<h2>3. Autentikasi: siapa yang membawa identitas kolektor</h2>
+<p>Setiap request yang dikirim ke API melakukan dua hal sekaligus: meminta data dan memperlihatkan identitas. Ketiga pola identitas yang paling umum dapat dibaca pada Gambar 3.1 — bearer token berbasis aplikasi, OAuth 2.0 atas nama pengguna, dan <i>app password</i> pada protokol terbuka. Ketiganya berbeda pada kepemilikan kuota, cakupan akses (scope), dan risikonya.</p>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-label="figm4 auth" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Tiga pola autentikasi API — siapa yang membawa identitas</text>
+<rect x="30" y="64" width="296" height="300" rx="10" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.6"/>
+<text x="44" y="90" font-size="12.5" fill="#0072B2" font-weight="bold" text-anchor="start">A. BEARER TOKEN (APP-ONLY)</text>
+<rect x="46" y="134" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="178" y="154" font-size="12" fill="#141414" text-anchor="middle">Aplikasi riset</text>
+<line x1="178" y1="164" x2="178" y2="182" stroke="#0072B2" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="46" y="186" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="178" y="206" font-size="12" fill="#141414" text-anchor="middle">↓ header: Authorization: Bearer</text>
+<line x1="178" y1="216" x2="178" y2="234" stroke="#0072B2" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="46" y="238" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="178" y="258" font-size="12" fill="#141414" text-anchor="middle">Endpoint API platform</text>
+<text x="44" y="304" font-size="11.5" fill="#5A5A5A" text-anchor="start">Mudah untuk data publik; kuota paling tipis;</text>
+<text x="44" y="322" font-size="11.5" fill="#5A5A5A" text-anchor="start">tidak membawa akun user.</text>
+<text x="44" y="352" font-size="11.5" fill="#0072B2" font-weight="bold" text-anchor="start">contoh: X API v2 app-only</text>
+<rect x="348" y="64" width="296" height="300" rx="10" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.6"/>
+<text x="362" y="90" font-size="12.5" fill="#D55E00" font-weight="bold" text-anchor="start">B. OAUTH 2.0 (USER CONTEXT)</text>
+<rect x="364" y="134" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="496" y="154" font-size="12" fill="#141414" text-anchor="middle">Aplikasi riset</text>
+<line x1="496" y1="164" x2="496" y2="182" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="364" y="186" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="496" y="206" font-size="12" fill="#141414" text-anchor="middle">↓ login + consent user</text>
+<line x1="496" y1="216" x2="496" y2="234" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="364" y="238" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="496" y="258" font-size="12" fill="#141414" text-anchor="middle">Access token (+ refresh)</text>
+<text x="362" y="304" font-size="11.5" fill="#5A5A5A" text-anchor="start">Aksi atas nama user; scope diberikan setipis</text>
+<text x="362" y="322" font-size="11.5" fill="#5A5A5A" text-anchor="start">mungkin.</text>
+<text x="362" y="352" font-size="11.5" fill="#D55E00" font-weight="bold" text-anchor="start">contoh: YouTube Data API v3</text>
+<rect x="666" y="64" width="296" height="300" rx="10" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.6"/>
+<text x="680" y="90" font-size="12.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">C. APP PASSWORD (AT PROTOCOL)</text>
+<rect x="682" y="134" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="814" y="154" font-size="12" fill="#141414" text-anchor="middle">Aplikasi riset</text>
+<line x1="814" y1="164" x2="814" y2="182" stroke="#7A4FA0" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="682" y="186" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="814" y="206" font-size="12" fill="#141414" text-anchor="middle">↓ app-password khusus riset</text>
+<line x1="814" y1="216" x2="814" y2="234" stroke="#7A4FA0" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="682" y="238" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="814" y="258" font-size="12" fill="#141414" text-anchor="middle">PDC server / firehose</text>
+<text x="680" y="304" font-size="11.5" fill="#5A5A5A" text-anchor="start">User tetap memegang kendali; bisa dicabut</text>
+<text x="680" y="322" font-size="11.5" fill="#5A5A5A" text-anchor="start">kapan saja.</text>
+<text x="680" y="352" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">contoh: Bluesky AT Protocol</text>
+<rect x="30" y="382" width="940" height="62" rx="8" fill="#FFFFFF" stroke="#009E73" stroke-width="1.4"/>
+<text x="46" y="404" font-size="12.5" fill="#009E73" font-weight="bold" text-anchor="start">Aturan kredensial yang dipakai di lab</text>
+<text x="46" y="426" font-size="12.5" fill="#141414" text-anchor="start">•  Kredensial di file .env (di-gitignore); scope minimum; versi API dicantumkan di collection log.</text>
+<text x="46" y="444" font-size="12.5" fill="#141414" text-anchor="start">•  Secret pernah bocor = asumsi bocor: regenerate, jangan hanya menghapus dari repo.</text>
+</svg>
+<figcaption><b>Gambar 3.1.</b> Tiga pola autentikasi dalam akuisisi riset: app-only (bearer), user context (OAuth 2.0), dan app password (AT Protocol).</figcaption>
+</figure>
+
+<table>
+<caption>Tabel 3.1 — Perbandingan tiga pola autentikasi</caption>
+<thead><tr><th>Aspek</th><th>Bearer (app-only)</th><th>OAuth 2.0 (user)</th><th>App password</th></tr></thead>
+<tbody>
+<tr><td>Pemegang kuota</td><td>Aplikasi</td><td>Pengguna akun riset</td><td>Akun pengguna AT Protocol</td></tr>
+<tr><td>Batas data</td><td>Publik saja; kuota paling tipis</td><td>Sesuai scope yang disetujui</td><td>Akses penuh ke data milik akun tersebut</td></tr>
+<tr><td>Risiko utama</td><td>Token bocor berarti akun riset bisa disusupi</td><td>Scope berlebih; refresh token harus disimpan aman</td><td>Dapat dicabut kapan saja oleh pemilik akun</td></tr>
+<tr><td>Kegunaan riset</td><td>Pemetaan topik beragam, tanpa aksi akun</td><td>Aksi atas nama akun; feed personal</td><td>Riset pada protokol terbuka</td></tr>
+</tbody>
+</table>
+
+<h3>3.1 Aturan kredensial yang diuji di lab</h3>
+<ul>
+<li>Kredensial — baik bearer token, kunci aplikasi, maupun app password — tidak pernah dituliskan dalam kode. Ia disimpan di berkas <code>.env</code>, dan berkas itu didaftar pada <code>.gitignore</code>.</li>
+<li>Scope OAuth dilancarkan menjadi paling sempit yang diperlukan tugas. Lebih baik meminta ulang hak akses ketimbang membawa hak yang tak terpakai.</li>
+<li>Sekali kredensial bocor — satu kali, hingga lokal — ia dianggap terkompromi: token harus di-regenerate, bukan cukup dihapus dari riwayat repo.</li>
+<li>Setiap run mencantumkan mode kredensial di collection log. Ini membantu taksir kuota run berikutnya tanpa membuka dashboard API.</li>
+</ul>
+
+<div class="box warn">
+<span class="h">Peringatan sekitar secret</span>
+Kesalahan yang paling sering terjadi di lab: menyalin token langsung ke dalam kode agar cepat berjalan. Kebiasaan kecil ini memperlihatkan kredensial di layar banyak orang — dan sekali kode terbagi, kredensial ikut terbagi. Kebiasaan yang dibangun di sini akan menolong mahasiswa ketika proyeknya besar.
+</div>
+
+<h2>4. Query dan sampling frame: mesin penanya</h2>
+<p>Query adalah mesin penanya kolektor. Ia menentukan objek apa yang berhak masuk sampel dan objek apa yang tersaring. Ada dua versi query yang perlu dibedakan sejak awal: query harapan (yang ditulis peneliti) dan query kenyataan (yang berjalan di API bersama operator tambahan serta batas platform). Operator umum yang dipakai di lab dirangkum pada tabel berikut.</p>
+
+<table>
+<caption>Tabel 4.1 — Operator query umum dan makna akuisisinya (sisipan sintak tercatat per 2026)</caption>
+<thead><tr><th>Operator</th><th>Makna</th><th>Pengaruhnya pada sampel</th></tr></thead>
+<tbody>
+<tr><td><code>#hashtag</code> atau kata</td><td>Post memuat istilah itu</td><td>Relevan langsung terhadap tema; sempit bila istilahnya jarang</td></tr>
+<tr><td><code>OR</code> dan tanda kurung</td><td>Alternatif istilah selang sehingga tak kehilangan kata</td><td>Memperluas query tanpa menguras kuota</td></tr>
+<tr><td><code>&quot;frasa tepat&quot;</code></td><td>Istilah berurutan</td><td>Sampel mengecil, presisi meningkat</td></tr>
+<tr><td><code>-is:retweet</code> (X)</td><td>Retweet dihapus</td><td>Mengurangi duplikasi; post kutipan (quote) tetap terhitung tersendiri</td></tr>
+<tr><td><code>lang:id</code></td><td>Terkait bahasa Indonesia</td><td>Label bahasa dari platform tidak selalu akurat; perlu diperiksa dengan language-ID sendiri</td></tr>
+<tr><td><code>from:akun</code></td><td>Post akun tertentu</td><td>Cepat, tetapi cenderung bias: profilnya dipilih peneliti</td></tr>
+</tbody>
+</table>
+
+<p>Empat pattern pengambilan sampel (sampling frame) pada Gambar 4.1 dibedakan, dan masing-masing membawa bias yang menyertai:<br>
+<b>keyword search</b> mengambil post yang memuat masukan query — relevan langsung dengan topik, namun bila query terlalu sempit, sampel makin kecil daripada gambaran populasi; <b>timeline</b> mengambil seluruh aktivitas akun yang dipilih — konteks akun utuh namun representatifnya akun, bukan populasi; <b>snowball</b> mengembangkan sampel melalui reply dan mention — menemukan komunitas tersembunyi namun kadang terjebak pada satu kubu; <b>random sample dari firehose</b> mengambil cuplikan acak dari stream yang terbuka — bebas dari keterikatan algoritma yang menyeleksi halaman demi halaman, namun membawa banyak post yang tidak relevan.</p>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-label="figm4 sampling" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Empat sampling frame — dan bias yang menyertai masing-masing</text>
+<rect x="30" y="58" width="462" height="178" rx="10" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.5"/>
+<text x="46" y="84" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">KEYWORD SEARCH</text>
+<text x="46" y="106" font-size="12" fill="#141414" text-anchor="start">Sampel = post yang memuat query (hashtag/kata).</text>
+<text x="46" y="129" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: relevan langsung dgn topik.</text>
+<text x="46" y="147" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: query sempit = rantai kecil; platform bisa memotong</text>
+<text x="46" y="162" font-size="11.5" fill="#9B2C2C" text-anchor="start">query diam-diam.</text>
+<rect x="516" y="58" width="462" height="178" rx="10" fill="#F1FAF5" stroke="#009E73" stroke-width="1.5"/>
+<text x="532" y="84" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">TIMELINE (PER AKUN)</text>
+<text x="532" y="106" font-size="12" fill="#141414" text-anchor="start">Sampel = seluruh aktivitas akun yang dipilih.</text>
+<text x="532" y="129" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: konteks akun utuh, kronologis.</text>
+<text x="532" y="147" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: representatifnya akun, bukan pop; kurasi hidup</text>
+<text x="532" y="162" font-size="11.5" fill="#9B2C2C" text-anchor="start">manusia (bias kurator).</text>
+<rect x="30" y="260" width="462" height="178" rx="10" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.5"/>
+<text x="46" y="286" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">SNOWBALL (REPLY/MENTION)</text>
+<text x="46" y="308" font-size="12" fill="#141414" text-anchor="start">Sampel = perluasan via tautan dari sampel awal.</text>
+<text x="46" y="331" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: menemukan komunitas tersembunyi.</text>
+<text x="46" y="349" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: terjebak di satu kubu — lingkaran yang menutup diri.</text>
+<rect x="516" y="260" width="462" height="178" rx="10" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.5"/>
+<text x="532" y="286" font-size="13" fill="#7A4FA0" font-weight="bold" text-anchor="start">RANDOM (FIREHOSE SAMPLE)</text>
+<text x="532" y="308" font-size="12" fill="#141414" text-anchor="start">Sampel = cuplikan acak dari stream/firehose.</text>
+<text x="532" y="331" font-size="11.5" fill="#009E73" text-anchor="start">↗ Kuat: tak dibentuk algoritma recommendation per-halaman.</text>
+<text x="532" y="349" font-size="11.5" fill="#9B2C2C" text-anchor="start">✕ Bahaya: banyak tak relevan; users kecil terwakili,</text>
+<text x="532" y="364" font-size="11.5" fill="#9B2C2C" text-anchor="start">justifikasi window harus ditulis.</text>
+<rect x="30" y="446" width="940" height="56" rx="8" fill="#FFFFFF" stroke="#E69F00" stroke-width="1.4"/>
+<text x="46" y="468" font-size="12.5" fill="#E69F00" text-anchor="start">Pilih frame yang menjawab pertanyaan riset — bukan yang paling mudah. Kuota &amp; akses</text>
+<text x="46" y="488" font-size="12.5" fill="#E69F00" text-anchor="start">adalah bagian dari desain: backbone frame yang lemah tidak diselamatkan oleh jumlah halaman yang besar.</text>
+</svg>
+<figcaption><b>Gambar 4.1.</b> Empat sampling frame dan bias yang menyertai masing-masing.</figcaption>
+</figure>
+
+<div class="box">
+<span class="h">Prinsip penting</span>
+Setiap operator query yang <b>tidak</b> dicantumkan di collection log adalah filter yang tak terbaca. Pengulas riset akan menganggap sampel yang diambil berbeda dari yang dijanjikan — dan ia benar: memang query yang berjalan berbeda dari yang ditulis.
+</div>
+
+<h2>5. Pagination: membaca halaman sampai token habis</h2>
+<p>API jarang mengembalikan seluruh jawaban sekaligus. Data datang per halaman, dan proses meminta halaman berikutnya berulang-ulang inilah <i>pagination</i>. Gambar 5.1 memperkenalkan dua pola yang diujikan di lab: <b>cursor pagination</b> (API memberi tanda "lanjut dari sini" berupa <i>next_token</i>) dan <b>potongan waktu</b> (rentang tanggal dipecah menjadi jendela yang lebih kecil).</p>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-label="figm4 pagination" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Dua mekanisme halaman: cursor pagination vs potongan waktu</text>
+<rect x="30" y="58" width="940" height="170" rx="10" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.3"/>
+<text x="46" y="82" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">A. CURSOR PAGINATION — API deserahkan token 'lanjut dari sini'</text>
+<rect x="46" y="96" width="130" height="62" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="111" y="116" font-size="12" fill="#141414" text-anchor="middle">request#1</text>
+<rect x="300" y="96" width="200" height="62" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="400" y="116" font-size="12" fill="#141414" text-anchor="middle">page 1</text>
+<text x="400" y="134" font-size="12" fill="#141414" text-anchor="middle">next_token = c1</text>
+<rect x="560" y="96" width="200" height="62" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="660" y="116" font-size="12" fill="#141414" text-anchor="middle">request#2</text>
+<text x="660" y="134" font-size="12" fill="#141414" text-anchor="middle">(next_token=c1)</text>
+<rect x="820" y="96" width="200" height="62" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="920" y="116" font-size="12" fill="#141414" text-anchor="middle">page 2 …</text>
+<line x1="178" y1="127" x2="298" y2="127" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<line x1="502" y1="127" x2="558" y2="127" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<line x1="762" y1="127" x2="818" y2="127" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<text x="46" y="188" font-size="12" fill="#5A5A5A" text-anchor="start">selama next_token masih dikirim → terus; token habis → berputar dari token null. cursor membuat trek tak bisa</text>
+<text x="46" y="204" font-size="12" fill="#5A5A5A" text-anchor="start">loncat.</text>
+<text x="46" y="218" font-size="12" fill="#9B2C2C" text-anchor="start">Dedup tetap wajib: retweet/konten editan bisa muncul dobel antar halaman.</text>
+<rect x="30" y="240" width="940" height="150" rx="10" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.3"/>
+<text x="46" y="264" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">B. POTONGAN WAKTU — kuota kecil? bagi rentang tanggal menjadi jendela</text>
+<rect x="46" y="280" width="190" height="56" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="141" y="306" font-size="12" fill="#141414" text-anchor="middle">jendela 11–17 Mar</text>
+<text x="141" y="326" font-size="11" fill="#5A5A5A" text-anchor="middle">max_results fase per jendela</text>
+<rect x="276" y="280" width="190" height="56" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="371" y="306" font-size="12" fill="#141414" text-anchor="middle">jendela 18–24 Mar</text>
+<text x="371" y="326" font-size="11" fill="#5A5A5A" text-anchor="middle">max_results fase per jendela</text>
+<rect x="506" y="280" width="190" height="56" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="601" y="306" font-size="12" fill="#141414" text-anchor="middle">jendela 25–31 Mar</text>
+<text x="601" y="326" font-size="11" fill="#5A5A5A" text-anchor="middle">max_results fase per jendela</text>
+<rect x="736" y="280" width="190" height="56" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="831" y="306" font-size="12" fill="#141414" text-anchor="middle">jendela 1–7 Apr</text>
+<text x="831" y="326" font-size="11" fill="#5A5A5A" text-anchor="middle">max_results fase per jendela</text>
+<line x1="238" y1="308" x2="274" y2="308" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<line x1="468" y1="308" x2="504" y2="308" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<line x1="698" y1="308" x2="734" y2="308" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<text x="46" y="366" font-size="12" fill="#9B2C2C" text-anchor="start">Hati-hati dobel di tepi jendela: dedup by post_id + cap waktu eksklusif (batas kiri termasuk, batas kanan tidak).</text>
+<rect x="30" y="404" width="940" height="48" rx="8" fill="#FFFFFF" stroke="#009E73" stroke-width="1.4"/>
+<text x="46" y="432" font-size="12.5" fill="#009E73" text-anchor="start">Angka halaman yang selalu sama persis (mis. 200 tiap run) = tanda query terpotong diam-diam (silent truncation). Catat!</text>
+</svg>
+<figcaption><b>Gambar 5.1.</b> Dua mekanisme pagination: cursor pagination (A) dan pembagian rentang waktu menjadi jendela (B).</figcaption>
+</figure>
+
+<p>Pada cursor pagination, loop berawal dari request tanpa token; jawaban memuat batch data dan <i>next_token</i>; run berikutnya dikirim bersama token itu, dan seterusnya sampai token berikutnya bernilai kosong (null). Satu bahaya yang wajib dikenali: <b>silent truncation</b> — platform memotong hasil pada batas halamannya sendiri tanpa memberi peringatan. Sinyal yang paling mudah ditangkap di lab: ukuran halaman yang persis sama pada semua run. Angka 45-45-45 harus mengundang kecurigaan; 45-45-0 yang disebabkan token habis baru dianggap wajar.</p>
+<p>Pada potongan waktu, rentang koleksi dipecah menjadi jendela (mis. 12 jam), tiap jendela menghasilkan pengambilan yang terbatas kuotanya. Pola yang paling sering ditemui: <b>duplikasi di tepi jendela</b>. Bila aturan batas waktu (kiri-inklusif, kanan-eksklusif) tidak ditetapkan, satu post bisa tampil di dua jendela sekaligus, dan analisis selanjutnya menganggapnya dua kejadian berbeda. Dua langkah menyelesaikannya: menetapkan aturan batas (inklusif vs eksklusif), lalu menjalankan dedup pada post_id setelah semua jendela ditutup.</p>
+
+<div class="box warn">
+<span class="h">Bahaya zona waktu</span>
+Platform mengembalikan waktu dalam UTC; mahasiswa Indonesia memikir waktu WIB (UTC+7). Kesalahan klasiknya: potongan jendela "00:00–12:00" dihitung dengan membaca UTC, sementara kolektor menulis timestamp WIB. Sampel bisa kehilangan post puncak ketika garis waktu lintas zona waktu. Aturan: simpan waktu dalam UTC, dan <i>tulis keduanya</i> (UTC + WIB) di collection log.
+</div>
+
+<h2>6. Rate limit, kuota, dan backoff</h2>
+<p>Istilah <i>rate limit</i> dan kuota sering dicampur, padahal berbeda bentuk: rate limit memasok permintaan dalam satu jendela waktu (banyak API memakai 15 menit), sedangkan kuota menghitung total penggunaan dalam kalender panjang (per hari, per bulan). Keduanya bekerja seperti dua kalender yang berbeda — dan menuntut dua neraca yang diisi bersamaan.</p>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-label="figm4 ratelimit" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Rate limit &amp; kuota: anggaran yang dijadwalkan sejak hari pertama</text>
+<rect x="30" y="58" width="430" height="250" rx="10" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.4"/>
+<text x="50" y="84" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">BUCKET PER 15 MENIT (contoh satu tier)</text>
+<rect x="70" y="110" width="90" height="170" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="70" y="180" width="90" height="100" rx="0" fill="#C8E3F5" stroke="none" stroke-width="1.2"/>
+<text x="115" y="240" font-size="11.5" fill="#0072B2" text-anchor="middle">terpakai</text>
+<text x="115" y="258" font-size="11.5" fill="#5A5A5A" text-anchor="middle">di jendela ini</text>
+<text x="184" y="134" font-size="12" fill="#141414" text-anchor="start">rekon: hitung request, bukan post</text>
+<text x="184" y="202" font-size="12" fill="#9B2C2C" text-anchor="start">backoff: kalau 429, tunggu header reset; jangan</text>
+<text x="184" y="218" font-size="12" fill="#9B2C2C" text-anchor="start">terus ngebut</text>
+<text x="50" y="296" font-size="11.5" fill="#5A5A5A" text-anchor="start">kuota per endpoint berbeda dari kuota per jendela — dua</text>
+<text x="50" y="311" font-size="11.5" fill="#5A5A5A" text-anchor="start">kalender, dua neraca.</text>
+<rect x="480" y="58" width="490" height="250" rx="10" fill="#F1FAF5" stroke="#009E73" stroke-width="1.4"/>
+<text x="498" y="84" font-size="12.5" fill="#009E73" font-weight="bold" text-anchor="start">ANGGARAN KUOTA (contoh perencanaan, bukan angka resmi)</text>
+<text x="498" y="110" font-size="11.5" fill="#141414" text-anchor="start">• Kuota yg dialokasikan utk riset: 20.000 post/hari (fase maksimal satu tier)</text>
+<text x="498" y="148" font-size="11.5" fill="#141414" text-anchor="start">• Target korpus: 150.000 post (satu topik, 30 hari)</text>
+<text x="498" y="186" font-size="11.5" fill="#141414" text-anchor="start">• Buffer eksperimen: 25% (query uji cobacoba di sini, bukan di produksi)</text>
+<text x="498" y="224" font-size="11.5" fill="#141414" text-anchor="start">• Estimasi durasi koleksi: 9–10 hari kerja (kurva nonlinier saat weekend)</text>
+<text x="498" y="262" font-size="11.5" fill="#141414" text-anchor="start">• Strategi: pagi berjalan sejahtera; kalau jendela habis, jadwal lain dipakai</text>
+<rect x="30" y="326" width="940" height="88" rx="8" fill="#FFFFFF" stroke="#E69F00" stroke-width="1.4"/>
+<text x="46" y="350" font-size="12.5" fill="#E69F00" font-weight="bold" text-anchor="start">Aturan anggaran yang dipakai di lab</text>
+<text x="46" y="374" font-size="11.5" fill="#141414" text-anchor="start">• Query uji dikerjakan di budget eksperimen; pemborosan kuota = desain yang buruk, bukan pekerjaan rajin.</text>
+<text x="46" y="396" font-size="11.5" fill="#141414" text-anchor="start">• Setiap run dicatat: jumlah request, jumlah post, sisa kuota — kalau run gagal, catatan menyelamatkan sesi berikut.</text>
+</svg>
+<figcaption><b>Gambar 6.1.</b> Rate limit per jendela (kiri) dan rencana anggaran kuota (kanan) yang ditulis sejak hari pertama.</figcaption>
+</figure>
+
+<p>Saat rate limit tercapai, API merespons HTTP 429 dengan header yang menyebut waktu reset. Pada lab, aturannya satu: <b>jangan terus menembak ulang</b>. Baca header reset, menunggu (<i>backoff</i>), lalu mencoba lagi setelah jendela sisa terbuka. Run tidak dipersulit dan kuota tidak terbakar oleh request yang tidak terjawab.</p>
+
+<table>
+<caption>Tabel 6.1 — Neraca anggaran kuota (contoh perencanaan lab — bukan angka resmi; verifikasi di halaman API)</caption>
+<thead><tr><th>Baris neraca</th><th>Contoh isi</th><th>Pelajaran</th></tr></thead>
+<tbody>
+<tr><td>Kuota harian yang disetujui</td><td>20.000 post per hari (tier contoh)</td><td>Baca halaman tier sebelum menulis kode</td></tr>
+<tr><td>Target korpus</td><td>150.000 post · satu topik · 30 hari</td><td>Perkiraan: 8 hari kerja bila panen stabil</td></tr>
+<tr><td>Buffer eksperimen</td><td>25% kuota (≈5.000 post/hari)</td><td>Query uji dijalankan di buffer, bukan di produksi</td></tr>
+<tr><td>Estimasi durasi</td><td>9–10 hari kerja</td><td>Waktu koleksi adalah waktu kalender, bukan waktu prosesor</td></tr>
+<tr><td>Sisa kuota yang dicatat</td><td>19.4k/20.000 (tertulis di run terakhir)</td><td>Run berikutnya tahu anggaran sisa tanpa estimasi</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Mengapa kuota jadi bagian desain</span>
+Sejak 2023, sejumlah platform memindahkan akses akademik ke tier berbayar (X) atau lingkungan riset terpisah dengan biaya kelembagaan (yang dilaporkan publik per 2026 menyebut kisaran USD 371 per tim per bulan — <b>verifikasi ulang</b> sebelum kutip di manuskrip). Konsekuensinya, jumlah halaman yang bisa dikoleksi bukan keputusan teknis semata; ia adalah keputusan anggaran yang menuntut pertanyaan "berapa data yang akan diperoleh dan berapa biayanya" bisa dijawab di hadapan komite riset.
+</div>
+
+<h2>7. Checkpoint dan checksum: koleksi yang selamat</h2>
+<p>Koleksi besar jarang sukses pada percobaan pertama. Listrik mati, koneksi terputus, rate limit keras — run yang jalan lama hampir selalu kena satu di antaranya. Tanpa mekanisme <i>checkpoint</i>, kegagalan satu jam bisa memaksa koleksi diulang dari nol. Dengan checkpoint yang baik, run yang terputus dapat dilanjutkan, bukan diulang.</p>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img" aria-label="figm4 checkpoint" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Checkpoint &amp; checksum: koleksi yang selamat dari crash dan koneksi</text>
+<rect x="40" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.5"/>
+<text x="140" y="110" font-size="12.5" fill="#0072B2" text-anchor="middle">fetch</text>
+<text x="140" y="128" font-size="12.5" fill="#0072B2" text-anchor="middle">halaman</text>
+<line x1="242" y1="117" x2="272" y2="117" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="274" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#009E73" stroke-width="1.5"/>
+<text x="374" y="110" font-size="12.5" fill="#009E73" text-anchor="middle">tulis hanya-append</text>
+<text x="374" y="128" font-size="12.5" fill="#009E73" text-anchor="middle">raw_history.jsonl</text>
+<line x1="476" y1="117" x2="506" y2="117" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="508" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#E69F00" stroke-width="1.5"/>
+<text x="608" y="110" font-size="12.5" fill="#E69F00" text-anchor="middle">hash SHA-256</text>
+<text x="608" y="128" font-size="12.5" fill="#E69F00" text-anchor="middle">file baru</text>
+<line x1="710" y1="117" x2="740" y2="117" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="742" y="84" width="200" height="66" rx="8" fill="#FFFFFF" stroke="#D55E00" stroke-width="1.5"/>
+<text x="842" y="110" font-size="12.5" fill="#D55E00" text-anchor="middle">update checkpoint.json</text>
+<line x1="140" y1="150" x2="140" y2="176" stroke="#D55E00" stroke-width="1.6"/>
+<line x1="140" y1="176" x2="842" y2="176" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<text x="140" y="196" font-size="12" fill="#D55E00" text-anchor="middle">kembali ke awal sampai next_token habis / kuota habis / target tercapai</text>
+<rect x="40" y="160" width="900" height="96" rx="10" fill="#FBE9E9" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="58" y="186" font-size="13" fill="#9B2C2C" font-weight="bold" text-anchor="start">SAAT RUN TERPUTUS (listrik, timeout, rate limit keras)</text>
+<text x="58" y="208" font-size="12" fill="#141414" text-anchor="start">•  raw app-only: file yang terlanjur terulis aman — tidak ada yang dikorbankan.</text>
+<text x="58" y="226" font-size="12" fill="#141414" text-anchor="start">•  checkpoint.json bilang: run_id, waktu, file terakhir, halaman terakhir → resume dari sini.</text>
+<text x="58" y="244" font-size="12" fill="#9B2C2C" text-anchor="start">•  kolektor NEMPARKAN jendela waktu sisa; jangan mulai dari nol seperti orang panik.</text>
+<rect x="40" y="272" width="440" height="130" rx="10" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="56" y="296" font-size="12.5" fill="#5A5A5A" font-weight="bold" text-anchor="start">nilai SHA-256 satu file (contoh)</text>
+<text x="56" y="320" font-size="12.5" fill="#141414" text-anchor="start">3f9a12c4…  raw_w03_part01.jsonl</text>
+<text x="56" y="344" font-size="12" fill="#5A5A5A" text-anchor="start">checksum = sidik jari file.</text>
+<text x="56" y="366" font-size="12" fill="#141414" text-anchor="start">file rusak/terpotong → hash beda → ditolak</text>
+<text x="56" y="382" font-size="12" fill="#141414" text-anchor="start">masuk analisis.</text>
+<rect x="500" y="272" width="440" height="130" rx="10" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="516" y="296" font-size="12.5" fill="#5A5A5A" font-weight="bold" text-anchor="start">jendela waktu sisa di checkpoint (contoh)</text>
+<text x="516" y="320" font-size="12" fill="#141414" text-anchor="start">"window": "2026-11-03 → 2026-11-07",</text>
+<text x="516" y="344" font-size="12" fill="#141414" text-anchor="start">"page": "halaman 23", "run_id": "run03",</text>
+<text x="516" y="368" font-size="12" fill="#5A5A5A" text-anchor="start">resume = mulai run03 dari halaman 23</text>
+</svg>
+<figcaption><b>Gambar 7.1.</b> Loop checkpoint: fetch halaman → tulis append-only → hash → update checkpoint; run yang terputus disambung dari titik terakhir.</figcaption>
+</figure>
+
+<p>Aturan write yang diikuti lab disebut <b>append-only</b>: tiap halaman data langsung ditulis sebagai baris baru di berkas JSONL tanpa pernah menimpa isi lama. Dengan pola ini, kata “hilang” berhenti muncul dalam percakapan data — kejadian apa pun yang terlanjur terulis sudah aman.</p>
+
+<table>
+<caption>Tabel 7.1 — Isi minimal berkas <code>checkpoint.json</code></caption>
+<thead><tr><th>Field</th><th>Contoh</th><th>Guna</th></tr></thead>
+<tbody>
+<tr><td><code>run_id</code></td><td><code>run03</code></td><td>Idempoten: run yang sama menimpa checkpoint yang sama</td></tr>
+<tr><td><code>window</code></td><td>2026-11-03 → 2026-11-07 (UTC)</td><td>Jendela koleksi yang perlu dilanjutkan</td></tr>
+<tr><td><code>page</code></td><td>halaman 23 · next_token tersimpan</td><td>Resume: mulai dari sini, bukan dari halaman satu</td></tr>
+<tr><td><code>files</code></td><td>raw_w03_part01.jsonl…</td><td>Daftar berkas yang sudah terlanjur terulis</td></tr>
+<tr><td><code>updated_at</code></td><td>2026-11-07T04:12Z</td><td>Neraca waktu run terakhir</td></tr>
+</tbody>
+</table>
+
+<p>Berkas yang terkumpul kemudian mengalami <b>checksum</b>: untuk setiap berkas dihitung sidik jari SHA-256, dan sidik jari itu dikunci di manifest. Pada sesi berikutnya, hash dihitung ulang; berkas yang hashnya berbeda ditolak masuk analisis sampai penyebabnya diketahui dahulu (umumnya transfer atau salinan yang terputus). Checksum membuat klaim “berkas tidak rusak” menjadi pernyataan terverifikasi, bukan pernyataan harapan.</p>
+
+<div class="box warn">
+<span class="h">Yang tidak terselamatkan checkpoint</span>
+Koleksi jenis ini menangkap satu kejadian yang tidak bisa diselamatkan oleh sembarangan checkpoint: <b>post yang dihapus penulisnya</b>. Post yang tersedia saat run pagi bisa hilang pada run sore. Karena itu: raw disimpan <i>apa adanya</i> per run, dan tiap run mencatat waktu penarikan — dengan demikian perbandingan antar run dapat membedakan "hilang karena dihapus" dari "hilang karena tidak sempat dikoleksi".
+</div>
+
+<h2>8. Collection log: bukti, bukan pelengkap</h2>
+<p>Collection log adalah dokumen yang mengikat semua elemen modul ini. Tiga fungsinya sekaligus: sebagai <b>memori</b>, ia membebaskan peneliti dari kewajiban mengingat parameter tiap run; sebagai <b>alat konsistensi</b>, ia memaksa run ke-dua dan ke-tiga memakai frame yang sama; dan sebagai <b>alarm</b>, ia memunculkan silent truncation yang terjadi diam-diam — bila jumlah halaman berulang persis, log segera memperlihatkan pola itu. Gambar 8.1 dan Tabel 8.1 merangkum bentuk log yang dipakai di lab.</p>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-label="figm4 collectionlog" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Collection log — bukti koleksi, bukan laporan akhir</text>
+<text x="22" y="52" font-size="12.5" fill="#5A5A5A" text-anchor="start">Fungsi: membebaskan memori; menegakkan konsistensi antar run; mata-mata atas silent truncation.</text>
+<rect x="30" y="54" width="940" height="26" rx="4" fill="#E9EEF4" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="72" font-size="12.5" fill="#0072B2" font-weight="bold" text-anchor="start">Field</text>
+<text x="260" y="72" font-size="12.5" fill="#0072B2" font-weight="bold" text-anchor="start">Contoh isi (run nyata di lab)</text>
+<text x="672" y="72" font-size="12.5" fill="#0072B2" font-weight="bold" text-anchor="start">Fungsi</text>
+<rect x="30" y="76" width="940" height="37" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="99" font-size="12.5" fill="#7A4FA0" text-anchor="start">run_id</text>
+<text x="260" y="91" font-size="12" fill="#141414" text-anchor="start">run02</text>
+<text x="672" y="91" font-size="11.5" fill="#5A5A5A" text-anchor="start">identitas run; idempoten (ulang run menimpa</text>
+<text x="672" y="107" font-size="11.5" fill="#5A5A5A" text-anchor="start">id sama)</text>
+<rect x="30" y="113" width="940" height="37" rx="8" fill="#FAFBFC" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="136" font-size="12.5" fill="#7A4FA0" text-anchor="start">platform + endpoint</text>
+<text x="260" y="128" font-size="12" fill="#141414" text-anchor="start">X API v2 · /2/tweets/search/recent</text>
+<text x="672" y="128" font-size="11.5" fill="#5A5A5A" text-anchor="start">versi API dicantumkan — docs berubah per</text>
+<text x="672" y="144" font-size="11.5" fill="#5A5A5A" text-anchor="start">bulan</text>
+<rect x="30" y="150" width="940" height="37" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="173" font-size="12.5" fill="#7A4FA0" text-anchor="start">auth mode</text>
+<text x="260" y="165" font-size="12" fill="#141414" text-anchor="start">app-only bearer</text>
+<text x="672" y="165" font-size="11.5" fill="#5A5A5A" text-anchor="start">bearer / oauth2 / app-password</text>
+<rect x="30" y="187" width="940" height="37" rx="8" fill="#FAFBFC" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="210" font-size="12.5" fill="#7A4FA0" text-anchor="start">sampling frame</text>
+<text x="260" y="202" font-size="12" fill="#141414" text-anchor="start">keyword (#BapakKantor OR kata kunci</text>
+<text x="260" y="218" font-size="12" fill="#141414" text-anchor="start">tokoh) window 7 hari</text>
+<text x="672" y="202" font-size="11.5" fill="#5A5A5A" text-anchor="start">query string utuh + rentang waktu UTC</text>
+<rect x="30" y="224" width="940" height="37" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="247" font-size="12.5" fill="#7A4FA0" text-anchor="start">mulai–selesai (UTC+WIB)</text>
+<text x="260" y="239" font-size="12" fill="#141414" text-anchor="start">2026-11-03 00:00Z ↔ 07:00 WIB</text>
+<text x="672" y="239" font-size="11.5" fill="#5A5A5A" text-anchor="start">dua zona berdampingan — tidak boleh dicampur</text>
+<text x="672" y="255" font-size="11.5" fill="#5A5A5A" text-anchor="start">diam-diam</text>
+<rect x="30" y="261" width="940" height="37" rx="8" fill="#FAFBFC" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="284" font-size="12.5" fill="#7A4FA0" text-anchor="start">pages / post</text>
+<text x="260" y="276" font-size="12" fill="#141414" text-anchor="start">45 halaman · 3.120 post mentah</text>
+<text x="672" y="276" font-size="11.5" fill="#5A5A5A" text-anchor="start">jika bulat selerusnya (200/200/…) → curiga</text>
+<text x="672" y="292" font-size="11.5" fill="#5A5A5A" text-anchor="start">truncation</text>
+<rect x="30" y="298" width="940" height="37" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="321" font-size="12.5" fill="#7A4FA0" text-anchor="start">filter aktif</text>
+<text x="260" y="313" font-size="12" fill="#141414" text-anchor="start">exclude retweet; exclude tombol</text>
+<text x="260" y="329" font-size="12" fill="#141414" text-anchor="start">query promosi</text>
+<text x="672" y="313" font-size="11.5" fill="#5A5A5A" text-anchor="start">setiap filter platform dicantumkan — ia ikut</text>
+<text x="672" y="329" font-size="11.5" fill="#5A5A5A" text-anchor="start">membentuk sampel</text>
+<rect x="30" y="335" width="940" height="37" rx="8" fill="#FAFBFC" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="358" font-size="12.5" fill="#7A4FA0" text-anchor="start">dedup &amp; jendela</text>
+<text x="260" y="350" font-size="12" fill="#141414" text-anchor="start">by post_id; kap waktu kiri-inklusif</text>
+<text x="672" y="350" font-size="11.5" fill="#5A5A5A" text-anchor="start">dedup across window; tepi jendela tak dobel</text>
+<rect x="30" y="372" width="940" height="37" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="395" font-size="12.5" fill="#7A4FA0" text-anchor="start">file + checksum</text>
+<text x="260" y="387" font-size="12" fill="#141414" text-anchor="start">raw_w03_part00.jsonl …  shasum256s 4</text>
+<text x="260" y="403" font-size="12" fill="#141414" text-anchor="start">file</text>
+<text x="672" y="387" font-size="11.5" fill="#5A5A5A" text-anchor="start">file raw di arsip; hash disimpan berdekatan</text>
+<rect x="30" y="409" width="940" height="37" rx="8" fill="#FAFBFC" stroke="#D9D9D9" stroke-width="1"/>
+<text x="44" y="432" font-size="12.5" fill="#7A4FA0" text-anchor="start">kuota</text>
+<text x="260" y="424" font-size="12" fill="#141414" text-anchor="start">19.4k/20.000 post terpakai</text>
+<text x="672" y="424" font-size="11.5" fill="#5A5A5A" text-anchor="start">run berikutnya harus tahu sisa anggaran</text>
+<text x="30" y="472" font-size="12.5" fill="#009E73" text-anchor="start">Reviewer menilai collection log dulu, baru dataset: log yang baik membuat dataset bisa direproduksi tanpa bertanya.</text>
+</svg>
+<figcaption><b>Gambar 8.1.</b> Wujud collection log: daftar field dengan contoh isi run nyata dan maknanya.</figcaption>
+</figure>
+
+<table>
+<caption>Tabel 8.1 — Field minimal collection log (contoh run lab)</caption>
+<thead><tr><th>Field</th><th>Contoh isi</th><th>Fungsi</th></tr></thead>
+<tbody>
+<tr><td>run_id</td><td>run02</td><td>Idempoten; run ulang menimpa id yang sama</td></tr>
+<tr><td>platform + endpoint</td><td>X API v2 · <code>/2/tweets/search/recent</code></td><td>Versi API dicantumkan — dokumen berubah sepanjang waktu</td></tr>
+<tr><td>auth mode</td><td>app-only bearer</td><td>Basis estimasi kuota run berikutnya</td></tr>
+<tr><td>sampling frame</td><td>keyword (OR dua istilah) · window 7 hari</td><td>Frame lengkap: query eksak + rentang UTC</td></tr>
+<tr><td>mulai–selesai</td><td>03 Nov 00:00Z ↔ 07 Nov 07:00 WIB</td><td>Dua zona ditulis berdampingan</td></tr>
+<tr><td>pages / post</td><td>45 halaman · 3.120 post mentah</td><td>Halaman bulat berulang = curiga truncation</td></tr>
+<tr><td>filter aktif</td><td>exclude retweet; lang:id</td><td>Semua operator platform ditulis</td></tr>
+<tr><td>dedup</td><td>by post_id · batas kiri-inklusif</td><td>Tepi jendela tak dobel</td></tr>
+<tr><td>file + checksum</td><td>raw_w03_part01.jsonl · SHA-256 tersimpan</td><td>Bukti arsip utuh</td></tr>
+<tr><td>kuota</td><td>19.4k/20.000 post</td><td>Run berikutnya tahu sisa anggaran</td></tr>
+</tbody>
+</table>
+
+<div class="box ok">
+<span class="h">Perspektif reviewer</span>
+Penguji membaca collection log <b>sebelum</b> membaca dataset. Log yang baik memungkinkan seluruh proses direproduksi tanpa bertanya; log yang buruk memicu pertanyaan "kapan koleksi dijalankan, query apa yang dipakai, dan mengapa data tidak muncul lagi saat diulang" — pertanyaan yang seharusnya sudah terjawab oleh dokumen itu sendiri.
+</div>
+
+<h2>9. Lab utama: kolektor mini tiga platform</h2>
+<p>Lab inti pertemuan 4 merangkai seluruh konsep modul ini menjadi kerja nyata yang dinilai: mahasiswa — berpasangan — membangun kolektor sederhana pada <b>tiga platform</b> untuk satu topik yang sama. Rekomendasi platform: <i>X API v2</i> (keyword recent search), <i>Bluesky via AT Protocol</i> (firehose filter yang gratis), dan <i>YouTube Data API v3</i> (daftar komentar dari beberapa video bertopik). Tujuan target: 500 post per platform — cukup besar untuk membedakan struktur data antar platform, cukup kecil untuk menghemat kuota.</p>
+
+<h3>9.1 Sepuluh langkah lab</h3>
+<ol>
+<li><b>Kelompok &amp; topik.</b> Pilih topik yang bisa diuji pada ketiga platform sekaligus (hindari topik yang hanya hidup di satu platform).</li>
+<li><b>Kredensial di .env.</b> Empat berkas kredensial disiapkan; <code>.gitignore</code> diuji dengan memeriksa isinya.</li>
+<li><b>Kamus sampling frame.</b> Tulis query per platform sebelum menulis kode; operator diperiksa pada dokumentasi per 2026.</li>
+<li><b>Nama run.</b> Format <code>run01_singkat</code>: nama run dari awal mencegah berkas tertukar antar run dan antar kelompok.</li>
+<li><b>Kolektor X.</b> Tulis fungsi <code>fetch_page(token)</code> dan loop cursor; berhenti saat next_token null atau kuota tercapai.</li>
+<li><b>Kolektor Bluesky.</b> Subscribe firehose/filter selama 3 menit, tulis chunk per sesi; satu berkas JSONL per chunk.</li>
+<li><b>Kolektor YouTube.</b> Ambil daftar video topik → commentsThreads; pagination baca sampai nextPageToken habis.</li>
+<li><b>Setiap run: checkpoint + SHA-256.</b> Hash disimpan di manifest; run tidak pernah menimpa hasil run lain.</li>
+<li><b>Tulis collection_log.md saat run berlangsung</b> — <i>bukan</i> setelah selesai. Tangan yang menulis setelah jalan akan lupa parameter yang aktif saat itu.</li>
+<li><b>Debrief ringkas.</b> Bandingkan field dari ketiga platform; mana yang hilang di mana; beri nilai missingness.</li>
+</ol>
+
+<table>
+<caption>Tabel 9.1 — Rubrik penilaian lab dan tugas mingguan (total 100)</caption>
+<thead><tr><th>Kriteria</th><th>Porsi</th><th>Indikator penuh poin</th></tr></thead>
+<tbody>
+<tr><td>Kelaikan sampling frame</td><td>25</td><td>Frame lengkap dengan operator, jendela, dan alasannya — tiga platform konsisten</td></tr>
+<tr><td>Dedup &amp; batas jendela</td><td>15</td><td>Dedup by post_id; batas kiri-inklusif dinyatakan; uji duplikat tepi</td></tr>
+<tr><td>Checksum &amp; reproducibility</td><td>20</td><td>Checkpoint resume terbukti; verifikasi SHA-256 diulang pada sesi lain</td></tr>
+<tr><td>Collection log lengkap</td><td>30</td><td>Seluruh isian Tabel 8.1 ada; log ditulis saat run, bukan setelahnya</td></tr>
+<tr><td>Refleksi bias</td><td>10</td><td>Satu paragraf: frame mana yang mendorong hasil dan cara menaksir arahnya</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Rencana cadangan lab</span>
+Akses API bisa gagal di tengah sesi (situs terputus, kuota habis, kredensial hangus). Karena itu dosen menyimpan arsip mini lokal: kelompok yang tidak mendapat akses tetap melanjutkan langkah 4–10 memakai dataset cadangan, dan kegagalan akses justru menjadi bahan refleksi di rubrik kriteria kelima.
+</div>
+
+<h2>10. Studi kasus: arsip isu tujuh hari dalam anggaran sempit</h2>
+<p>Sering kali, mahasiswa diminta mengumpulkan percakapan sebuah isu selama satu minggu. Pertanyaan praktisnya: bagaimana menyusun keputusan-keputusan akuisisi ketika kuota menyempitkan pilihan yang tersedia? Contoh kasus yang dipakai di kelas: mendokumentasikan percakapan publik tentang <b>penanganan banjir Jakarta</b> selama tujuh hari dengan kuota yang sempit (tier terendah).</p>
+
+<table>
+<caption>Tabel 10.1 — Keputusan akuisisi kasus banjir Jakarta (7 hari) dan alasannya</caption>
+<thead><tr><th>Keputusan</th><th>Pilihan</th><th>Alasan</th></tr></thead>
+<tbody>
+<tr><td>Platform utama</td><td>X recent search (tier rendah)</td><td>Keyword search lebih tepat untuk isu generik daripada feed</td></tr>
+<tr><td>Platform gratis</td><td>Bluesky firehose (3 sesi singkat)</td><td>Biaya nol; sampling acak gratis yang melengkapi X</td></tr>
+<tr><td>Platform tambahan</td><td>YouTube komentar (5 video bertopik)</td><td>Membawa sampel komentar tanpa menguras kuota unit</td></tr>
+<tr><td>Jendela waktu</td><td>7 × 12 jam (kiri-inklusif)</td><td>Ruang percakapan tetap muat kuota per jendela</td></tr>
+<tr><td>Target per jendela</td><td>2.000 post</td><td>≈ 14.000 post mentah; perkiraan muat pada tier terendah</td></tr>
+<tr><td>Dedup tepi jendela</td><td>by post_id + batas kiri-inklusif</td><td>Tepi jendela tak dobel</td></tr>
+<tr><td>Kuota buffer</td><td>25% (untuk uji query)</td><td>Query alternatif diuji di buffer sebelum produksi</td></tr>
+<tr><td>Instrument</td><td>collection_log.md + checkpoint saat jalan</td><td>Bukti keputusan tersimpan sejak hari pertama</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Pembacaan atas keputusan studi kasus</span>
+Perhatikan bahwa langkah-langkah keputusan di atas tidak hanya tentang "platform mana yang paling nyaman": bila kuota dan akses masuk anggaran, pilihan menjadi keputusan desain riset yang dapat dibela di hadapan komite apa pun. Kolektor yang dibangun dengan cara yang sama akan melayani studi yang lebih besar pada tahun berikutnya.
+</div>
+
+<h2>11. Sepuluh kesalahan umum dalam akuisisi API</h2>
+<table>
+<caption>Tabel 11.1 — Sepuluh kesalahan yang paling sering terjadi pada siapa pun yang melakukannya pertama kali</caption>
+<thead><tr><th>#</th><th>Kesalahan</th><th>Tangkalnya</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Mencampur waktu UTC dan WIB tanpa catatan</td><td>Simpan UTC; tulis kedua zona di log</td></tr>
+<tr><td>2</td><td>Tidak menjalankan dedup by post_id antar jendela</td><td>Dedup setelah semua jendela ditutup</td></tr>
+<tr><td>3</td><td>Mengabaikan silent truncation</td><td>Bandingkan jumlah halaman antar run</td></tr>
+<tr><td>4</td><td>Operator query tidak dituliskan di log</td><td>Semua operator dicantumkan</td></tr>
+<tr><td>5</td><td>Menghabiskan kuota untuk query eksperimen</td><td>Buffer 25% ditulis paling depan</td></tr>
+<tr><td>6</td><td>Tidak memakai checkpoint sehingga run gagal harus diulang dari nol</td><td>checkpoint.json + berkas append-only</td></tr>
+<tr><td>7</td><td>Kredensial tercommit ke repo</td><td>.env + .gitignore + regenerasi setelah bocor</td></tr>
+<tr><td>8</td><td>Membandingkan jumlah post lintas platform tanpa normalisasi</td><td>Perbandingan memakai angka ternormalisasi (Modul 2)</td></tr>
+<tr><td>9</td><td>Mengabaikan fakta post dapat dihapus penulisnya</td><td>Simpan raw per run + catat waktu penarikan</td></tr>
+<tr><td>10</td><td>Log ditulis setelah run selesai menghilangkan jejak</td><td>Log diisi bersamaan dengan berjalan-nya run</td></tr>
+</tbody>
+</table>
+
+<h2>12. Ringkasan modul</h2>
+<p>Akuisisi adalah tahap pertama di mana bias, kuota, dan konsep sampling frame bekerja bersama — dan tahap yang paling mudah luput perhatian. Mahasiswa membawa pulang empat kebiasaan yang kini menjadi standar: (1) kredensial di .env dan scope yang dipilih minim; (2) sampling frame yang lengkap — query, jendela, operator, dan alasannya; (3) koleksi yang selamat — checkpoint dan penulisan append-only, checksum untuk sidik jari, dan dedup by post_id; serta (4) collection log yang ditulis <i>selama</i> run jalan, bukan sesudahnya.</p>
+<p>Tidak ada akronim yang perlu dihafal dari modul ini; yang perlu dikuasai adalah satu kalimat sederhana: <b>"Korpus yang tidak bisa direproduksi adalah korpus yang belum selesai."</b> Pada pertemuan berikutnya (Modul 5), seluruh kerangka teknik ini dipindahkan ke ranah kebijakan: apa yang terjadi bila jalur resmi terlalu mahal, dan apa yang masih sah dilakukan bila akses hanya tersedia lewat platform bergating atau lingkungan enclave.</p>
+
+<h2>13. Glosarium</h2>
+<table>
+<caption>Tabel 13.1 — Istilah inti pertemuan 4</caption>
+<thead><tr><th>Istilah</th><th>Makna dalam konteks modul ini</th></tr></thead>
+<tbody>
+<tr><td><b>endpoint</b></td><td>Alamat API tempat request dikirim; satu platform umumnya punya banyak endpoint dengan kuota yang berbeda-beda</td></tr>
+<tr><td><b>sampling frame</b></td><td>Definisi eksplisit populasi yang akan diambil: query (keyword/timeline/snowball/acak) plus jendela waktu</td></tr>
+<tr><td><b>query</b></td><td>Ekspresi pencarian yang menentukan isi sampel; operator query adalah rangkaian filter yang harus dicantumkan</td></tr>
+<tr><td><b>pagination</b></td><td>Mekanisme membaca data halaman demi halaman; diuji dalam bentuk cursor (next_token) dan potongan waktu</td></tr>
+<tr><td><b>silent truncation</b></td><td>Pemotongan hasil oleh platform tanpa pemberitahuan; ditangkap dari pola jumlah halaman yang berulang persis</td></tr>
+<tr><td><b>rate limit</b></td><td>Batas jumlah request pada jendela pendek (umumnya 15 menit); biasa menyertakan header reset</td></tr>
+<tr><td><b>kuota (quota)</b></td><td>Jumlah penggunaan maksimum pada kalender panjang; menuntut perencanaan anggaran sejak desain</td></tr>
+<tr><td><b>backoff</b></td><td>Praktik menunggu setelah menerima respons 429; mencegah kuota terbakar oleh request yang tidak terjawab</td></tr>
+<tr><td><b>checkpoint</b></td><td>Catatan keadaan (state) run yang disimpan selama koleksi berlangsung; memungkinkan run terputus dilanjutkan</td></tr>
+<tr><td><b>checksum</b></td><td>Sidik jari SHA-256 untuk berkas; pemeriksaan integritas berkas yang bisa diverifikasi</td></tr>
+<tr><td><b>append-only</b></td><td>Pola tulis yang menambah baris baru tanpa pernah menimpa isi lama; membuat "hilang" tidak mungkin</td></tr>
+<tr><td><b>dedup</b></td><td>Penghapusan duplikasi berdasarkan kunci (post_id), terutama di tepi antar jendela</td></tr>
+<tr><td><b>collection log</b></td><td>Bukti tertulis parameter tiap run: query, jendela, filter, halaman, kuota, file, checksum</td></tr>
+<tr><td><b>app password</b></td><td>Kredensial khusus pada protokol terbuka (mis. AT Protocol) yang bisa dicabut kapan saja oleh pemilik akun</td></tr>
+<tr><td><b>idempotent</b></td><td>Aturan: run yang sama memakai run_id yang sama; run ulang menimpa artefak yang sama</td></tr>
+<tr><td><b>JSONL</b></td><td>Format berkas baris-per-objek ringan, pilihan wajar untuk berkas append-only</td></tr>
+</tbody>
+</table>
+
+<h2>14. Referensi</h2>
+<ol class="refs">
+<li>Russell, M. <i>Mining the Social Web</i> (ed. 3). Bab pengumpulan data via API.</li>
+<li>Dokumentasi X API v2 — tier, kuota, harga (diakses 2026; <b>angka diverifikasi ulang</b> saat lab).</li>
+<li>Dokumentasi Meta Content Library — proses akses terpasang 2024–2026.</li>
+<li>Lohr, S. L. <i>Sampling: Design and Analysis</i> (ed. 3). Bingkai sampling yang berlaku lintas platform.</li>
+<li>Dokumentasi AT Protocol / Bluesky — app password dan firehose.</li>
+<li>Dokumentasi YouTube Data API v3 — kuota, komentar, pagination (Google Developers).</li>
+<li>Kajian "data access scarcity" pada riset platform (mis. preprint data 2505.09877, 2025).</li>
+<li>Undang-Undang No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP).</li>
+<li>Laporan publik kelembagaan lingkungan enclave riset data 2026 (dikutip bersifat indikatif).</li>
+</ol>
+
+<p class="small">Dokumen disusun dari arsip riset Modul 4 (<code>results/akuisisi-api.json</code>) dan penelusuran kebijakan akses 2024–2026. Panduan angka kuota dan harga bersifat contoh pedagogis; <b>verifikasi ulang</b> pada halaman resmi platform sebelum dipakai dalam laporan ilmiah.</p>
+
+</div>
+
+</body>
+</html>
+<!--M4END-->

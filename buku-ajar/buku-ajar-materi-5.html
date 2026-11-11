@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Buku Ajar Materi 5 — Akses Gated, Biaya, Scraping &amp; Legalitas</title>
+<style>
+body{font-family:Georgia,'Times New Roman',serif;line-height:1.65;margin:0;background:#f8fafc;color:#1e293b}
+main{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:1.7em;margin:.2em 0 .1em}
+h2{font-size:1.28em;margin-top:1.9em;border-bottom:2px solid #2563eb;padding-bottom:.25em}
+h3{font-size:1.08em;margin-top:1.3em}
+table{border-collapse:collapse;width:100%;margin:.9em 0;font-size:.92em;background:#fff}
+th,td{border:1px solid #cbd5e1;padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#e2e8f0}
+caption{caption-side:top;text-align:left;font-weight:bold;padding:6px 2px;font-size:.92em}
+code,.mono{font-family:'DejaVu Sans Mono',monospace;font-size:.88em;background:#eef2ff;padding:1px 5px;border-radius:4px}
+figure{margin:1.2em 0;text-align:center}
+figcaption{font-size:.85em;color:#475569;margin-top:8px;text-align:left}
+.box{border-left:4px solid #2563eb;background:#eff6ff;padding:10px 14px;margin:1.1em 0;border-radius:0 8px 8px 0}
+.box.warn{border-left-color:#dc2626;background:#fef2f2}
+.box.tip{border-left-color:#059669;background:#ecfdf5}
+.box .h{font-weight:bold;display:block;margin-bottom:4px}
+@media print{body{background:#fff}main{padding:0}}
+</style>
+</head>
+<body><main>
+<h1>Buku Ajar Mata Kuliah Social Media Analytics</h1>
+<p><b>Materi 5 — Akses Gated, Biaya, Scraping &amp; Legalitas</b> (Pertemuan 5 · 150 menit · 3 SKS · CPMK-1)</p>
+<p>Penutup jalur fondasi: setelah mahasiswa tahu <i>apa</i> datanya (Materi 3) dan <i>bagaimana cara teknis</i> mengambilnya (Materi 4), pertemuan ini menjawab pertanyaan yang lebih ditentukan: <b>apakah data itu legal dan etik untuk diambil, berapa biayanya, dan apa jalur terbaik dengan anggaran yang tersedia.</b></p>
+<table><caption>Tabel 0.1 — Identitas modul</caption>
+<tr><th>Atribut</th><th>Nilai</th></tr>
+<tr><td>Mata kuliah</td><td>Social Media Analytics (3 SKS)</td></tr>
+<tr><td>Pertemuan</td><td>5 dari 14 — Akses gated, biaya, scraping &amp; legalitas</td></tr>
+<tr><td>CPMK</td><td>CPMK-1 &amp; CPMK-2: (*) membenarkan jalur akses data dengan pertimbangan hukum, etik, dan biaya; (*) menyusun feasibility memo sebagai dokumen keputusan</td></tr>
+<tr><td>Sub-CPMK</td><td>(3) Menerjemahkan kerangka regulasi (UU PDP, ToS, GDPR) ke keputusan praktis; (4) Membandingkan jalur kandidat sebagai kelayakan, bukan inginkan</td></tr>
+<tr><td>Bukti penilaian</td><td>Feasibility memo 1 halaman untuk 3 platform + catatan legal-etik</td></tr>
+<tr><td>Dasar penyusunan</td><td>Hasil riset modul 2024–2026: kebijakan akses platform, regulasi Indonesia &amp; UE, praksis scraping akademik</td></tr>
+</table>
+<p><b>Daftar isi:</b> 1 Peta pembelajaran · 2 Mengapa akses adalah urusan hukum · 3 Peta akses data 2026 · 4 Platform demi platform · 5 Scraping · 6 Aturan hukum &amp; etika · 7 Feasibility memo · 8 Lab utama · 9 Studi kasus banjir Jakarta · 10 Sepuluh kesalahan umum · 11 Sepuluh pertanyaan pengaman · 12 Ringkasan · 13 Glosarium · 14 Referensi</p>
+
+<h2>1. Peta pembelajaran pertemuan 5</h2>
+<p>Materi 4 berakhir dengan berita yang sebenarnya sudah terasa di udara: <b>kolektor yang bagus tidak berarti apa-apa kalau datanya tidak boleh diambil.</b> Pertemuan ini menutup pertanyaan fondasi itu. Pertanyaan riset yang paling menarik pun harus ditunda — atau dialihkan ke platform lain — kalau jalur datanya tidak ada, terlalu mahal, atau bermasalah secara hukum. Keputusan semacam ini bukan urusan pengacara semata; ia adalah keputusan metodologis, dan peneliti data sosial yang baik melakukannya sejak awal, bukan setelah data setengah terkumpul.</p>
+<p>Pertanyaan pemandu pertemuan ini sengaja dibuat konkret dan terukur:</p>
+<p class="q">«Saya ingin menganalisis reaksi publik atas kebijakan baru penggabungan desa. Data di mana, dari siapa, dengan alat apa, melanggar aturan siapa, dan berapa biayanya — dan jawaban yang mana yang masih masuk akal untuk anggaran nol kelompok mahasiswa?»</p>
+<table><caption>Tabel 1.1 — Rute pembelajaran 8 tahap</caption>
+<tr><th>#</th><th>Tahap</th><th>Output mahasiswa</th></tr>
+<tr><td>1</td><td>Peta akses 2026 — tangga jalur &amp; timeline kebijakan</td><td>Bisa menempatkan platform apa pun di tangga</td></tr>
+<tr><td>2</td><td>Platform demi platform — jalur, kuota, biaya</td><td>Tabel jalur 7 platform</td></tr>
+<tr><td>3</td><td>Kaidah scraping — kapan memungut halaman publik sah</td><td>Checklist 6 pertanyaan</td></tr>
+<tr><td>4</td><td>Regulasi — UU PDP, GDPR, ToS</td><td>Fokus keputusan dari setiap regulasi</td></tr>
+<tr><td>5</td><td>Lapisan etika — publik ≠ boleh</td><td>Argumen etik singkat di memo</td></tr>
+<tr><td>6</td><td>Struktur feasibility memo + contoh</td><td>Tahu isi 6 blok memo</td></tr>
+<tr><td>7</td><td>Lab utama — menyusun memo 3 platform</td><td>Memo v1 + catatan legal-etik</td></tr>
+<tr><td>8</td><td>Studi kasus lanjutan banjir + debrief</td><td>Keputusan revisi atas basis riset</td></tr>
+</table>
+<p><b>Jembatan dari Materi 4:</b> collection log yang kini mampu mendokumentasi proses akuisisi berguna berlipat di pertemuan ini — dokumen yang sama menjadi bukti tanggung gugat bahwa pengambilan data dilakukan tertata, dalam kuota, dan dengan jalan sah.</p>
+
+<h2>2. Mengapa akses adalah urusan hukum, bukan urusan kelaziman teknis</h2>
+<p>Bayangkan tiga mahasiswa dengan pertanyaan riset yang sama-sama baik. Yang pertama ingin mengukur sentimen publik terhadap kenaikan tarif commuter di X. Yang kedua ingin melacak narasi hoaks kesehatan di grup Facebook ibu-ibu. Yang ketiga ingin memetakan jaringan dukungan kandidat di TikTok. Ketiganya obsesif soal metode analisis, tapi masing-masing menghadapi tembok yang berbeda — dan tidak ada satu pun tembok itu yang bisa diakali dengan kode yang lebih rapi.</p>
+<p>Mahasiswa pertama akan menemukan bahwa API X yang tadinya murah untuk riset akademik kini dikenakan biaya berat; tier riset gratis yang dulu lazim telah dirampingkan sejak 2023. Mahasiswa kedua menemukan bahwa grup Meta hanya bisa ditelusuri lewat Meta Content Library, yang memerlukan persetujuan lembaga, proses seleksi, dan akses lewat <i>secure enclave</i> berbayar. Mahasiswa ketiga menemukan TikTok Research API terbuka bagi peneliti — tapi harus mengajukan proposal, menunggu seleksi, dan menerima kuota yang ketat.</p>
+<p>Perbedaan nasib ketiganya bukan kebetulan teknis. Ini adalah perubahan zaman: data media sosial telah menjadi komoditas. Platform memahami bahwa arsip komentar penggunanya punya nilai ilmiah, komersial, dan politik — dan karena itulah aksesnya diatur, dikawal, dan dijual. Kondisi ini tidak bisa dihindari; yang bisa kita kendalikan adalah bagaimana meresponsnya secara ilmiah. Itulah fungsi feasibility memo yang akan kita rangkai di bagian 7.</p>
+<div class="box"><span class="h">Konsep kunci — gated access</span>
+<p>Sebuah jalur akses disebut <b>gated</b> bila buka-tutup pintunya ditentukan platform saja: siapa yang boleh lewat (akun riset atau umum), seberapa banyak boleh lewat per hari (kuota), apa yang boleh dibawa keluar (tanpa PII, agregat saja), dan berapa harga pasnya (gratis, tier, atau bayar per tim).</p>
+</div>
+<p>Jembatan ke bagian 3: sebelum membahas platform satu per satu, kita perlu satu gambar besar yang mengurutkan semua jalur — dari yang paling terbuka hingga yang paling terkunci.</p>
+
+<h2>3. Peta akses data 2026: tangga kebijakan dan timeline</h2>
+<p>Cara paling ringkas untuk membaca lanskap akses adalah sebuah tangga. Di anak tangga teratas, data mengalir hampir bebas dan legal. Semakin turun, syarat mulai bertambah: pendaftaran, persetujuan lembaga, kuota, bayar, hingga enclave yang antaranya menuntut tim dan dana. Mahasiswa yang tahu tangga ini tidak akan kehabisan ide ketika satu jalur tertutup — ia langsung turun satu anak tangga lalu mengecek ulang: <i>jalur berikutnya masih menjawab pertanyaan saya tidak</i>?</p>
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="figm5 ladder">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#4a5568"/></marker>
+<marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2f855a"/></marker>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#c53030"/></marker>
+</defs>
+<style>.t{font-size:16px;fill:#1a202c}.ts{font-size:13px;fill:#2d3748}.tx{font-size:11.5px;fill:#4a5568}.th{font-size:15px;fill:#fff}</style>
+<text x="30" y="34" class="t" font-weight="700" font-size="19">Tangga akses data media sosial (2026)</text>
+<text x="30" y="56" class="tx">Semakin tinggi anak tangga: hak akses lebih luas, kuota makin longgar — namun biaya dan tuntutan tahap opsi besar makin tinggi.</text>
+<rect x="34" y="96" width="78" height="66" fill="#9b2c2c" rx="6"/>
+<text x="73" y="136" class="th" font-size="22" text-anchor="middle">4</text>
+<rect x="126" y="96" width="520" height="66" rx="8" fill="#f7fafc" stroke="#9b2c2c" stroke-width="1.4"/>
+<text x="140" y="123" class="t" text-anchor="start" font-weight="700">Enclave berbayar</text>
+<text x="140" y="143" class="tx" text-anchor="start">Meta Content Library — approval lembaga; biaya kelembagaan (verifikasi per 2026)</text>
+<rect x="60" y="176" width="78" height="66" fill="#c05621" rx="6"/>
+<text x="99" y="216" class="th" font-size="22" text-anchor="middle">3</text>
+<rect x="152" y="176" width="520" height="66" rx="8" fill="#f7fafc" stroke="#c05621" stroke-width="1.4"/>
+<text x="166" y="203" class="t" text-anchor="start" font-weight="700">Research API terdaftar</text>
+<text x="166" y="223" class="tx" text-anchor="start">TikTok Research API, dsb. — proposal + waktu tunggu; kuota dikendalikan platform</text>
+<rect x="86" y="256" width="78" height="66" fill="#2b6cb0" rx="6"/>
+<text x="125" y="296" class="th" font-size="22" text-anchor="middle">2</text>
+<rect x="178" y="256" width="520" height="66" rx="8" fill="#f7fafc" stroke="#2b6cb0" stroke-width="1.4"/>
+<text x="192" y="283" class="t" text-anchor="start" font-weight="700">API resmi berkuota</text>
+<text x="192" y="303" class="tx" text-anchor="start">X v2 tier rendah · YouTube Data API v3 · Reddit — registrasi + batas kuota harian</text>
+<rect x="112" y="336" width="78" height="66" fill="#2f855a" rx="6"/>
+<text x="151" y="376" class="th" font-size="22" text-anchor="middle">1</text>
+<rect x="204" y="336" width="520" height="66" rx="8" fill="#f7fafc" stroke="#2f855a" stroke-width="1.4"/>
+<text x="218" y="363" class="t" text-anchor="start" font-weight="700">Kanal terbuka</text>
+<text x="218" y="383" class="tx" text-anchor="start">Bluesky (AT Protocol) firehose · data terbuka pemerintah — biaya nol, cakupan terbatas</text>
+<rect x="700" y="96" width="210" height="266" rx="8" fill="#fff5f5" stroke="#c53030" stroke-width="1.4"/>
+<text x="714" y="126" class="ts" text-anchor="start">Semuanya kanal</text>
+<text x="714" y="155" class="ts" text-anchor="start">RESMI.</text>
+<text x="714" y="184" class="ts" text-anchor="start">Scraping halaman</text>
+<text x="714" y="213" class="ts" text-anchor="start">publik bukan anak</text>
+<text x="714" y="242" class="ts" text-anchor="start">tangga kelima —</text>
+<text x="714" y="271" class="ts" text-anchor="start">melainkan jalan</text>
+<text x="714" y="300" class="ts" text-anchor="start">samping dengan</text>
+<text x="714" y="329" class="ts" text-anchor="start">risiko hukum</text>
+<text x="714" y="358" class="ts" text-anchor="start">sendiri (Bag. 5).</text>
+<text x="30" y="415" class="tx">Kuota dan biaya bersifat indikatif — verifikasi ulang tiap semester di halaman resmi platform.</text>
+</svg>
+
+</figure>
+<table><caption>Tabel 3.1 — Anak tangga akses 2026 (karakteristik &amp; risiko)</caption>
+<tr><th>Anak tangga</th><th>Ciri</th><th>Contoh</th><th>Risiko utama</th></tr>
+<tr><td><b>1. Firehose terbuka</b></td><td>Aliran lengkap, tanpa seleksi pengguna</td><td>Bluesky Jetstream / AT Protocol</td><td>Volume besar perlu infrastruktur; kualitas konteks rendah</td></tr>
+<tr><td><b>2. API berkuota gratis</b></td><td>Bebas butuh API key; hitungan unit per hari</td><td>YouTube Data API v3</td><td>Kuota habis tanpa peringatan; field berbeda per jenis konten</td></tr>
+<tr><td><b>3. Research API terdaftar</b></td><td>Proposal riset disetujui platform; akun verifikasi</td><td>TikTok Research API</td><td>Waktu tunggu persetujuan; kuota subjek; wilayah terbatas</td></tr>
+<tr><td><b>4. Enclave berbayar</b></td><td>Data tidak keluar; analisis di ruang yang dikawal platform; biaya per tim</td><td>Meta Content Library</td><td>Biaya besar; metrik &amp; export dibatas; konteks platform campur</td></tr>
+<tr><td><b>5. Scraping (zona abu-abu)</b></td><td>Memungut data dari halaman web publik</td><td>Portal berita, forum publik</td><td>Bentrok ToS; rentan UI berubah; legalitas per yurisdiksi</td></tr>
+</table>
+<p>Tangga ini bukan foto yang diam. Perubahan kebijakan berlangsung nyaris tiap tahun, dan mahasiswa perlu membiasakan diri membaca timeline — bukan untuk hafal, tetapi untuk menemukan <b>polanya</b>: arah geraknya selalu ke arah akses yang lebih diatur dan lebih mahal.</p>
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="figm5 timeline">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#4a5568"/></marker>
+<marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2f855a"/></marker>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#c53030"/></marker>
+</defs>
+<style>.t{font-size:16px;fill:#1a202c}.ts{font-size:13px;fill:#2d3748}.tx{font-size:11.5px;fill:#4a5568}.th{font-size:15px;fill:#fff}</style>
+<text x="30" y="34" class="t" font-weight="700" font-size="19">Timeline kebijakan akses akademik 2021–2026</text>
+<text x="30" y="56" class="tx">Peta perubahan besar; peristiwa makin baru makin cepat berubah — semua angka wajib diverifikasi ulang.</text>
+<line x1="60" y1="240" x2="880" y2="240" stroke="#4a5568" stroke-width="2.4" marker-end="url(#ar)"/>
+<circle cx="120" cy="240" r="8" fill="#2f855a"/>
+<text x="120" y="272" class="t" text-anchor="middle" font-weight="700">2021</text>
+<text x="120" y="150" class="tx" text-anchor="middle">Era API longgar:</text>
+<text x="120" y="167" class="tx" text-anchor="middle">tier akademik gratis</text>
+<text x="120" y="184" class="tx" text-anchor="middle">masih tersedia</text>
+<line x1="120" y1="195" x2="120" y2="234" stroke="#2f855a" stroke-width="1.4"/>
+<circle cx="300" cy="240" r="8" fill="#c05621"/>
+<text x="300" y="272" class="t" text-anchor="middle" font-weight="700">2023</text>
+<text x="300" y="88" class="tx" text-anchor="middle">X menghentikan tier</text>
+<text x="300" y="105" class="tx" text-anchor="middle">gratis; Reddit menetapkan</text>
+<text x="300" y="122" class="tx" text-anchor="middle">harga Data API</text>
+<line x1="300" y1="133" x2="300" y2="172" stroke="#c05621" stroke-width="1.4"/>
+<circle cx="490" cy="240" r="8" fill="#c05621"/>
+<text x="490" y="272" class="t" text-anchor="middle" font-weight="700">2024</text>
+<text x="490" y="150" class="tx" text-anchor="middle">Meta Content Library</text>
+<text x="490" y="167" class="tx" text-anchor="middle">diumumkan pengganti</text>
+<text x="490" y="184" class="tx" text-anchor="middle">CrowdTangle</text>
+<line x1="490" y1="195" x2="490" y2="234" stroke="#c05621" stroke-width="1.4"/>
+<circle cx="670" cy="240" r="8" fill="#9b2c2c"/>
+<text x="670" y="272" class="t" text-anchor="middle" font-weight="700">2025-26</text>
+<text x="670" y="88" class="tx" text-anchor="middle">Biaya enclave dilaporkan</text>
+<text x="670" y="105" class="tx" text-anchor="middle">publik; DSA memata</text>
+<text x="670" y="122" class="tx" text-anchor="middle">keras transparansi Eropa</text>
+<line x1="670" y1="133" x2="670" y2="172" stroke="#9b2c2c" stroke-width="1.4"/>
+<circle cx="828" cy="240" r="8" fill="#9b2c2c"/>
+<text x="828" y="272" class="t" text-anchor="middle" font-weight="700">2026</text>
+<text x="828" y="150" class="tx" text-anchor="middle">Peta akses berubah</text>
+<text x="828" y="167" class="tx" text-anchor="middle">terus — cek sumber resmi</text>
+<text x="828" y="184" class="tx" text-anchor="middle">tiap semester</text>
+<line x1="828" y1="195" x2="828" y2="234" stroke="#9b2c2c" stroke-width="1.4"/>
+<text x="30" y="415" class="tx">Sumber: dokumentasi resmi tiap platform dan laporan komunitas riset 2021–2026 (indikatif).</text>
+</svg>
+
+</figure>
+<div class="box tip"><span class="h">Aturan praktis membaca timeline</span>
+<p>Angka harga dan syarat di bab ini adalah <b>kondisi per 2026</b> — berlaku sebagai urutan besaran, bukan angka pasti. Bagian terpenting bukan hafal angka harga enclave; melainkan kebiasaan memeriksa halaman kebijakan resmi platform <i>sebelum setiap penelitian dimulai</i>. Kebijakan akses adalah dokumen yang berubah, dan feasibility memo tanpa tanggal pengecekan adalah dokumen yang cacat.</p>
+</div>
+<p>Jembatan ke bagian 4: dengan kerangka tangga di kepala, kita kini menjelajah platform utama satu demi satu dan menempatkan masing-masing di anak tangga yang tepat.</p>
+
+<h2>4. Platform demi platform: jalur, kuota, biaya, batas</h2>
+<p>Tabel berikut adalah peta jalur untuk tujuh platform yang paling sering muncul dalam riset bahasa Indonesia. Yang perlu dibaca dari tabel ini bukan angka detailnya, tapi polanya: beberapa platform terbuka luas, sebagian menaruh dirinya di anak tangga ketiga, dan satu kawasan besar berdiri di belakang enclave.</p>
+<table><caption>Tabel 4.1 — Jalur akses dan biaya per platform (kondisi per 2026, verifikasi ulang tiap semester)</caption>
+<tr><th>Platform</th><th>Jalur utama riset</th><th>Kuota / batas</th><th>Biaya (indikasi)</th><th>Catatan penting</th></tr>
+<tr><td><b>X (Twitter)</b></td><td>API v2 tier akademik</td><td>Paket per bulan; batas post dibaca</td><td>Tier berbayar sejak 2023</td><td>Harga tier sering berubah; filter &amp; arsip dibatas</td></tr>
+<tr><td><b>TikTok</b></td><td>TikTok Research API</td><td>Proposal seleksi; wilayah; kuota subjek</td><td>Gratis; waktu tunggu signifikan</td><td>Analisis di lingkungan platform; field kaya</td></tr>
+<tr><td><b>Instagram / Facebook</b></td><td>Meta Content Library</td><td>Seleksi lembaga; enclave</td><td>Biaya per tim (indikasi &lt; USD 400/bln)</td><td>Data tidak keluar enclave; metrik dibatas</td></tr>
+<tr><td><b>YouTube</b></td><td>YouTube Data API v3</td><td>Unit kuota harian</td><td>Gratis dalam kuota</td><td>Komentar via <i>commentThreads</i>; kuota ketat untuk proyek besar</td></tr>
+<tr><td><b>Reddit</b></td><td>Reddit Data API</td><td>Batas per menit/bulan; usulan pembayaran skenario besar</td><td>Gratis untuk skala kecil-menengah</td><td>Batasi interval; komunitas besar perlu jeda</td></tr>
+<tr><td><b>Bluesky</b></td><td>App password + Jetstream</td><td>Firehose hampir penuh</td><td>Gratis</td><td>Komunitas Indonesia lebih kecil; bias pengguna terpelajar</td></tr>
+<tr><td><b>Threads</b></td><td>Threads API (Meta)</td><td>Terbatas; bukan jalur riset utama</td><td>—</td><td>Jangkauan riset masih terbatas; pantau perkembangan</td></tr>
+</table>
+<p>Dua pola yang perlu diberi perhatian khusus:</p>
+<p><b>Pertama, Meta adalah kawasan enclave.</b> Kalangan ibu-ibu di grup Facebook, komentar Instagram, dan thread Threads semuanya berada di belakang pintu Meta Content Library. Untuk riset yang butuh bahan dari grup tertutup — misalnya pelacakan hoaks kesehatan — jalur ini sering kali tidak bisa dihindari. Gambar berikut menunjukkan alur aksennya, termasuk proses seleksi dan penahapan yang perlu dianggarkan.</p>
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="figm5 contentlibrary">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#4a5568"/></marker>
+<marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2f855a"/></marker>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#c53030"/></marker>
+</defs>
+<style>.t{font-size:16px;fill:#1a202c}.ts{font-size:13px;fill:#2d3748}.tx{font-size:11.5px;fill:#4a5568}.th{font-size:15px;fill:#fff}</style>
+<text x="30" y="34" class="t" font-weight="700" font-size="19">Jalur riset lewat Meta Content Library: dari proposal hingga enclave</text>
+<text x="30" y="56" class="tx">Contoh konkret kanal ter-gating: tiap panah adalah waktu tunggu, syarat, atau biaya.</text>
+<rect x="40" y="96" width="190" height="78" rx="8" fill="#edf2f7" stroke="#4a5568" stroke-width="1.4"/>
+<text x="52" y="120" class="t" text-anchor="start" font-weight="700">Tim riset</text>
+<text x="52" y="142" class="tx" text-anchor="start">dosen penanggung</text>
+<text x="52" y="159" class="tx" text-anchor="start">jawab + proposal</text>
+<rect x="270" y="96" width="190" height="78" rx="8" fill="#fefcbf" stroke="#4a5568" stroke-width="1.4"/>
+<text x="282" y="120" class="t" text-anchor="start" font-weight="700">Pendaftaran lembaga</text>
+<text x="282" y="142" class="tx" text-anchor="start">verifikasi institusi</text>
+<text x="282" y="159" class="tx" text-anchor="start">+ tujuan riset</text>
+<rect x="490" y="96" width="190" height="78" rx="8" fill="#fed7d7" stroke="#4a5568" stroke-width="1.4"/>
+<text x="502" y="120" class="t" text-anchor="start" font-weight="700">Approval</text>
+<text x="502" y="142" class="tx" text-anchor="start">waktu tunggu;</text>
+<text x="502" y="159" class="tx" text-anchor="start">berlaku utk lembaga</text>
+<rect x="710" y="96" width="190" height="78" rx="8" fill="#fed7d7" stroke="#4a5568" stroke-width="1.4"/>
+<text x="722" y="120" class="t" text-anchor="start" font-weight="700">Enclave berbayar</text>
+<text x="722" y="142" class="tx" text-anchor="start">query di dalam;</text>
+<text x="722" y="159" class="tx" text-anchor="start">ekspor terbatas</text>
+<line x1="230" y1="135" x2="270" y2="135" stroke="#4a5568" stroke-width="1.8" marker-end="url(#ar)"/>
+<line x1="460" y1="135" x2="500" y2="135" stroke="#4a5568" stroke-width="1.8" marker-end="url(#ar)"/>
+<line x1="680" y1="135" x2="720" y2="135" stroke="#4a5568" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="46" y="210" class="ts" text-anchor="start">Tiga pelajaran dari satu jalur:</text>
+<text x="46" y="234" class="ts" text-anchor="start">1. Approval milik LEMBAGA, bukan pribadi — usulkan pendaftaran di minggu pertama semester.</text>
+<text x="46" y="258" class="ts" text-anchor="start">2. Enclave: data tidak boleh keluar; hasil yang bisa dibawa umumnya hanya agregat.</text>
+<text x="46" y="282" class="ts" text-anchor="start">3. Biaya kelembagaan yang dilaporkan publik 2026 sekitar USD 371 per tim per bulan (verifikasi!).</text>
+<text x="46" y="306" class="ts" text-anchor="start">4. Tanpa approval? triangulasi kanal terbuka (Bluesky) dan platform berkuota — dan jujur di memo tentang cakupannya.</text>
+<text x="30" y="415" class="tx">Sumber: laporan publik akses riset Meta 2024–2026 (indikatif; verifikasi sebelum dikutip).</text>
+</svg>
+
+</figure>
+<div class="box"><span class="h">Contoh keputusan — kesehatan: hoaks obat herbal</span>
+<p>Penelitian narasi "obat herbal menyembuhkan diabetes" di grup Facebook ibu-ibu: tanpa MCL, tidak ada jalur sah. Dua pilihan realistis: (a) ajukan MCL dengan sponsor lembaga, siap dana enclave dan waktu menunggu; (b) turun anak tangga — pakai forum kesehatan publik (Reddit r/…, forum kesehatan berita) sebagai korpus pembanding, walau berarti mengubah pertanyaan dari "grup tertutup" ke "ruang publik". Kedua jalur sah; yang salah adalah diam-diam memakai akun pribadi untuk koleksi grup.</p>
+</div>
+<p><b>Kedua, Bluesky adalah pengaman jalur.</b> Ketika semua jalur lain mempersulit, Bluesky (dan kawasan federasi terbuka secara umum) memberi kelegaan berupa firehose yang sah dan gratis. Namun komunitas berbahasa Indonesia di sana jauh lebih kecil, dan profil penggunanya tergolong lapisan pengguna yang lebih terdidik — jadi data Bluesky yang baik untuk uji konsep dan metode, belum tentu mewakili gelombang opini publik Indonesia.</p>
+<p>Jembatan ke bagian 5: tangga kita punya anak tangga terbawah yang paling menarik sekaligus paling berisiko — memungut data dari halaman yang terbuka, tanpa sepengetahuan platform. Di sinilah banyak peneliti awal kelelahan; kita akan melintasi zona ini dengan aman.</p>
+
+<h2>5. Scraping: memungut data dari halaman publik</h2>
+<p>Scraping sering jadi pilihan pertama mahasiswa: tidak perlu approval, tidak perlu kuota, langsung (bisa dibilang) "ambil semuanya". Namun satu kalimat itu menyembunyikan emas dan perangkap dalam jumlah yang sama. Sisi emasnya: banyak data Indonesia yang hanya ada di halaman web biasa — komentar portal berita, forum obrolan kesehatan publik, arsip tanya-jawab layanan publik — dan semuanya jauh lebih terbuka daripada platform komersial. Sisi perangkapnya: banyak platform keras melarang scraping dalam Terms of Service, dan membongkar proteksinya berpotensi menyeret peneliti ke jalur yang tidak sehat.</p>
+<p>Kaidah dasarnya dapat dipegang dengan satu gambar — pohon keputusan enam pertanyaan. Setiap cabang harus kembali jawabannya ya; satu saja jawaban tidak berarti scraping harus dihentikan atau dialihkan.</p>
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="figm5 scraping">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#4a5568"/></marker>
+<marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2f855a"/></marker>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#c53030"/></marker>
+</defs>
+<style>.t{font-size:16px;fill:#1a202c}.ts{font-size:13px;fill:#2d3748}.tx{font-size:11.5px;fill:#4a5568}.th{font-size:15px;fill:#fff}</style>
+<text x="30" y="34" class="t" font-weight="700" font-size="19">Pohon keputusan: boleh scraping atau tidak?</text>
+<text x="30" y="56" class="tx">Empat pertanyaan berurutan — 'terlihat publik' bukan lisensi otomatis.</text>
+<rect x="370" y="74" width="200" height="46" rx="8" fill="#2b6cb0" stroke="#2b6cb0" stroke-width="1.4"/>
+<text x="470" y="102" class="th" text-anchor="middle">Data tidak tersedia via API</text>
+<line x1="470" y1="120" x2="470" y2="142" stroke="#4a5568" stroke-width="1.8" marker-end="url(#ar)"/>
+<rect x="360" y="142" width="220" height="44" rx="8" fill="#edf2f7" stroke="#4a5568" stroke-width="1.4"/>
+<text x="470" y="169" class="ts" text-anchor="middle">1. robots.txt memperbolehkan?</text>
+<line x1="580" y1="164" x2="646" y2="164" stroke="#2f855a" stroke-width="1.8" marker-end="url(#arg)"/>
+<text x="606" y="156" class="ts" text-anchor="middle" fill="#2f855a">ya</text>
+<line x1="360" y1="164" x2="296" y2="164" stroke="#c53030" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="326" y="156" class="ts" text-anchor="middle" fill="#c53030">tidak</text>
+<rect x="648" y="142" width="120" height="44" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="1.4"/>
+<text x="708" y="169" class="ts" text-anchor="middle" fill="#2f855a">lanjut cek ToS</text>
+<rect x="200" y="142" width="94" height="44" rx="8" fill="#fff5f5" stroke="#c53030" stroke-width="1.4"/>
+<text x="247" y="169" class="ts" text-anchor="middle" fill="#c53030">BERHENTI</text>
+<line x1="470" y1="186" x2="470" y2="208" stroke="#4a5568" stroke-width="1.8" marker-end="url(#ar)"/>
+<rect x="360" y="208" width="220" height="44" rx="8" fill="#edf2f7" stroke="#4a5568" stroke-width="1.4"/>
+<text x="470" y="235" class="ts" text-anchor="middle">2. Ketentuan Layanan mengizinkan?</text>
+<line x1="580" y1="230" x2="646" y2="230" stroke="#2f855a" stroke-width="1.8" marker-end="url(#arg)"/>
+<text x="606" y="222" class="ts" text-anchor="middle" fill="#2f855a">ya</text>
+<line x1="360" y1="230" x2="296" y2="230" stroke="#c53030" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="326" y="222" class="ts" text-anchor="middle" fill="#c53030">tidak</text>
+<rect x="648" y="208" width="120" height="44" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="1.4"/>
+<text x="708" y="235" class="ts" text-anchor="middle" fill="#2f855a">cek data pribadi</text>
+<rect x="200" y="208" width="94" height="44" rx="8" fill="#fff5f5" stroke="#c53030" stroke-width="1.4"/>
+<text x="247" y="235" class="ts" text-anchor="middle" font-weight="700" fill="#c53030">BERHENTI</text>
+<line x1="470" y1="252" x2="470" y2="274" stroke="#4a5568" stroke-width="1.8" marker-end="url(#ar)"/>
+<rect x="360" y="274" width="220" height="44" rx="8" fill="#edf2f7" stroke="#4a5568" stroke-width="1.4"/>
+<text x="470" y="301" class="ts" text-anchor="middle">3. Isinya bebas data pribadi?</text>
+<line x1="580" y1="296" x2="646" y2="296" stroke="#2f855a" stroke-width="1.8" marker-end="url(#arg)"/>
+<text x="606" y="288" class="ts" text-anchor="middle" fill="#2f855a">ya</text>
+<line x1="360" y1="296" x2="296" y2="296" stroke="#c53030" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="326" y="288" class="ts" text-anchor="middle" fill="#c53030">tidak</text>
+<rect x="648" y="274" width="120" height="44" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="1.4"/>
+<text x="708" y="301" class="ts" text-anchor="middle" fill="#2f855a">cek beban situs</text>
+<rect x="200" y="274" width="94" height="44" rx="8" fill="#fff5f5" stroke="#c53030" stroke-width="1.4"/>
+<text x="247" y="301" class="ts" text-anchor="middle" font-weight="700" fill="#c53030">Jalur Bag. 6</text>
+<line x1="470" y1="318" x2="470" y2="340" stroke="#4a5568" stroke-width="1.8" marker-end="url(#ar)"/>
+<rect x="360" y="340" width="220" height="48" rx="8" fill="#edf2f7" stroke="#4a5568" stroke-width="1.4"/>
+<text x="470" y="362" class="ts" text-anchor="middle">4. Tidak membebani situs?</text>
+<text x="470" y="380" class="tx" text-anchor="middle">jeda antar request, jam mati, tanpa retry agresif</text>
+<line x1="580" y1="364" x2="646" y2="364" stroke="#2f855a" stroke-width="1.8" marker-end="url(#arg)"/>
+<text x="606" y="356" class="ts" text-anchor="middle" fill="#2f855a">ya</text>
+<line x1="360" y1="364" x2="296" y2="364" stroke="#c53030" stroke-width="1.8" marker-end="url(#arr)"/>
+<text x="326" y="356" class="ts" text-anchor="middle" fill="#c53030">tidak</text>
+<rect x="648" y="340" width="120" height="48" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="1.4"/>
+<text x="708" y="366" class="ts" text-anchor="middle" font-weight="700" fill="#2f855a">BOLEH;</text>
+<text x="708" y="381" class="tx" text-anchor="middle" fill="#2f855a">catat di log</text>
+<rect x="200" y="340" width="94" height="48" rx="8" fill="#fff5f5" stroke="#c53030" stroke-width="1.4"/>
+<text x="247" y="367" class="ts" text-anchor="middle" font-weight="700" fill="#c53030">BERHENTI</text>
+<text x="30" y="415" class="tx">Empat 'ya' menjadi satu keputusan: scraping yang boleh; satu saja 'tidak' menghentikan jalurnya.</text>
+</svg>
+
+</figure>
+<table><caption>Tabel 5.1 — Enam pemeriksaan sebelum scraping</caption>
+<tr><th>Pertanyaan</th><th>Seharusnya</th><th>Kalau tidak</th></tr>
+<tr><td>1. Halaman terbuka tanpa login?</td><td>Data bisa diakses publik siapa pun</td><td>Berhenti; login-dinding berarti platform sengaja menyekat</td></tr>
+<tr><td>2. robots.txt tidak melarang?</td><td>Norma teknis web dihormati</td><td>Turunkan kecepatan atau tunda; pencatatan alasan</td></tr>
+<tr><td>3. ToS tidak melarang pengizinan?</td><td>Kontrak layanan tidak dilanggar</td><td>Cari isi setara di sumber lain, atau bantah jalur</td></tr>
+<tr><td>4. Beban server kecil?</td><td> delays besar; header identitas</td><td>Tunda sampai jadwal jam sepi; kurangi frekuensi</td></tr>
+<tr><td>5. Ada data pribadi?</td><td>Anonimisasi wajib di jalur pemrosesan</td><td>Periksa bagian 6 sebelum lanjut</td></tr>
+<tr><td>6. Direproduksi dengan benar?</td><td>URL, tanggal, checksum tercatat</td><td>tercatat di collection log</td></tr>
+</table>
+<div class="box warn"><span class="h">Yurisdiksi itu bukan semu — Indonesia dan dunia</span>
+<p>Legalitas scraping berbeda antar negara. Pengadilan di AS (kasus hiQ v. LinkedIn) sempat berkata data publik tidak bisa dikunci dengan kontrak; lalu keputusan itu berubah bentuk dalam peretasan hukum berikutnya. UE membatasi penghisapan lewat GDPR &amp; hukum kontrak. Di Indonesia, dua landasan yang relevan: UU ITE dan UU PDP. Karena itu aturan aman satu-satunya: <b>pretapi diri dengan pertimbangan paling ketat di antara semua yurisdiksi yang relevan</b> — jangan cari negara mana yang paling longgar.</p>
+</div>
+<p>Contoh nyata yang bisa langsung dipahami: mengumpulkan komentar portal berita nasional tentang kasus korupsi 2024. Halaman terbuka, robots.txt tidak melarang, beban rendah — jalur aman sejauh anonimisasi nama dan tanpa menyimpan email pengomentar. Bandingkan dengan niat singkat "ambil profil semua follower akun politik X dengan masuk menggunakan akun pribadi" — jalur ini menabrak pertanyaan 1, 2, 3, dan 5 sekaligus, dan meski secara teknis bisa jadi berhasil, ia berada tepat di zona yang seharusnya dihindari peneliti.</p>
+<p>Jembatan ke bagian 6: enam pertanyaan tadi duduk di atas kerangka hukum. Kini kita buka kerangkanya — dari UU PDP hingga kontrak ToS — dan melihat ancaman mana yang benar-benar terjadi.</p>
+
+<h2>6. Aturan hukum dan etika: apa yang mengikat</h2>
+<p>Banyak mahasiswa mengelompokkan semua ancaman hukum jadi satu kotak hitam yang menakutkan. Lebih berguna menyusunnya sebagai tiga lapis yang masing-masing punya pasokan kepastian yang berbeda:</p>
+<table><caption>Tabel 6.1 — Tiga lapis regulasi yang mengikat peneliti SMA</caption>
+<tr><th>Lapis</th><th>Regulasi</th><th>Contoh pelanggaran</th><th>Panduan praktis</th></tr>
+<tr><td><b>1. Data pribadi</b></td><td>UU PDP 27/2022; GDPR (UE)</td><td>Menyimpan nama akun bersifat tematik; lokasi presisi; teleport data ke layanan piringan</td><td>Analisis boleh; periksa field; render awal anonim</td></tr>
+<tr><td><b>2. Kontrak platform</b></td><td>Terms of Service tiap platform</td><td>Multiple akun; menyewa bot untuk menaikkan kuota; berbagi data mentah</td><td>Jalur resmi dulu; ToS dibaca; jangan andalkan celah</td></tr>
+<tr><td><b>3. Zona abu-abu</b></td><td>Norma hacking/ET; UU ITE; etika IRB</td><td>Menembus anti-bot; mengakses data non-publik dengan akun palsu</td><td>Hindari sepenuhnya; konsultasi etik lembaga</td></tr>
+</table>
+<p>Lapis pertama sering disalahkaperti. Banyak mahasiswa beranggapan "key post langsung publik, bukan data pribadi". Pendapat ini semu: status <i>publik di halaman</i> tidak otomatis berarti <i>bebas dikoleksi</i>. UU PDP dan GDPR memakai kriteria identifikasi: bila seseorang bisa diidentifikasi — dari nama akun, foto wajah, gabungan sinyal (waktu post + gaya bahasa + lokasi halaman) — maka itu data pribadi. Gambar berikut menunjukkan satu post yang dipecah jadi dua kolom.</p>
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="figm5 pdp">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#4a5568"/></marker>
+<marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2f855a"/></marker>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#c53030"/></marker>
+</defs>
+<style>.t{font-size:16px;fill:#1a202c}.ts{font-size:13px;fill:#2d3748}.tx{font-size:11.5px;fill:#4a5568}.th{font-size:15px;fill:#fff}</style>
+<text x="30" y="34" class="t" font-weight="700" font-size="19">Satu post, dua klaster field — pelindungan data pribadi (UU PDP 27/2022)</text>
+<text x="30" y="56" class="tx">Pembeda utamanya adalah 'dapat diidentifikasi', bukan status privasi akun.</text>
+<rect x="30" y="84" width="430" height="296" rx="8" fill="#f0fdf4" stroke="#2f855a" stroke-width="1.4"/>
+<text x="52" y="112" class="t" text-anchor="start" font-weight="700" fill="#2f855a">Aman dianalisis & disajikan</text>
+<rect x="52" y="132" width="386" height="34" rx="6" fill="#ffffff" stroke="#c6f6d5" stroke-width="1.4"/>
+<text x="66" y="154" class="ts" text-anchor="start">isi teks post (dipublikasikan akun sendiri)</text>
+<rect x="52" y="173" width="386" height="34" rx="6" fill="#ffffff" stroke="#c6f6d5" stroke-width="1.4"/>
+<text x="66" y="195" class="ts" text-anchor="start">id post / id media (tanpa identitas akun)</text>
+<rect x="52" y="214" width="386" height="34" rx="6" fill="#ffffff" stroke="#c6f6d5" stroke-width="1.4"/>
+<text x="66" y="236" class="ts" text-anchor="start">metrik agregat: jumlah suka, replikasi</text>
+<rect x="52" y="255" width="386" height="34" rx="6" fill="#ffffff" stroke="#c6f6d5" stroke-width="1.4"/>
+<text x="66" y="277" class="ts" text-anchor="start">waktu posting (UTC)</text>
+<rect x="52" y="296" width="386" height="34" rx="6" fill="#ffffff" stroke="#c6f6d5" stroke-width="1.4"/>
+<text x="66" y="318" class="ts" text-anchor="start">label bahasa dari platform</text>
+<rect x="52" y="337" width="386" height="34" rx="6" fill="#ffffff" stroke="#c6f6d5" stroke-width="1.4"/>
+<text x="66" y="359" class="ts" text-anchor="start">jenis konten: teks / gambar / video</text>
+<rect x="480" y="84" width="430" height="296" rx="8" fill="#fff5f5" stroke="#c53030" stroke-width="1.4"/>
+<text x="502" y="112" class="t" text-anchor="start" font-weight="700" fill="#c53030">Perlu mitigasi / tidak dibagikan</text>
+<rect x="502" y="132" width="386" height="34" rx="6" fill="#ffffff" stroke="#fed7d7" stroke-width="1.4"/>
+<text x="516" y="154" class="ts" text-anchor="start">nama tampilan + user_id akun</text>
+<rect x="502" y="173" width="386" height="34" rx="6" fill="#ffffff" stroke="#fed7d7" stroke-width="1.4"/>
+<text x="516" y="195" class="ts" text-anchor="start">foto profil wajah (data biometrik)</text>
+<rect x="502" y="214" width="386" height="34" rx="6" fill="#ffffff" stroke="#fed7d7" stroke-width="1.4"/>
+<text x="516" y="236" class="ts" text-anchor="start">bio: pekerjaan, kota presisi, sekolah</text>
+<rect x="502" y="255" width="386" height="34" rx="6" fill="#ffffff" stroke="#fed7d7" stroke-width="1.4"/>
+<text x="516" y="277" class="ts" text-anchor="start">kontak yang dipaparkan di bio</text>
+<rect x="502" y="296" width="386" height="34" rx="6" fill="#ffffff" stroke="#fed7d7" stroke-width="1.4"/>
+<text x="516" y="318" class="ts" text-anchor="start">jaringan follower/following yang memetakan</text>
+<rect x="502" y="337" width="386" height="34" rx="6" fill="#ffffff" stroke="#fed7d7" stroke-width="1.4"/>
+<text x="516" y="359" class="ts" text-anchor="start">label kategori sensitif lainnya</text>
+<text x="30" y="415" class="tx">Anonimisasi bukan menghapus nama saja: kombinasi field kecil pun dapat mengembalikan identitas (re-identification).</text>
+</svg>
+
+</figure>
+<p>Lapis kedua dan ketiga sering dianggap sama "pedoman kantoran". Padahal keduanya mengikat berbeda: ToS berpelaku perjanjian antara platform dan pengguna — melanggarnya bisa berakibat batal akun riset (dan reputasi lembaga); zona abu-abu menyelipkan ancaman pidana di sebagian yurisdiksi. Untuk kelopak tercepat: bila satu pertanyaan pun ada yang memaksa <i>menyamar</i> atau <i>menipu platform</i>, tetapkan: jalur itu bukan riset; cari jalur lain.</p>
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="figm5 ethics">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#4a5568"/></marker>
+<marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2f855a"/></marker>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#c53030"/></marker>
+</defs>
+<style>.t{font-size:16px;fill:#1a202c}.ts{font-size:13px;fill:#2d3748}.tx{font-size:11.5px;fill:#4a5568}.th{font-size:15px;fill:#fff}</style>
+<text x="30" y="34" class="t" font-weight="700" font-size="19">Publik ≠ boleh — tiga lingkar izin yang mengecil</text>
+<text x="30" y="56" class="tx">Terlihat publik, boleh dianalisis, boleh dibagikan: tiga persetujuan berbeda dengan syarat masing-masing.</text>
+<circle cx="480" cy="228" r="150" fill="#eff6ff" stroke="#2b6cb0" stroke-width="2"/>
+<circle cx="480" cy="252" r="104" fill="#fefcbf" stroke="#b7791f" stroke-width="2"/>
+<circle cx="480" cy="276" r="58" fill="#e6fffa" stroke="#2c7a7b" stroke-width="2"/>
+<text x="480" y="96" class="t" text-anchor="middle" font-weight="700" fill="#2b6cb0">TERLIHAT PUBLIK</text>
+<text x="480" y="114" class="tx" text-anchor="middle" fill="#2b6cb0">semua yang bisa dibaca siapa pun di halaman terbuka</text>
+<text x="480" y="196" class="t" text-anchor="middle" font-weight="700" fill="#b7791f">BOLEH DIANALISIS</text>
+<text x="480" y="214" class="tx" text-anchor="middle" fill="#b7791f">persetujuan etik + penghargaan post yang telah dihapus</text>
+<text x="480" y="282" class="t" text-anchor="middle" font-weight="700" fill="#2c7a7b">BOLEH DIBAGIKAN</text>
+<text x="480" y="300" class="tx" text-anchor="middle" fill="#2c7a7b">anonimisasi agresif; dataset dibagikan dengan rubrik</text>
+<rect x="30" y="360" width="880" height="40" rx="8" fill="#fff5f5" stroke="#c53030" stroke-width="1.4"/>
+<text x="52" y="385" class="ts" text-anchor="start" fill="#c53030">Melanggar lingkar: menganalisis dari data publik lalu membagikannya utuh beserta identitas akun — pelanggaran hukum dan etika sekaligus.</text>
+<text x="30" y="415" class="tx">Izin analisis dan izin publikasi adalah dua surat yang berbeda.</text>
+</svg>
+
+</figure>
+<div class="box"><span class="h">Etika lapis keempat — yang tidak tertulis di kertas</span>
+<p>Regulasi menentukan <i>batas minimum</i>. Etika bertanya lebih jauh: apakah warga yang post terasa seperti disurvei tanpa perlindungan? Riset SMA yang baik: (a) memangan akun dengan nama grup di footnote lembaga, bukan menutupi identitas; (b) tidak mengundang partisipasi tersembunyi; (c) menutup PII sebelum dataset dibagikan — dari siapa pun, termasuk rekan lab.</p>
+</div>
+<p>Jembatan ke bagian 7: semua elemen — tangga jalur, platform, scraping, regulasi, etika — kini siap dirangkai menjadi satu dokumen keputusan: feasibility memo.</p>
+
+<h2>7. Feasibility memo: struktur dan contoh lengkap</h2>
+<p>Buku ajar ini tidak meminta mahasiswa jadi ahli hukum. Fungsinya: <b>menulis satu halaman yang membuat dosen (atau atasan siapa pun) bisa memahami jalur mana yang dipilih dan mengapa jalur lain ditolak.</b> Dokumen inilah yang di dunia kerja disebut feasibility memo, dan keterampilannya terpakai jauh melebihi kelas SMA.</p>
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="figm5 memo">
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#4a5568"/></marker>
+<marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2f855a"/></marker>
+<marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" fill="#c53030"/></marker>
+</defs>
+<style>.t{font-size:16px;fill:#1a202c}.ts{font-size:13px;fill:#2d3748}.tx{font-size:11.5px;fill:#4a5568}.th{font-size:15px;fill:#fff}</style>
+<text x="30" y="34" class="t" font-weight="700" font-size="19">Feasibility memo: enam blok keputusan</text>
+<text x="30" y="56" class="tx">Memo satu halaman; urutan blok memaksa pertimbangan yang tidak terlewat.</text>
+<rect x="60" y="84" width="820" height="42" rx="8" fill="#f7fafc" stroke="#2b6cb0" stroke-width="1.4"/>
+<rect x="60" y="84" width="46" height="42" fill="#2b6cb0" rx="6"/>
+<text x="83" y="113" class="th" text-anchor="middle" font-weight="700">1</text>
+<text x="118" y="102" class="t" text-anchor="start" font-weight="700">Pertanyaan riset & unit analisis</text>
+<text x="118" y="121" class="tx" text-anchor="start">topik apa, forum apa, unitnya post / akun / forum</text>
+<rect x="60" y="136" width="820" height="42" rx="8" fill="#f7fafc" stroke="#c05621" stroke-width="1.4"/>
+<rect x="60" y="136" width="46" height="42" fill="#c05621" rx="6"/>
+<text x="83" y="165" class="th" text-anchor="middle" font-weight="700">2</text>
+<text x="118" y="154" class="t" text-anchor="start" font-weight="700">Kandidat jalur data (minimal 3)</text>
+<text x="118" y="173" class="tx" text-anchor="start">API kuota · Research API · enclave · scraping terbuka · dataset publik</text>
+<rect x="60" y="188" width="820" height="42" rx="8" fill="#f7fafc" stroke="#2b6cb0" stroke-width="1.4"/>
+<rect x="60" y="188" width="46" height="42" fill="#2b6cb0" rx="6"/>
+<text x="83" y="217" class="th" text-anchor="middle" font-weight="700">3</text>
+<text x="118" y="206" class="t" text-anchor="start" font-weight="700">Keputusan & alasan</text>
+<text x="118" y="225" class="tx" text-anchor="start">jalur utama yang dipilih; jalur cadangan yang ditunda beserta alasannya</text>
+<rect x="60" y="240" width="820" height="42" rx="8" fill="#f7fafc" stroke="#c05621" stroke-width="1.4"/>
+<rect x="60" y="240" width="46" height="42" fill="#c05621" rx="6"/>
+<text x="83" y="269" class="th" text-anchor="middle" font-weight="700">4</text>
+<text x="118" y="258" class="t" text-anchor="start" font-weight="700">Biaya & risiko</text>
+<text x="118" y="277" class="tx" text-anchor="start">kuota harian, harga tier, waktu tunggu approval</text>
+<rect x="60" y="292" width="820" height="42" rx="8" fill="#f7fafc" stroke="#2b6cb0" stroke-width="1.4"/>
+<rect x="60" y="292" width="46" height="42" fill="#2b6cb0" rx="6"/>
+<text x="83" y="321" class="th" text-anchor="middle" font-weight="700">5</text>
+<text x="118" y="310" class="t" text-anchor="start" font-weight="700">Mitigasi & jadwal</text>
+<text x="118" y="329" class="tx" text-anchor="start">buffer 25%, jalur cadangan, jadwal approval, jam cadangan lab</text>
+<rect x="60" y="344" width="820" height="42" rx="8" fill="#f7fafc" stroke="#c05621" stroke-width="1.4"/>
+<rect x="60" y="344" width="46" height="42" fill="#c05621" rx="6"/>
+<text x="83" y="373" class="th" text-anchor="middle" font-weight="700">6</text>
+<text x="118" y="362" class="t" text-anchor="start" font-weight="700">Rujukan hukum & etik</text>
+<text x="118" y="381" class="tx" text-anchor="start">kebijakan platform, UU PDP, ToS, dan pedoman etik akademik kampus</text>
+<text x="30" y="415" class="tx">Memo ditulis sebelum koleksi berjalan — bukan catatan mundur-mundur setelah data terkumpul.</text>
+</svg>
+
+</figure>
+<table><caption>Tabel 7.1 — Struktur feasibility memo (enam blok)</caption>
+<tr><th>Blok</th><th>Isi minimal</th><th>Ciri memo yang baik</th></tr>
+<tr><td>1</td><td>Pertanyaan riset &amp; unit analisis</td><td>Spesifik; unit disebut eksplisit (post / akun / forum)</td></tr>
+<tr><td>2</td><td>Kandidat jalur data (minimal 3)</td><td>jalan dari tangga bagian 3, bukan satu jalur kesukaan</td></tr>
+<tr><td>3</td><td>Keputusan &amp; alasan</td><td>alasan tolak dan pilih tertulis jelas; dasarnya hukum/kuota/biaya</td></tr>
+<tr><td>4</td><td>Biaya &amp; risiko</td><td>dana/waktu/risiko; jawaban bisa diuji ulang</td></tr>
+<tr><td>5</td><td>Mitigasi &amp; jadwal</td><td>buffer persetujuan 25%; jalur cadangan dinamai</td></tr>
+<tr><td>6</td><td>Rujukan hukum &amp; etik</td><td>UU PDP, ToS, GDPR sesuai dengan relevansinya</td></tr>
+</table>
+<p>Contoh memo berikut sudah diringkas. Buat mahasiswa menilai: blok mana yang bagus, blok mana yang harus ditambah. (Memo v1 yang sebenarnya akan ditulis di lab bagian 8 dan dinilai dengan rubrik Tabel 8.1.)</p>
+<div class="box"><span class="h">Contoh Feasibility Memo — v1</span>
+<p class="mono">Memo: pelacakan sentimen banjir (lanjutan riset Materi 4) — 2026-01-xx</p>
+<p>1. Pertanyaan: bagaimana sentimen publik atas banjir Jakarta 3 hari sejak awal; unit = post X/Bluesky yang sebut <code>#banjirjakarta</code> / kata "banjir".</p>
+<p>2. Kandidat: (a) X API tier akademik; (b) Bluesky firehose; (c) jalur scraping portal berita.</p>
+<p>3. Keputusan: X ditunda bila tier saat ini tidak terjangkau tim (lihat 4). Bluesky dipilih sebagai jalur utama uji coba; portal berita jadi korpus pembanding, anonimisasi nama akun komentator.</p>
+<p>4. Biaya &amp; risiko: X menuntut tier berbayar (cek halaman resmi hari memo); Bluesky kurang mewakili audiens umum; portal berita berisiko struktur HTML berubah.</p>
+<p>5. Mitigasi &amp; jadwal: buffer persetujuan 25%; jadwal approval bila jalur X diteruskan; fallback dataset arsip public.</p>
+<p>6. Hukum &amp; etik: anonym field user sebelum analisis; nama akun bilang tidak disimpen; ToS portal dibaca (bagian crawler).</p>
+</div>
+<p>Jembatan ke bagian 8: lab kali ini justru menguji memo, bukan kode — karena di pertemuan inilah kemampuan mengambil keputusan yang diuji.</p>
+
+<h2>8. Lab utama: menyusun feasibility memo tiga platform</h2>
+<p><b>Format:</b> 90 menit kerja kelompok, satu topik bagi seluruh kelas (karena membandingkan memo antar kelompok jadi pelajaran yang paling membekas). Pertanyaan topik: <b>bagaimana narasi publik tentang penggabungan desa di Sumatera Utara</b> (topik kebijakan lokal; risikonya rendah; muncul di semua platform).</p>
+<table><caption>Tabel 8.1 — Rubrik feasibility memo (skor 100)</caption>
+<tr><th>Komponen</th><th>Skor</th><th>Kriteria penuh skor</th></tr>
+<tr><td>Pertanyaan &amp; unit</td><td>5</td><td>Unit analisis ditentukan dengan bahasa eksplisit</td></tr>
+<tr><td>3 kandidat jalur</td><td>20</td><td>Tiap jalur sudah ditempatkan di tangga; tidak meniru satuan</td></tr>
+<tr><td>Keputusan &amp; alasan</td><td>20</td><td>Alasan memilih &amp; tolak memakai kuota/biaya/ToS kr</td></tr>
+<tr><td>Biaya &amp; risiko</td><td>15</td><td>Angka mengutip halaman resmi dengan tanggal</td></tr>
+<tr><td>Mitigasi</td><td>15</td><td>Jalur cadangan dinamai; buffer jelas</td></tr>
+<tr><td>Hukum &amp; etik</td><td>15</td><td>UU PDP / ToS / etika disebut dengan relevan</td></tr>
+<tr><td>Bahasa &amp; keterbacaan</td><td>10</td><td>jelas untuk pembaca bukan teknis</td></tr>
+</table>
+<div class="box tip"><span class="h">Panduan dosen — lakukan 2 kebiasaan</span>
+<p>(1) Cek draf memo berkala selama lab, bukan setelah nilai masuk — feedback diterima sebelum memo final, bukan setelah nilai. (2) Bawa semua keputusan rak tidak masuk akal: "ambil via akun pribadi" dihitung gagal bukan karena mahal, tapi karena melanggar ToS — di kelas ini hukum yang tidak dinegosiasikan.</p>
+</div>
+<p>Jembatan ke bagian 9: memo yang habis dibuat perlu diuji dengan luka uji: sebuah kasus yang lebih menahankan — banjir Jakarta yang sudah kita kolektor di Materi 4.</p>
+
+<h2>9. Studi kasus: banjir Jakarta — kelanjutan dari Materi 4</h2>
+<p>Di pertemuan 4, kolektor X, Bluesky, dan YouTube sudah hidup dan menulis collection log. Pertemuan ini menguji keputusannya di zona yang paling kritikal: pertanyaan riset bisa adil tapi jalur datanya bisa sempit, mahal, atau dilarang. Tabel berikut memperluas memo contoh di bagian 7 ke level struktural — bagian mana yang dulu cukup, bagian mana yang kini harus ditambah.</p>
+<table><caption>Tabel 9.1 — Bagan studi kasus: masalah baru dan tindak balasnya</caption>
+<tr><th>Tahap</th><th>Keadaan di pertemuan 4</th><th>Tambahan pertemuan 5</th></tr>
+<tr><td>Jalur X tier akademik</td><td>dipersoalkan biaya; kolektor siap</td><td>Verifikasi tier aktif tanggal memo; anggap jalan bila tim bayain</td></tr>
+<tr><td>Bluesky firehose</td><td>utama; 1 hari arsip 3 GB-ready</td><td>Inspeksi akan menemukan bias pengguna senior; korpus pembanding</td></tr>
+<tr><td>YouTube komentar</td><td>kolektor siap</td><td>komentar banjir biasanya video media TV; kuota dikontrol</td></tr>
+<tr><td>Portal berita</td><td>— belum jadi kolektor; scraping belum ada</td><td>tambahkan; jalankan checklist 6 pertanyaan</td></tr>
+<tr><td>Grup Meta</td><td>di luar jejak</td><td> ditambahkan sebagai risiko; persiapan modul persetujuan MCL dibuat khusus</td></tr>
+</table>
+<p>Hasil belajar pentingnya: di kasus banjir, <b>anggaran nol tetap cukup</b> — tetapi hanya karena jalur Bluesky dan portal berita diakui sebagai pengganti yang sah untuk X; dan karena kita mengakui bahwa grup Meta mungkin tempat narasi paling kaya, namun tidak diandalkan tanpa persetujuan. Ini akhir fase fondasi: dari sini, setiap pertemuan makan data yang sudah diberi izin sah.</p>
+<p>Jembatan ke bagian 10: studi kasus ini memuncak dua kesalahan terbaik — mari kita rangkum jadi suatu daftar yang bisa dari satu tugas.</p>
+
+<h2>10. Sepuluh kesalahan umum pertemuan 5</h2>
+<table><caption>Tabel 10.1 — Kesalahan umum dan mitigasinya</caption>
+<tr><th>#</th><th>Kesalahan</th><th>Mitigasi</th></tr>
+<tr><td>1</td><td>Memilih jalur karena keandas sebelum cek ToS</td><td>Setiap jalur di memo wajib menyebut ToS</td></tr>
+<tr><td>2</td><td>Anggap post publik = bukan data pribadi</td><td>Uji dengan kriteria identifikasi UU PDP</td></tr>
+<tr><td>3</td><td>Scraping dengan kecepatan tanpa jeda</td><td>delay besar; jam sepi; <code>robots.txt</code> dihormati</td></tr>
+<tr><td>4</td><td>Mengharapkan kuota tak berditurunkan bila proyek lama berhenti</td><td>Tepat baca unit kuota per hari; tidak bersambung</td></tr>
+<tr><td>5</td><td>Lupa tier &amp; harga cek di halaman resmi hari memulai</td><td>Tanggal pengecekan wajib di memo</td></tr>
+<tr><td>6</td><td>Memakai akun pribadi sebagai database platform</td><td>Larangan mutlak di kelas ini</td></tr>
+<tr><td>7</td><td>Menunggu approval di malam hari pengumpulan data</td><td>Approval bukan buffer; ajukan sejak P2</td></tr>
+<tr><td>8</td><td>Mengkompare angka platform beda tanpa normalisasi</td><td>Load dari Materi 2; perseribu pengikut / tontonan</td></tr>
+<tr><td>9</td><td>Mengandalkan jalur Meta enclave tanpa sponsor lembaga</td><td>MCL butuh wajah lembaga (halaman permohonan sponsor)</td></tr>
+<tr><td>10</td><td>Memo ditulis setelah data dikumpulkan</td><td>Urutannya: memo dulu, kolektor kemudian</td></tr>
+</table>
+<p>Jembatan ke bagian 11: sebelum tutup, periksa pemahamanmu lewat sepuluh pertanyaan pengaman.</p>
+
+<h2>11. Sepuluh pertanyaan pengaman</h2>
+<table><caption>Tabel 11.1 — Self-check pertemuan 5</caption>
+<tr><th>#</th><th>Pertanyaan</th><th>Jawaban yang diharapkan</th></tr>
+<tr><td>1</td><td>Sebutkan anak tangga akses data, dari terbuka ke terkunci pds</td><td>5 anak tangga, dari firehose terbuka ke enclave berbayar</td></tr>
+<tr><td>2</td><td>Apa yang membuat alur akses Meta tidak bisa dianak tirikan jalur lain?</td><td>Seleksi lembaga + secure enclave + biaya</td></tr>
+<tr><td>3</td><td>Kapan scraping portalmu tadi bilang sah?</td><td>Enam pertanyaan checklist semuanya terjawab</td></tr>
+<tr><td>4</td><td>UU PDP dan GDPR menjawab mengidentifikasi seseorang?</td><td>data yang banyak bisa diidentifikasi</td></tr>
+<tr><td>5</td><td>Hasil apa kalau ToS melarang tapi data penting?</td><td>Cari jalur sah lain; larangan ToS mengikat karena ia kontrak layanan</td></tr>
+<tr><td>6</td><td>Berpapa pentingnya tanggal pengecekan di memo?</td><td>Karena harga &amp; kuota berubah tiap semester</td></tr>
+<tr><td>7</td><td>Berapa kandidat jalur minimal dalam memo?</td><td>3, dari tangga berbeda</td></tr>
+<tr><td>8</td><td>Yang membuat proposal TikTok Research API lambat?</td><td>Seleksi + wilayah + persetujuan lembaga</td></tr>
+<tr><td>9</td><td>Kapan akun pribadi bisa dipakai untuk koleksi?</td><td>Tidak pernah untuk riset kelas ini</td></tr>
+<tr><td>10</td><td>Bluesky bagus untuk apa, dan untuk apa ia kurang?</td><td>Bagus untuk uji metode; kurang untuk menggambarkan opini publik umum</td></tr>
+</table>
+<p>Jembakan ke bagian 12: kita rangkum seluruh argumen dalam dua halaman terakhir.</p>
+
+<h2>12. Ringkasan modul</h2>
+<p>Pertemuan ini menutup fondasi. Empat temuan yang menjadi jangkar:</p>
+<p><b>Pertama</b>, keputusan data dimulai dari pertanyaan riset, bukan dari platform favorit. Tangga akses (bagian 3) memberi lima anak tangga; platform yang satu bisa dibandungkan dengan yang lain tapi tidak bisa didandani.</p>
+<p><b>Kedua</b>, scraping berada di zona abu-abu yang sah bila rugi enam pemeriksaan terjawab: halaman publik, robots.txt baik, ToS tidak melarang, beban kecil, data pribadi terkontrol, reproduksi terchartul.</p>
+<p><b>Ketiga</b>, identifikasi data pribadi tidak melihat apakah post terbuka atau bukan — yang jadi tolok ukur adalah kemungkinan seseorang diidentifikasi. UU PDP dan GDPR memeluk kriteria yang sama.</p>
+<p><b>Keempat</b>, feasibility memo adalah alat keputusan yang bisa perlu jauh melampaui kelas. Enam blok: pertanyaan, kandidat jalur (≥ 3), keputusan &amp; alasan, biaya &amp; risiko, mitigasi &amp; jadwal, rujukan hukum-etik.</p>
+<p>Selain hukum dan etika, satu kebiasaan kecil yang akan mengikuti mahasiswa jauh melebihi mata kuliah ini: <b> tulis tanggal pengecekan, dan jangan percaya harga dari halaman blog siapa pun</b> — karena kebijakan akses media sosial baik berubah tiap semester.</p>
+
+<h2>13. Glosarium</h2>
+<table><caption>Tabel 13.1 — Glosarium materi 5</caption>
+<tr><th>Istilah</th><th>Arti</th></tr>
+<tr><td>gated access</td><td>Akses yang aturan buka-tutupnya ditentukan platform: siapa boleh lewat, seberapa banyak, apa yang boleh dibawa, dengan harga apa</td></tr>
+<tr><td>secure enclave</td><td>Ruang analisis terkendali di infrastruktur platform; data tidak keluar kecuali hasil agregat yang diizinkan</td></tr>
+<tr><td>Meta Content Library (MCL)</td><td>Gerbang riset Meta: seleksi lembaga, akses data konten publik lintas platform melalui enclave</td></tr>
+<tr><td>Research API</td><td>Jalur API yang hanya terbuka bila proposal riset disetujui platform (mis. TikTok Research API)</td></tr>
+<tr><td>firehose</td><td>Aliran semua aktivitas jaringan secara nyaris tanpa saringan dan legal (contoh: Bluesky Jetstream)</td></tr>
+<tr><td>web scraping</td><td>Program otomatis yang baca URL &amp; ekstrak bahan dari halaman web di luar API resmi</td></tr>
+<tr><td>robots.txt</td><td>File kecil di akar situs yang menyatakan aturan crawler per halaman</td></tr>
+<tr><td>Terms of Service (ToS)</td><td>Kontrak layanan platform; melanggarnya berakibat akun dibekukan atau akses data diputus</td></tr>
+<tr><td>UU PDP</td><td>Undang-Undang Perlindungan Data Pribadi RI; melarang pemrosesan data yang bisa mengidentifikasi seseorang tanpa dasar hukum</td></tr>
+<tr><td>GDPR</td><td>General Data Protection Regulation (UE); rujukan utama pengelolaan data pribadi di banyak yurisdiksi</td></tr>
+<tr><td>unit analysis</td><td>Satuan data yang menjadi tolok ukur: post, akun, atau forum dalam satu riset</td></tr>
+<tr><td>feasibility memo</td><td>Dokumen keputusan jalur data 1 halaman: kandidat, keputusan, biaya/risiko, jalur cadangan, rujukan hukum</td></tr>
+<tr><td>anonimisasi</td><td>Penutupan atau masking data sehingga seseorang tidak dapat diidentifikasi bila dataset dibagikan</td></tr>
+<tr><td>rate mention bias</td><td>Bias yang muncul bila dataset dibatasi oleh kebijakan platform, bukan kepentingan riset</td></tr>
+<tr><td>re-identification</td><td>Usaha mengembalikan identitas dari dataset; membuat data yang tampak anonim jatuh ke kategori data pribadi</td></tr>
+<tr><td>crawler delay</td><td>Jeda sengaja antar request agar beban server rendah; ada yang dinyatakan tersurat di <code>robots.txt</code></td></tr>
+</table>
+
+<h2>14. Referensi</h2>
+<ol>
+<li>Undang-Undang RI No. 27 Tahun 2022 tentang Perlindungan Data Pribadi (UU PDP).</li>
+<li>Regulation (EU) 2016/679 — GDPR; situs resmi European Commission untuk panduan riset akademik.</li>
+<li>Dokumen resmi Terms of Service &amp; robots.txt untuk platform yang dipelajari: X, Meta Content Library, TikTok Research API, Reddit, YouTube, Bluesky/AT Protocol (masing-masing dicek tanggal pengusahaan memo).</li>
+<li>Hasil riset modul kelas 2024–2026: <code>results/scraping-legalitas.json</code>, <code>results/etika-legal.json</code>, <code>results/data-access-governance.json</code> (arsip kurikulum Social Media Analytics).</li>
+<li>Bruns, A. (2019). <i>Are Filter Bubbles Real?</i> Wiley (mengingatkan bahwa jalur &amp; feed membentuk sampling frame, bukan populasi).</li>
+<li>Pedoman penelitian akademik IRB singkat: kewajiban minimalisasi data &amp; persetujuan lembaga bagi riset mahasiswa yang menyentuh data pribadi.</li>
+</ol>
+</main></body></html>

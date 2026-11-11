@@ -1,0 +1,48 @@
+{
+  "module_name": "Audience Profiling, Demographics, and Measurement",
+  "module_description": "Module 22 covers understanding who the audience is: inference of demographics (age, gender, location) from text and profiles, audience overlap and reach/dedup measurement, media-mix/cross-platform attribution, and consent-based first-party measurement as the 2026 norm. Students build an audience profile for a topic/brand and learn the uncertainty of inferred versus declared attributes.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Inferred vs declared attributes and their uncertainty",
+    "Reach, frequency, deduplication and overlap",
+    "Cross-platform audience measurement",
+    "First-party consented data as the 2026 standard",
+    "Brand-safety and synthetic-audience (fake follower) measurement"
+  ],
+  "learning_outcomes": [
+    "C3 Build an audience profile with uncertainty estimates",
+    "C4 Explain reach/dedup measurement across platforms",
+    "C5 Evaluate fake-audience risk for a creator/brand"
+  ],
+  "methods_models": [
+    "Text-based attribute inference (name, bio, language, location cues), probabilistic age/gender models, overlap estimation (survey or model-based), fake-follower scoring",
+    "Bias correction for platform-level samples"
+  ],
+  "evaluation_metrics": "Accuracy of inference vs ground truth, confidence intervals on reach, overlap metric agreement, calibration of inferred probabilities",
+  "pitfalls_limitations": "Inference errors by group, bias amplification, over-claiming reach numbers, consent limits on profiling, privacy law constraints on sensitive inferences",
+  "tools_stack": "scikit-learn/transformers for inference, geonames, census/IPS data for calibration",
+  "commercial_platforms": "Commercial audience-insights tools (Pulsar, Talkwalker audience modules) for comparison",
+  "tools_access_cost": "Audience tools are usually licensed; inference from public data is free but legally sensitive",
+  "lab_activities": "Build an audience profile for a topic (language mix, location mix, inferred interests) with caveats",
+  "datasets_apis": "Public topic corpora + declared demographics where available",
+  "assessment_methods": "Lab submission plus a short strategy recommendation memo; graded on metric validity and quality of reasoning",
+  "data_collection_workflow": "Collect short-video metadata and media -> transcribe/OCR -> extract retention and engagement features -> normalise by follower base -> analyse and report",
+  "textbooks": [
+    "Measurement literature on cross-platform reach and first-party data (industry reports 2025-2026)"
+  ],
+  "key_papers": [
+    "Hootsuite/We Are Social 2026 trends on consent-based first-party data",
+    "Papers on audience measurement and deduplication"
+  ],
+  "trends_2024_2026": "2024-2026: measurement shifted to consent-based first-party data; 'chaos culture' and community-based content changed what an audience even means",
+  "industry_relevance": "Directly used in short-form content strategy, creator-marketing measurement, and social-commerce analytics teams; the metrics in this module (watch time, completion, saves, CTR via video) are the same KPIs agencies report to clients.",
+  "localization_context": "Taught against the Indonesian short-video and live-commerce ecosystem (TikTok Shop, live shopping sessions, Shopee/Tokopedia live), which has different content formats and monetization mechanics from the US market.",
+  "ethics_regulation": "Disclosure of paid partnerships, sponsored content and affiliate links; UU PDP and platform rules on scraping engagement data; caution when profiling creators and audiences from public metrics.",
+  "case_study_scenarios": "Profile the audience of a TikTok campaign and estimate reach with confidence intervals.",
+  "deliverable_format": "Audience profile report + methodology appendix",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

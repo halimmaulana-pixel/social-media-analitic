@@ -1,0 +1,49 @@
+{
+  "module_name": "Tools Stack: Python, R, and Commercial Platforms Compared",
+  "module_description": "Module 27 gives parity training: what the open-source stack can do (Python: pandas, transformers, bertopic, networkx/leidenalg, praw/atproto; R: rtweet/tidytext/quanteda/ggraph/stm), what commercial platforms (Brandwatch, Meltwater, Talkwalker, Sprout Social, Pulsar) sell, and where the boundary lies. Students benchmark free vs paid output on one question and learn to justify tool choices - a job-interview and procurement skill.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Python stack for each analytics family (text, network, video)",
+    "R stack for text and networks (tidytext, quanteda, igraph, stm)",
+    "Commercial platform capabilities and limits",
+    "Build-vs-buy decisions and procurement justification",
+    "Reproducible environments (conda/renv, Docker basics)"
+  ],
+  "learning_outcomes": [
+    "C3 Implement an analysis in both Python and R",
+    "C4 Benchmark commercial vs open-source output on the same question",
+    "C5 Justify a tool choice for a given scenario"
+  ],
+  "methods_models": [
+    "Parallel implementation in Python and R, benchmark protocol (same query, same metric, same window)",
+    "Environment reproducibility (renv/conda/Docker)"
+  ],
+  "evaluation_metrics": "Output agreement across implementations, runtime, cost of implementation, and qualitative gap analysis",
+  "pitfalls_limitations": "Assuming vendor metrics equal your computation, opacity of vendor algorithms, licensing constraints, R/Python result differences from library versions",
+  "tools_stack": "Full Python/R stacks as above, conda/renv, jupyter",
+  "commercial_platforms": "brandwatch, meltwater, talkwalker, sproutsocial, pulsar",
+  "tools_access_cost": "Commercial platforms are licensed per seat and rarely in university budget; open source is free",
+  "lab_activities": "Same question analysed in Python and R, and benchmarked against a vendor trial or public demo",
+  "datasets_apis": "Any course dataset",
+  "assessment_methods": "Benchmark report plus a build-vs-buy justification; graded on evidence quality and cost reasoning",
+  "data_collection_workflow": "Define benchmark question -> collect once -> analyse in both stacks -> compare outputs, runtimes and costs -> document discrepancy sources",
+  "textbooks": [
+    "Silge & Robinson, Text Mining with R (R pipeline)",
+    "Wickham & Grolemund, R for Data Science",
+    "Official docs of the commercial platforms"
+  ],
+  "key_papers": [
+    "2025-2026 vendor documentation and industry comparisons of social-listening tools"
+  ],
+  "trends_2024_2026": "2024-2026: agentic/AI features entered vendor products while open LLM models matured, so build-vs-buy expanded into build-vs-lease-vs-agent",
+  "industry_relevance": "Industry parity checks: students benchmark free tools against commercial platforms (Pulsar, Talkwalker, Meltwater, Brandwatch, Sprout Social) to learn which metrics the market actually sells, and how to justify a tool purchase.",
+  "localization_context": "Cost realism for Indonesian labs: most commercial social-listening seats are out of university budget, so the module builds an open-source pipeline and teaches read-only academic access paths that are free.",
+  "ethics_regulation": "Data licensing and redistribution limits of each tool, platform Terms of Service restrictions on scraping, and storage of raw data with access control; UU PDP requires minimization when datasets contain personal text.",
+  "case_study_scenarios": "Decide build vs buy for a client's monitoring need and defend it with evidence and cost.",
+  "deliverable_format": "Benchmark report + tool-choice justification",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

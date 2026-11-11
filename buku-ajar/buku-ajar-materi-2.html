@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buku Ajar Materi 2 — Ekosistem Platform &amp; Data Affordance</title>
+<style>
+  :root{
+    --ink:#141414; --muted:#5A5A5A; --line:#D9D9D9; --bg:#FFFFFF;
+    --blue:#0072B2; --green:#009E73; --amber:#E69F00; --orange:#D55E00; --plum:#7A4FA0;
+    --softblue:#F2F8FD; --softgreen:#F1FAF5; --softamber:#FEF6E7; --softorange:#FDF1EA; --softgrey:#F6F6F8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#EEF0F2;color:var(--ink);
+       font-family:"Times New Roman", Georgia, serif;font-size:16px;line-height:1.55}
+  .page{max-width:1000px;margin:24px auto;background:var(--bg);padding:52px 60px 64px;
+        box-shadow:0 2px 14px rgba(0,0,0,.12)}
+  h1,h2,h3,h4,.sans{font-family:Helvetica,Arial,"DejaVu Sans",sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:19px;margin:34px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+  h3{font-size:16px;margin:22px 0 6px;color:#1F3A5F}
+  h4{font-size:14.5px;margin:16px 0 4px;color:#333}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:3px 0}
+  .cover{border:2px solid var(--ink);padding:26px 30px;margin-bottom:26px}
+  .cover .kicker{font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;color:var(--orange);text-transform:uppercase}
+  .cover h1{margin-top:8px}
+  .cover .sub{font-size:15px;color:var(--muted)}
+  table{border-collapse:collapse;width:100%;margin:12px 0 6px;font-size:13.5px}
+  caption{caption-side:top;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:13px;
+          font-weight:bold;color:#1F3A5F;padding:6px 0}
+  th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+  thead th{background:#EAF1F7;font-family:Helvetica,Arial,sans-serif;font-size:12.5px}
+  tbody tr:nth-child(even){background:#FAFBFC}
+  figure{margin:16px 0 22px;page-break-inside:avoid}
+  figure svg{width:100%;height:auto;border:1px solid var(--line);background:#fff}
+  figcaption{font-family:Helvetica,Arial,sans-serif;font-size:12.5px;color:var(--muted);margin-top:6px}
+  .box{border:1px solid var(--line);border-left:5px solid var(--blue);background:var(--softblue);
+       padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .box.warn{border-left-color:var(--orange);background:var(--softorange)}
+  .box.ok{border-left-color:var(--green);background:var(--softgreen)}
+  .box.note{border-left-color:var(--amber);background:var(--softamber)}
+  .box .h{font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13px;display:block;margin-bottom:4px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tag{display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:11px;padding:1px 7px;
+       border-radius:10px;border:1px solid var(--line);background:#fff;color:#333;margin-right:5px}
+  .small{font-size:12.5px;color:var(--muted)}
+  .toc{background:var(--softgrey);border:1px solid var(--line);padding:14px 22px;font-size:14px}
+  .toc ol{margin:6px 0 0 20px}
+  figure.pagebreak{page-break-before:always}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;padding:0}h2{page-break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+<div class="kicker">Pertemuan 2 · 150 menit · CPMK-1</div>
+<h1>Materi 2 — Ekosistem Platform &amp; Data Affordance</h1>
+<div class="sub">Peta platform, matriks affordance, logika feed, tangga keterbukaan akses, dan metrik lintas-platform: mengapa pilihan platform menentukan pertanyaan yang tersedia.</div>
+</div>
+
+<table>
+<caption>Tabel 0.1 — Identitas materi</caption>
+<thead><tr><th>Aspek</th><th>Isi</th></tr></thead>
+<tbody>
+<tr><td>Mata kuliah</td><td>Social Media Analytics (3 SKS · semester 5)</td></tr>
+<tr><td>Pertemuan</td><td>2 dari 14 (sesuai RPS; jalur A — Fondasi)</td></tr>
+<tr><td>Beban</td><td>150 menit: teori 60&prime; + implementasi 70&prime; + artefak 20&prime;</td></tr>
+<tr><td>CPMK</td><td>CPMK-1: membandingkan platform pada ketersediaan data, keterbukaan API, dan logika feed (C4); memilih platform untuk sebuah pertanyaan (C3); menjelaskan mengapa metrik identik berarti beda antar-platform (C5)</td></tr>
+<tr><td>Bukti penilaian</td><td>Tugas mini 10% — matriks affordance + memo komparabilitas 1 halaman; kuis konsep</td></tr>
+<tr><td>Dasar penyusunan</td><td>Arsip riset <code>results/ekosistem-platform.json</code>; dokumentasi API resmi; literatur platform-studies 2024–2026</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<span class="h">Cara memakai buku ini</span>
+Desain tiga lapis: <b>Lapis Teori</b> menamai konsep formal; <b>Lapis Implementasi</b> menerjemahkannya ke data social media nyata; <b>Lapis Artefak</b> berisi sesuatu yang mahasiswa kerjakan dan dinilai. Urutan baca baku Bagian 2→4→6→7; Bagian 8–10 dipakai saat lab; Bagian 11–14 referensi permanen. Semua angka biaya/kuota berlaku per 2026 dan <i>wajib diverifikasi ulang</i> sebelum dikutip.
+</div>
+
+<div class="toc">
+<b>Daftar isi</b>
+<ol>
+<li>Peta pembelajaran pertemuan 2</li>
+<li>Data affordance: konsep inti</li>
+<li>Lima kawasan ekosistem</li>
+<li>Logika feed dan sampel yang dihasilkannya</li>
+<li>Tangga keterbukaan akses dan biayanya</li>
+<li>Protokol terbuka: AT Protocol dan ActivityPub</li>
+<li>Metrik lintas-platform: satu kata, banyak definisi</li>
+<li>Implementasi: membangun matriks affordance di lab</li>
+<li>Studi kasus terpandu: isu publik di tiga platform</li>
+<li>Sepuluh kesalahan umum mahasiswa</li>
+<li>Etika dan regulasi secara ringkas</li>
+<li>Latihan mandiri</li>
+<li>Ringkasan</li>
+<li>Glosarium dan referensi</li>
+</ol>
+</div>
+
+<h2>1. Peta pembelajaran pertemuan 2</h2>
+
+<table>
+<caption>Tabel 1.1 — Sub-CPMK, indikator, dan rute pembelajaran</caption>
+<thead><tr><th>Tahap</th><th>Sub-CPMK (indikator)</th><th>Aktivitas</th><th>Alokasi</th></tr></thead>
+<tbody>
+<tr><td>T1</td><td>Menjelaskan definisi data affordance dan tiga pertanyaan kuncinya</td><td>Kuliah Bagian 2 + contoh objek API</td><td>15&prime;</td></tr>
+<tr><td>T2</td><td>Memetakan lima kawasan ekosistem dan ciri data khasnya</td><td>Gambar 1 + diskusi platform asal-usul data</td><td>10&prime;</td></tr>
+<tr><td>T3</td><td>Membedakan tiga logika feed dan konsekuensi sampelnya</td><td>Gambar 2 + latihan mengaitkan feed → inferensi</td><td>15&prime;</td></tr>
+<tr><td>T4</td><td>Mengurutkan enam anak tangga keterbukaan akses beserta biayanya</td><td>Gambar 3–4 + studi kasus biaya</td><td>20&prime;</td></tr>
+<tr><td>T5</td><td>Mampu membuat matriks affordance untuk 3 platform</td><td>Lab implementasi (Bagian 8)</td><td>60&prime;</td></tr>
+<tr><td>T6</td><td>Menilai platform mana yang mampu menjawab pertanyaan tertentu</td><td>Studi kasus terpandu (Bagian 9)</td><td>30&prime;</td></tr>
+</tbody>
+</table>
+
+<h2>2. Data affordance: konsep inti</h2>
+
+<p><b>Definisi.</b> <i>Data affordance</i> adalah apa yang suatu platform <b>memungkinkan</b> dan <b>mengizinkan</b> diambil oleh analis akademik: field data yang dihasilkan API, tingkat penelusuran ke belakang, laju streaming, dan syarat hukum/tarifnya. Istilah menandingi pertanyaan metodologis dan pertanyaan biaya sekaligus — data affordance dijabarkan sebagai pertanyaan <b>tiga lapis</b>:</p>
+
+<ul>
+<li><b>Metodologis</b> — field apa yang punya alasan ilmiah dipakai? Contoh: metrik <code>like</code> tersedia di semua platform, tetapi <i>watch time</i> hanya di platform video dan definisinya berbeda sehingga tidak bisa langsung disandingkan.<br></li>
+<li><b>Teknis</b> — endpoint apa, rate limit berapa, pagination apa, status envelope apa? Endpoint yang sama di dua tier bisa punya cakupan beda.<br></li>
+<li><b>Legal/financial</b> — apakah akses gratis, berkuota, terdaftar, gated, atau berbayar? Jawabannya tidak seragam: X mencabut akses akademik gratis pada 2023; Meta Content Library terbuka-lewat-tetapi-gated dan gratis untuk institusi yang lolos.</li>
+</ul>
+
+<div class="box">
+<span class="h">Lapis teori</span>
+Affordance adalah <b>properti relasi</b> (platform × pertanyaan × analis), bukan properti platform semata. Platform yang kaya data bisa tetap tidak afford untuk riset tertentu bila aksesnya tertutup atau memuat biaya. Dari sisi ilmu komputer, istilah ini menghubungkan dua bidang: desain sistem (API design) dan metodologi riset (sampling frame).
+</div>
+
+<h2>3. Lima kawasan ekosistem</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="figm2 ecosystem" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="494" rx="14" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Lima kawasan ekosistem media sosial (2026)</text>
+<rect x="22" y="66" width="300" height="226" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.8"/>
+<text x="36" y="92" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">KAWASAN MIKROBLOG / TEKS</text>
+<text x="36" y="122" font-size="12" fill="#141414" text-anchor="start">- X - API berbayar sejak 2023</text>
+<text x="36" y="148" font-size="12" fill="#141414" text-anchor="start">- Threads - feed, API riset terbatas</text>
+<text x="36" y="174" font-size="12" fill="#141414" text-anchor="start">- Bluesky - firehose terbuka (AT</text>
+<text x="36" y="190" font-size="12" fill="#141414" text-anchor="start">Protocol)</text>
+<line x1="36" y1="218" x2="306" y2="218" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="36" y="246" font-size="12" fill="#5A5A5A" text-anchor="start">Ciri data: teks pendek +</text>
+<text x="36" y="262" font-size="12" fill="#5A5A5A" text-anchor="start">reply/follow</text>
+<rect x="342" y="66" width="300" height="226" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.8"/>
+<text x="356" y="92" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">KAWASAN SHORT-VIDEO</text>
+<text x="356" y="122" font-size="12" fill="#141414" text-anchor="start">- TikTok - Research API (terdaftar)</text>
+<text x="356" y="148" font-size="12" fill="#141414" text-anchor="start">- Instagram Reels - gated via Meta</text>
+<text x="356" y="174" font-size="12" fill="#141414" text-anchor="start">- YouTube Shorts - data via Data API</text>
+<line x1="356" y1="218" x2="626" y2="218" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="356" y="246" font-size="12" fill="#5A5A5A" text-anchor="start">Ciri data: watch time &amp; completion</text>
+<rect x="662" y="66" width="300" height="226" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.8"/>
+<text x="676" y="92" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">KAWASAN VIDEO PANJANG</text>
+<text x="676" y="122" font-size="12" fill="#141414" text-anchor="start">- YouTube - Data API berkuota</text>
+<text x="676" y="148" font-size="12" fill="#141414" text-anchor="start">- Live stream - chat burst</text>
+<line x1="676" y1="218" x2="946" y2="218" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="676" y="246" font-size="12" fill="#5A5A5A" text-anchor="start">Ciri data: hitaman view + komentar</text>
+<rect x="22" y="316" width="300" height="226" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="36" y="342" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">KAWASAN KOMUNITAS / FORUM</text>
+<text x="36" y="372" font-size="12" fill="#141414" text-anchor="start">- Reddit - API berkuota</text>
+<text x="36" y="398" font-size="12" fill="#141414" text-anchor="start">- Forum &amp; grup HTML/Telegram</text>
+<text x="36" y="424" font-size="12" fill="#141414" text-anchor="start">- Diskusi thread terstruktur</text>
+<line x1="36" y1="468" x2="306" y2="468" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="36" y="496" font-size="12" fill="#5A5A5A" text-anchor="start">Ciri data: kedalaman percakapan</text>
+<rect x="342" y="316" width="300" height="226" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="356" y="342" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">KAWASAN PROTOKOL TERBUKA</text>
+<text x="356" y="372" font-size="12" fill="#141414" text-anchor="start">- AT Protocol - Jetstream repat</text>
+<text x="356" y="398" font-size="12" fill="#141414" text-anchor="start">- ActivityPub - Mastodon dkk.</text>
+<text x="356" y="424" font-size="12" fill="#141414" text-anchor="start">- Graf sosial pengguna terpublikasi</text>
+<line x1="356" y1="468" x2="626" y2="468" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="356" y="496" font-size="12" fill="#5A5A5A" text-anchor="start">Ciri data: reproducible &amp; andal</text>
+<rect x="662" y="316" width="300" height="226" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.8"/>
+<text x="676" y="342" font-size="13" fill="#7A4FA0" font-weight="bold" text-anchor="start">KAWASAN META (GATED)</text>
+<text x="676" y="372" font-size="12" fill="#141414" text-anchor="start">- Facebook &amp; Instagram - MCL</text>
+<text x="676" y="398" font-size="12" fill="#141414" text-anchor="start">- Threads - via Meta riset</text>
+<text x="676" y="424" font-size="12" fill="#141414" text-anchor="start">- Enclave SOMAR (eksekusi terbatas)</text>
+<line x1="676" y1="468" x2="946" y2="468" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="676" y="496" font-size="12" fill="#5A5A5A" text-anchor="start">Ciri data: arsip besar, akses dijaga</text>
+</svg>
+<figcaption><b>Gambar 1.</b> Lima kawasan ekosistem media sosial (2026) beserta ciri data khasnya. Masing-masing kawasan menuntut metode penyimpanan dan analisis berbeda; sebelum menganalisis, rangkuman pertanyaan apa yang mampu dijawab kawasan mana.</figcaption>
+</figure>
+
+<p>Analis yang belajar riset platform tidak belajar satu platform, melainkan belajar <b>kawasan</b> beserta affordance-nya:</p>
+
+<table>
+<caption>Tabel 3.1 — Profil affordance per platform (per 2026; cek ulang tiap semester)</caption>
+<thead><tr><th>Platform</th><th>Unit dasar</th><th>Data kaya</th><th>Akses riset</th><th>Biaya</th><th>Retrospektif</th></tr></thead>
+<tbody>
+<tr><td>X (Twitter)</td><td>post teks</td><td>teks + engagement + graf</td><td>API berbayar v2</td><td>berbayar sejak 2023</td><td>search lama terbatas</td></tr>
+<tr><td>TikTok</td><td>video pendek</td><td>watch time + on-screen teks</td><td>Research API (terdaftar)</td><td>gratis untuk yang lolos</td><td>7–30 hari via API</td></tr>
+<tr><td>Instagram</td><td>visual + reel</td><td>visual + save/share</td><td>gated via Meta Content Library</td><td>gratis untuk gated</td><td>terbatas</td></tr>
+<tr><td>YouTube</td><td>video (semua)</td><td>komentar + watch time (gated)</td><td>Data API berkuota</td><td>gratis berkuota</td><td>sangat baik</td></tr>
+<tr><td>Reddit</td><td>thread / komentar</td><td>teks thread + vote</td><td>API berkuota</td><td>berbayar sejak Jun 2023</td><td>pushshift terbatas</td></tr>
+<tr><td>Bluesky</td><td>post teks</td><td>teks + graf publik</td><td>firehose terbuka (Jetstream)</td><td>gratis</td><td>firehose forward + search</td></tr>
+<tr><td>Threads</td><td>post teks</td><td>teks + engagement</td><td>gated via Meta riset</td><td>gated</td><td>terbatas</td></tr>
+</tbody>
+</table>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-label="figm2 affordance" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="554" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="24" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Matriks affordance: apa yang bisa diambil dari tiap platform</text>
+<text x="272" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">teks</text>
+<text x="396" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">media</text>
+<text x="520" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">engagement</text>
+<text x="644" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">graf</text>
+<text x="768" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">firehose</text>
+<text x="892" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">retrospektif</text>
+<text x="1016" y="104" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">STATUS AKSES</text>
+<rect x="28" y="90" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="112" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">X</text>
+<rect x="226" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="95" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="93" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="1013" y="112" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="middle">berbayar</text>
+<rect x="28" y="136" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="158" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">TikTok</text>
+<rect x="226" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="141" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="139" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#E69F00" stroke-width="1.4"/>
+<text x="1013" y="158" font-size="11.5" fill="#E69F00" font-weight="bold" text-anchor="middle">terdaftar</text>
+<rect x="28" y="182" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="204" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Instagram</text>
+<rect x="226" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="187" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="185" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#7A4FA0" stroke-width="1.4"/>
+<text x="1013" y="204" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="middle">gated</text>
+<rect x="28" y="228" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="250" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">YouTube</text>
+<rect x="226" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="233" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="231" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#0072B2" stroke-width="1.4"/>
+<text x="1013" y="250" font-size="11.5" fill="#0072B2" font-weight="bold" text-anchor="middle">berkuota</text>
+<rect x="28" y="274" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="296" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Reddit</text>
+<rect x="226" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="279" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="277" width="102" height="28" rx="5" fill="#FEF6E7" stroke="#0072B2" stroke-width="1.4"/>
+<text x="1013" y="296" font-size="11.5" fill="#0072B2" font-weight="bold" text-anchor="middle">berkuota</text>
+<rect x="28" y="320" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="342" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Bluesky</text>
+<rect x="226" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="325" width="90" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="323" width="102" height="28" rx="5" fill="#F1FAF5" stroke="#009E73" stroke-width="1.4"/>
+<text x="1013" y="342" font-size="11.5" fill="#009E73" font-weight="bold" text-anchor="middle">TERBUKA</text>
+<rect x="28" y="366" width="150" height="34" rx="6" fill="#F6F6F8" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="42" y="388" font-size="14" fill="#141414" font-weight="bold" text-anchor="start">Threads</text>
+<rect x="226" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="226" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="350" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="350" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="474" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="474" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="598" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="598" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="722" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="722" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="846" y="371" width="90" height="26" rx="4" fill="#FFFFFF" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="846" y="371" width="45" height="26" rx="4" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="962" y="369" width="102" height="28" rx="5" fill="#F6F6F8" stroke="#5A5A5A" stroke-width="1.4"/>
+<text x="1013" y="388" font-size="11.5" fill="#5A5A5A" font-weight="bold" text-anchor="middle">tertutup</text>
+<text x="272" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">post/caption utama</text>
+<text x="396" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">gambar/video terekap</text>
+<text x="520" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">like/simpan/tonton</text>
+<text x="644" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">reply/follow/mention</text>
+<text x="768" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">stream realtime</text>
+<text x="892" y="454" font-size="10.5" fill="#5A5A5A" text-anchor="middle">unduh data lama</text>
+<rect x="28" y="482" width="946" height="74" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="508" font-size="12.5" fill="#141414" text-anchor="start">Kotak biru penuh = tersedia penuh  ·  setengah biru = tersedia sebagian  ·  putih = tidak tersedia</text>
+<text x="44" y="534" font-size="12.5" fill="#5A5A5A" text-anchor="start">Indikasi per 2026 - tier, kuota, dan field API berubah-ubah: selalu cek ulang tiap semester.</text>
+</svg>
+<figcaption><b>Gambar 2.</b> Matriks affordance 7 platform: baris platform, kolom jenis affordance (teks, media, engagement, graf, firehose, retrospektif) plus status akses. Kotak biru penuh = tersedia penuh; setengah = sebagian; putih = tidak tersedia. Indikasi per 2026 — tier dan kuota API berubah, cek ulang tiap semester.</figcaption>
+</figure>
+
+<div class="box ok">
+<span class="h">Lapis implementasi</span>
+Cara praktis menghafal profil platform: <b>buka objek mentahnya</b> sekarang, bukan minggu depan. Nyalakan <code>curl</code> atau browser devtools ke endpoint publik sebuah post Bluesky, lihat field apa yang sebenarnya ada. Platform berbeda punya bentuk JSON berbeda; yang sama namanya (mis. <code>timestamp</code>) bisa beda unit (detik vs milidetik vs ISO-string).
+</div>
+
+<h2>4. Logika feed dan sampel yang dihasilkannya</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-label="figm2 feed" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="404" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Tiga logika feed - dan sampel data yang dihasilkannya</text>
+<rect x="28" y="66" width="296" height="230" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="44" y="92" font-size="14" fill="#009E73" font-weight="bold" text-anchor="start">KRONOLOGIS</text>
+<text x="44" y="122" font-size="12.5" fill="#141414" text-anchor="start">Post mengikuti urutan waktu murni</text>
+<line x1="44" y1="150" x2="306" y2="150" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="44" y="176" font-size="12" fill="#141414" text-anchor="start">Sampel: apa saja yang tayang dalam</text>
+<text x="44" y="192" font-size="12" fill="#141414" text-anchor="start">jendela waktu; waktu ukur yang jujur.</text>
+<text x="44" y="240" font-size="11.5" fill="#5A5A5A" text-anchor="start">Pakai untuk:</text>
+<text x="44" y="262" font-size="12" fill="#009E73" font-weight="bold" text-anchor="start">Cocok untuk: kecepatan sebaran per jam</text>
+<rect x="350" y="66" width="296" height="230" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.8"/>
+<text x="366" y="92" font-size="14" fill="#7A4FA0" font-weight="bold" text-anchor="start">FOLLOW-GRAPH</text>
+<text x="366" y="122" font-size="12.5" fill="#141414" text-anchor="start">Post terbatas pada jaringan follow</text>
+<text x="366" y="138" font-size="12.5" fill="#141414" text-anchor="start">pengguna</text>
+<line x1="366" y1="150" x2="628" y2="150" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="366" y="176" font-size="12" fill="#141414" text-anchor="start">Sampel: kubu yang saling follow -</text>
+<text x="366" y="192" font-size="12" fill="#141414" text-anchor="start">bukan kubu yang jauh.</text>
+<text x="366" y="240" font-size="11.5" fill="#5A5A5A" text-anchor="start">Pakai untuk:</text>
+<text x="366" y="262" font-size="12" fill="#7A4FA0" font-weight="bold" text-anchor="start">Cocok untuk: analisis tautan relasi</text>
+<rect x="672" y="66" width="296" height="230" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.8"/>
+<text x="688" y="92" font-size="14" fill="#D55E00" font-weight="bold" text-anchor="start">REKOMENDASI</text>
+<text x="688" y="122" font-size="12.5" fill="#141414" text-anchor="start">Ranking model memilih apa yang tampil</text>
+<line x1="688" y1="150" x2="950" y2="150" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="688" y="176" font-size="12" fill="#141414" text-anchor="start">Sampel: yang direkomendasikan, bukan</text>
+<text x="688" y="192" font-size="12" fill="#141414" text-anchor="start">yang tayang semuanya.</text>
+<text x="688" y="240" font-size="11.5" fill="#5A5A5A" text-anchor="start">Pakai untuk:</text>
+<text x="688" y="262" font-size="12" fill="#D55E00" font-weight="bold" text-anchor="start">Cocok untuk: analisis viralitas - hati-</text>
+<text x="688" y="278" font-size="12" fill="#D55E00" font-weight="bold" text-anchor="start">hati-hati bias</text>
+<text x="22" y="332" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Konsekuensi metodologis (yang sering tidak disebut)</text>
+<rect x="28" y="350" width="944" height="34" rx="6" fill="#FEF6E7" stroke="#E69F00" stroke-width="1.2"/>
+<text x="44" y="372" font-size="12" fill="#141414" text-anchor="start">Feed rekomendasi menyembunyikan waktu tayang asli: jangan baca timestamp sampel rekomendasi sebagai waktu kejadian.</text>
+<rect x="28" y="390" width="944" height="34" rx="6" fill="#FEF6E7" stroke="#E69F00" stroke-width="1.2"/>
+<text x="44" y="412" font-size="12" fill="#141414" text-anchor="start">Hasil di feed kronologis tidak berlaku di feed rekomendasi tanpa pengkajian ulang.</text>
+<rect x="28" y="430" width="944" height="34" rx="6" fill="#FEF6E7" stroke="#E69F00" stroke-width="1.2"/>
+<text x="44" y="452" font-size="12" fill="#141414" text-anchor="start">Kombinasi nominal: 'engager' di feed kronologis = siapa saja yang melihat; di rekomendasi = siapa saja yang algoritma pilih.</text>
+</svg>
+<figcaption><b>Gambar 3.</b> Tiga logika feed - kronologis, follow-graph, dan rekomendasi - tiga jendela yang menghasilkan dunia berbeda; sampel yang dihasilkannya tidak tumpang-tindih sempurna.</figcaption>
+</figure>
+
+<p>Logika feed menentukan <b>siapa yang melihat apa</b>, dan dengan demikian data yang terkoleksi. Kesalahan metodenya ialah memperlakukan feed sebagai pipa netral. Konsekuensinya bertingkat:</p>
+
+<table>
+<caption>Tabel 4.1 — Feed, sampel, dan inferensi berlebihan yang harus dihindari</caption>
+<thead><tr><th>Logika feed</th><th>Sampel yang terlihat</th><th>Inferensi yang melanggar</th></tr></thead>
+<tbody>
+<tr><td>Kronologis</td><td>semua post dalam rentang waktu; cenderung bebas rooting</td><td>menganggap populasi = sampel; pengguna di dalam feed tidak representatif</td></tr>
+<tr><td>Follow-graph</td><td>netral terutama di dalam kubu graph pilih; mewarisi pola struktur sosial jaringan</td><td>menyimpulkan konsensi publik dari kubu yang saling follow</td></tr>
+<tr><td>Rekomendasi</td><td>post yang algoritma angkat; hasilnya tergantung personalisasi penonton</td><td>menganggap timestamp atau engagement sampel rekomendasi sebagai rata-rata populasi</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Lapis teori: sampling frame</span>
+Feed adalah <b>sampling frame</b> (kerangka sampel) yang tidak dipilih kita. Akibatnya kebanyakan kesalahan yang disebut <i>filter bubble</i> sebenarnya kesalahan inferensi: sampel yang diluluskan algoritma dicompare dengan populasi. Bruns (2019) menunjukkan bahwa perdebatan "filter bubble" sering melewatkan poin sampling: masalah utamanya bukan semata keragaman konten, melainkan inferensi yang salah — sampel feed diperlakukan sebagai populasi.
+</div>
+
+<h2>5. Tangga keterbukaan akses dan biayanya</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-label="figm2 openness" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="534" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Tangga keterbukaan akses riset data platform (2026)</text>
+<rect x="24" y="72" width="480" height="82" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="38" y="98" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">1. API / FIREHOSE TERBUKA</text>
+<text x="38" y="120" font-size="12.5" fill="#141414" text-anchor="start">Bluesky Jetstream - Mastodon</text>
+<rect x="520" y="72" width="408" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="534" y="102" font-size="12" fill="#5A5A5A" text-anchor="start">Gratis, tanpa penjajakan - riset graf skala besar &amp; reproducible</text>
+<line x1="256" y1="154" x2="256" y2="168" stroke="#009E73" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="46" y="168" width="480" height="82" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.8"/>
+<text x="60" y="194" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">2. API BERKUOTA</text>
+<text x="60" y="216" font-size="12.5" fill="#141414" text-anchor="start">YouTube Data API - Reddit API</text>
+<rect x="542" y="168" width="386" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="556" y="198" font-size="12" fill="#5A5A5A" text-anchor="start">Gratis, kuota harian: kuota harian dibagi membagi antar tim</text>
+<line x1="278" y1="250" x2="278" y2="264" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="68" y="264" width="480" height="82" rx="8" fill="#FDF1EA" stroke="#E69F00" stroke-width="1.8"/>
+<text x="82" y="290" font-size="13.5" fill="#E69F00" font-weight="bold" text-anchor="start">3. API TERDAFTAR</text>
+<text x="82" y="312" font-size="12.5" fill="#141414" text-anchor="start">TikTok Research API</text>
+<rect x="564" y="264" width="364" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="578" y="294" font-size="12" fill="#5A5A5A" text-anchor="start">Wajib daftar + uji riset; field &amp; kuota terbatas per request</text>
+<line x1="300" y1="346" x2="300" y2="360" stroke="#E69F00" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="90" y="360" width="480" height="82" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.8"/>
+<text x="104" y="386" font-size="13.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">4. GATED AKADEMIK</text>
+<text x="104" y="408" font-size="12.5" fill="#141414" text-anchor="start">Meta Content Library (+ Threads riset)</text>
+<rect x="586" y="360" width="342" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="600" y="390" font-size="12" fill="#5A5A5A" text-anchor="start">Gratis untuk kampus yang lolos; eksekusi di enclave, ekspor terbatas</text>
+<line x1="322" y1="442" x2="322" y2="456" stroke="#7A4FA0" stroke-width="2" marker-end="url(#ahb)"/>
+<rect x="112" y="456" width="480" height="82" rx="8" fill="#FBE9E9" stroke="#9B2C2C" stroke-width="1.8"/>
+<text x="126" y="482" font-size="13.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">5. API BERBAYAR</text>
+<text x="126" y="504" font-size="12.5" fill="#141414" text-anchor="start">X API v2 (tier berbayar)</text>
+<rect x="608" y="456" width="320" height="82" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="622" y="486" font-size="12" fill="#5A5A5A" text-anchor="start">Akses riset gratis dicabut 2023; anggaran wajib masuk rencana studi</text>
+<line x1="24" y1="560" x2="950" y2="560" stroke="#5A5A5A" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="24" y="584" font-size="12" fill="#5A5A5A" text-anchor="start">Membaca tangga dari kiri-atas ke kanan-bawah: makin ke bawah, makin mahal dan makin ribet perizinannya.</text>
+<text x="24" y="604" font-size="12" fill="#5A5A5A" text-anchor="start">Seluruhnya legal bagi riset; keputusannya adalah desain studi memilih anak tangga mana yang menopang pertanyaan.</text>
+</svg>
+<figcaption><b>Gambar 4.</b> Enam anak tangga keterbukaan akses riset, dari API/firehose terbuka di kiri-atas sampai API berbayar di kanan-bawah. Semuanya legal bagi riset; yang beda adalah biaya, formalitas, dan kemudahannya.</figcaption>
+</figure>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="400" viewBox="0 0 1000 400" role="img" aria-label="figm2 timeline" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="334" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Timeline kebijakan akses data riset 2021-2026</text>
+<line x1="60" y1="250" x2="950" y2="250" stroke="#5A5A5A" stroke-width="2"/>
+<circle cx="202" cy="250" r="6" fill="#D55E00"/>
+<line x1="202" y1="250" x2="202" y2="278" stroke="#D55E00" stroke-width="1.4"/>
+<text x="194" y="294" font-size="11.5" fill="#D55E00" font-weight="bold" text-anchor="start">TikTok Research API</text>
+<text x="194" y="309" font-size="11.5" fill="#D55E00" font-weight="bold" text-anchor="start">mulai berlaku (2021-22)</text>
+<circle cx="433" cy="250" r="6" fill="#9B2C2C"/>
+<line x1="433" y1="250" x2="433" y2="210" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="425" y="194" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">X: akses riset gratis</text>
+<text x="425" y="209" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">dicabut (Feb-Apr 2023)</text>
+<circle cx="496" cy="250" r="6" fill="#E69F00"/>
+<line x1="496" y1="250" x2="496" y2="278" stroke="#E69F00" stroke-width="1.4"/>
+<text x="488" y="294" font-size="11.5" fill="#E69F00" font-weight="bold" text-anchor="start">Reddit: API membayar</text>
+<text x="488" y="309" font-size="11.5" fill="#E69F00" font-weight="bold" text-anchor="start">(Jun 2023)</text>
+<circle cx="629" cy="250" r="6" fill="#7A4FA0"/>
+<line x1="629" y1="250" x2="629" y2="278" stroke="#7A4FA0" stroke-width="1.4"/>
+<text x="621" y="294" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">Meta Content Library</text>
+<text x="621" y="309" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">dibuka (2024)</text>
+<circle cx="700" cy="250" r="6" fill="#009E73"/>
+<line x1="700" y1="250" x2="700" y2="278" stroke="#009E73" stroke-width="1.4"/>
+<text x="692" y="294" font-size="11.5" fill="#009E73" font-weight="bold" text-anchor="start">AT Protocol &amp; Jetstream</text>
+<text x="692" y="309" font-size="11.5" fill="#009E73" font-weight="bold" text-anchor="start">matang (2024)</text>
+<circle cx="958" cy="250" r="6" fill="#9B2C2C"/>
+<line x1="958" y1="250" x2="958" y2="210" stroke="#9B2C2C" stroke-width="1.4"/>
+<text x="950" y="194" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">Enclave riset mulai</text>
+<text x="950" y="209" font-size="11.5" fill="#9B2C2C" font-weight="bold" text-anchor="start">berbayar (Jan 2026)</text>
+<text x="60" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2021</text>
+<text x="238" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2022</text>
+<text x="416" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2023</text>
+<text x="594" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2024</text>
+<text x="772" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2025</text>
+<text x="950" y="326" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="middle">2026</text>
+<text x="24" y="368" font-size="12.5" fill="#141414" text-anchor="start">Pesan utama: akses riset condong menyempit sejak 2023 - desain studi mesti pilih platform</text>
+<text x="24" y="388" font-size="12.5" fill="#141414" text-anchor="start">yang aksesnya masih jelas tanggal kebijakannya, bukan dipilih setelah pengeluaran biaya naik.</text>
+</svg>
+<figcaption><b>Gambar 5.</b> Timeline kebijakan akses data riset 2021–2026. Titik-titik menandai perubahan besar: TikTok Research API (2021-22), X mencabut akses gratis (2023), Reddit berbayar (Jun 2023), Meta Content Library (2024), AT Protocol matang (2024), dan enclave riset berbayar (Jan 2026).</figcaption>
+</figure>
+
+<table>
+<caption>Tabel 5.1 — Rincian akses dan biaya per anak tangga (angka verifikasi per 2026, wajib cek ulang)</caption>
+<thead><tr><th>Anak tangga</th><th>Contoh</th><th>Syarat formal</th><th>Risiko bagi proyek capstone</th></tr></thead>
+<tbody>
+<tr><td>1. API/firehose terbuka</td><td>Bluesky Jetstream, Mastodon</td><td>tanpa pendaftaran</td><td>arsitektur penyimpanan berbeda bila volume firehose besar</td></tr>
+<tr><td>2. API berkuota</td><td>YouTube Data API, Reddit API</td><td>API key, batas unit</td><td>kuota habis di tengah koleksi; desain sampel harus mengakui plural batas</td></tr>
+<tr><td>3. API terdaftar</td><td>TikTok Research API</td><td>daftar, klarifikasi riset</td><td>field dipilah tiap request; musti buat catatan request yang dipilih</td></tr>
+<tr><td>4. Gated akademik</td><td>Meta Content Library</td><td>kampus lolos prasyarat</td><td>enclave; ekspor data agregat terbatas; perlu direncanakan aksesnya</td></tr>
+<tr><td>5. API berbayar</td><td>X API v2</td><td>kartu kredit / anggaran proyek</td><td>biaya bertumbuh jika koleksi mengerem; anggaran disiapkan di surat riset</td></tr>
+<tr><td>6. Enclave berbayar</td><td>Meta SOMAR (2026)</td><td>penyewaan per tim</td><td>eksekusi terkontrol; output terbatas; lapor biaya ke unit riset</td></tr>
+</tbody>
+</table>
+
+<h2>6. Protokol terbuka: AT Protocol dan ActivityPub</h2>
+
+<p>Dua protokol terbuka mengubah lanskap riset 2024–2026: <b>AT Protocol</b> (Bluesky) menawarkan <b>firehose</b> publik — deretan event murah untuk skala besar; <b>ActivityPub</b> (Mastodon, dkk.) menata data sebagai graf terfederasi antar server. Keduanya mendekatkan riset ke ideal <i>reproducible</i>: data dapat dicapture ulang dari protokol, bukan bergantung pada akses lingkungan komersial. Affordance risetnya:</p>
+
+<ul>
+<li>AT Protocol (Bluesky) — firehose Jetstream. Untuk riset graf sosial skala besar, ini jalur yang paling murah.</li>
+<li>ActivityPub (Mastodon dkk.) — data terfederasi antar server; sejumlah instansi menutup pencarian publik untuk privasi.</li>
+</ul>
+
+<div class="box">
+<span class="h">Lapis teori: keterbukaan protocol vs komersial</span>
+Protokol terbuka menawarkan data yang lebih stabil antar-tahun, tetapi komunitas penggunanya sering lebih kecil. Untuk riset Indonesia, diperiksa dulu ukuran komunitas lokal sebelum memilih platform berprotokol terbuka.
+</div>
+
+<h2>7. Metrik lintas-platform: satu kata, banyak definisi</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-label="figm2 metrics" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="414" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Satu kata 'engagement' - empat definisi beda</text>
+<rect x="30" y="66" width="216" height="190" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.8"/>
+<text x="44" y="92" font-size="14" fill="#0072B2" font-weight="bold" text-anchor="start">X</text>
+<text x="44" y="122" font-size="12.5" fill="#141414" text-anchor="start">- like (suka)</text>
+<text x="44" y="150" font-size="12.5" fill="#141414" text-anchor="start">- repost (re-post)</text>
+<text x="44" y="178" font-size="12.5" fill="#141414" text-anchor="start">- reply (jawab)</text>
+<text x="44" y="206" font-size="12.5" fill="#141414" text-anchor="start">- quote + impression</text>
+<rect x="274" y="66" width="216" height="190" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.8"/>
+<text x="288" y="92" font-size="14" fill="#D55E00" font-weight="bold" text-anchor="start">TikTok</text>
+<text x="288" y="122" font-size="12.5" fill="#141414" text-anchor="start">- like (suka)</text>
+<text x="288" y="150" font-size="12.5" fill="#141414" text-anchor="start">- komentar</text>
+<text x="288" y="178" font-size="12.5" fill="#141414" text-anchor="start">- share (bagikan)</text>
+<text x="288" y="206" font-size="12.5" fill="#141414" text-anchor="start">- save + watch time</text>
+<rect x="518" y="66" width="216" height="190" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.8"/>
+<text x="532" y="92" font-size="14" fill="#7A4FA0" font-weight="bold" text-anchor="start">YouTube</text>
+<text x="532" y="122" font-size="12.5" fill="#141414" text-anchor="start">- view (tonton)</text>
+<text x="532" y="150" font-size="12.5" fill="#141414" text-anchor="start">- watch time total</text>
+<text x="532" y="178" font-size="12.5" fill="#141414" text-anchor="start">- like (suka)</text>
+<text x="532" y="206" font-size="12.5" fill="#141414" text-anchor="start">- komentar + share</text>
+<rect x="762" y="66" width="216" height="190" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="776" y="92" font-size="14" fill="#009E73" font-weight="bold" text-anchor="start">Instagram</text>
+<text x="776" y="122" font-size="12.5" fill="#141414" text-anchor="start">- like (suka)</text>
+<text x="776" y="150" font-size="12.5" fill="#141414" text-anchor="start">- komentar</text>
+<text x="776" y="178" font-size="12.5" fill="#141414" text-anchor="start">- save (simpan)</text>
+<text x="776" y="206" font-size="12.5" fill="#141414" text-anchor="start">- share (bagikan)</text>
+<text x="22" y="292" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Ambang perbandingan yang masih sah:</text>
+<rect x="28" y="306" width="944" height="34" rx="6" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="328" font-size="12" fill="#141414" text-anchor="start">1. Normalisasi: per 1.000 pengikut atau per 1.000 penonton - jangan raw count mentah.</text>
+<rect x="28" y="346" width="944" height="34" rx="6" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="368" font-size="12" fill="#141414" text-anchor="start">2. Damai komponen: hanya banding like vs like, save vs save - bukan engagement gabungan.</text>
+<rect x="28" y="386" width="944" height="34" rx="6" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="408" font-size="12" fill="#141414" text-anchor="start">3. Nyatakan definisi: laporan musti cantumkan versi definisi yang dipakai.</text>
+<rect x="28" y="426" width="944" height="34" rx="6" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="448" font-size="12" fill="#141414" text-anchor="start">4. Watch time &amp; save: dua metrik paling berbeda antar platform; catat khusus.</text>
+</svg>
+<figcaption><b>Gambar 6.</b> Satu kata "engagement" memuat komponen berbeda di empat platform. Sebelum dipakai sebagai variabel di riset, semua komponen harus dinyatakan secara eksplisit.</figcaption>
+</figure>
+
+<table>
+<caption>Tabel 7.1 — Nama yang terlihat sama, definisi yang berbeda</caption>
+<thead><tr><th>Nama</th><th>X</th><th>TikTok</th><th>YouTube</th><th>Instagram</th></tr></thead>
+<tbody>
+<tr><td>like</td><td>aksi suka</td><td>aksi suka</td><td>aksi suka</td><td>aksi suka</td></tr>
+<tr><td>share</td><td>repost / retweet / quote</td><td>bagikan ke chat atau platform lain</td><td>bagikan (embed)</td><td>bagikan ke story/DM</td></tr>
+<tr><td>save</td><td>tidak ada</td><td>bookmark personal</td><td>tidak ada</td><td>bookmark personal</td></tr>
+<tr><td>watch</td><td>tidak diketahui</td><td>watch time &amp; completion</td><td>view (≥30 detik)</td><td>view + retensi</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Aturan harfiah</span>
+Jangan pernah mencantumkan kolom <code>engagement</code> di tabel hasil tanpa <b>manuscript formula</b> — daftar eksplisit komponen yang diragukan. Safeguard terkuat: normalisasi per 1.000 pengikut atau per 1.000 tontonan; bandingkan <b>komponen dengan komponen yang setara</b>.
+</div>
+
+<h2>8. Implementasi: membangun matriks affordance di lab</h2>
+
+<div class="box">
+<span class="h">Lapis implementasi (60 menit lab)</span>
+<ol>
+<li>Pilih 3 platform yang aktif di Indonesia (saran: X atau Bluesky + TikTok atau YouTube + Reddit).</li>
+<li>Beri satu topik yang sama sama antara ketiganya (contoh: kenaikan harga BBM, pemilu, krisis pangan).</li>
+<li>Kumpulkan (atau simulasi, bila API terlalu ketat) <b>1.000 item</b> per platform ke folder <code>data/raw/{platform}/</code>.</li>
+<li>Masuk tiap platform ke dataframe; daftar semua field yang muncul beserta tipe datanya — field bersarang ditulis sebagai jalur penuh (<code>metrics.like</code>).</li>
+<li>Berikan skor affordance: teks / media / engagement / graf / firehose / retrospektif, disertai status akses.</li>
+</ol>
+</div>
+
+<p>Hasil lab: <b>matriks affordance</b> 3 baris × 6 kolom mirip Gambar 2, plus <b>memo komparabilitas</b> 1 halaman yang menjawab: "Pertanyaan apa yang mampu dijawab di platform mana?" Bagian wajib memo: tabel per platform, ukuran numerik, dan status akses.</p>
+
+<h2>9. Studi kasus terpandu: isu publik di tiga platform</h2>
+
+<p>Pertanyaan kasus: <b>"Isu kenaikan harga BBM ramai di tiga platform — dan masing-masing platform mampu menjawab apa saja?"</b> Lakukan bersama di kelas:</p>
+
+<table>
+<caption>Tabel 9.1 — Walkthrough studi kasus (lengkap rubrik isi dengan bagian memo yang menjawabnya)</caption>
+<thead><tr><th>Aspek</th><th>Ujiannya</th><th>Bagian memo yang menjawab</th></tr></thead>
+<tbody>
+<tr><td>Sampling frame</td><td>feed di ketiga platform berada dalam jendela waktu yang jelas?</td><td>Bab 1 memo — feed: kronologis / follow / rekomendasi</td></tr>
+<tr><td>Representasi</td><td>kerangka pengambilan (kata kunci, tag, akun) dinyatakan transparan</td><td>Bab 1 memo — jaminan pada bahasa &amp; waktu lokal</td></tr>
+<tr><td>Legality</td><td>jalur akses legal dan prasyaratnya jelas</td><td>Bab 2 memo — status per anak tangga keterbukaan</td></tr>
+<tr><td>Costs</td><td>estimasi anggaran untuk sampel minimum yang layak</td><td>Bab 2 memo — kuota harian atau biaya per hari</td></tr>
+<tr><td>Design</td><td>keputusan desain meminimalkan bias yang bisa dihindari</td><td>Bab 3 memo — kombinasi platform vs satu platform</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Lapis artefak</span>
+Artefak yang dinilai: <b>memo komparabilitas</b> yang dapat dipakai ulang mahasiswa lain untuk pertanyaan berbeda. Kalau bisa dipergunakan luas, memo berhasil.
+</div>
+
+<h2>10. Sepuluh kesalahan umum mahasiswa</h2>
+
+<table>
+<caption>Tabel 10.1 — Kesalahan umum: gejala, akibat, dan mitigasi</caption>
+<thead><tr><th>#</th><th>Kesalahan</th><th>Konsekuensi metrik</th><th>Pencegahan</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Membandingkan hitungan engagement mentah lintas platform</td><td>skala yang berbeda tanpa normalisasi melahirkan kesimpulan keliru</td><td>normalisasi per 1.000 followers/penonton</td></tr>
+<tr><td>2</td><td>Menganggap feed rekomendasi = feed kronologis</td><td>timestamp sampel rekomendasi diperlakukan sebagai waktu aktual</td><td>catat jenis feed di metadata dataset</td></tr>
+<tr><td>3</td><td>Menganggap teks = seluruh unit data platform</td><td>teks on-screen hilang dari analisis</td><td>simpan teks on-screen sebagai field terpisah</td></tr>
+<tr><td>4</td><td>Asumsi field API satu tier berlaku di tier lain</td><td>perbandingan antar tier memakai field yang sebenarnya berbeda</td><td>verifikasi field yang disajikan tiap request</td></tr>
+<tr><td>5</td><td>Mengabaikan akun yang dihapus antara dua snapshot</td><td>sampel berkecenderungan ke akun yang masih aktif</td><td>catat persentase akun yang hilang antar snapshot</td></tr>
+<tr><td>6</td><td>Timestamp dari dua platform dicampur tanpa standarisasi</td><td>urutan waktu rusak karena unitnya beda (s/milidetik/ISO)</td><td>standarkan timestamp ke format ISO 8601</td></tr>
+<tr><td>7</td><td>Lupa menyiapkan kredensial API resmi sebelum lab</td><td>lab gagal atau waktu pada kertas terpakai mengantri akses</td><td>siapkan data cadangan lokal untuk demo</td></tr>
+<tr><td>8</td><td>Asumsi bahasa tidak perlu dideteksi ulang</td><td>bias bahasa masuk ke sampel tanpa tercatat</td><td>lakukan language ID terpisah pada data lokal</td></tr>
+<tr><td>9</td><td>Menggabungkan data dua feed menjadi satu sampel</td><td>feed kronologis dan rekomendasi tercampur</td><td>simpan jenis feed di kolom terpisah</td></tr>
+<tr><td>10</td><td>Mengabaikan jendela snapshot batch data</td><td>rapor salah karena batch yang berbeda periode dibanding-bandingkan</td><td>nyatakan jendela snapshot di memo dan laporan</td></tr>
+</tbody>
+</table>
+
+<h2>11. Etika dan regulasi secara ringkas</h2>
+
+<p>Empat rujukan dari Materi 1 yang tetap membatasi pilihan platform:</p>
+<table><caption>Tabel 11.1 — Regulasi yang menentukan akses data</caption>
+<thead><tr><th>Regulasi</th><th>Guna bagi</th><th>Waktu riil</th></tr></thead>
+<tbody>
+<tr><td>UU PDP No. 27/2022</td><td>fondasi legal pemrosesan data pribadi di Indonesia</td><td>kewajiban konfirmasi dosen dan paket penelitian</td></tr>
+<tr><td>GDPR</td><td>data berbackground lintas yurisdiksi</td><td>rencanakan trasparansi data pengguna</td></tr>
+<tr><td>Platform ToS</td><td>syarat penyimpanan data oleh platform</td><td>verifikasi di awal setiap unit riset</td></tr>
+<tr><td>IRB-ring per riset</td><td>riset dengan data pribadi pengguna yang percaya / vulnerable</td><td>penilaian bersama dengan dosen aman riset</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Prinsip yang tidak bisa dilanggar</span>
+<b>Publik bukan sama dengan consentable.</b> Kuncinya: sebuah data bersifat <i>publik</i> karena penggunanya menayangkannya di aplikasi, tetapi ia tidak otomatis <i>consentable</i> — izin yang relevan adalah izin memproses yang dicatat di kerangka metodologi. Riset yang mengandung data pengguna pribadi masih perlu tinjauan etik seperti di Materi 3.
+</div>
+
+<h2>12. Latihan mandiri</h2>
+
+<ol>
+<li>Tebak dulu — <b>tanpa</b> membaca tabel affordance, daftarkan affordance satu platform yang sering dipakai (X atau TikTok), lalu bandingkan dengan dokumentasi resmi. Catat selisihnya.</li>
+<li>Simulasi feed: tulis urutan langkah yang menyatakan cara memilih feed di satu platform — sebut pemantik (timestamp paling stabil) dan pelampauan pasti sebelum mengaitkan hasil sampel ke populasi.</li>
+<li>Akses maze: <b>pilih dua platform</b> yang menopang satu pertanyaan riset berikut yang cukup rumit (contoh: "sentimen terhadap satu kebijakan publik"), lalu rangkum rute aksesnya.</li>
+<li>Anggaran riset: <b>untuk proyek capstone</b>, buat perkiraan biaya 3 bulan pengumpulan data di dua platform dan cantumkan di surat riset Anda.</li>
+</ol>
+
+<h2>13. Ringkasan</h2>
+
+<ul>
+<li><b>Affordance</b> = metode ∩ teknik ∩ legal; platform baru dipilih setelah pertanyaan dan urgensinya jelas.</li>
+<li><b>Kawasan</b> (mikroblog, short-video, video panjang, komunitas, protokol terbuka, kawasan gated) lebih informatif dibanding memilih platform satu per satu.</li>
+<li><b>Feed</b> adalah sampling frame; rekomendasi feed tidak boleh diperlakukan sebagai pengukur waktu.</li>
+<li><b>Tangga keterbukaan</b> memandu masuk; trajectory akses sejak 2023 condong turun ke kanan-bawah; rencanakan anggaran sejak awal.</li>
+<li><b>Metrik</b> — nama sama, definisi beda: normalisasi + komponen + formula yang dinyatakan di laporan.</li>
+<li>Memo komparabilitas dan arsip affordance adalah fondasi materi-materi berikut: jenis data (P3), akuisisi API (P4), dan akses gated (P5).</li>
+</ul>
+
+<h2>14. Glosarium dan referensi</h2>
+
+<h3>Glosarium</h3>
+<ol>
+<li><b>Data affordance</b> — potensi data yang suatu platform memungkinkan dan mengizinkan diambil, yang mencakup dimensi metodologi, teknik, dan legal.</li>
+<li><b>Sampling frame</b> — kerangka dari mana sampel ditarik; feed adalah sebuah sampling frame.</li>
+<li><b>Firehose</b> — deretan event realtime yang dipublikasikan platform/protokol terbuka.</li>
+<li><b>AT Protocol</b> — protokol terbuka yang dipakai Bluesky; firehose + repositori data terstruktur.</li>
+<li><b>ActivityPub</b> — protokol terbuka federasi (Mastodon, PeerTube, dll.).</li>
+<li><b>Endpoint</b> — alamat API untuk satu tujuan (search, lookup, timeline).</li>
+<li><b>Rate limit</b> — batas jumlah panggilan API per jendela waktu.</li>
+<li><b>Quota / kuota unit</b> — anggaran panggilan hari-an; YouTube memakai unit (quota).</li>
+<li><b>Retrospektif</b> — kemampuan mengambil data lama (pencarian ke belakang).</li>
+<li><b>Enclave</b> — lingkungan eksekusi terpasang yang membatasi ekspor data.</li>
+<li><b>Meta Content Library (MCL)</b> — pintu akses gated riset Meta untuk institusi akademik.</li>
+<li><b>Tier</b> — tingkatan layanan API (free/Basic/Pro) yang beda field &amp; kuota.</li>
+<li><b>Engagement</b> — nama umum untuk aksi pengguna (like/reply/share/save); definisinya plat X vs TikTok vs YouTube vs IG berbeda.</li>
+<li><b>Watch time</b> — durasi total yang ditonton; paling beda antar platform.</li>
+<li><b>Impression</b> — sinyal bahwa konten tampil; tidak selalu berarti dilihat.</li>
+<li><b>Protokol federasi</b> — sistem yang menyebarkan data antar server dengan mandating isyarat.</li>
+</ol>
+
+<h3>Referensi pokok</h3>
+<ol>
+<li>Zafarani, Abbasi, &amp; Liu (2014). <i>Social Media Mining</i>, ch. 2 — data sources.</li>
+<li>Bruns (2019). <i>Are Filter Bubbles Real?</i> — karekter feed dan sampling.</li>
+<li>Dokumentasi resmi: <b>X API v2</b> (tiers, pricing), <b>YouTube Data API</b> (quota), <b>TikTok Research API</b>, <b>Reddit API</b>, <b>Meta Content Library</b>.</li>
+<li>Dokumentasi resmi: <b>AT Protocol</b> (Jetstream &amp; sync) dan <b>ActivityPub</b>.</li>
+<li>arXiv:2505.09877 (2025). <i>Studying Digital Platforms in Scant Data Access Times</i>.</li>
+<li>Rice et al. (2022). <i>Working with computational data</i> — akses data antar platform.</li>
+<li>Freelon (2018). <i>Computational research on random publics</i>. <i>Stanford Annals</i>.</li>
+<li>UU PDP No. 27 Tahun 2022 dan kanto resmi privasi platform (X/Meta/Google).</li>
+</ol>
+
+<div class="box">
+<span class="h">Jembatan ke Materi 3</span>
+Materi ini mengakui affordance (kesempatan); materi berikutnya menajamkan format (figur): <b>jenis data, schema, dan field dictionary</b> — bagaimana objek mentah dari API yang dibaca & dirangkum dengan pengukuran realistis.
+</div>
+
+</div>
+</body>
+</html>

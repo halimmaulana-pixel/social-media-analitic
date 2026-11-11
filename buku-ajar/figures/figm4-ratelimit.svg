@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-label="figm4 ratelimit" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Rate limit &amp; kuota: anggaran yang dijadwalkan sejak hari pertama</text>
+<rect x="30" y="58" width="430" height="250" rx="10" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.4"/>
+<text x="50" y="84" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">BUCKET PER 15 MENIT (contoh satu tier)</text>
+<rect x="70" y="110" width="90" height="170" rx="8" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="70" y="180" width="90" height="100" rx="0" fill="#C8E3F5" stroke="none" stroke-width="1.2"/>
+<text x="115" y="240" font-size="11.5" fill="#0072B2" text-anchor="middle">terpakai</text>
+<text x="115" y="258" font-size="11.5" fill="#5A5A5A" text-anchor="middle">di jendela ini</text>
+<text x="184" y="134" font-size="12" fill="#141414" text-anchor="start">rekon: hitung request, bukan post</text>
+<text x="184" y="202" font-size="12" fill="#9B2C2C" text-anchor="start">backoff: kalau 429, tunggu header reset; jangan</text>
+<text x="184" y="218" font-size="12" fill="#9B2C2C" text-anchor="start">terus ngebut</text>
+<text x="50" y="296" font-size="11.5" fill="#5A5A5A" text-anchor="start">kuota per endpoint berbeda dari kuota per jendela — dua</text>
+<text x="50" y="311" font-size="11.5" fill="#5A5A5A" text-anchor="start">kalender, dua neraca.</text>
+<rect x="480" y="58" width="490" height="250" rx="10" fill="#F1FAF5" stroke="#009E73" stroke-width="1.4"/>
+<text x="498" y="84" font-size="12.5" fill="#009E73" font-weight="bold" text-anchor="start">ANGGARAN KUOTA (contoh perencanaan, bukan angka resmi)</text>
+<text x="498" y="110" font-size="11.5" fill="#141414" text-anchor="start">• Kuota yg dialokasikan utk riset: 20.000 post/hari (fase maksimal satu tier)</text>
+<text x="498" y="148" font-size="11.5" fill="#141414" text-anchor="start">• Target korpus: 150.000 post (satu topik, 30 hari)</text>
+<text x="498" y="186" font-size="11.5" fill="#141414" text-anchor="start">• Buffer eksperimen: 25% (query uji cobacoba di sini, bukan di produksi)</text>
+<text x="498" y="224" font-size="11.5" fill="#141414" text-anchor="start">• Estimasi durasi koleksi: 9–10 hari kerja (kurva nonlinier saat weekend)</text>
+<text x="498" y="262" font-size="11.5" fill="#141414" text-anchor="start">• Strategi: pagi berjalan sejahtera; kalau jendela habis, jadwal lain dipakai</text>
+<rect x="30" y="326" width="940" height="88" rx="8" fill="#FFFFFF" stroke="#E69F00" stroke-width="1.4"/>
+<text x="46" y="350" font-size="12.5" fill="#E69F00" font-weight="bold" text-anchor="start">Aturan anggaran yang dipakai di lab</text>
+<text x="46" y="374" font-size="11.5" fill="#141414" text-anchor="start">• Query uji dikerjakan di budget eksperimen; pemborosan kuota = desain yang buruk, bukan pekerjaan rajin.</text>
+<text x="46" y="396" font-size="11.5" fill="#141414" text-anchor="start">• Setiap run dicatat: jumlah request, jumlah post, sisa kuota — kalau run gagal, catatan menyelamatkan sesi berikut.</text>
+</svg>

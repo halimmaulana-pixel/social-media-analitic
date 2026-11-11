@@ -1,0 +1,91 @@
+topic: Isi Mata Kuliah Social Media Analytics di Era Tren Terkini (2024–2026)
+
+fields:
+
+  Informasi Modul:
+    - name: module_name
+      description: Nama modul/bab dalam mata kuliah
+      detail_level: brief
+    - name: module_description
+      description: Penjelasan isi modul (3-5 kalimat), versi final untuk RPS
+      detail_level: moderate
+    - name: duration_weeks
+      description: Durasi (minggu) jika masuk RPS 14-16 pertemuan
+      detail_level: brief
+    - name: core_concepts
+      description: Konsep kunci yang harus dikuasai mahasiswa
+      detail_level: moderate
+    - name: learning_outcomes
+      description: Capaian pembelajaran modul dalam taksonomi Bloom (C1-C6)
+      detail_level: moderate
+
+  Metode & Model:
+    - name: methods_models
+      description: Algoritma/model/statistik yang diajarkan (mis. TF-IDF, LDA, BERT, Louvain, epidemic models)
+      detail_level: detailed
+    - name: evaluation_metrics
+      description: Metrik evaluasi (precision/recall/F1, Cohen kappa, NMI, AUC, RMSE)
+      detail_level: moderate
+    - name: pitfalls_limitations
+      description: Keterbatasan dan bias umum (sampling bias API, bias bahasa, generalisasi)
+      detail_level: moderate
+
+  Tools & Praktikum:
+    - name: tools_stack
+      description: Library/perangkat open-source beserta nama fungsi/package
+      detail_level: moderate
+    - name: commercial_platforms
+      description: Platform komersial untuk demo (Brandwatch, Meltwater, Talkwalker, Sprout Social, Pulsar)
+      detail_level: brief
+    - name: tools_access_cost
+      description: Biaya/tier akses tools dan API (mis. SOMAR Virtual Data Enclave berbayar sejak 2026, X API tier, Meta Content Library akademik gratis)
+      detail_level: brief
+    - name: lab_activities
+      description: Aktivitas praktikum hands-on yang bisa dikerjakan dalam 1-2 pertemuan
+      detail_level: moderate
+
+  Data:
+    - name: datasets_apis
+      description: Dataset publik atau API yang dipakai beserta catatan akses
+      detail_level: moderate
+    - name: data_collection_workflow
+      description: Alur akuisisi hingga penyimpanan data (akuisisi, cleaning, storage, analisis)
+      detail_level: moderate
+
+  Asesmen & Referensi:
+    - name: assessment_methods
+      description: Metode asesmen modul (tugas, presentasi, kuis, mini-project, rubrik)
+      detail_level: moderate
+    - name: textbooks
+      description: Buku teks/bab yang relevan untuk modul ini
+      detail_level: moderate
+    - name: key_papers
+      description: Paper kunci 2024-2026 sebagai pembaruan kurikulum (judul + tahun + relevansi)
+      detail_level: moderate
+
+  Tren & Konteks:
+    - name: trends_2024_2026
+      description: Tren terkini yang wajib masuk modul ini (multi-modal, agentic AI, short video, social commerce, konten sintetis)
+      detail_level: moderate
+    - name: industry_relevance
+      description: Relevansi industri dan peran pekerjaan (social media analyst, insights researcher, community data scientist) plus sertifikasi terkait
+      detail_level: moderate
+    - name: localization_context
+      description: Konteks bahasa/lokal Indonesia (IndoBERT, NusaBERT, InSet, dataset ID, UU PDP No. 27/2022)
+      detail_level: moderate
+    - name: ethics_regulation
+      description: Isu etika dan regulasi yang dibahas di modul ini (IRB, GDPR, UU PDP, DSA, algorithmic accountability)
+      detail_level: moderate
+
+  Capstone:
+    - name: case_study_scenarios
+      description: Skenario studi kasus/capstone yang bisa memakai modul ini
+      detail_level: moderate
+    - name: deliverable_format
+      description: Format luaran (dashboard, notebook, laporan, publikasi) untuk capstone yang memakai modul ini
+      detail_level: brief
+
+uncertain:
+  - exact_pricing_x_api_2026
+  - somar_vde_fee_2026_in_idr
+  - jumlah_minggu_tepat_per_modul (tergantung RPS prodi)

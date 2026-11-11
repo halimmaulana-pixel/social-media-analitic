@@ -1,0 +1,50 @@
+{
+  "module_name": "Data Collection via Official APIs (X API v2, TikTok Research API, YouTube Data API, Reddit API, Bluesky AT Protocol)",
+  "module_description": "Module 4 is hands-on API collection: authentication, query operators, pagination, rate limits, and quota budgeting, plus honest treatment of access politics after 2023-2026 (X academic access removed, Meta gated, Bluesky open). Students learn to build a defensible sampling frame (top vs recent, keyword vs full archive) and to archive what they collect.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Authentication and authorization models (OAuth2, bearer, app password)",
+    "Query operators and endpoint design (search, timeline, video list, comments)",
+    "Pagination and rate limits",
+    "Sampling frames: keyword, timeline, snowball, random",
+    "Archiving and checksums for reproducibility"
+  ],
+  "learning_outcomes": [
+    "C3 Use at least three platform APIs to collect a documented sample",
+    "C4 Justify a sampling frame and quantify its bias",
+    "C5 Evaluate API access cost and quota against a research budget"
+  ],
+  "methods_models": [
+    "REST/JSON collection, cursor pagination, time-window slicing, quota budgeting, snapshot archiving",
+    "Common learning-by-building: one API per lab, output CSV + collection log"
+  ],
+  "evaluation_metrics": "Not quantified by ML metrics; assessed by completeness of collection log and reproducibility of counts",
+  "pitfalls_limitations": "Silent query truncation, timezone bugs, deleted/edited content, deduplication across windows, undisclosed API filters",
+  "tools_stack": "requests/httpx, tweepy or raw X API v2 calls, praw (Reddit), google-api-python-client (YouTube), atproto or requests for Bluesky Jetstream",
+  "commercial_platforms": "Side-by-side quota comparison across tiers (X basic/pro/enterprise vs free research tools)",
+  "tools_access_cost": "X moved academic access to paid tiers after 2023; Meta Content Library is free but institutionally gated; SOMAR-type research environments began charging research teams from 2026 (about USD 371/team/month per public reporting)",
+  "lab_activities": "Collect the same topic from 3 platforms with a written collection log (query, dates, counts, filters)",
+  "datasets_apis": "X recent search + Bluesky firehose sample + YouTube comments on a topic; plus Reddit sample",
+  "assessment_methods": "Written analysis/design document plus a short quiz; graded on correctness of concepts and quality of justification",
+  "data_collection_workflow": "Define the question -> choose platform and access route -> collect via API or permitted scrape -> archive raw with checksums -> clean and document schema -> analyse -> preserve dataset and code",
+  "textbooks": [
+    "Russell, Mining the Social Web, API chapters",
+    "Exploratory Tutorials for Data Analysis (API/SQL chapters)"
+  ],
+  "key_papers": [
+    "Meta Content Library get-access documentation (2024-2026)",
+    "arXiv 2505.09877 (2025) on data access scarcity",
+    "X API tier documentation (current pricing)"
+  ],
+  "trends_2024_2026": "2024-2026: access became the main constraint; curriculum must teach quota literacy and teach Bluesky/open protocol as the fallback research surface",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "Collect one month of an issue's discussion within a fixed budget and defend the sample.",
+  "deliverable_format": "Documented dataset (raw JSON + tidy CSV) + collection log",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

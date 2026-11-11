@@ -1,0 +1,48 @@
+{
+  "module_name": "Influence Maximization, Bots, Trolls, and Coordinated Inauthentic Behavior",
+  "module_description": "Module 18 is the trust-and-safety analytics module: identifying coordinated behavior (co-tweeting, co-posting, synchronized timing), bot and troll detection (heuristics, classifier, graph-based), influence maximization for campaigns, and the growing problem of AI-driven accounts. Students learn to separate coordinated from correlated but independent behavior - the central methodological challenge of this field.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Bot detection: features, classifiers, graph signals",
+    "Coordinated behavior detection (co-retweet, co-posting, timing)",
+    "Troll/astroturf patterns and campaign structure",
+    "Influence maximization algorithms (greedy, hill-climbing)",
+    "LLM-generated accounts and 'AI slop' at scale"
+  ],
+  "learning_outcomes": [
+    "C3 Apply heuristics/classifiers to detect likely automation",
+    "C4 Detect coordinated posting clusters and characterize campaigns",
+    "C5 Evaluate false-positive risk when accusing accounts"
+  ],
+  "methods_models": [
+    "Feature engineering (posting regularity, entropy, device patterns), clustering on synchronization features, greedy influence maximization, anomaly detection",
+    "Ensemble with network structure"
+  ],
+  "evaluation_metrics": "Precision/recall/F1 on labelled bot sets (Botometer-style), cluster quality (silhouette, purity), false-positive rate on hand-checked samples",
+  "pitfalls_limitations": "Labelling automation as intent; deleted/hidden accounts; synchronized activity being explainable by platform prompts; accusing real users; model drift against evasion",
+  "tools_stack": "python-igraph/networkx, scikit-learn, community detection, Botometer API (availability varies), temporal clustering tools",
+  "commercial_platforms": "Brief mention of commercial bot-detection and brand-safety tools",
+  "tools_access_cost": "Some detection services are paid; the algorithmic approaches are free to implement",
+  "lab_activities": "Detect coordinated clusters in a topic network and write a careful, defensible report with false-positive caveats",
+  "datasets_apis": "Public bot/bot-like labelled datasets (botometer-adjacent), topic networks",
+  "assessment_methods": "Lab notebook plus graph figures and a short interpretation; graded on correctness of metrics and defensibility of substantive claims",
+  "data_collection_workflow": "Build the interaction graph from collected data -> deduplicate accounts and edges -> compute metrics -> cluster communities -> archive graph object and code",
+  "textbooks": [
+    "Zafarani et al., Social Media Mining, ch. on bots",
+    "Trust & safety / bot-detection survey papers"
+  ],
+  "key_papers": [
+    "2024-2026 work on LLM-driven coordinated behavior and on AI agents spreading propaganda"
+  ],
+  "trends_2024_2026": "2024-2026: coordinated behavior increasingly LLM-generated and agent-driven, which breaks classical automation detectors and pushes graph/temporal methods forward",
+  "industry_relevance": "Used in disinformation/trust-and-safety teams, political-communication research units, community-management analytics, and influence-marketing measurement; network metrics are standard deliverables in crisis-mapping briefings.",
+  "localization_context": "Practised on Indonesian case networks (election-issue discussion, anti-hoax communities, local brand mentions) where the platform mix and language mix differ from US/EU benchmark datasets.",
+  "ethics_regulation": "Re-identification risk of pseudonymous accounts, doxxing risk when publishing ego-networks, and the ethical line between mapping influence and surveilling individuals; UU PDP applies to any data tied to identifiable accounts.",
+  "case_study_scenarios": "Assess whether a public issue's spike on X shows signs of coordinated amplification.",
+  "deliverable_format": "Coordination analysis notebook + cautious evidence report",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

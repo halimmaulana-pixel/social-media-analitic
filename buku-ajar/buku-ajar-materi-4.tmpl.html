@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buku Ajar Materi 4 — Akuisisi Data via API Resmi</title>
+<!--STYLE-->
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+<div class="kicker">Pertemuan 4 · 150 menit · CPMK-2</div>
+<h1>Materi 4 — Akuisisi Data via API Resmi</h1>
+<div class="sub">Autentikasi, perancangan query, pagination, rate limit, checkpoint dan checksum, serta collection log — dari kredensial pertama hingga korpus yang dapat direproduksi.</div>
+</div>
+
+<table>
+<caption>Tabel 0.1 — Identitas materi</caption>
+<thead><tr><th>Aspek</th><th>Isi</th></tr></thead>
+<tbody>
+<tr><td>Mata kuliah</td><td>Social Media Analytics (3 SKS · semester 5)</td></tr>
+<tr><td>Pertemuan</td><td>4 dari 14 (jalur A — Fondasi; menutup CPMK-1, membuka jalur kerja CPMK-2)</td></tr>
+<tr><td>Beban</td><td>150 menit: teori 60&prime; + implementasi 70&prime; + artefak 20&prime;</td></tr>
+<tr><td>CPMK</td><td>CPMK-2: mengumpulkan sampel terdokumentasi dari minimal tiga platform (C3); membenarkan sampling frame dan menaksir biasnya (C4); menilai kuota API terhadap anggaran riset (C5)</td></tr>
+<tr><td>Bukti penilaian</td><td>Kolektor sederhana pada tiga platform, berkas raw (JSONL), CSV ringkasan, dan <i>collection log</i>; kuis ringkas konsep pagination–quota</td></tr>
+<tr><td>Dasar penyusunan</td><td>Arsip riset <code>results/akuisisi-api.json</code>; dokumentasi resmi X API v2, YouTube Data API v3, AT Protocol, Reddit API; UU No. 27/2022 (PDP); literatur sampling (Lohr); kajian kebijakan akses 2024–2026</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<span class="h">Cara memakai buku ini</span>
+Lapis Teori berada di Bagian 2, 4, 5, dan 6; Lapis Implementasi di Bagian 3, 7, dan 9; Lapis Artefak (yang dinilai) di Bagian 8 (collection log) dan Bagian 10 (studi kasus). Glosarium dan referensi berada di Bagian 13–14. Semua contoh endpoint, kuota, dan harga ditulis per 2026 dan <b>harus diverifikasi ulang</b> saat jadwal lab, karena dokumen harga dan kuota platform berubah sepanjang semester.
+</div>
+
+<div class="toc">
+<b>Daftar isi</b>
+<ol>
+<li>Peta pembelajaran pertemuan 4</li>
+<li>Mengapa akuisisi adalah kompetensi tersendiri</li>
+<li>Autentikasi: siapa yang membawa identitas kolektor</li>
+<li>Query dan sampling frame: mesin penanya</li>
+<li>Pagination: membaca halaman sampai token habis</li>
+<li>Rate limit, kuota, dan backoff</li>
+<li>Checkpoint dan checksum: koleksi yang selamat</li>
+<li>Collection log: bukti, bukan pelengkap</li>
+<li>Lab utama: kolektor mini tiga platform</li>
+<li>Studi kasus: arsip isu tujuh hari dalam anggaran sempit</li>
+<li>Sepuluh kesalahan umum dalam akuisisi API</li>
+<li>Ringkasan modul</li>
+<li>Glosarium</li>
+<li>Referensi</li>
+</ol>
+</div>
+
+<h2>1. Peta pembelajaran pertemuan 4</h2>
+<p>Pertemuan ini adalah pertemuan tangan: mayoritas waktu dihabiskan menulis kode kolektor, membaca jawaban API, dan mencatat keputusan selama proses berjalan. Meski demikian, lapisan teorinya tetap padat, karena kompetensi akuisisi tidak berhenti pada kemampuan memanggil API. Ujung dari kompetensi ini adalah kecakapan <b>merancang pengambilan sampel yang dapat dipertanggungjawabkan</b>: di tingkat sarjana, pertanggungjawabannya dibaca dosen penilai; di tingkat tesis, dibaca reviewer ilmiah; di tingkat industri, dibaca auditor data.</p>
+
+<table>
+<caption>Tabel 1.1 — Rute belajar delapan tahap pertemuan 4</caption>
+<thead><tr><th>Tahap</th><th>Aktivitas utama</th><th>Durasi</th></tr></thead>
+<tbody>
+<tr><td>1. Pembuka artefak</td><td>Membaca dua collection log contoh: mana yang memungkinkan reproduksi, mengapa yang lain tidak</td><td>15 mnt</td></tr>
+<tr><td>2. Teori: mengapa akuisisi adalah kompetensi tersendiri</td><td>Akses sebagai kendala utama 2024–2026; bias masuk lebih dahulu lewat koleksi</td><td>15 mnt</td></tr>
+<tr><td>3. Lab kredensial</td><td>Inisialisasi proyek, berkas pengaturan (env), empat kredensial platform</td><td>30&prime;</td></tr>
+<tr><td>4. Teori: sampling frame &amp; operator query</td><td>Query sebagai mesin penanya; empat sampling frame (keyword, timeline, snowball, acak)</td><td>20&prime;</td></tr>
+<tr><td>5. Teori: pagination, rate limit, dedup</td><td>Cursor vs potongan waktu; neraca kuota; backoff saat 429</td><td>25&prime;</td></tr>
+<tr><td>6. Lab inti</td><td>Membangun kolektor X + Bluesky untuk topik yang sama (tujuan 500 post per platform)</td><td>70&prime;</td></tr>
+<tr><td>7. Perluasan endpoint</td><td>Menambahkan YouTube Data API v3 sebagai kanal ketiga; menaikkan rubrik</td><td>45&prime;</td></tr>
+<tr><td>8. Tugas mingguan</td><td>Kolektor mini + collection log; kelompok 3–4 mahasiswa</td><td>10&prime;</td></tr>
+</tbody>
+</table>
+
+<div class="box ok">
+<span class="h">Jembatan dari Modul 3</span>
+Field dictionary yang dibangun pada Modul 3 kini berubah fungsi: ia menjadi <b>spesifikasi kolektor</b>. Env field yang tertulis di kamus tak lagi daftar abstrak seperti minggu lalu; minggu ini, setiap field harus diperoleh lewat query dan endpoint yang nyata. Mahasiswa yang melewati Modul 3 dengan kamus yang lengkap akan membangun kolektornya lebih cepat; yang hanya mengingat konsepnya akan menghabiskan awal sesi untuk menulis ulang kamusnya.
+</div>
+
+<!--FIG:figm4-pipeline.svg-->
+<figcaption><b>Gambar 1.1.</b> Alur akuisisi data media sosial: setiap tahap mengeluarkan artefak yang bisa diaudit (file raw, checksum, collection log).</figcaption>
+
+<h2>2. Mengapa akuisisi adalah kompetensi tersendiri</h2>
+<p>Tiga alasan menjadikan kepadatan modul ini patut mendapat perhatian. <i>Pertama</i>, akses data telah berubah menjadi kendala riset utama pada era 2024–2026. Beberapa platform menutup akses gratis bagi komunitas akademik atau memindahkannya ke lingkungan riset terdaftar (X sejak 2023; Meta Content Library yang hanya lewat approval lembaga); kajian yang menulis tentang kondisi ini memakai frasa <i>data access scarcity</i>. Konsekuensinya, mahasiswa yang menyusun rencana riset tanpa mempertimbangkan kuota membuang waktu pada desain yang sulit dilaksanakan.</p>
+<p><i>Kedua</i>, kesalahan pada tahap akuisisi menembus sampel dan tidak dapat dipulihkan pada tahap berikutnya. Analisis yang paling hati-hati tidak mengembalikan halaman yang hilang, tidak menyelamatkan jendela waktu yang salah, dan tidak memperbaiki query yang terpotong diam-diam. Dengan demikian, "pengumpulan yang buruk" menghasilkan riset yang buruk berapa pun baiknya model di bagian akhir.</p>
+<p><i>Ketiga</i>, bias memasuki proyek melalui pintu koleksi lebih dahulu. Logika feed platform (Modul 2) dan definisi field per platform (Modul 3) menentukan populasi yang tampil di sampel sebelum satu pun analitik berjalan. Karena itu, kolektor yang baik bukan sekadar kode yang berjalan; ia juga menuliskan keputusan eksplisit — frame apa yang diambil, mengapa secara teknik, dan sejauh mana frame itu membatasi apa yang bisa ditemukan di sampel.</p>
+
+<div class="box">
+<span class="h">Pernyataan patokan pertemuan 4</span>
+"Korpus yang bagus itu mahal; yang murah hanyalah reproduksi dari <i>collection log</i> yang rapi." Setiap langkah di modul ini mengejar satu hal yang sama: memastikan setiap keputusan riset terdokumentasi dengan buktinya sendiri.
+</div>
+
+<h2>3. Autentikasi: siapa yang membawa identitas kolektor</h2>
+<p>Setiap request yang dikirim ke API melakukan dua hal sekaligus: meminta data dan memperlihatkan identitas. Ketiga pola identitas yang paling umum dapat dibaca pada Gambar 3.1 — bearer token berbasis aplikasi, OAuth 2.0 atas nama pengguna, dan <i>app password</i> pada protokol terbuka. Ketiganya berbeda pada kepemilikan kuota, cakupan akses (scope), dan risikonya.</p>
+
+<!--FIG:figm4-auth.svg-->
+<figcaption><b>Gambar 3.1.</b> Tiga pola autentikasi dalam akuisisi riset: app-only (bearer), user context (OAuth 2.0), dan app password (AT Protocol).</figcaption>
+
+<table>
+<caption>Tabel 3.1 — Perbandingan tiga pola autentikasi</caption>
+<thead><tr><th>Aspek</th><th>Bearer (app-only)</th><th>OAuth 2.0 (user)</th><th>App password</th></tr></thead>
+<tbody>
+<tr><td>Pemegang kuota</td><td>Aplikasi</td><td>Pengguna akun riset</td><td>Akun pengguna AT Protocol</td></tr>
+<tr><td>Batas data</td><td>Publik saja; kuota paling tipis</td><td>Sesuai scope yang disetujui</td><td>Akses penuh ke data milik akun tersebut</td></tr>
+<tr><td>Risiko utama</td><td>Token bocor berarti akun riset bisa disusupi</td><td>Scope berlebih; refresh token harus disimpan aman</td><td>Dapat dicabut kapan saja oleh pemilik akun</td></tr>
+<tr><td>Kegunaan riset</td><td>Pemetaan topik beragam, tanpa aksi akun</td><td>Aksi atas nama akun; feed personal</td><td>Riset pada protokol terbuka</td></tr>
+</tbody>
+</table>
+
+<h3>3.1 Aturan kredensial yang diuji di lab</h3>
+<ul>
+<li>Kredensial — baik bearer token, kunci aplikasi, maupun app password — tidak pernah dituliskan dalam kode. Ia disimpan di berkas <code>.env</code>, dan berkas itu didaftar pada <code>.gitignore</code>.</li>
+<li>Scope OAuth dilancarkan menjadi paling sempit yang diperlukan tugas. Lebih baik meminta ulang hak akses ketimbang membawa hak yang tak terpakai.</li>
+<li>Sekali kredensial bocor — satu kali, hingga lokal — ia dianggap terkompromi: token harus di-regenerate, bukan cukup dihapus dari riwayat repo.</li>
+<li>Setiap run mencantumkan mode kredensial di collection log. Ini membantu taksir kuota run berikutnya tanpa membuka dashboard API.</li>
+</ul>
+
+<div class="box warn">
+<span class="h">Peringatan sekitar secret</span>
+Kesalahan yang paling sering terjadi di lab: menyalin token langsung ke dalam kode agar cepat berjalan. Kebiasaan kecil ini memperlihatkan kredensial di layar banyak orang — dan sekali kode terbagi, kredensial ikut terbagi. Kebiasaan yang dibangun di sini akan menolong mahasiswa ketika proyeknya besar.
+</div>
+
+<h2>4. Query dan sampling frame: mesin penanya</h2>
+<p>Query adalah mesin penanya kolektor. Ia menentukan objek apa yang berhak masuk sampel dan objek apa yang tersaring. Ada dua versi query yang perlu dibedakan sejak awal: query harapan (yang ditulis peneliti) dan query kenyataan (yang berjalan di API bersama operator tambahan serta batas platform). Operator umum yang dipakai di lab dirangkum pada tabel berikut.</p>
+
+<table>
+<caption>Tabel 4.1 — Operator query umum dan makna akuisisinya (sisipan sintak tercatat per 2026)</caption>
+<thead><tr><th>Operator</th><th>Makna</th><th>Pengaruhnya pada sampel</th></tr></thead>
+<tbody>
+<tr><td><code>#hashtag</code> atau kata</td><td>Post memuat istilah itu</td><td>Relevan langsung terhadap tema; sempit bila istilahnya jarang</td></tr>
+<tr><td><code>OR</code> dan tanda kurung</td><td>Alternatif istilah selang sehingga tak kehilangan kata</td><td>Memperluas query tanpa menguras kuota</td></tr>
+<tr><td><code>&quot;frasa tepat&quot;</code></td><td>Istilah berurutan</td><td>Sampel mengecil, presisi meningkat</td></tr>
+<tr><td><code>-is:retweet</code> (X)</td><td>Retweet dihapus</td><td>Mengurangi duplikasi; post kutipan (quote) tetap terhitung tersendiri</td></tr>
+<tr><td><code>lang:id</code></td><td>Terkait bahasa Indonesia</td><td>Label bahasa dari platform tidak selalu akurat; perlu diperiksa dengan language-ID sendiri</td></tr>
+<tr><td><code>from:akun</code></td><td>Post akun tertentu</td><td>Cepat, tetapi cenderung bias: profilnya dipilih peneliti</td></tr>
+</tbody>
+</table>
+
+<p>Empat pattern pengambilan sampel (sampling frame) pada Gambar 4.1 dibedakan, dan masing-masing membawa bias yang menyertai:<br>
+<b>keyword search</b> mengambil post yang memuat masukan query — relevan langsung dengan topik, namun bila query terlalu sempit, sampel makin kecil daripada gambaran populasi; <b>timeline</b> mengambil seluruh aktivitas akun yang dipilih — konteks akun utuh namun representatifnya akun, bukan populasi; <b>snowball</b> mengembangkan sampel melalui reply dan mention — menemukan komunitas tersembunyi namun kadang terjebak pada satu kubu; <b>random sample dari firehose</b> mengambil cuplikan acak dari stream yang terbuka — bebas dari keterikatan algoritma yang menyeleksi halaman demi halaman, namun membawa banyak post yang tidak relevan.</p>
+
+<!--FIG:figm4-sampling.svg-->
+<figcaption><b>Gambar 4.1.</b> Empat sampling frame dan bias yang menyertai masing-masing.</figcaption>
+
+<div class="box">
+<span class="h">Prinsip penting</span>
+Setiap operator query yang <b>tidak</b> dicantumkan di collection log adalah filter yang tak terbaca. Pengulas riset akan menganggap sampel yang diambil berbeda dari yang dijanjikan — dan ia benar: memang query yang berjalan berbeda dari yang ditulis.
+</div>
+
+<h2>5. Pagination: membaca halaman sampai token habis</h2>
+<p>API jarang mengembalikan seluruh jawaban sekaligus. Data datang per halaman, dan proses meminta halaman berikutnya berulang-ulang inilah <i>pagination</i>. Gambar 5.1 memperkenalkan dua pola yang diujikan di lab: <b>cursor pagination</b> (API memberi tanda "lanjut dari sini" berupa <i>next_token</i>) dan <b>potongan waktu</b> (rentang tanggal dipecah menjadi jendela yang lebih kecil).</p>
+
+<!--FIG:figm4-pagination.svg-->
+<figcaption><b>Gambar 5.1.</b> Dua mekanisme pagination: cursor pagination (A) dan pembagian rentang waktu menjadi jendela (B).</figcaption>
+
+<p>Pada cursor pagination, loop berawal dari request tanpa token; jawaban memuat batch data dan <i>next_token</i>; run berikutnya dikirim bersama token itu, dan seterusnya sampai token berikutnya bernilai kosong (null). Satu bahaya yang wajib dikenali: <b>silent truncation</b> — platform memotong hasil pada batas halamannya sendiri tanpa memberi peringatan. Sinyal yang paling mudah ditangkap di lab: ukuran halaman yang persis sama pada semua run. Angka 45-45-45 harus mengundang kecurigaan; 45-45-0 yang disebabkan token habis baru dianggap wajar.</p>
+<p>Pada potongan waktu, rentang koleksi dipecah menjadi jendela (mis. 12 jam), tiap jendela menghasilkan pengambilan yang terbatas kuotanya. Pola yang paling sering ditemui: <b>duplikasi di tepi jendela</b>. Bila aturan batas waktu (kiri-inklusif, kanan-eksklusif) tidak ditetapkan, satu post bisa tampil di dua jendela sekaligus, dan analisis selanjutnya menganggapnya dua kejadian berbeda. Dua langkah menyelesaikannya: menetapkan aturan batas (inklusif vs eksklusif), lalu menjalankan dedup pada post_id setelah semua jendela ditutup.</p>
+
+<div class="box warn">
+<span class="h">Bahaya zona waktu</span>
+Platform mengembalikan waktu dalam UTC; mahasiswa Indonesia memikir waktu WIB (UTC+7). Kesalahan klasiknya: potongan jendela "00:00–12:00" dihitung dengan membaca UTC, sementara kolektor menulis timestamp WIB. Sampel bisa kehilangan post puncak ketika garis waktu lintas zona waktu. Aturan: simpan waktu dalam UTC, dan <i>tulis keduanya</i> (UTC + WIB) di collection log.
+</div>
+
+<h2>6. Rate limit, kuota, dan backoff</h2>
+<p>Istilah <i>rate limit</i> dan kuota sering dicampur, padahal berbeda bentuk: rate limit memasok permintaan dalam satu jendela waktu (banyak API memakai 15 menit), sedangkan kuota menghitung total penggunaan dalam kalender panjang (per hari, per bulan). Keduanya bekerja seperti dua kalender yang berbeda — dan menuntut dua neraca yang diisi bersamaan.</p>
+
+<!--FIG:figm4-ratelimit.svg-->
+<figcaption><b>Gambar 6.1.</b> Rate limit per jendela (kiri) dan rencana anggaran kuota (kanan) yang ditulis sejak hari pertama.</figcaption>
+
+<p>Saat rate limit tercapai, API merespons HTTP 429 dengan header yang menyebut waktu reset. Pada lab, aturannya satu: <b>jangan terus menembak ulang</b>. Baca header reset, menunggu (<i>backoff</i>), lalu mencoba lagi setelah jendela sisa terbuka. Run tidak dipersulit dan kuota tidak terbakar oleh request yang tidak terjawab.</p>
+
+<table>
+<caption>Tabel 6.1 — Neraca anggaran kuota (contoh perencanaan lab — bukan angka resmi; verifikasi di halaman API)</caption>
+<thead><tr><th>Baris neraca</th><th>Contoh isi</th><th>Pelajaran</th></tr></thead>
+<tbody>
+<tr><td>Kuota harian yang disetujui</td><td>20.000 post per hari (tier contoh)</td><td>Baca halaman tier sebelum menulis kode</td></tr>
+<tr><td>Target korpus</td><td>150.000 post · satu topik · 30 hari</td><td>Perkiraan: 8 hari kerja bila panen stabil</td></tr>
+<tr><td>Buffer eksperimen</td><td>25% kuota (≈5.000 post/hari)</td><td>Query uji dijalankan di buffer, bukan di produksi</td></tr>
+<tr><td>Estimasi durasi</td><td>9–10 hari kerja</td><td>Waktu koleksi adalah waktu kalender, bukan waktu prosesor</td></tr>
+<tr><td>Sisa kuota yang dicatat</td><td>19.4k/20.000 (tertulis di run terakhir)</td><td>Run berikutnya tahu anggaran sisa tanpa estimasi</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Mengapa kuota jadi bagian desain</span>
+Sejak 2023, sejumlah platform memindahkan akses akademik ke tier berbayar (X) atau lingkungan riset terpisah dengan biaya kelembagaan (yang dilaporkan publik per 2026 menyebut kisaran USD 371 per tim per bulan — <b>verifikasi ulang</b> sebelum kutip di manuskrip). Konsekuensinya, jumlah halaman yang bisa dikoleksi bukan keputusan teknis semata; ia adalah keputusan anggaran yang menuntut pertanyaan "berapa data yang akan diperoleh dan berapa biayanya" bisa dijawab di hadapan komite riset.
+</div>
+
+<h2>7. Checkpoint dan checksum: koleksi yang selamat</h2>
+<p>Koleksi besar jarang sukses pada percobaan pertama. Listrik mati, koneksi terputus, rate limit keras — run yang jalan lama hampir selalu kena satu di antaranya. Tanpa mekanisme <i>checkpoint</i>, kegagalan satu jam bisa memaksa koleksi diulang dari nol. Dengan checkpoint yang baik, run yang terputus dapat dilanjutkan, bukan diulang.</p>
+
+<!--FIG:figm4-checkpoint.svg-->
+<figcaption><b>Gambar 7.1.</b> Loop checkpoint: fetch halaman → tulis append-only → hash → update checkpoint; run yang terputus disambung dari titik terakhir.</figcaption>
+
+<p>Aturan write yang diikuti lab disebut <b>append-only</b>: tiap halaman data langsung ditulis sebagai baris baru di berkas JSONL tanpa pernah menimpa isi lama. Dengan pola ini, kata “hilang” berhenti muncul dalam percakapan data — kejadian apa pun yang terlanjur terulis sudah aman.</p>
+
+<table>
+<caption>Tabel 7.1 — Isi minimal berkas <code>checkpoint.json</code></caption>
+<thead><tr><th>Field</th><th>Contoh</th><th>Guna</th></tr></thead>
+<tbody>
+<tr><td><code>run_id</code></td><td><code>run03</code></td><td>Idempoten: run yang sama menimpa checkpoint yang sama</td></tr>
+<tr><td><code>window</code></td><td>2026-11-03 → 2026-11-07 (UTC)</td><td>Jendela koleksi yang perlu dilanjutkan</td></tr>
+<tr><td><code>page</code></td><td>halaman 23 · next_token tersimpan</td><td>Resume: mulai dari sini, bukan dari halaman satu</td></tr>
+<tr><td><code>files</code></td><td>raw_w03_part01.jsonl…</td><td>Daftar berkas yang sudah terlanjur terulis</td></tr>
+<tr><td><code>updated_at</code></td><td>2026-11-07T04:12Z</td><td>Neraca waktu run terakhir</td></tr>
+</tbody>
+</table>
+
+<p>Berkas yang terkumpul kemudian mengalami <b>checksum</b>: untuk setiap berkas dihitung sidik jari SHA-256, dan sidik jari itu dikunci di manifest. Pada sesi berikutnya, hash dihitung ulang; berkas yang hashnya berbeda ditolak masuk analisis sampai penyebabnya diketahui dahulu (umumnya transfer atau salinan yang terputus). Checksum membuat klaim “berkas tidak rusak” menjadi pernyataan terverifikasi, bukan pernyataan harapan.</p>
+
+<div class="box warn">
+<span class="h">Yang tidak terselamatkan checkpoint</span>
+Koleksi jenis ini menangkap satu kejadian yang tidak bisa diselamatkan oleh sembarangan checkpoint: <b>post yang dihapus penulisnya</b>. Post yang tersedia saat run pagi bisa hilang pada run sore. Karena itu: raw disimpan <i>apa adanya</i> per run, dan tiap run mencatat waktu penarikan — dengan demikian perbandingan antar run dapat membedakan "hilang karena dihapus" dari "hilang karena tidak sempat dikoleksi".
+</div>
+
+<h2>8. Collection log: bukti, bukan pelengkap</h2>
+<p>Collection log adalah dokumen yang mengikat semua elemen modul ini. Tiga fungsinya sekaligus: sebagai <b>memori</b>, ia membebaskan peneliti dari kewajiban mengingat parameter tiap run; sebagai <b>alat konsistensi</b>, ia memaksa run ke-dua dan ke-tiga memakai frame yang sama; dan sebagai <b>alarm</b>, ia memunculkan silent truncation yang terjadi diam-diam — bila jumlah halaman berulang persis, log segera memperlihatkan pola itu. Gambar 8.1 dan Tabel 8.1 merangkum bentuk log yang dipakai di lab.</p>
+
+<!--FIG:figm4-collectionlog.svg-->
+<figcaption><b>Gambar 8.1.</b> Wujud collection log: daftar field dengan contoh isi run nyata dan maknanya.</figcaption>
+
+<table>
+<caption>Tabel 8.1 — Field minimal collection log (contoh run lab)</caption>
+<thead><tr><th>Field</th><th>Contoh isi</th><th>Fungsi</th></tr></thead>
+<tbody>
+<tr><td>run_id</td><td>run02</td><td>Idempoten; run ulang menimpa id yang sama</td></tr>
+<tr><td>platform + endpoint</td><td>X API v2 · <code>/2/tweets/search/recent</code></td><td>Versi API dicantumkan — dokumen berubah sepanjang waktu</td></tr>
+<tr><td>auth mode</td><td>app-only bearer</td><td>Basis estimasi kuota run berikutnya</td></tr>
+<tr><td>sampling frame</td><td>keyword (OR dua istilah) · window 7 hari</td><td>Frame lengkap: query eksak + rentang UTC</td></tr>
+<tr><td>mulai–selesai</td><td>03 Nov 00:00Z ↔ 07 Nov 07:00 WIB</td><td>Dua zona ditulis berdampingan</td></tr>
+<tr><td>pages / post</td><td>45 halaman · 3.120 post mentah</td><td>Halaman bulat berulang = curiga truncation</td></tr>
+<tr><td>filter aktif</td><td>exclude retweet; lang:id</td><td>Semua operator platform ditulis</td></tr>
+<tr><td>dedup</td><td>by post_id · batas kiri-inklusif</td><td>Tepi jendela tak dobel</td></tr>
+<tr><td>file + checksum</td><td>raw_w03_part01.jsonl · SHA-256 tersimpan</td><td>Bukti arsip utuh</td></tr>
+<tr><td>kuota</td><td>19.4k/20.000 post</td><td>Run berikutnya tahu sisa anggaran</td></tr>
+</tbody>
+</table>
+
+<div class="box ok">
+<span class="h">Perspektif reviewer</span>
+Penguji membaca collection log <b>sebelum</b> membaca dataset. Log yang baik memungkinkan seluruh proses direproduksi tanpa bertanya; log yang buruk memicu pertanyaan "kapan koleksi dijalankan, query apa yang dipakai, dan mengapa data tidak muncul lagi saat diulang" — pertanyaan yang seharusnya sudah terjawab oleh dokumen itu sendiri.
+</div>
+
+<h2>9. Lab utama: kolektor mini tiga platform</h2>
+<p>Lab inti pertemuan 4 merangkai seluruh konsep modul ini menjadi kerja nyata yang dinilai: mahasiswa — berpasangan — membangun kolektor sederhana pada <b>tiga platform</b> untuk satu topik yang sama. Rekomendasi platform: <i>X API v2</i> (keyword recent search), <i>Bluesky via AT Protocol</i> (firehose filter yang gratis), dan <i>YouTube Data API v3</i> (daftar komentar dari beberapa video bertopik). Tujuan target: 500 post per platform — cukup besar untuk membedakan struktur data antar platform, cukup kecil untuk menghemat kuota.</p>
+
+<h3>9.1 Sepuluh langkah lab</h3>
+<ol>
+<li><b>Kelompok &amp; topik.</b> Pilih topik yang bisa diuji pada ketiga platform sekaligus (hindari topik yang hanya hidup di satu platform).</li>
+<li><b>Kredensial di .env.</b> Empat berkas kredensial disiapkan; <code>.gitignore</code> diuji dengan memeriksa isinya.</li>
+<li><b>Kamus sampling frame.</b> Tulis query per platform sebelum menulis kode; operator diperiksa pada dokumentasi per 2026.</li>
+<li><b>Nama run.</b> Format <code>run01_singkat</code>: nama run dari awal mencegah berkas tertukar antar run dan antar kelompok.</li>
+<li><b>Kolektor X.</b> Tulis fungsi <code>fetch_page(token)</code> dan loop cursor; berhenti saat next_token null atau kuota tercapai.</li>
+<li><b>Kolektor Bluesky.</b> Subscribe firehose/filter selama 3 menit, tulis chunk per sesi; satu berkas JSONL per chunk.</li>
+<li><b>Kolektor YouTube.</b> Ambil daftar video topik → commentsThreads; pagination baca sampai nextPageToken habis.</li>
+<li><b>Setiap run: checkpoint + SHA-256.</b> Hash disimpan di manifest; run tidak pernah menimpa hasil run lain.</li>
+<li><b>Tulis collection_log.md saat run berlangsung</b> — <i>bukan</i> setelah selesai. Tangan yang menulis setelah jalan akan lupa parameter yang aktif saat itu.</li>
+<li><b>Debrief ringkas.</b> Bandingkan field dari ketiga platform; mana yang hilang di mana; beri nilai missingness.</li>
+</ol>
+
+<table>
+<caption>Tabel 9.1 — Rubrik penilaian lab dan tugas mingguan (total 100)</caption>
+<thead><tr><th>Kriteria</th><th>Porsi</th><th>Indikator penuh poin</th></tr></thead>
+<tbody>
+<tr><td>Kelaikan sampling frame</td><td>25</td><td>Frame lengkap dengan operator, jendela, dan alasannya — tiga platform konsisten</td></tr>
+<tr><td>Dedup &amp; batas jendela</td><td>15</td><td>Dedup by post_id; batas kiri-inklusif dinyatakan; uji duplikat tepi</td></tr>
+<tr><td>Checksum &amp; reproducibility</td><td>20</td><td>Checkpoint resume terbukti; verifikasi SHA-256 diulang pada sesi lain</td></tr>
+<tr><td>Collection log lengkap</td><td>30</td><td>Seluruh isian Tabel 8.1 ada; log ditulis saat run, bukan setelahnya</td></tr>
+<tr><td>Refleksi bias</td><td>10</td><td>Satu paragraf: frame mana yang mendorong hasil dan cara menaksir arahnya</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Rencana cadangan lab</span>
+Akses API bisa gagal di tengah sesi (situs terputus, kuota habis, kredensial hangus). Karena itu dosen menyimpan arsip mini lokal: kelompok yang tidak mendapat akses tetap melanjutkan langkah 4–10 memakai dataset cadangan, dan kegagalan akses justru menjadi bahan refleksi di rubrik kriteria kelima.
+</div>
+
+<h2>10. Studi kasus: arsip isu tujuh hari dalam anggaran sempit</h2>
+<p>Sering kali, mahasiswa diminta mengumpulkan percakapan sebuah isu selama satu minggu. Pertanyaan praktisnya: bagaimana menyusun keputusan-keputusan akuisisi ketika kuota menyempitkan pilihan yang tersedia? Contoh kasus yang dipakai di kelas: mendokumentasikan percakapan publik tentang <b>penanganan banjir Jakarta</b> selama tujuh hari dengan kuota yang sempit (tier terendah).</p>
+
+<table>
+<caption>Tabel 10.1 — Keputusan akuisisi kasus banjir Jakarta (7 hari) dan alasannya</caption>
+<thead><tr><th>Keputusan</th><th>Pilihan</th><th>Alasan</th></tr></thead>
+<tbody>
+<tr><td>Platform utama</td><td>X recent search (tier rendah)</td><td>Keyword search lebih tepat untuk isu generik daripada feed</td></tr>
+<tr><td>Platform gratis</td><td>Bluesky firehose (3 sesi singkat)</td><td>Biaya nol; sampling acak gratis yang melengkapi X</td></tr>
+<tr><td>Platform tambahan</td><td>YouTube komentar (5 video bertopik)</td><td>Membawa sampel komentar tanpa menguras kuota unit</td></tr>
+<tr><td>Jendela waktu</td><td>7 × 12 jam (kiri-inklusif)</td><td>Ruang percakapan tetap muat kuota per jendela</td></tr>
+<tr><td>Target per jendela</td><td>2.000 post</td><td>≈ 14.000 post mentah; perkiraan muat pada tier terendah</td></tr>
+<tr><td>Dedup tepi jendela</td><td>by post_id + batas kiri-inklusif</td><td>Tepi jendela tak dobel</td></tr>
+<tr><td>Kuota buffer</td><td>25% (untuk uji query)</td><td>Query alternatif diuji di buffer sebelum produksi</td></tr>
+<tr><td>Instrument</td><td>collection_log.md + checkpoint saat jalan</td><td>Bukti keputusan tersimpan sejak hari pertama</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Pembacaan atas keputusan studi kasus</span>
+Perhatikan bahwa langkah-langkah keputusan di atas tidak hanya tentang "platform mana yang paling nyaman": bila kuota dan akses masuk anggaran, pilihan menjadi keputusan desain riset yang dapat dibela di hadapan komite apa pun. Kolektor yang dibangun dengan cara yang sama akan melayani studi yang lebih besar pada tahun berikutnya.
+</div>
+
+<h2>11. Sepuluh kesalahan umum dalam akuisisi API</h2>
+<table>
+<caption>Tabel 11.1 — Sepuluh kesalahan yang paling sering terjadi pada siapa pun yang melakukannya pertama kali</caption>
+<thead><tr><th>#</th><th>Kesalahan</th><th>Tangkalnya</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Mencampur waktu UTC dan WIB tanpa catatan</td><td>Simpan UTC; tulis kedua zona di log</td></tr>
+<tr><td>2</td><td>Tidak menjalankan dedup by post_id antar jendela</td><td>Dedup setelah semua jendela ditutup</td></tr>
+<tr><td>3</td><td>Mengabaikan silent truncation</td><td>Bandingkan jumlah halaman antar run</td></tr>
+<tr><td>4</td><td>Operator query tidak dituliskan di log</td><td>Semua operator dicantumkan</td></tr>
+<tr><td>5</td><td>Menghabiskan kuota untuk query eksperimen</td><td>Buffer 25% ditulis paling depan</td></tr>
+<tr><td>6</td><td>Tidak memakai checkpoint sehingga run gagal harus diulang dari nol</td><td>checkpoint.json + berkas append-only</td></tr>
+<tr><td>7</td><td>Kredensial tercommit ke repo</td><td>.env + .gitignore + regenerasi setelah bocor</td></tr>
+<tr><td>8</td><td>Membandingkan jumlah post lintas platform tanpa normalisasi</td><td>Perbandingan memakai angka ternormalisasi (Modul 2)</td></tr>
+<tr><td>9</td><td>Mengabaikan fakta post dapat dihapus penulisnya</td><td>Simpan raw per run + catat waktu penarikan</td></tr>
+<tr><td>10</td><td>Log ditulis setelah run selesai menghilangkan jejak</td><td>Log diisi bersamaan dengan berjalan-nya run</td></tr>
+</tbody>
+</table>
+
+<h2>12. Ringkasan modul</h2>
+<p>Akuisisi adalah tahap pertama di mana bias, kuota, dan konsep sampling frame bekerja bersama — dan tahap yang paling mudah luput perhatian. Mahasiswa membawa pulang empat kebiasaan yang kini menjadi standar: (1) kredensial di .env dan scope yang dipilih minim; (2) sampling frame yang lengkap — query, jendela, operator, dan alasannya; (3) koleksi yang selamat — checkpoint dan penulisan append-only, checksum untuk sidik jari, dan dedup by post_id; serta (4) collection log yang ditulis <i>selama</i> run jalan, bukan sesudahnya.</p>
+<p>Tidak ada akronim yang perlu dihafal dari modul ini; yang perlu dikuasai adalah satu kalimat sederhana: <b>"Korpus yang tidak bisa direproduksi adalah korpus yang belum selesai."</b> Pada pertemuan berikutnya (Modul 5), seluruh kerangka teknik ini dipindahkan ke ranah kebijakan: apa yang terjadi bila jalur resmi terlalu mahal, dan apa yang masih sah dilakukan bila akses hanya tersedia lewat platform bergating atau lingkungan enclave.</p>
+
+<h2>13. Glosarium</h2>
+<table>
+<caption>Tabel 13.1 — Istilah inti pertemuan 4</caption>
+<thead><tr><th>Istilah</th><th>Makna dalam konteks modul ini</th></tr></thead>
+<tbody>
+<tr><td><b>endpoint</b></td><td>Alamat API tempat request dikirim; satu platform umumnya punya banyak endpoint dengan kuota yang berbeda-beda</td></tr>
+<tr><td><b>sampling frame</b></td><td>Definisi eksplisit populasi yang akan diambil: query (keyword/timeline/snowball/acak) plus jendela waktu</td></tr>
+<tr><td><b>query</b></td><td>Ekspresi pencarian yang menentukan isi sampel; operator query adalah rangkaian filter yang harus dicantumkan</td></tr>
+<tr><td><b>pagination</b></td><td>Mekanisme membaca data halaman demi halaman; diuji dalam bentuk cursor (next_token) dan potongan waktu</td></tr>
+<tr><td><b>silent truncation</b></td><td>Pemotongan hasil oleh platform tanpa pemberitahuan; ditangkap dari pola jumlah halaman yang berulang persis</td></tr>
+<tr><td><b>rate limit</b></td><td>Batas jumlah request pada jendela pendek (umumnya 15 menit); biasa menyertakan header reset</td></tr>
+<tr><td><b>kuota (quota)</b></td><td>Jumlah penggunaan maksimum pada kalender panjang; menuntut perencanaan anggaran sejak desain</td></tr>
+<tr><td><b>backoff</b></td><td>Praktik menunggu setelah menerima respons 429; mencegah kuota terbakar oleh request yang tidak terjawab</td></tr>
+<tr><td><b>checkpoint</b></td><td>Catatan keadaan (state) run yang disimpan selama koleksi berlangsung; memungkinkan run terputus dilanjutkan</td></tr>
+<tr><td><b>checksum</b></td><td>Sidik jari SHA-256 untuk berkas; pemeriksaan integritas berkas yang bisa diverifikasi</td></tr>
+<tr><td><b>append-only</b></td><td>Pola tulis yang menambah baris baru tanpa pernah menimpa isi lama; membuat "hilang" tidak mungkin</td></tr>
+<tr><td><b>dedup</b></td><td>Penghapusan duplikasi berdasarkan kunci (post_id), terutama di tepi antar jendela</td></tr>
+<tr><td><b>collection log</b></td><td>Bukti tertulis parameter tiap run: query, jendela, filter, halaman, kuota, file, checksum</td></tr>
+<tr><td><b>app password</b></td><td>Kredensial khusus pada protokol terbuka (mis. AT Protocol) yang bisa dicabut kapan saja oleh pemilik akun</td></tr>
+<tr><td><b>idempotent</b></td><td>Aturan: run yang sama memakai run_id yang sama; run ulang menimpa artefak yang sama</td></tr>
+<tr><td><b>JSONL</b></td><td>Format berkas baris-per-objek ringan, pilihan wajar untuk berkas append-only</td></tr>
+</tbody>
+</table>
+
+<h2>14. Referensi</h2>
+<ol class="refs">
+<li>Russell, M. <i>Mining the Social Web</i> (ed. 3). Bab pengumpulan data via API.</li>
+<li>Dokumentasi X API v2 — tier, kuota, harga (diakses 2026; <b>angka diverifikasi ulang</b> saat lab).</li>
+<li>Dokumentasi Meta Content Library — proses akses terpasang 2024–2026.</li>
+<li>Lohr, S. L. <i>Sampling: Design and Analysis</i> (ed. 3). Bingkai sampling yang berlaku lintas platform.</li>
+<li>Dokumentasi AT Protocol / Bluesky — app password dan firehose.</li>
+<li>Dokumentasi YouTube Data API v3 — kuota, komentar, pagination (Google Developers).</li>
+<li>Kajian "data access scarcity" pada riset platform (mis. preprint data 2505.09877, 2025).</li>
+<li>Undang-Undang No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP).</li>
+<li>Laporan publik kelembagaan lingkungan enclave riset data 2026 (dikutip bersifat indikatif).</li>
+</ol>
+
+<p class="small">Dokumen disusun dari arsip riset Modul 4 (<code>results/akuisisi-api.json</code>) dan penelusuran kebijakan akses 2024–2026. Panduan angka kuota dan harga bersifat contoh pedagogis; <b>verifikasi ulang</b> pada halaman resmi platform sebelum dipakai dalam laporan ilmiah.</p>
+
+</div>
+
+</body>
+</html>
+<!--M4END-->

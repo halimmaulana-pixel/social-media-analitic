@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buku Ajar Materi 1 — Fondasi &amp; Ruang Lingkup Social Media Analytics</title>
+<style>
+  :root{
+    --ink:#141414; --muted:#5A5A5A; --line:#D9D9D9; --bg:#FFFFFF;
+    --blue:#0072B2; --green:#009E73; --amber:#E69F00; --orange:#D55E00; --plum:#7A4FA0;
+    --softblue:#F2F8FD; --softgreen:#F1FAF5; --softamber:#FEF6E7; --softorange:#FDF1EA; --softgrey:#F6F6F8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#EEF0F2;color:var(--ink);
+       font-family:"Times New Roman", Georgia, serif;font-size:16px;line-height:1.55}
+  .page{max-width:1000px;margin:24px auto;background:var(--bg);padding:52px 60px 64px;
+        box-shadow:0 2px 14px rgba(0,0,0,.12)}
+  h1,h2,h3,h4,.sans{font-family:Helvetica,Arial,"DejaVu Sans",sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:19px;margin:34px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+  h3{font-size:16px;margin:22px 0 6px;color:#1F3A5F}
+  h4{font-size:14.5px;margin:16px 0 4px;color:#333}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:3px 0}
+  .cover{border:2px solid var(--ink);padding:26px 30px;margin-bottom:26px}
+  .cover .kicker{font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;color:var(--orange);text-transform:uppercase}
+  .cover h1{margin-top:8px}
+  .cover .sub{font-size:15px;color:var(--muted)}
+  table{border-collapse:collapse;width:100%;margin:12px 0 6px;font-size:13.5px}
+  caption{caption-side:top;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:13px;
+          font-weight:bold;color:#1F3A5F;padding:6px 0}
+  th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+  thead th{background:#EAF1F7;font-family:Helvetica,Arial,sans-serif;font-size:12.5px}
+  tbody tr:nth-child(even){background:#FAFBFC}
+  figure{margin:16px 0 22px;page-break-inside:avoid}
+  figure svg{width:100%;height:auto;border:1px solid var(--line);background:#fff}
+  figcaption{font-family:Helvetica,Arial,sans-serif;font-size:12.5px;color:var(--muted);margin-top:6px}
+  .box{border:1px solid var(--line);border-left:5px solid var(--blue);background:var(--softblue);
+       padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .box.warn{border-left-color:var(--orange);background:var(--softorange)}
+  .box.ok{border-left-color:var(--green);background:var(--softgreen)}
+  .box.note{border-left-color:var(--amber);background:var(--softamber)}
+  .box .h{font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13px;display:block;margin-bottom:4px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tag{display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:11px;padding:1px 7px;
+       border-radius:10px;border:1px solid var(--line);background:#fff;color:#333;margin-right:5px}
+  .small{font-size:12.5px;color:var(--muted)}
+  .toc{background:var(--softgrey);border:1px solid var(--line);padding:14px 22px;font-size:14px}
+  .toc ol{margin:6px 0 0 20px}
+  figure.pagebreak{page-break-before:always}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;padding:0}h2{page-break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+  <div class="kicker">Buku Ajar · Mata Kuliah Social Media Analytics · Pertemuan 1 dari 14</div>
+  <h1>Materi 1 — Fondasi &amp; Ruang Lingkup Social Media Analytics</h1>
+  <div class="sub">Definisi, posisi disiplin, siklus hidup data, tangga maturitas analitik, unit analisis, dan perbedaan metrik–insight</div>
+</div>
+
+<table>
+<caption>Tabel 0.1 — Identitas materi</caption>
+<tbody>
+<tr><th style="width:190px">Mata kuliah</th><td>Social Media Analytics (3 SKS · semester 5)</td></tr>
+<tr><th>Pertemuan</th><td>1 dari 14 (sesuai RPS 14 pertemuan)</td></tr>
+<tr><th>Beban pertemuan</th><td>150 menit tatap muka: 100 menit kuliah interaktif + 50 menituan praktikum</td></tr>
+<tr><th>Prasyarat</th><td>Statistika Dasar · Pemrograman Dasar (Python atau R) · penguasaan dasar media sosial sebagai pengguna kritis</td></tr>
+<tr><th>CPMK yang dikerjakan</th><td>CPMK-1: Menjelaskan ruang lingkup, jenis data, ekosistem platform, jalur akses, serta etika &amp; regulasi analitik media sosial</td></tr>
+<tr><th>Bukti penilaian pertemuan ini</th><td>Kuis konsep (5%) + rencana analisis 2 halaman (5%) + ketuntasan latihan mandiri (formatif)</td></tr>
+<tr><th>Dasar penyusunan</th><td>Hasil riset 29 modul kurikulum SMA 2024–2026 (arsip <code>results/*.json</code>) dan web-search tren 2024–2026</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<span class="h">Cara memakai buku ini</span>
+Buku ini dirancang untuk satu pertemuan (“one-meeting teaching module”). Urutan baku yang disarankan:
+<b>Bagian 2 → 3 → 4 → 5 → 6 → 7 → 8</b>, ditutup <b>studi kasus terpandu (Bagian 9)</b> dan <b>latihan mandiri (Bagian 12)</b>.
+Bagian 10–11 adalah referensi permanen untuk tugas-tugas berikutnya. Semua angka industri di buku ini berasal dari laporan vendor/institusi dan diberi catatan sumber — mahasiswa wajib memverifikasi ulang sebelum mengutipnya di karya tulis.
+</div>
+
+<div class="toc">
+<b class="sans">Daftar isi</b>
+<ol>
+<li>Peta pembelajaran pertemuan 1</li>
+<li>Apa itu Social Media Analytics</li>
+<li>Mengapa materi ini penting pada 2026</li>
+<li>Siklus hidup data analitik media sosial</li>
+<li>Sumber data dan lanskap akses 2026</li>
+<li>Tangga maturitas: deskriptif → preskriptif</li>
+<li>Unit analisis: apa yang sedang anda analisis</li>
+<li>Dari metrik ke insight</li>
+<li>Studi kasus terpandu: “Apakah persepsi merek X memburuk di TikTok?”</li>
+<li>Sepuluh kesalahan umum mahasiswa</li>
+<li>Etika dan regulasi secara ringkas</li>
+<li>Latihan mandiri dan studi kasus diskusi</li>
+<li>Ringkasan, glosarium, dan referensi</li>
+</ol>
+</div>
+
+<h2>1. Peta pembelajaran pertemuan 1</h2>
+
+<table>
+<caption>Tabel 1.1 — Sub-CPMK, indikator, dan rute pembelajaran</caption>
+<thead><tr><th style="width:70px">Tahap</th><th style="width:210px">Sub-CPMK (indikator)</th><th>Materi / aktivitas</th><th style="width:120px">Alokasi</th></tr></thead>
+<tbody>
+<tr><td>T1</td><td>Menjelaskan definisi, ruang lingkup, dan batas SMA</td><td>Kuliah interaktif Bagian 2 + diskusi “SMA vs monitoring”</td><td>25 menit</td></tr>
+<tr><td>T2</td><td>Memetakan posisi SMA dalam disiplin ilmu</td><td>Gambar 1 + latihan memetakan sendiri disiplin</td><td>15 menit</td></tr>
+<tr><td>T3</td><td>Menjelaskan enam tahap siklus data</td><td>Gambar 2 + contoh tautan antar-tahap</td><td>20 menit</td></tr>
+<tr><td>T4</td><td>Membedakan sumber data &amp; tingkat keterbukaannya</td><td>Tabel 5.2 + Gambar 5 + demo dokumentasi API</td><td>20 menit</td></tr>
+<tr><td>T5</td><td>Mengelompokkan pertanyaan analitik ke tingkat maturitas</td><td>Gambar 3 + latihan mengurutkan 6 pertanyaan</td><td>10 menit</td></tr>
+<tr><td>T6</td><td>Menentukan unit analisis yang tepat</td><td>Gambar 4 + Tabel 7.1</td><td>10 menit</td></tr>
+<tr><td>T7</td><td>Membedakan metrik, temuan, dan insight</td><td>Gambar 6 + studi kasus terpandu Bagian 9</td><td>30 menit</td></tr>
+<tr><td>T8</td><td>Menyusun rencana analisis sederhana</td><td>Praktikum: kerangka rencana (kelompok 2–3)</td><td>20 menit</td></tr>
+</tbody>
+</table>
+
+<div class="box ok">
+<span class="h">Pertanyaan pemantik pembuka (5 menit, sebelum kuliah)</span>
+“Sebuah merek menarik 3 juta <i>view</i> dan 4,2% <i>engagement</i> di TikTok minggu lalu. Apakah itu kabar baik?”
+Simpan jawaban mahasiswa; pertanyaan ini dibuka kembali di Bagian 8 sebagai alat evaluasi pemahaman.
+</div>
+
+<h2>2. Apa itu Social Media Analytics</h2>
+
+<h3>2.1 Definisi lengkap dan definisi operasional</h3>
+<p><b>Definisi panjang.</b> <i>Social media analytics</i> (SMA) adalah serangkaian metode dan proses untuk memperoleh, membersihkan, menganalisis, dan menginterpretasikan data yang dihasilkan oleh aktivitas manusia pada platform media sosial — beserta seluruh aktivitas <i>engagement</i> dan metadata sistemnya — guna menjawab pertanyaan terukur tentang audiens, isu, konten, merek, atau perilaku kolektif.</p>
+<p><b>Definisi operasional yang dipakai di kuliah ini.</b> Suatu kegiatan dikatakan SMA apabila memenuhi <b>empat syarat</b>:</p>
+<ol>
+<li><b>Data sebagai bahan dasar</b> — ada unit data platform yang terarsip (teks, media, interaksi, atau metadata), bukan hanya opini/cerita.</li>
+<li><b>Prosedur yang dapat diulang</b> — tahap akuisisi sampai analisis terdokumentasi sehingga bisa dijalankan ulang oleh orang lain.</li>
+<li><b>Metode yang eksplisit</b> — teknik dinyatakan terbuka (mis. TF-IDF, BERTopic, sentralitas <i>betweenness</i>), bukan “dibaca dulu”.</li>
+<li><b>Pertanyaan yang terukur</b> — pertanyaan memuat siapa, apa, kapan, dibandingkan dengan apa, dan batasan generalisasi.</li>
+</ol>
+<div class="box warn">
+<span class="h">Tes cepat untuk mahasiswa</span>
+“Saya membaca 500 komentar dan menyimpulkan audiens marah” — <b>bukan</b> SMA menurut empat syarat di atas (tidak terdokumentasi, tidak eksplisit, tidak terukur). “Saya menarik 4.812 komentar dari 31 hari, menandai 200 di antaranya sebagai emosi marah melalui dua pemeriksa dengan κ = 0,78, lalu melatih classifier dan melaporkan rasio per minggu” — <b>adalah</b> SMA.
+</div>
+
+<h3>2.2 Ruang lingkup: apa yang termasuk dan yang tidak</h3>
+<table>
+<caption>Tabel 2.1 — Batas ruang lingkup SMA</caption>
+<thead><tr><th style="width:33%">Termasuk</th><th style="width:33%">Sebagian (tergantung metode)</th><th>Tidak termasuk (di kuliah ini)</th></tr></thead>
+<tbody>
+<tr><td>Analisis teks, topik, sentimen, emosi; analisis jaringan interaksi; perilaku &amp; engagement; konten multimodal; deteksi konten sintetis; pengukuran audiens dan merek</td>
+td>Riset pengalaman pengguna (UX) berbasis interview; studi kasus kualitatif tanpa data terstruktur; observasi etnografis komunitas daring</td>
+<td>Manajemen media sosial (jadwal unggah, moderasi komunitas); produksi konten; kampanye berbayar (media buying); social media <i>customer service</i></td></tr>
+</tbody>
+</table>
+
+<h3>2.3 SMA bukan nama lain untuk “social listening”</h3>
+<p>Empat istilah sering dipakai bergantian padahal cakupannya berbeda. Mahasiswa wajib bisa membedakannya, karena di dunia kerja ketidakmampuannya membedakan istilah ini menjadi salah satu kesalahan pewawancara terbesar bagi lulusan muda.</p>
+<table>
+<caption>Tabel 2.2 — Empat istilah yang sering tertukar</caption>
+<thead><tr><th>Istilah</th><th>Ciri utama</th><th>Produk khas</th><th>Contoh instrumen</th></tr></thead>
+<tbody>
+<tr><td><b>Social listening</b></td><td>Pemantauan menyeluruh untuk kesadaran merek dan isu; komersial; dekat waktu-nyata</td><td>Peringatan lonjakan, laporan keseimbangan sentimen</td><td>Brandwatch, Meltwater, Pulsar, Talkwalker</td></tr>
+<tr><td><b>Social media analytics</b></td><td>Analisis data terstruktur untuk pertanyaan spesifik; seperti statistik; riset</td><td>Model, metrik, tabel hasil, dataset &amp; kode</td><td>Python/R + API platform</td></tr>
+<tr><td><b>Digital/web analytics</b></td><td>Perilaku pengunjung pada properti milik sendiri (situs, aplikasi)</td><td>Funnel, konversi, retensi, atribusi</td><td>Google Analytics, Matomo</td></tr>
+<tr><td><b>Social media monitoring</b></td><td>Pencatatan terjadwal tanpa analisis panjang</td><td>Dashboard angka dan notifikasi</td><td>Alert, mention counter</td></tr>
+</tbody>
+</table>
+
+<h3>2.4 Peta disiplin</h3>
+<p>SMA lahir dari pertemuan empat tradisi ilmu yang membawa pertanyaan dan metode berbeda. Satu tim proyek SMA yang baik biasanya memerlukan keempat sumbangsih ini — dan kesalahan paling mahal terjadi ketika satu disiplin menguasai penuh proyek (mis. hanya metode komputasi, tanpa teori komunikasi, sehingga temuan tidak bermakna secara substantif).</p>
+<!--FIG:fig1-discipline.svg-->
+<figcaption><b>Gambar 1.</b> Posisi Social Media Analytics sebagai irisan empat disiplin: ilmu komunikasi (apa yang dibicarakan dan bagaimana narasi terbentuk), ilmu komputer/NLP (pipeline dan model), statistika/pembelajaran mesin (validitas dan ketidakpastian), riset pasar/marketing (nilai bisnis).</figcaption>
+
+<table>
+<caption>Tabel 2.3 — Sum bangsih tiap disiplin dalam satu proyek SMA</caption>
+<thead><tr><th style="width:200px">Disiplin</th><th>Pertanyaan yang dibawa</th><th>Metode yang dibawa</th><th>Kegagalan bila dikuasai sendiri</th></tr></thead>
+<tbody>
+<tr><td>Ilmu komunikasi</td><td>Isu apa yang berkembang? Siapa pembicara? Framing seperti apa?</td><td>Analisis wacana, analisis isi, teori agenda</td><td>Temuan tanpa teori: daftar kata populer tanpa penjelasan makna</td></tr>
+<tr><td>Ilmu komputer / NLP</td><td>Bagaimana memproses data dalam skala besar dan reproducible?</td><td>Klasifikasi, topic modeling, pencocokan teks, pipeline otomatis</td><td>Model berakurasi tinggi tetapi menjawab pertanyaan yang tidak penting</td></tr>
+<tr><td>Statistika / ML</td><td>Seberapa yakin kita? Apa bias sampelnya?</td><td>Sampling, uji hipotesis, metrik evaluasi, validasi</td><td>Angka presisi tetapi tidak dapat dipertahankan (overclaiming)</td></tr>
+<tr><td>Riset pasar / marketing</td><td>Apa implikasi untuk merek dan keputusan?</td><td>Social listening, pengukuran merek, perencanaan konten</td><td>Rekomendasi tanpa bukti diagnostik (Gambar 6)</td></tr>
+</tbody>
+</table>
+
+<h2>3. Mengapa materi ini penting pada 2026</h2>
+
+<h3>3.1 Skala fenomena dan pasarnya</h3>
+<table>
+<caption>Tabel 3.1 — Indikator skala per 2026 (laporan vendor/lembaga; verifikasi sebelum dikutip)</caption>
+<thead><tr><th style="width:230px">Indikator</th><th>Angka</th><th>Sumber</th><th>Catatan pemakaian</th></tr></thead>
+<tbody>
+<tr><td>Pengguna media sosial global</td><td>±5,41 miliar (±68,5% populasi dunia)</td><td>Improvado, <i>Social Media Data &amp; Statistics 2026</i></td><td>Estimasi vendor; bedakan dengan “identitas pengguna” (±5,81 miliar, DataReportal Okt 2026)</td></tr>
+<tr><td>Pasar perangkat analitik media sosial</td><td>USD 10,94 miliar (2026) → USD 24,42 miliar (2031), CAGR 17,42%</td><td>Mordor Intelligence</td><td>Menunjukkan permintaan tenaga menganalisis; angka pasar, bukan pengguna</td></tr>
+<tr><td>Lanskap akses data</td><td>Berbayar &amp; dibatasi menjadi norm baru</td><td>arXiv:2505.09877 (2025); dokumentasi Meta; X</td><td>Lihat Tabel 5.2</td></tr>
+<tr><td>Konten yang dianalisis</td><td>Terdesak ke video pendek &amp; multimodal</td><td>Hootsuite <i>Social Trends 2026</i>; We Are Social</td><td>Analisis teks saja kini tidak memadai</td></tr>
+<tr><td>Creator economy &amp; social commerce</td><td>±USD 249 miliar (2026)</td><td>DemandSage/Riset industri</td><td>Dasar modul creator &amp; commerce (electif)</td></tr>
+</tbody>
+</table>
+
+<h3>3.2 Tujuh perubahan yang menentukan isi kuliah ini</h3>
+<table>
+<caption>Tabel 3.2 — Perubahan 2024–2026 dan konsekuensinya pada kemampuan</caption>
+<thead><tr><th style="width:30px">#</th><th style="width:230px">Perubahan</th><th>Bukti</th><th>Konsekuensi bagi mahasiswa</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Konten multimodal jadi default</td><td>Hootsuite 2026: konten harus multi-modal</td><td>Wajib bisa transkrip audio (Whisper), OCR teks layar, analisis gambar</td></tr>
+<tr><td>2</td><td>LLM menjadi standar koder/annotator</td><td>Törnberg 2024; Gilardi 2024; Bermejo 2025</td><td>Wajib bisa merancang codebook→prompt dan memvalidasi dengan κ</td></tr>
+<tr><td>3</td><td>Video pendek menjadi saturan konten utama</td><td>TikTok, Reels, Shorts; panduan metrik 2025–2026</td><td>Metrik utama pindah ke <i>watch time</i>, <i>completion</i>, <i>save</i>/<i>share</i></td></tr>
+<tr><td>4</td><td>Social commerce &amp; creator economy tumbuh</td><td>Estimasi pasar 2026 ±USD 249 miliar</td><td>Pengukuran penjualan influencer, kualitas engagement, kepatuhan label</td></tr>
+<tr><td>5</td><td>Konten sintetis &amp; misinformasi AI meningkat</td><td>arXiv:2505.10266; Park 2026; NewsGuard AI Tracking Center</td><td>Deteksi konten AI, provenance/watermarking, “pangsa post sintetis”</td></tr>
+<tr><td>6</td><td>Agentic AI masuk workflow listening</td><td>Produk Pulsar/Talkwalker 2025–2026; panduan agent untuk riset pasar</td><td>Peran analis: merancang, mengevaluasi, dan mengaudit keluaran agent</td></tr>
+<tr><td>7</td><td>Akses data berbayar/terbatas</td><td>X menghapus akses akademik gratis (2023); enclave riset berbayar 2026</td><td>Kemampuan “desain studi yang tetap feasible” menjadi inti kurikulum</td></tr>
+</tbody>
+</table>
+
+<h2>4. Siklus hidup data analitik media sosial</h2>
+<p>SMA bukan satu teknik, melainkan <b>rangkaian enam tahap</b>. Kualitas akhir rata-rata seluruh tahap: satu tahap yang bocak merusak tahap berikutnya, dan tidak dapat diperbaiki oleh teknik pada tahap akhir.</p>
+<!--FIG:fig2-lifecycle.svg-->
+<figcaption><b>Gambar 2.</b> Siklus enam tahap SMA beserta putaran umpan balik. Perhatikan bahwa tahap yang paling sering salah dimahasiswa adalah tahap 2 (sampling frame) dan tahap 6 (interpretasi), bukan tahap 4 (pemodelan).</figcaption>
+
+<h3>4.1 Rincian tiap tahap</h3>
+<table>
+<caption>Tabel 4.1 — Enam tahap siklus: aksi nyata, luaran, dan kesalahan umum</caption>
+<thead><tr><th style="width:150px">Tahap</th><th style="width:250px">Aksi nyata</th><th style="width:210px">Luaran yang harus ada</th><th>Kesalahan umum</th></tr></thead>
+<tbody>
+<tr><td><b>1. Rumusan pertanyaan</b></td><td>Menerjemahkan keluhan pembuat keputusan menjadi pertanyaan terukur</td><td>Rencana analisis 1–2 halaman: pertanyaan, unit analisis, pembanding, batasan</td><td>Pertanyaan kabur (“bagaimana opini publik?”) yang tak bisa dijawab salah/benar</td></tr>
+<tr><td><b>2. Akses &amp; akuisisi</b></td><td>Pilih jalur akses, tentukan sampling frame, patuhi kuota</td><td>Dataset mentah + collection log (query, tanggal, jumlah, filter) + checksum</td><td>Sampling tersembunyi (API hanya mengembalikan “top”, bukan semua) dan tidak dilaporkan</td></tr>
+<tr><td><b>3. Preprocessing</b></td><td>Normalisasi, dedup, filter bot, deteksi bahasa, anonimisasi</td><td>Dataset bersih + laporan before/after (jumlah, duplikat, komposisi bahasa)</td><td>Membersihkan berlebihan (menghapus negasi/sarkasme) atau menyaring bot berlebihan</td></tr>
+<tr><td><b>4. Analisis / model</b></td><td>Terapkan metode sesuai pertanyaan dan tingkat maturitas</td><td>Kode, model, dan metrik evaluasi (bukan hanya angka akhir)</td><td>Melompat ke model canggih tanpa baseline; kebocoran data masa depan (leak)</td></tr>
+<tr><td><b>5. Visualisasi</b></td><td>Bangun graf/tren/dashboard yang jujur dan memuat ketidakpastian</td><td>Figur/table dengan sumbu wajar, rentang tanggal, ukuran sampel</td><td>Graf tanpa ukuran sampel; potongan sumbu; memilih jendela waktu menguntungkan</td></tr>
+<tr><td><b>6. Interpretasi &amp; preservasi</b></td><td>Hubungkan temuan dengan mekanisme, nyatakan keterbatasan, simpan artefak</td><td>Insight bermakna + bagian keterbatasan + paket data &amp; kode</td><td>Menyebut metrik sebagai insight; tidak menyimpan kode/data (tidak reproducible)</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Prinsip “rantai terlemah”</span>
+Bayangkan masing-masing tahap sebagai fungsi: <i>kualitas akhir = min(tahap 1..6)</i>. Sampel bias (tahap 2) tidak dapat diselamatkan oleh model terbaik (tahap 4) — model hanya akan mempelajari bias itu dengan lebih rapi.
+</div>
+
+<h2>5. Sumber data dan lanskap akses 2026</h2>
+
+<h3>5.1 Jalur akses dan konsekuensinya</h3>
+<p>Ada tiga jalur utama memperoleh data. Mahasiswa harus tahu jalur mana yang memungkinkan pertanyaan apa, dan biaya apa yang “tidak terlihat”.</p>
+<table>
+<caption>Tabel 5.1 — Tiga jalur akuisisi data</caption>
+<thead><tr><th style="width:150px">Jalur</th><th style="width:210px">Contoh</th><th>Kekuatan</th><th>Risiko / batasan</th></tr></thead>
+<tbody>
+<tr><td>API resmi</td><td>X API v2, TikTok Research API, YouTube Data API, Reddit API, Bluesky Jetstream</td><td>Stabil, terdokumentasi, legal, ada metadata lengkap</td><td>Kuota, filter tersembunyi, biaya (X), gating (Meta)</td></tr>
+<tr><td>Enclave riset</td><td>Meta Content Library &amp; SOMAR Virtual Data Enclave</td><td>Arsip besar &amp; berkualitas tinggi; gratis untuk institusi akademik yang lolos</td><td>Eligibility institusional; eksekusi hanya di dalam enclave; mulai ada biaya per tim sejak Jan 2026 (±USD 371/tim/bulan — verifikasi)</td></tr>
+<tr><td>Scraping &amp; sumber terbuka lain</td><td>HTML/playwright, yt-dlp, arsip publik, dataset komunitas</td><td>Gratis, dapat menjangkau hal yang tidak tersedia di API</td><td>ToS dan hukum (UU PDP, GDPR), anti-bot, reputasi, tidak stabil</td></tr>
+</tbody>
+</table>
+
+<h3>5.2 Lanskap keterbukaan per platform</h3>
+<!--FIG:fig5-openness.svg-->
+<figcaption><b>Gambar 5.</b> Perbandingan indikatif keterbukaan akses riset per platform (2026). Platform dengan protokol terbuka memudahkan studi reproducible; platform ter-gated menuntut perencanaan akses sejak awal desain studi.</figcaption>
+
+<table>
+<caption>Tabel 5.2 — Matriks akses platform (verifikasi tier/kuota/biaya setiap semester)</caption>
+<thead><tr><th style="width:130px">Platform</th><th style="width:150px">Jalur utama</th><th style="width:110px">Status akses</th><th>Catatan untuk rancangan studi</th></tr></thead>
+<tbody>
+<tr><td>Bluesky</td><td>AT Protocol / Jetstream</td><td>Terbuka</td><td>Pilihan utama proyek kelas yang membutuhkan graf besar &amp; reproducible; perhatikan ukuran komunitas Indonesia yang masih terbatas</td></tr>
+<tr><td>Reddit</td><td>API resmi</td><td>Terbuka berkuota</td><td>Rate limit dan kebijakan paska-2023; cocok untuk data thread terstruktur</td></tr>
+<tr><td>YouTube</td><td>Data API</td><td>Terbuka berkuota</td><td>Komentar + metadata video; kuota harian perlu dikuotakan antar tim</td></tr>
+<tr><td>TikTok</td><td>Research API</td><td>Terbatas/terdaftar</td><td>Memerlukan pengajuan tujuan riset; alternatif: data publik dari akun sendiri (dengan persetujuan pemilik) atau studi kasus</td></tr>
+<tr><td>X / Twitter</td><td>API v2 berbayar</td><td>Berbayar</td><td>Akses akademik gratis dihapus 2023; rencana anggaran harus ditulis sejak RPS</td></tr>
+<tr><td>Facebook / Instagram</td><td>Meta Content Library</td><td>Gated akademik</td><td>Gratis tetapi hanya untuk institusi akademik yang lolos; eksekusi di enclave, ekspor terbatas</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<span class="h">Konsekuensi pedagogis</span>
+Karena akses tidak dapat diasumsikan gratis, kemampuan yang dinilai bukan “bisa memakai satu platform”, melainkan: <b>memilih platform yang bisa diakses, merancang pertanyaan yang tetap dapat dijawab dengan data yang diperoleh, dan mendokumentasikan batasan sampling tersebut secara eksplisit.</b>
+</div>
+
+<h2>6. Tangga maturitas: deskriptif → preskriptif</h2>
+<p>Setiap pertanyaan analitik menempati salah satu dari empat tingkat. Semua tingkat sah; yang tidak sah adalah <b>memakai bahasa tingkat tinggi untuk klaim tingkat rendah</b> (mis. menyebut “brand rusak” hanya dari selisih sentimen).</p>
+<!--FIG:fig3-maturity.svg-->
+<figcaption><b>Gambar 3.</b> Empat tingkat maturitas analitik beserta bukti yang diwajibkan tiap tingkat. Nilai meningkat ke kanan, tetapi begitu pula kesempatan salah tafsir.</figcaption>
+
+<table>
+<caption>Tabel 6.1 — Empat tingkat: contoh pertanyaan, bukti, dan alat</caption>
+<thead><tr><th style="width:120px">Tingkat</th><th style="width:200px">Contoh pertanyaan</th><th style="width:190px">Bukti yang diwajibkan</th><th>Alat/modul terkait</th></tr></thead>
+<tbody>
+<tr><td><b>Deskriptif</b></td><td>Berapa porsi sentimen negatif tiap minggu?</td><td>Jumlah data, definisi label, rentang tanggal, ketidakpastian sederhana</td><td>pandas, lexicon, visualisasi</td></tr>
+<tr><td><b>Diagnostik</b></td><td>Mengapa lonjakan terjadi pada minggu 3?</td><td>Perbandingan terkontrol (kegiatan platform/kebijakan/event), analisis aspek/topik</td><td>ABSA, BERTopic, kohort waktu</td></tr>
+<tr><td><b>Prediktif</b></td><td>Post seperti apa yang akan <i>trending</i>?</td><td>Split temporal (bukan acak), metrik out-of-sample, kalibrasi</td><td>Regresi/ML, fitur konten, time series</td></tr>
+<tr><td><b>Preskriptif</b></td><td>Anggaran konten dialokasikan bagaimana?</td><td>Evaluasi dampak tindakan (bukan hanya korelasi), uji A/B bila memungkinkan</td><td>Optimasi + evaluasi kampanye</td></tr>
+</tbody>
+</table>
+
+<h2>7. Unit analisis: apa yang sedang anda analisis</h2>
+<p>Kegagalan paling sering bukan pada model, melainkan pada <b>kesalahan peralihan unit analisis</b>: metrik per-post diartikan sebagai metrik per-pengguna, atau agregasi per-kampanye diartikan sebagai peristiwa individual. Gambar 4 memetakan lima tingkatan dan pertanyaan yang sah untuk masing-masing.</p>
+<!--FIG:fig4-units.svg-->
+<figcaption><b>Gambar 4.</b> Lima tingkatan unit analisis dan anatomi empat lapis data dalam satu post. Setiap pernyataan dalam laporan analisis harus menyebut explisit unit analisis yang dipakai.</figcaption>
+
+<table>
+<caption>Tabel 7.1 — Unit analisis, data yang dibutuhkan, pertanyaan sah, dan jebakan</caption>
+<thead><tr><th style="width:120px">Unit</th><th style="width:190px">Data yang dibutuhkan</th><th style="width:200px">Pertanyaan sah</th><th>Jebakan</th></tr></thead>
+<tbody>
+<tr><td><b>Platform / ekosistem</b></td><td>Kumpulan beberapa platform dengan kueri yang setara</td><td>Apakah narasi berbeda antar aplikasi? Platform mana layak diaudit?</td><td>Membandingkan jumlah mentah tanpa normalisasi ukuran audiens</td></tr>
+<tr><td><b>Conversasi / kampanye</b></td><td>Thread, tagar, rentang waktu lengkap</td><td>Bagaimana isu X berkembang 7 hari? Topik apa muncul pasca peristiwa?</td><td>Jendela waktu dipilih setelah melihat puncak (cherry-picking)</td></tr>
+<tr><td><b>Post / konten</b></td><td>Teks + media + metrik engagement</td><td>Format apa yang mendorong <i>save</i>? Hook seperti apa menahan penonton?</td><td>Engagement dibaca sebagai sikap/opini individu</td></tr>
+<tr><td><b>Pengguna / akun</b></td><td>Profil + riwayat post; demografi hanya jika tersedia</td><td>Siapa pembicara teraktif? Akun mana tampak otomatis?</td><td>Demografi terinferensi diperlakukan sebagai fakta</td></tr>
+<tr><td><b>Jaringan / komunitas</b></td><td>Graf balas/mention/follow/co-post</td><td>Siapa jembatan antar-kubu? Adakah klaster terkoordinasi?</td><td>Sentralitas dibaca sebagai “pengaruh” tanpa uji efek</td></tr>
+</tbody>
+</table>
+
+<h2>8. Dari metrik ke insight</h2>
+<p>Perbedaan antara laporan yang baik dan laporan biasa berada di bagian ini. <b>Metrik</b> menjawab “berapa”, <b>temuan</b> menjawab “apa polanya”, dan <b>insight</b> menjawab “mengapa bisa demikian” <i>plus implikasinya</i>. Hanya tingkat ketiga dapat digunakan untuk keputusan, dan hanya ia yang memerlukan kemungkinan keterangan alternatif.</p>
+<!--FIG:fig6-insight.svg-->
+<figcaption><b>Gambar 6.</b> Lima tingkat dari data ke rekomendasi. Nilai naik ke kanan, namun begitu pula risiko salah-tafsir; daftar jebakan di bawah grafik adalah checklist minimum setiap laporan.</figcaption>
+
+<table>
+<caption>Tabel 8.1 — Metrik, temuan, dan insight pada satu kasus</caption>
+<thead><tr><th style="width:110px">Tingkat</th><th style="width:250px">Pernyataan</th><th>Kenapa level ini</th></tr></thead>
+<tbody>
+<tr><td>Metrik</td><td>“3,1 juta view, engagement 4,2%.”</td><td>Angka, tanpa pembanding dan tanpa penjelasan</td></tr>
+<tr><td>Temuan</td><td>“<i>Save</i> naik 38% pada minggu 3, sementara <i>like</i> datar.”</td><td>Ada pola dan arah perubahan, belum ada mekanisme</td></tr>
+<tr><td>Insight</td><td>“Format ‘cara membuat’ mendorong <i>save</i> karena konten tutorial dipakai seperti resep; <i>like</i> bukan indikator minat tertunda.”</td><td>Ada mekanisme (referensi/utilitas) dan implikasi format</td></tr>
+<tr><td>Rekomendasi</td><td>“Aliokasikan 60% produksi ke format tutorial; ukur <i>save</i> sebagai KPI utama, bukan <i>like</i>.”</td><td>Ada keputusan yang dapat diuji dampaknya</td></tr>
+</tbody>
+</table>
+
+<div class="box ok">
+<span class="h">Empat pemeriksaan wajib sebelum mengiris klaim</span>
+<ol style="margin:6px 0 0 18px">
+<li><b>Unit</b> — angka ini per post, per akun, atau per kampanye?</li>
+<li><b>Pembanding</b> — dibandingkan dengan apa, dan apakah pembandingnya setara?</li>
+<li><b>Ketidakpastian &amp; bias</b> — berapa ukuran sampel, apa bias sampling, apa penjelasan alternatif?</li>
+<li><b>Mekanisme</b> — mengapa pola ini bisa terjadi, dan apa bukti pendukungnya?</li>
+</ol>
+</div>
+
+<h2>9. Studi kasus terpandu: “Apakah persepsi merek X memburuk di TikTok?”</h2>
+<p>Studi kasus ini menelusuri satu pertanyaan melalui seluruh rangkaian tahap siklus data dan seluruh tingkat maturitas. Mahasiswa cukup mengubah nama merek, platform, dan rentang waktu untuk menjadikannya rencana tugas mandiri.</p>
+
+<table>
+<caption>Tabel 9.1 — Langkah demi langkah studi kasus</caption>
+<thead><tr><th style="width:44px">Langkah</th><th style="width:170px">Tahap siklus</th><th style="width:230px">Yang dikerjakan</th><th>Keputusan &amp; catatan metodologis</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Rumusan pertanyaan</td><td>“Bagaimana emosi terhadap merek X berubah selama 4 minggu di TikTok, dan aspek apa yang mendorong perubahan itu?”</td><td>Dibatasi pada 1 platform + 4 minggu; satuan: post; label: emosi (positif/negatif/Netral/marut?)</td></tr>
+<tr><td>2</td><td>Definisi label</td><td>Codebook 1 halaman: definisi setiap kelas emosi, aturan sarkasme, ambang keputusan</td><td>Wajib ditulis sebelum penggalangan data; menjadi dasar prompt LLM di langkah 5</td></tr>
+<tr><td>3</td><td>Akses &amp; akuisisi</td><td>Tentukan jalur (API riset / metadata publik), tetapkan sampling frame, kumpulkan 4 minggu</td><td>Collection log: kueri, tanggal, jumlah, filter; checksum tiap batch</td></tr>
+<tr><td>4</td><td>Preprocessing</td><td>Normalisasi, dedup, deteksi bahasa, filter bot heuristik, anonimisasi akun</td><td>Laporkan jumlah sebelum/sesudah; jangan menyaring “akun kecil” tanpa alasan eksplisit</td></tr>
+<tr><td>5</td><td>Analisis emosi</td><td>Gold set 200 item dikode dua pemeriksa (κ); jalankan LLM pada gold set; bandingkan; jalankan LLM pada seluruh data bila κ ≥ 0,70</td><td>Kalau κ &lt; 0,70: perbaiki codebook atau labeling bertahap, jangan memakai label</td></tr>
+<tr><td>6</td><td>Analisis aspek &amp; topik</td><td>Extraksi aspek (rasa/harga/iklan/kemasan); BERTopic untuk klaster keluhan</td><td>Validasi 30 dokumen/topik dibaca manusia; catkan coherence</td></tr>
+<tr><td>7</td><td>Visualisasi</td><td>Graf emosi per minggu; diagram topik; tabel aspek dengan contoh kutipan</td><td>Setiap figur wajib memuat ukuran sampel dan rentang tanggal</td></tr>
+<tr><td>8</td><td>Interpretasi</td><td>Susun pernyataan tingkat diagnostik: perubahan apa, aspek mana, peristiwa pemicu apa, penjelasan alternatif apa</td><td>Daftarkan minimal tiga penjelasan alternatif dan mengapa yang terpilih lebih kuat</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Versi salah yang harus dihindari</span>
+“Sentimen negatif naik dari 12% ke 18%, jadi reputasi merek rusak.” — hanya deskriptif, tanpa asosiasi ke aspek/peristiwa, tanpa penjelasan alternatif (mis. satu video viral oleh akun besar yang sudah dibaca di langkah preprocessing sebagai kasus khusus).
+</div>
+
+<h2>10. Sepuluh kesalahan umum mahasiswa</h2>
+<table>
+<caption>Tabel 10.1 — Kesalahan, dampak, dan mitigasi</caption>
+<thead><tr><th style="width:34px">#</th><th style="width:200px">Kesalahan</th><th style="width:200px">Dampak</th><th>Mitigasi yang diajarkan</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Menyebut metrik sebagai insight</td><td>Rekomendasi tanpa dasar</td><td>Pakai checklist 4 pemeriksaan (Bagian 8)</td></tr>
+<tr><td>2</td><td>Sampling frame tidak terdokumentasi</td><td>Hasil tidak dapat dipercaya atau direplikasi</td><td>Collection log wajib tiap batch</td></tr>
+<tr><td>3</td><td>Melompat ke model canggih tanpa baseline</td><td>Tidak bisa membuktikan peningkatan apa pun</td><td>Selalu mulai dengan lexicon/TF-IDF baseline</td></tr>
+<tr><td>4</td><td>Membersihkan berlebihan</td><td>Hilangnya negasi, sarkasme, dan sinyal emosi</td><td>Simpan salinan mentah; laporkan aturan cleaning</td></tr>
+<tr><td>5</td><td>Menggeneralisasi satu platform</td><td>Klaim tidak berlaku untuk ekosistem lain</td><td>Nyatakan batasan platform dalam kesimpulan</td></tr>
+<tr><td>6</td><td>Demografi terinferensi dibaca sebagai fakta</td><td>Kesimpulan salah tentang audiens</td><td>Laporkan kepercayaan dan asal inferensi</td></tr>
+<tr><td>7</td><td>Sentralitas jaringan dibaca sebagai pengaruh</td><td>Klaim kausal tidak berdasar</td><td>Bedakan metrik struktur dari efek, dan uji bila memungkinkan</td></tr>
+<tr><td>8</td><td>Label LLM dipakai tanpa validasi manusia</td><td>Bias dan galat tidak terdeteksi</td><td>Gold set + κ; kalibrasi prompt</td></tr>
+<tr><td>9</td><td>Graf tanpa ukuran sampel / window menguntungkan</td><td>Presentasi menyesatkan</td><td>Wajibkan anotasi n, rentang tanggal, dan ketidakpastian</td></tr>
+<tr><td>10</td><td>Tidak menyimpan data &amp; kode</td><td>Tugas tidak reproducible</td><td>Paket berkas: dataset, kode, README, environment</td></tr>
+</tbody>
+</table>
+
+<h2>11. Etika dan regulasi secara ringkas</h2>
+<table>
+<caption>Tabel 11.1 — Instrumen hukum dan prinsip etis yang relevan</caption>
+<thead><tr><th style="width:170px">Instrumen / prinsip</th><th style="width:250px">Implikasi pada pekerjaan SMA</th><th>Tindakan wajib dalam tugas</th></tr></thead>
+<tbody>
+<tr><td>UU PDP No. 27/2022 (Indonesia)</td><td>Perlindungan data pribadi: dasar hukum, minimasi, retensi, hak subjek data</td><td>Nyatakan dasar pemrosesan, batasi kolom, anonimisasi, tetapkan masa retensi</td></tr>
+<tr><td>GDPR (jika data terkait UE)</td><td>Prinsip serupa dengan UU PDP + hak akses &amp; penghapusan</td><td>Hindari pengumpulan data sensitif; tidak memublikasikan profil individu</td></tr>
+<tr><td>Terms of Service platform</td><td>Membatasi pengumpulan, distribusi, dan komersialisasi data</td><td>Baca ToS jalur akses yang dipakai; catat dalam method</td></tr>
+<tr><td>Prinsip “publik ≠ sebabnya boleh dipakai”</td><td>Data dapat diakses publik tetapi tetap memuat risiko privasi/re-identifikasi</td><td>Hilangkan pengenal langsung (username) sebelum publikasi</td></tr>
+<tr><td>Etika penelitian &amp; komite etik</td><td>Studi yang melibatkan manusia (termasuk analisis perilaku) perlu kajian etik</td><td>Sertakan catatan etik (1 halaman) dalam rencana analisis</td></tr>
+<tr><td>Kepatuhan &amp; pengungkapan AI</td><td>Penggunaan LLM untuk analisis perlu diungkapkan dan divalidasi</td><td>Catat model, versi, prompt, gold set, dan κ</td></tr>
+</tbody>
+</table>
+
+<h2>12. Latihan mandiri dan studi kasus diskusi</h2>
+
+<h3>12.1 Soal konsep</h3>
+<ol>
+<li>Jelaskan dengan bahasa anda mengapa “sampel bias tidak dapat diselamatkan oleh model yang baik”. Berikan satu contoh pada konteks tagar yang sedang tren.</li>
+<li>Sebuah laporan menyatakan “engagement naik 20%, sehingga audiens lebih puas”. Identifikasi tiga tingkat maturitas dan klaim mana yang belum didukung bukti.</li>
+<li>Andi menarik 2.000 post terpopuler untuk topik kebijakan. Mengapa <i>frame</i> ini berbahaya, dan apa alternatifnya?</li>
+<li>Apa perbedaan “sentimen negatif 18%” sebagai metrik dan sebagai insight? Rumuskan versi insight dari angka yang sama.</li>
+<li>Mengapa “akun terpusat tertinggi” belum tentu berarti “akun paling berpengaruh”? Uji apa saja yang diperlukan?</li>
+</ol>
+
+<h3>12.2 Latihan tak terstruktur (untuk praktikum 50 menituan)</h3>
+<table>
+<caption>Tabel 12.1 — Latihan praktikum pertemuan 1</caption>
+<thead><tr><th style="width:44px">No</th><th style="width:250px">Latihan</th><th style="width:180px">Luaran</th><th>Kriteria penilaian</th></tr></thead>
+<tbody>
+<tr><td>L1</td><td>Peta lima pertanyaan analitik dari berita/isu terkini ke tingkat maturitas (deskriptif–preskriptif)</td><td>Tabel 5 baris</td><td>Kebenaran pemetaan tingkat + alasan</td></tr>
+<tr><td>L2</td><td>Pilih satu platform; tulis rencana akses untuk satu pertanyaan (jalur, kuota, batch, waktu)</td><td>Rencana akses 1 halaman</td><td>Realisme dan penanganan batasan akses</td></tr>
+<tr><td>L3</td><td>Ubah satu pertanyaan kabur menjadi pertanyaan terukur (siapa/apa/kapan/dibanding apa/batas)</td><td>Formulir 8 baris</td><td>Kelima elemen terpenuhi</td></tr>
+<tr><td>L4</td><td>Dari satu metrik platform (mis. <i>watch time</i>), turunkan menjadi temuan dan insight yang sah</td><td>Tabel metrik–temuan–insight</td><td>Pemisahan level yang tegas</td></tr>
+</tbody>
+</table>
+
+<h3>12.3 Studi kasus diskusi kelompok (untuk pertemuan berikutnya)</h3>
+<p><b>Kasus “Angka bagus, keputusan salah”.</b> Sebuah UMKM melaporkan “3 juta view dan 4,2% engagement” untuk video promosi, lalu menaikkan angggaran. Dua minggu berikutnya penjualan justru turun. Anggaplah anda analis yang diminta meneliti.</p>
+<table>
+<caption>Tabel 12.2 — Panduan analisis kasus diskusi</caption>
+<thead><tr><th style="width:150px">Pertanyaan</th><th>Petunjuk jawaban</th></tr></thead>
+<tbody>
+<tr><td>Apa yang sebenarnya diketahui?</td><td>Hanya dua metrik deskriptif tanpa pembanding, tanpa unit analisis, tanpa distribusi audiens</td></tr>
+<tr><td>Penjelasan alternatif apa yang harus diuji?</td><td>Jangkauan penonton salah sasaran; komunitas viral bukan pasar; konten menarik namun bukan pembeli; efek platform vs konten; pengukuran penjualan salah jendela</td></tr>
+<tr><td>Data apa yang dibutuhkan untuk membedakan penjelasan itu?</td><td>Demografi audiens (terinferensi, disertai kepercayaan), analisis aspek komentar, konversi/attribution, perbandingan dengan baseline historis</td></tr>
+<tr><td>Rekomendasi berbasis tingkat mana yang sah?</td><td>Hanya setelah tingkat diagnostik terbukti; bila belum, langkah berikutnya adalah diagnosa, bukan penyesuaian anggaran</td></tr>
+</tbody>
+</table>
+
+<h2>13. Ringkasan, glosarium, dan referensi</h2>
+
+<h3>13.1 Sepuluh poin yang harus diingat</h3>
+<ol>
+<li>SMA adalah proses berantai; kekuatan hebat pada satu tahap tidak menutupi kelemahan tahap lain.</li>
+<li>Satu kegiatan disebut SMA apabila: ada data terarsip, prosedur reproducible, metode eksplisit, dan pertanyaan terukur.</li>
+<li>SMA berbeda dari social listening, monitoring, dan digital analytics meski alatnya sering tumpang tindih.</li>
+<li>Enam tahap siklus: rumusan pertanyaan → akuisisi → preprocessing → analisis → visualisasi → interpretasi &amp; preservasi.</li>
+<li>Akses data 2026 tidak gratis secara otomatis; perencanaan akses adalah bagian dari desain studi.</li>
+<li>Empat tingkat maturitas: deskriptif, diagnostik, prediktif, preskriptif — tiap tingkat punya syarat bukti.</li>
+<li>Unit analisis harus dinyatakan eksplisit pada setiap pernyataan.</li>
+<li>Metrik ≠ temuan ≠ insight; insight memerlukan mekanisme dan penjelasan alternatif.</li>
+<li>Label LLM hanya sah setelah divalidasi terhadap gold set manusia (κ) dan dilaporkan biasnya.</li>
+<li>Etika &amp; regulasi (UU PDP, GDPR, ToS) adalah bagian metode, bukan pelengkap.</li>
+</ol>
+
+<h3>13.2 Glosarium inti</h3>
+<table>
+<caption>Tabel 13.1 — Glosarium 24 istilah</caption>
+<thead><tr><th style="width:170px">Istilah</th><th>Definisi ringkas</th></tr></thead>
+<tbody>
+<tr><td>Social media analytics</td><td>Process memperoleh, membersihkan, menganalisis, dan menginterpretasi data platform untuk pertanyaan terukur</td></tr>
+<tr><td>Unit analisis</td><td>Entitas tingkat yang menjadi dasar pernyataan (post, akun, percakapan, jaringan)</td></tr>
+<tr><td>Sampling frame</td><td>Deskripsi populasi yang benar-benar dapat diambil sampelnya oleh jalur akses yang dipilih</td></tr>
+<tr><td>Collection log</td><td>Catatan kueri, tanggal, jumlah, dan filter pada setiap pengambilan data</td></tr>
+<tr><td>Codebook</td><td>Definisi operasional setiap label beserta aturan penentuan (termasuk kasus ambigu)</td></tr>
+<tr><td>Gold set</td><td>Subsampel yang dikode manusia sebagai pembanding untuk label otomatis</td></tr>
+<tr><td>Cohen's κ</td><td>Koefisien kesepakatan antar-pemeriksa yang dikoreksi kesepakatan kebetulan</td></tr>
+<tr><td>Baseline</td><td>Metode sederhana dan dapat dijelaskan sebagai pembanding minimal</td></tr>
+<tr><td>Metrik</td><td>Angka deskriptif (hitungan, rasio, rata-rata)</td></tr>
+<tr><td>Temuan</td><td>Pola terukur hasil perbandingan yang sah</td></tr>
+<tr><td>Insight</td><td>Mekanisme + implikasi yang menjelaskan sebuah temuan</td></tr>
+<tr><td>ABSA</td><td>Analisis sentimen berbasis aspek (per bagian produk/layanan)</td></tr>
+<tr><td>Topic modeling</td><td>Kelompok kata/isi dokumen yang sering muncul bersama (mis. LDA, BERTopic)</td></tr>
+<tr><td>Coherence</td><td>Ukuran kejelasan semantik topik (C_v, NPMI)</td></tr>
+<tr><td>Embedding</td><td>Representasi vektor teks yang menangkap kemiripan makna</td></tr>
+<tr><td>Zero-shot classification</td><td>Klasifikasi teks menggunakan instruksi bahasa alami tanpa data latihan</td></tr>
+<tr><td>Centrality</td><td>Ukuran kepentingan simpul dalam graf (degree, betweenness, eigenvector)</td></tr>
+<tr><td>Community detection</td><td>Penemukan klaster simpul yang saling lebih erat (mis. Louvain, Leiden)</td></tr>
+<tr><td>Engagement</td><td>Aksi audiens terhadap konten (like, komentar, share, save, watch time)</td></tr>
+<tr><td>Watch time / completion</td><td>Waktu tonton absolut dan rasio selesai menonton — metrik inti video pendek</td></tr>
+<tr><td>Conten sintetis</td><td>Teks/gambar/audio/video yang dihasilkan atau dimanipulasi AI</td></tr>
+<tr><td>Enclave riset</td><td>Lingkungan aman tempat analisis dijalankan tanpa mengunduh data mentah</td></tr>
+<tr><td>Konten siklik (trending)</td><td>Isu yang melonjak dalam jendela waktu pendek dan cenderung mereda</td></tr>
+<tr><td>DPIA / catatan etik</td><td>Penilaian dampak privasi: data, dasar hukum, risiko, mitigasi, retensi</td></tr>
+</tbody>
+</table>
+
+<h3>13.3 Referensi</h3>
+<ol class="small">
+<li>Zafarani, R., Abbasi, M. A., &amp; Liu, H. (2014). <i>Social Media Mining</i>. Cambridge University Press.</li>
+<li>Russell, M. A. (2019). <i>Mining the Social Web</i> (3rd ed.). O'Reilly Media.</li>
+<li>Silge, J., &amp; Robinson, D. (2017). <i>Text Mining with R</i>. O'Reilly Media.</li>
+<li>Wasserman, S., &amp; Faust, K. (1994). <i>Social Network Analysis: Methods and Applications</i>. Cambridge University Press.</li>
+<li>Barabási, A.-L. (2016). <i>Network Science</i>. Cambridge University Press.</li>
+<li>Jurafsky, D., &amp; Martin, J. H. <i>Speech and Language Processing</i> (3rd ed. draft).</li>
+<li>Grootendorst, M. (2022). BERTopic: Neural topic modeling with class-based TF-IDF. arXiv:2203.05794.</li>
+<li>Törnberg, P. (2024). Best practices for text annotation with large language models. <i>Sociologica</i>.</li>
+<li>Gilardi, F., Alizadeh, M., &amp; Kubli, M. (2023/2024). ChatGPT outperforms crowd workers and expert coders in annotation tasks. <i>SSRN</i> / <i>M&amp;SOM</i>.</li>
+<li>Bermejo, V. J. et al. (2025). LLMs outperform outsourced human coders on complex annotation tasks. <i>Scientific Reports</i>.</li>
+<li>Schroeder, B. et al. (2025). Just put a human in the loop? LLM-assisted annotation for subjective tasks. <i>Findings of ACL</i>.</li>
+<li>Park, S. et al. (2026). Generative AI and misinformation: a scoping review. <i>AI &amp; Society</i>.</li>
+<li>Bellingcat / dokumentasi Meta Content Library and API; dokumentasi X API v2, YouTube Data API, TikTok Research API, dan AT Protocol — diakses Oktober 2026.</li>
+<li>We Are Social / DataReportal (2026); Hootsuite <i>Social Trends 2026</i>; Mordor Intelligence <i>Social Media Analytics Market</i>; Improvado <i>Social Media Data &amp; Statistics 2026</i>.</li>
+<li>arXiv:2505.09877 (2025). <i>Studying Digital Platforms in Scant Data Access Times</i>.</li>
+</ol>
+
+<div class="box">
+<span class="h">Catatan akhir dosen</span>
+Buku ini adalah <b>modul satu pertemuan</b> dari rangkaian 14. Pertemuan 2–6 memperluas Bagian 5 (akses, legalitas, preprocessing); pertemuan 8–11 merupakan perwujudan tahap 4 siklus pada tiga keluarga metode; pertemuan 12–13 membawa mahasiswa ke tahap 4–6 dengan multimodal, short-video, LLM-annotation, dan agentic workflow.
+</div>
+
+</div>
+</body>
+</html>

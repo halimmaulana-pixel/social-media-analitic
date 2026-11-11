@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buku Ajar Materi 3 — Jenis Data &amp; Field Dictionary</title>
+<style>
+  :root{
+    --ink:#141414; --muted:#5A5A5A; --line:#D9D9D9; --bg:#FFFFFF;
+    --blue:#0072B2; --green:#009E73; --amber:#E69F00; --orange:#D55E00; --plum:#7A4FA0;
+    --softblue:#F2F8FD; --softgreen:#F1FAF5; --softamber:#FEF6E7; --softorange:#FDF1EA; --softgrey:#F6F6F8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#EEF0F2;color:var(--ink);
+       font-family:"Times New Roman", Georgia, serif;font-size:16px;line-height:1.55}
+  .page{max-width:1000px;margin:24px auto;background:var(--bg);padding:52px 60px 64px;
+        box-shadow:0 2px 14px rgba(0,0,0,.12)}
+  h1,h2,h3,h4,.sans{font-family:Helvetica,Arial,"DejaVu Sans",sans-serif}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:19px;margin:34px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+  h3{font-size:16px;margin:22px 0 6px;color:#1F3A5F}
+  h4{font-size:14.5px;margin:16px 0 4px;color:#333}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:3px 0}
+  .cover{border:2px solid var(--ink);padding:26px 30px;margin-bottom:26px}
+  .cover .kicker{font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:2px;color:var(--orange);text-transform:uppercase}
+  .cover h1{margin-top:8px}
+  .cover .sub{font-size:15px;color:var(--muted)}
+  table{border-collapse:collapse;width:100%;margin:12px 0 6px;font-size:13.5px}
+  caption{caption-side:top;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:13px;
+          font-weight:bold;color:#1F3A5F;padding:6px 0}
+  th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+  thead th{background:#EAF1F7;font-family:Helvetica,Arial,sans-serif;font-size:12.5px}
+  tbody tr:nth-child(even){background:#FAFBFC}
+  figure{margin:16px 0 22px;page-break-inside:avoid}
+  figure svg{width:100%;height:auto;border:1px solid var(--line);background:#fff}
+  figcaption{font-family:Helvetica,Arial,sans-serif;font-size:12.5px;color:var(--muted);margin-top:6px}
+  .box{border:1px solid var(--line);border-left:5px solid var(--blue);background:var(--softblue);
+       padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .box.warn{border-left-color:var(--orange);background:var(--softorange)}
+  .box.ok{border-left-color:var(--green);background:var(--softgreen)}
+  .box.note{border-left-color:var(--amber);background:var(--softamber)}
+  .box .h{font-family:Helvetica,Arial,sans-serif;font-weight:bold;font-size:13px;display:block;margin-bottom:4px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tag{display:inline-block;font-family:Helvetica,Arial,sans-serif;font-size:11px;padding:1px 7px;
+       border-radius:10px;border:1px solid var(--line);background:#fff;color:#333;margin-right:5px}
+  .small{font-size:12.5px;color:var(--muted)}
+  .toc{background:var(--softgrey);border:1px solid var(--line);padding:14px 22px;font-size:14px}
+  .toc ol{margin:6px 0 0 20px}
+  figure.pagebreak{page-break-before:always}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;padding:0}h2{page-break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+<div class="kicker">Pertemuan 3 · 150 menit · CPMK-1</div>
+<h1>Materi 3 — Jenis Data &amp; Field Dictionary</h1>
+<div class="sub">Taksonomi unit data teks–media–interaksi–metadata–log, anatomi satu objek API, spektrum terstruktur hingga tak terstruktur, dan lima langkah merancang field dictionary.</div>
+</div>
+
+<table>
+<caption>Tabel 0.1 — Identitas materi</caption>
+<thead><tr><th>Aspek</th><th>Isi</th></tr></thead>
+<tbody>
+<tr><td>Mata kuliah</td><td>Social Media Analytics (3 SKS · semester 5)</td></tr>
+<tr><td>Pertemuan</td><td>3 dari 14 (jalur A — Fondasi; jembatan ke CPMK-2)</td></tr>
+<tr><td>Beban</td><td>150 menit: teori 60&prime; + implementasi 70&prime; + artefak 20&prime;</td></tr>
+<tr><td>CPMK</td><td>CPMK-1 dan CPMK-2: mengklasifikasikan unit data beserta cara pengolahannya (C3); merancang field dictionary untuk API pilihan (C4); menjelaskan mengapa log engagement dan teks membutuhkan metode berbeda (C3)</td></tr>
+<tr><td>Bukti penilaian</td><td>Kamus field satu platform (field, tipe, contoh, arti, missingness); kuis ringkas</td></tr>
+<tr><td>Dasar penyusunan</td><td>Arsip riset <code>results/jenis-data.json</code>; objek API nyata (X v2, TikTok, Reddit, Bluesky); literatur data-management 2024–2026</td></tr>
+</tbody>
+</table>
+
+<div class="box note">
+<span class="h">Cara memakai buku ini</span>
+Lapis Teori terdapat di Bagian 2, 4, 5, dan 7; Lapis Implementasi di Bagian 3, 6, dan 8; Lapis Artefak (yang dinilai) di Bagian 6 (kamus field) dan Bagian 9 (studi kasus spesifikasi dataset). Glosarium dan referensi di Bagian 12–13. Semua contoh endpoint/field per 2026; verifikasi ulang saat lab.
+</div>
+
+<div class="toc">
+<b>Daftar isi</b>
+<ol>
+<li>Peta pembelajaran pertemuan 3</li>
+<li>Taksonomi lima keluarga data</li>
+<li>Anatomi satu objek API</li>
+<li>Spektrum terstruktur hingga tak terstruktur</li>
+<li>Multimodal sebagai satu unit</li>
+<li>Field dictionary dan granularitas baris</li>
+<li>Missingness, snapshot, dan jendela waktu</li>
+<li>Implementasi: lab klasifikasi data</li>
+<li>Studi kasus terpandu: dataset kampanye TikTok vs X</li>
+<li>Sepuluh kesalahan umum mahasiswa</li>
+<li>Etika: anonimisasi di tingkat field</li>
+<li>Latihan mandiri dan ringkasan</li>
+<li>Glosarium</li>
+<li>Referensi pokok</li>
+</ol>
+</div>
+
+<h2>1. Peta pembelajaran pertemuan 3</h2>
+
+<table>
+<caption>Tabel 1.1 — Sub-CPMK, indikator, dan rute pembelajaran</caption>
+<thead><tr><th>Tahap</th><th>Sub-CPMK (indikator)</th><th>Aktivitas</th><th>Alokasi</th></tr></thead>
+<tbody>
+<tr><td>T1</td><td>Mengklasifikasikan lima keluarga unit data dan bagian-bagian unitnya</td><td>Gambar 1 + diskusi unit asli</td><td>20&prime;</td></tr>
+<tr><td>T2</td><td>Membedah field sebuah objek API nyata</td><td>Lab bedah JSON (Bagian 3)</td><td>25&prime;</td></tr>
+<tr><td>T3</td><td>Menempatkan data pada spektrum terstruktur / semi / tidak terstruktur</td><td>Gambar 3 + tabel implikasi metode</td><td>15&prime;</td></tr>
+<tr><td>T4</td><td>Mengoperasi unit multimodal sebagai satu kumpulan data</td><td>Diskusi (Bagian 5)</td><td>10&prime;</td></tr>
+<tr><td>T5</td><td>Merancang field dictionary 1 platform</td><td>Lab lima langkah (Bagian 6)</td><td>60&prime;</td></tr>
+<tr><td>T6</td><td>Menyusun spesifikasi dataset kampanye TikTok vs X</td><td>Studi kasus (Bagian 9)</td><td>20&prime;</td></tr>
+</tbody>
+</table>
+
+<h2>2. Taksonomi lima keluarga data</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-label="figm3 taxonomy" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="534" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Taksonomi unit data media sosial - lima keluarganya</text>
+<rect x="418" y="62" width="164" height="40" rx="10" fill="#0072B2" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="500" y="88" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">SATU POST</text>
+<line x1="500" y1="102" x2="114" y2="148" stroke="#0072B2" stroke-width="1.4"/>
+<rect x="24" y="148" width="180" height="224" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.8"/>
+<text x="36" y="174" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">TEKS</text>
+<text x="36" y="202" font-size="11.5" fill="#141414" text-anchor="start">- isi post &amp; caption</text>
+<text x="36" y="234" font-size="11.5" fill="#141414" text-anchor="start">- hashtag &amp; mention</text>
+<text x="36" y="266" font-size="11.5" fill="#141414" text-anchor="start">- sarkasme &amp; emoji</text>
+<line x1="500" y1="102" x2="114" y2="148" stroke="#0072B2" stroke-width="1.4"/>
+<line x1="500" y1="102" x2="310" y2="148" stroke="#D55E00" stroke-width="1.4"/>
+<rect x="220" y="148" width="180" height="224" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.8"/>
+<text x="232" y="174" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">MEDIA</text>
+<text x="232" y="202" font-size="11.5" fill="#141414" text-anchor="start">- frame video utama</text>
+<text x="232" y="234" font-size="11.5" fill="#141414" text-anchor="start">- teks on-screen (OCR)</text>
+<text x="232" y="266" font-size="11.5" fill="#141414" text-anchor="start">- audio (transkrip)</text>
+<line x1="500" y1="102" x2="310" y2="148" stroke="#D55E00" stroke-width="1.4"/>
+<line x1="500" y1="102" x2="506" y2="148" stroke="#009E73" stroke-width="1.4"/>
+<rect x="416" y="148" width="180" height="224" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="428" y="174" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">INTERAKSI</text>
+<text x="428" y="202" font-size="11.5" fill="#141414" text-anchor="start">- like / suka</text>
+<text x="428" y="234" font-size="11.5" fill="#141414" text-anchor="start">- komentar / reply</text>
+<text x="428" y="266" font-size="11.5" fill="#141414" text-anchor="start">- share / save</text>
+<line x1="500" y1="102" x2="506" y2="148" stroke="#009E73" stroke-width="1.4"/>
+<line x1="500" y1="102" x2="702" y2="148" stroke="#7A4FA0" stroke-width="1.4"/>
+<rect x="612" y="148" width="180" height="224" rx="8" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.8"/>
+<text x="624" y="174" font-size="13" fill="#7A4FA0" font-weight="bold" text-anchor="start">METADATA</text>
+<text x="624" y="202" font-size="11.5" fill="#141414" text-anchor="start">- timestamp UTC &amp; lokal</text>
+<text x="624" y="234" font-size="11.5" fill="#141414" text-anchor="start">- lokasi (bila ada)</text>
+<text x="624" y="266" font-size="11.5" fill="#141414" text-anchor="start">- bahasa &amp; perangkat</text>
+<line x1="500" y1="102" x2="702" y2="148" stroke="#7A4FA0" stroke-width="1.4"/>
+<line x1="500" y1="102" x2="898" y2="148" stroke="#9B2C2C" stroke-width="1.4"/>
+<rect x="808" y="148" width="180" height="224" rx="8" fill="#FBE9E9" stroke="#9B2C2C" stroke-width="1.8"/>
+<text x="820" y="174" font-size="13" fill="#9B2C2C" font-weight="bold" text-anchor="start">LOG ENGAGEMENT</text>
+<text x="820" y="202" font-size="11.5" fill="#141414" text-anchor="start">- watch time &amp;</text>
+<text x="820" y="217" font-size="11.5" fill="#141414" text-anchor="start">completion</text>
+<text x="820" y="234" font-size="11.5" fill="#141414" text-anchor="start">- urutan frame ditonton</text>
+<text x="820" y="266" font-size="11.5" fill="#141414" text-anchor="start">- klik notifikasi</text>
+<line x1="500" y1="102" x2="898" y2="148" stroke="#9B2C2C" stroke-width="1.4"/>
+<rect x="24" y="404" width="944" height="108" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="40" y="432" font-size="12.5" fill="#141414" text-anchor="start">Moral: lima keluarga data hadir dalam SATU objek post. Analisis multimodal = menggabungkan</text>
+<text x="40" y="454" font-size="12.5" fill="#141414" text-anchor="start">semua keluarga atas berdasarkan post ID yang sama - bukan lima tabel yang biak tanpa tautan.</text>
+<text x="40" y="476" font-size="12.5" fill="#141414" text-anchor="start">Praktik juga aman: simpan mentah JSON utuh (audit), lalu ekstrak field di kamus field (efisien).</text>
+<text x="24" y="560" font-size="12" fill="#5A5A5A" text-anchor="start">Aliran data post = input beberapa kelompok metode (NLP untuk teks, CV untuk frame, timeseries untuk watch time)</text>
+<text x="24" y="580" font-size="12" fill="#5A5A5A" text-anchor="start">karena post yang sama bisa ditanya beragam pertanyaan.</text>
+</svg>
+<figcaption><b>Gambar 1.</b> Taksonomi unit data media sosial — lima keluarga yang hadir bersama-sama dalam satu objek post: teks, media, interaksi, metadata, dan log engagement. Pembahasan di kelas mengaitkan keluarga &rarr; metode (NLP, CV, timeseries, graf).</figcaption>
+</figure>
+
+<p>Unit data media sosial biasanya mendapat lima keluarga <b>data</b> yang hadir <b>bersama dalam post yang sama</b>. Pengelompokan bukan sekadar penamaan: tiap keluarga punya metode, sistem penyimpanan, dan risiko privasi yang berbeda. Tabel 2.1 mengaitkan keduanya:</p>
+
+<table>
+<caption>Tabel 2.1 — Keluarga unit data, metode peluang, dan risiko</caption>
+<thead><tr><th>Keluarga</th><th>Contoh isi</th><th>Metode khas</th><th>Risiko khusus</th></tr></thead>
+<tbody>
+<tr><td>teks</td><td>caption, komentar, hashtag, mention, emoji</td><td>NLP (tokenisasi, klasifikasi), konten analitika</td><td>sarkasme &amp; kode-campur; model bahasa berbeda</td></tr>
+<tr><td>media</td><td>gambar, frame video, teks on-screen, audio</td><td>CV &amp; OCR, transkripsi (ASR), multimodal fusion</td><td>beban penyimpanan &amp; waktu cetak besar</td></tr>
+<tr><td>interaksi</td><td>like, komentar, reply, share, save, follow</td><td>graph metrics, counter models</td><td>definisi per platform tidak sama (materi 2)</td></tr>
+<tr><td>metadata</td><td>timestamp, bahasa, di mana, perangkat</td><td>jendela waktu, sampel design, geo clustering</td><td>bisa mengidentifikasi pengguna (geo + waktu)</td></tr>
+<tr><td>log engagement</td><td>watch time, completion, scroll, click event</td><td>timeseries, timeseries &amp; retensi kurva</td><td>sangat tergantung akses platform; harus dijelaskan di laporan</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Lapis teori</span>
+Pengklasifikasian keluarga data sesuai standar deskripsi data dan data management plan: <b>struktur Peranan &rarr; penyimpanan &rarr; metode &rarr; etika</b>. Ini keterampilan yang juga dipakai di sains data umum &mdash; bukan hanya riset platform.
+</div>
+
+<h2>3. Anatomi satu objek API</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="figm3 anatomy" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="494" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Anatomi satu objek post (JSON dari API)</text>
+<rect x="46" y="60" width="470" height="440" rx="10" fill="#1E1E2E" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="62" y="88" font-family="Consolas, monospace" font-size="13" fill="#5A5A5A">{</text>
+<text x="62" y="106" font-family="Consolas, monospace" font-size="13" fill="#0072B2">  "id": "post_1892...",</text>
+<text x="62" y="124" font-family="Consolas, monospace" font-size="13" fill="#C7E5FA">  "text": "...om telolet om...",</text>
+<text x="62" y="142" font-family="Consolas, monospace" font-size="13" fill="#C7E5FA">  "created_at": "2026-10-25T08:14:05Z",</text>
+<text x="62" y="160" font-family="Consolas, monospace" font-size="13" fill="#C7E5FA">  "lang": "in",</text>
+<text x="62" y="178" font-family="Consolas, monospace" font-size="13" fill="#D55E00">  "author": {</text>
+<text x="62" y="196" font-family="Consolas, monospace" font-size="13" fill="#D55E00">    "id": "user_77",</text>
+<text x="62" y="214" font-family="Consolas, monospace" font-size="13" fill="#D55E00">    "followers": 4820,</text>
+<text x="62" y="232" font-family="Consolas, monospace" font-size="13" fill="#D55E00">    "verified": false</text>
+<text x="62" y="250" font-family="Consolas, monospace" font-size="13" fill="#D55E00">  },</text>
+<text x="62" y="268" font-family="Consolas, monospace" font-size="13" fill="#7A4FA0">  "metrics": {</text>
+<text x="62" y="286" font-family="Consolas, monospace" font-size="13" fill="#7A4FA0">    "like": 312,</text>
+<text x="62" y="304" font-family="Consolas, monospace" font-size="13" fill="#7A4FA0">    "reply": 44,</text>
+<text x="62" y="322" font-family="Consolas, monospace" font-size="13" fill="#7A4FA0">    "share": 87,</text>
+<text x="62" y="340" font-family="Consolas, monospace" font-size="13" fill="#7A4FA0">    "impression": 51203</text>
+<text x="62" y="358" font-family="Consolas, monospace" font-size="13" fill="#7A4FA0">  },</text>
+<text x="62" y="376" font-family="Consolas, monospace" font-size="13" fill="#009E73">  "media": [{"type": "video",</text>
+<text x="62" y="394" font-family="Consolas, monospace" font-size="13" fill="#009E73">             "duration": 41}],</text>
+<text x="62" y="412" font-family="Consolas, monospace" font-size="13" fill="#0072B2">  "entities": {</text>
+<text x="62" y="430" font-family="Consolas, monospace" font-size="13" fill="#0072B2">    "hashtag": ["ulasan"],</text>
+<text x="62" y="448" font-family="Consolas, monospace" font-size="13" fill="#0072B2">    "mention": ["user_x"]</text>
+<text x="62" y="466" font-family="Consolas, monospace" font-size="13" fill="#0072B2">  }</text>
+<text x="62" y="484" font-family="Consolas, monospace" font-size="13" fill="#5A5A5A">}</text>
+<line x1="526" y1="96" x2="560" y2="96" stroke="#9B2C2C" stroke-width="1.6"/>
+<rect x="560" y="66" width="396" height="78" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="576" y="92" font-size="13" fill="#9B2C2C" font-weight="bold" text-anchor="start">IDENTITAS</text>
+<text x="576" y="116" font-size="11.5" fill="#5A5A5A" text-anchor="start">id + URL post + timestamp: dasar dedup dan tautan ke artefak</text>
+<text x="576" y="131" font-size="11.5" fill="#5A5A5A" text-anchor="start">lain.</text>
+<line x1="526" y1="186" x2="560" y2="186" stroke="#D55E00" stroke-width="1.6"/>
+<rect x="560" y="156" width="396" height="78" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="576" y="182" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">KEPENGARANGAN</text>
+<text x="576" y="206" font-size="11.5" fill="#5A5A5A" text-anchor="start">author.id, followers, verified: jangan dipakai langsung sebagai</text>
+<text x="576" y="221" font-size="11.5" fill="#5A5A5A" text-anchor="start">identitas pribadi.</text>
+<line x1="526" y1="276" x2="560" y2="276" stroke="#0072B2" stroke-width="1.6"/>
+<rect x="560" y="246" width="396" height="78" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="576" y="272" font-size="13" fill="#0072B2" font-weight="bold" text-anchor="start">ISI</text>
+<text x="576" y="296" font-size="11.5" fill="#5A5A5A" text-anchor="start">text + entities (hashtag/mention): bahan pokok untuk analitik</text>
+<text x="576" y="311" font-size="11.5" fill="#5A5A5A" text-anchor="start">NLP teks.</text>
+<line x1="526" y1="366" x2="560" y2="366" stroke="#7A4FA0" stroke-width="1.6"/>
+<rect x="560" y="336" width="396" height="78" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="576" y="362" font-size="13" fill="#7A4FA0" font-weight="bold" text-anchor="start">METRIK</text>
+<text x="576" y="386" font-size="11.5" fill="#5A5A5A" text-anchor="start">engagement per aksi: definisinya beda per platform - nyatakan</text>
+<text x="576" y="401" font-size="11.5" fill="#5A5A5A" text-anchor="start">aturan di laporan.</text>
+<line x1="526" y1="456" x2="560" y2="456" stroke="#009E73" stroke-width="1.6"/>
+<rect x="560" y="426" width="396" height="78" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="576" y="452" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">MEDIA</text>
+<text x="576" y="476" font-size="11.5" fill="#5A5A5A" text-anchor="start">jenis media + durasi: pintu masuk analisis frame &amp; transkrip</text>
+<text x="576" y="491" font-size="11.5" fill="#5A5A5A" text-anchor="start">audio.</text>
+</svg>
+<figcaption><b>Gambar 2.</b> Anatomi satu objek API post: blok-blok field yang bersama-sama menandai satu unit data &mdash; identitas, kepengarangan, isi, metrik, dan media. Blok-blok ini menjadi kerangka field dictionary di Bagian 6.</figcaption>
+</figure>
+
+<p>Objek API adalah jendela memahami data platform: semua field yang ditawarkan dipasang dalam satu objek. Objeknya berkarakter <b>hidup</b>: field tidak selalu dijamin (bisa <code>null</code>), nilai bisa berubah, dan <i>timezone</i> sering berbeda. Aturan praktisnya: <b>identitas</b> per URL/pencarian, <b>kepengarangan</b> per akun riset, <b>isi</b> (teks/entities) untuk NLP, <b>metrik</b> per definisi engagement platform, dan <b>media</b> untuk model audio/visual.</p>
+
+<p>Ketiga lapis implementasi di kelas biasa menggunakan objek X v2, TikTok, Reddit, atau Bluesky &mdash; yang sesuai platform. Tiga hal yang harus dicatat tiap objek:</p>
+<ol>
+<li>Deterministik — JSON bisa dibaca ulang tanpa kehilangan makna; simpan raw seketika setelah koleksi.</li>
+<li>Heterogen — tak ada platform yang menjamin semua field di setiap objek: <code>null</code> dan <code>absent</code> perlu dibedakan.</li>
+<li>Berubah-ubah — field bisa ditambah/dihilangkan antar tahun; kamus field mencantumkan versi API dan tanggalnya.</li>
+</ol>
+
+<div class="box ok">
+<span class="h">Lapis implementasi</span>
+Praktik yang ada di lab: ambil 500 post satu platform, jalankan <code>pandas.json_normalize</code> atau <code>json.dumps</code>, lalu daftar field yang muncul beserta tipe datanya. Tiap platform berbeda: objek post X v2 umumnya 25–45 field unik, TikTok 10–20, Reddit 15–30 per objek komentar. Setelah langkah itu, putuskan field mana yang benar-benar punya alasan ilmiah dipakai — bukan sekadar muncul di objek.
+</div>
+
+<h2>4. Spektrum terstruktur hingga tak terstruktur</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-label="figm3 spectrum" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="374" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Spektrum struktur: terstruktur - semi-terstruktur - tak terstruktur</text>
+<rect x="30" y="66" width="296" height="214" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.8"/>
+<text x="46" y="92" font-size="13.5" fill="#009E73" font-weight="bold" text-anchor="start">TERSTRUKTUR</text>
+<text x="46" y="120" font-size="12" fill="#5A5A5A" text-anchor="start">Contoh konten:</text>
+<text x="46" y="142" font-size="12.5" fill="#141414" text-anchor="start">engagement log, follower count, watch</text>
+<text x="46" y="158" font-size="12.5" fill="#141414" text-anchor="start">time, timestamp</text>
+<line x1="46" y1="168" x2="310" y2="168" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="46" y="192" font-size="12" fill="#5A5A5A" text-anchor="start">Implikasi tooling:</text>
+<text x="46" y="214" font-size="12" fill="#141414" text-anchor="start">tabel SQL/pandas; dtype tetap; skala</text>
+<text x="46" y="230" font-size="12" fill="#141414" text-anchor="start">besar pilih parquet</text>
+<rect x="352" y="66" width="296" height="214" rx="8" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.8"/>
+<text x="368" y="92" font-size="13.5" fill="#0072B2" font-weight="bold" text-anchor="start">SEMI-TERSTRUKTUR</text>
+<text x="368" y="120" font-size="12" fill="#5A5A5A" text-anchor="start">Contoh konten:</text>
+<text x="368" y="142" font-size="12.5" fill="#141414" text-anchor="start">objek API JSON (post, comment), HTML</text>
+<text x="368" y="158" font-size="12.5" fill="#141414" text-anchor="start">forum, XML feed</text>
+<line x1="368" y1="168" x2="632" y2="168" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="368" y="192" font-size="12" fill="#5A5A5A" text-anchor="start">Implikasi tooling:</text>
+<text x="368" y="214" font-size="12" fill="#141414" text-anchor="start">pandas/tidy + kolom entitas; simpan</text>
+<text x="368" y="230" font-size="12" fill="#141414" text-anchor="start">JSON asli untuk audit</text>
+<rect x="674" y="66" width="296" height="214" rx="8" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.8"/>
+<text x="690" y="92" font-size="13.5" fill="#D55E00" font-weight="bold" text-anchor="start">TAK TERSTRUKTUR</text>
+<text x="690" y="120" font-size="12" fill="#5A5A5A" text-anchor="start">Contoh konten:</text>
+<text x="690" y="142" font-size="12.5" fill="#141414" text-anchor="start">teks bebas komentar, gambar, video,</text>
+<text x="690" y="158" font-size="12.5" fill="#141414" text-anchor="start">audio, live-stream</text>
+<line x1="690" y1="168" x2="954" y2="168" stroke="#D9D9D9" stroke-width="1.4"/>
+<text x="690" y="192" font-size="12" fill="#5A5A5A" text-anchor="start">Implikasi tooling:</text>
+<text x="690" y="214" font-size="12" fill="#141414" text-anchor="start">NLP/CV/ASR per kasus; simpan fitur</text>
+<text x="690" y="230" font-size="12" fill="#141414" text-anchor="start">hasil ekstraksi + penunjuk file mentah</text>
+<line x1="324" y1="254" x2="350" y2="254" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<line x1="646" y1="254" x2="672" y2="254" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<text x="22" y="300" font-size="12.5" fill="#141414" font-weight="bold" text-anchor="start">Satu post biasa menjangkau ketiga band:</text>
+<text x="22" y="322" font-size="12.5" fill="#5A5A5A" text-anchor="start">metadata (JSON) + teks isi (teks bebas) + OCR on-screen (tak terstruktur).</text>
+<rect x="28" y="348" width="944" height="54" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="44" y="370" font-size="12.5" fill="#141414" text-anchor="start">Bacaan arah kanan: struktur menurun, biaya analisis naik, potensi insight justru justru paling besar</text>
+<text x="44" y="392" font-size="12.5" fill="#141414" text-anchor="start">di band tak terstruktur - karena di band tak terstruktur: tidak terbaca oleh hitungan sederhana saja.</text>
+</svg>
+<figcaption><b>Gambar 3.</b> Spektrum struktur konten — terstruktur (SQL/pandas), semi-terstruktur (JSON/HTML/XML), dan tak terstruktur (teks, gambar, audio, video). Satu objek post sering mencakup ketiga band sekaligus.</figcaption>
+</figure>
+
+<table>
+<caption>Tabel 4.1 — Band struktur, kata kunci metode, dan penyimpanan yang cocok</caption>
+<thead><tr><th>Band</th><th>Kata kunci</th><th>Penyimpanan</th><th>Catatan</th></tr></thead>
+<tbody>
+<tr><td>Terstruktur</td><td>count, timestamp, dtypes (integer, float, boolean)</td><td>tabel/SQL; skema tetap</td><td>mudah bila simpan ditabulasi; perangkat tabel terbatas</td></tr>
+<tr><td>Semi-terstruktur</td><td>JSON/XML/HTML; nested &amp; entitas</td><td>JSON asli + dataframe ekstraks</td><td>duck-DB-like saat skala menengah</td></tr>
+<tr><td>Tak terstruktur</td><td>alam bebas teks; media afidavit; audio transkrip</td><td>file utuh (JSON.gz/image/png/mp4) + kolom pointer</td><td>perlu audio-fith, OCR, ASR; ukuran data bila tak taut</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+<span class="h">Lapis teori: keputusan penyimpanan</span>
+<b>Raw first, tabel second</b> — simpan JSON mentah apa adanya sebelum tabulasi; tabulasi bisa diulang kapan pun, raw yang hilang tak bisa dibangun kembali. Entah itu timestamp: simpan timezone asli dan UTC berpasangan.
+</div>
+
+<h2>5. Multimodal sebagai satu unit</h2>
+
+<p>Sejak 2024–2026, video media sosial menuntut perlakuan unit dan multimodal: satu video memuat beberapa modalitas sekaligus:</p>
+<ul>
+<li><b>Visual</b> — frame; binary CV (objek/gesture), CLIP embedding.</li>
+<li>Teks on-screen — hasil OCR dari frame; sering kritis karena di TikTok berisi kalimat penuh.</li>
+<li>Audio — hasil transkripsi (Whiser); penting untuk konten informal berbahasa Indonesia.</li>
+<li>Metadata — durasi, hashtag, kategori audio.</li>
+</ul>
+
+<p>Metode multimodal mendalam ada di elective (Materi 15–16). Untuk pertemuan ini kuncinya: data multimodal disimpan sebagai satu unit yang bertaut ke post ID yang sama — bukan beberapa berkas mandiri tanpa tautan.</p>
+
+<div class="box">
+<span class="h">Lapis implementasi</span>
+Contoh yang relevan: UMKM snack viral di TikTok — satu video memuat caption (teks), teks on-screen (OCR), audio yang ditranskripsi, plus metrik platform (watch time, save, share) — semuanya bertaut di satu unit post.
+</div>
+
+<h2>6. Field dictionary dan granularitas baris</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-label="figm3 dictionary" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="534" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Lima langkah merancang field dictionary</text>
+<circle cx="58" cy="88" r="18" fill="#0072B2"/>
+<text x="58" y="93" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">1</text>
+<rect x="96" y="64" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="88" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Ambil 500 objek dari API</text>
+<text x="112" y="112" font-size="11.5" fill="#5A5A5A" text-anchor="start">sampel mentah, jangan diubah dahulu</text>
+<line x1="58" y1="108" x2="58" y2="154" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="188" r="18" fill="#0072B2"/>
+<text x="58" y="193" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">2</text>
+<rect x="96" y="164" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="188" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Daftar semua field yang muncul</text>
+<text x="112" y="212" font-size="11.5" fill="#5A5A5A" text-anchor="start">field bersarang pakai jalur penuh: metrics.like</text>
+<line x1="58" y1="208" x2="58" y2="254" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="288" r="18" fill="#0072B2"/>
+<text x="58" y="293" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">3</text>
+<rect x="96" y="264" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="288" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Isi tipe tiap field</text>
+<text x="112" y="312" font-size="11.5" fill="#5A5A5A" text-anchor="start">text / angka / timestamp / enum / objek</text>
+<line x1="58" y1="308" x2="58" y2="354" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="388" r="18" fill="#0072B2"/>
+<text x="58" y="393" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">4</text>
+<rect x="96" y="364" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="388" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Tulis arti &amp; missingness</text>
+<text x="112" y="412" font-size="11.5" fill="#5A5A5A" text-anchor="start">apa yang terjadi bila field tidak ada?</text>
+<line x1="58" y1="408" x2="58" y2="454" stroke="#0072B2" stroke-width="2" marker-end="url(#ahb)"/>
+<circle cx="58" cy="488" r="18" fill="#0072B2"/>
+<text x="58" y="493" font-size="14" fill="#FFFFFF" font-weight="bold" text-anchor="middle">5</text>
+<rect x="96" y="464" width="380" height="66" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="112" y="488" font-size="13" fill="#141414" font-weight="bold" text-anchor="start">Pilih granularity baris</text>
+<text x="112" y="512" font-size="11.5" fill="#5A5A5A" text-anchor="start">satu baris per post, atau per event engagement</text>
+<rect x="500" y="62" width="468" height="474" rx="8" fill="#FFFFFF" stroke="#5A5A5A" stroke-width="1.4"/>
+<text x="514" y="88" font-size="12.5" fill="#0072B2" font-weight="bold" text-anchor="start">POTONGAN KAMUS FIELD (contoh post Bluesky)</text>
+<text x="604" y="118" font-size="11" fill="#7A4FA0" font-weight="bold" text-anchor="start">FIELD</text>
+<text x="620" y="118" font-size="11" fill="#7A4FA0" font-weight="bold" text-anchor="start">TIPE</text>
+<text x="692" y="118" font-size="11" fill="#7A4FA0" font-weight="bold" text-anchor="start">CONTOH / ARTI</text>
+<line x1="514" y1="130" x2="952" y2="130" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="142" font-size="10.5" fill="#141414" text-anchor="start">uri</text>
+<text x="620" y="142" font-size="10.5" fill="#141414" text-anchor="start">string</text>
+<text x="692" y="142" font-size="10.5" fill="#141414" text-anchor="start">at://.../post/3l</text>
+<text x="692" y="156" font-size="10.5" fill="#141414" text-anchor="start">... - id unik</text>
+<text x="692" y="170" font-size="10.5" fill="#141414" text-anchor="start">post</text>
+<line x1="514" y1="164" x2="952" y2="164" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="176" font-size="10.5" fill="#141414" text-anchor="start">created_at</text>
+<text x="620" y="176" font-size="10.5" fill="#141414" text-anchor="start">timestamp</text>
+<text x="692" y="176" font-size="10.5" fill="#141414" text-anchor="start">2026-10-</text>
+<text x="692" y="190" font-size="10.5" fill="#141414" text-anchor="start">25T02:14:05Z -</text>
+<text x="692" y="204" font-size="10.5" fill="#141414" text-anchor="start">waktu</text>
+<line x1="514" y1="198" x2="952" y2="198" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="210" font-size="10.5" fill="#141414" text-anchor="start">reply_coun</text>
+<text x="604" y="224" font-size="10.5" fill="#141414" text-anchor="start">t</text>
+<text x="620" y="210" font-size="10.5" fill="#141414" text-anchor="start">int</text>
+<text x="692" y="210" font-size="10.5" fill="#141414" text-anchor="start">23 - jumlah</text>
+<text x="692" y="224" font-size="10.5" fill="#141414" text-anchor="start">balasan</text>
+<line x1="514" y1="232" x2="952" y2="232" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="244" font-size="10.5" fill="#141414" text-anchor="start">repost_cou</text>
+<text x="604" y="258" font-size="10.5" fill="#141414" text-anchor="start">nt</text>
+<text x="620" y="244" font-size="10.5" fill="#141414" text-anchor="start">int</text>
+<text x="692" y="244" font-size="10.5" fill="#141414" text-anchor="start">410 - posting</text>
+<text x="692" y="258" font-size="10.5" fill="#141414" text-anchor="start">ulang</text>
+<line x1="514" y1="266" x2="952" y2="266" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="278" font-size="10.5" fill="#141414" text-anchor="start">quote_coun</text>
+<text x="604" y="292" font-size="10.5" fill="#141414" text-anchor="start">t</text>
+<text x="620" y="278" font-size="10.5" fill="#141414" text-anchor="start">int</text>
+<text x="692" y="278" font-size="10.5" fill="#141414" text-anchor="start">95 - quote /</text>
+<text x="692" y="292" font-size="10.5" fill="#141414" text-anchor="start">kutipan</text>
+<line x1="514" y1="300" x2="952" y2="300" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="312" font-size="10.5" fill="#141414" text-anchor="start">author.id</text>
+<text x="620" y="312" font-size="10.5" fill="#141414" text-anchor="start">string</text>
+<text x="692" y="312" font-size="10.5" fill="#141414" text-anchor="start">did:plc:... - id</text>
+<text x="692" y="326" font-size="10.5" fill="#141414" text-anchor="start">pengguna</text>
+<line x1="514" y1="334" x2="952" y2="334" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="346" font-size="10.5" fill="#141414" text-anchor="start">record.tex</text>
+<text x="604" y="360" font-size="10.5" fill="#141414" text-anchor="start">t</text>
+<text x="620" y="346" font-size="10.5" fill="#141414" text-anchor="start">text</text>
+<text x="692" y="346" font-size="10.5" fill="#141414" text-anchor="start">isi post utama</text>
+<line x1="514" y1="368" x2="952" y2="368" stroke="#D9D9D9" stroke-width="0.6"/>
+<text x="604" y="380" font-size="10.5" fill="#141414" text-anchor="start">like_count</text>
+<text x="620" y="380" font-size="10.5" fill="#141414" text-anchor="start">int|null</text>
+<text x="692" y="380" font-size="10.5" fill="#141414" text-anchor="start">null - bisa</text>
+<text x="692" y="394" font-size="10.5" fill="#141414" text-anchor="start">tidak tersedia</text>
+<text x="514" y="438" font-size="11.5" fill="#5A5A5A" text-anchor="start">Aturan: kamus harus bisa dipakai mahasiswa lain</text>
+<text x="514" y="458" font-size="11.5" fill="#5A5A5A" text-anchor="start">tanpa membaca kode - itulah ujian keterbacaannya.</text>
+</svg>
+<figcaption><b>Gambar 4.</b> Lima langkah merancang field dictionary: ambil 500 objek, daftar field, tentukan tipe, tulis arti &amp; missingness, dan pilih granularitas baris. Contoh potongan kamus untuk objek post Bluesky.</figcaption>
+</figure>
+
+<table>
+<caption>Tabel 6.1 — Skema kamus field (format yang dipakai selama kuliah)</caption>
+<thead><tr><th>Field</th><th>Tipe</th><th>Contoh</th><th>Arti</th><th>Missingness</th></tr></thead>
+<tbody>
+<tr><td><code>id</code></td><td>string</td><td><code>at://bsky.app/post/3l...</code></td><td>id unik post</td><td>selalu ada</td></tr>
+<tr><td><code>created_at</code></td><td>timestamp</td><td><code>2026-10-25T02:14:05Z</code></td><td>waktu tayang (UTC)</td><td>selalu ada</td></tr>
+<tr><td><code>text</code></td><td>text</td><td>isi caption</td><td>bahan utama NLP</td><td>absen jika post hanya media</td></tr>
+<tr><td><code>reply_count</code></td><td>int</td><td>23</td><td>jumlah balasan</td><td>bisa <code>null</code> di firehose</td></tr>
+<tr><td><code>quote_count</code></td><td>int</td><td>95</td><td>jumlah kutipan</td><td>bisa <code>null</code></td></tr>
+<tr><td><code>author.id</code></td><td>string</td><td><code>did:plc:...</code></td><td>id pengguna (anonimisasi opsional)</td><td>selalu ada</td></tr>
+<tr><td><code>media[0].type</code></td><td>enum</td><td><code>video|image</code></td><td>jenis media utama</td><td>absen jika no media</td></tr>
+<tr><td><code>geo</code></td><td>float|null</td><td>&mdash;</td><td>lokasi (jarang di-share)</td><td>absen saat lokasi tak menyala</td></tr>
+</tbody>
+</table>
+
+<p>Pertanyaan desain akhirnya: <b>granularitas baris</b>. Dua opsi yang dinyatakan di awal sebagai <i>entitas data:</i></p>
+
+<ul>
+<li>Row per post — satu catatan per post (pilihan utama); mudah dipahami, tetapi data samping seperti log engagement dan thread balasan lebih aman di tabel terpisah yang bertaut ID.</li>
+<li>Row per event — satu catatan per event pengguna (klik, view, reply); cocok untuk data streaming, tetapi wajib bertaut ke post ID.</li>
+</ul>
+
+<div class="box">
+<span class="h">Lapis implementasi (alur kerja lab)</span>
+<ol>
+<li>Simpan <b>JSON asli</b> ke <code>data/raw/{platform}/</code>, diberi checksum SHA-256.</li>
+<li>Normalisasi JSON ke dataframe; kolom nested menjadi jalur penuh &mdash; <code>metrics.like</code> berubah menjadi <code>metrics_like</code>.</li>
+<li><b>Klasifikasi tipe</b> — timestamp, string, angka, enum, objek — ke kolom <code>dtype</code>.</li>
+<li>Tulis arti dan kolom missingness — <code>null</code> yang sah, <code>absent</code>, atau jendela terbatas.</li>
+<li>Cek konsistensi: casing nama field antar-platform, tanda list, dan timezone.</li>
+</ol>
+</div>
+
+<h2>7. Missingness, snapshot, dan jendela waktu</h2>
+
+<figure>
+<svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-label="figm3 missingness" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<rect x="10" y="46" width="980" height="454" rx="14" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Tiga jenis missing pada data social media - dan cara mencatatnya</text>
+<rect x="26" y="66" width="944" height="94" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="26" y="66" width="250" height="94" rx="8" fill="#FEF6E7" stroke="#D55E00" stroke-width="1.6"/>
+<text x="44" y="100" font-size="13" fill="#D55E00" font-weight="bold" text-anchor="start">KONTEN TERHAPUS / DIEDIT</text>
+<text x="296" y="90" font-size="12" fill="#141414" text-anchor="start">Post dihapus atau admin menyembunyikan sebelum snapshot - missing 'tidak acak'.</text>
+<text x="296" y="116" font-size="12" fill="#9B2C2C" text-anchor="start">Risiko: sampel melewatkan konten paling kontroversial.</text>
+<text x="296" y="142" font-size="12" fill="#009E73" text-anchor="start">Mitigasi: snapshot saat tayang + laporkan jendela snapshot.</text>
+<rect x="26" y="174" width="944" height="94" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="26" y="174" width="250" height="94" rx="8" fill="#FEF6E7" stroke="#7A4FA0" stroke-width="1.6"/>
+<text x="44" y="208" font-size="13" fill="#7A4FA0" font-weight="bold" text-anchor="start">FIELD TIDAK DIJAMIN ADA</text>
+<text x="296" y="198" font-size="12" fill="#141414" text-anchor="start">Geotag hanya muncul bila pengguna memakai lokasi - pola berpola, bukan acak.</text>
+<text x="296" y="224" font-size="12" fill="#9B2C2C" text-anchor="start">Risiko: field kosong berimbang antar kelompok pengguna.</text>
+<text x="296" y="250" font-size="12" fill="#009E73" text-anchor="start">Mitigasi: lapor persentase null per field.</text>
+<rect x="26" y="282" width="944" height="94" rx="8" fill="#F2F8FD" stroke="#D9D9D9" stroke-width="1.2"/>
+<rect x="26" y="282" width="250" height="94" rx="8" fill="#FEF6E7" stroke="#009E73" stroke-width="1.6"/>
+<text x="44" y="316" font-size="13" fill="#009E73" font-weight="bold" text-anchor="start">JENDELA METRIK TERBATAS</text>
+<text x="296" y="306" font-size="12" fill="#141414" text-anchor="start">Engagement log sering hanya diberikan untuk window waktu terbatas.</text>
+<text x="296" y="332" font-size="12" fill="#9B2C2C" text-anchor="start">Risiko: perbandingan antar-batch dibaca sebagai perbedaan asli.</text>
+<text x="296" y="358" font-size="12" fill="#009E73" text-anchor="start">Mitigasi: tulis jendela snapshot di laporan; jangan campur batch.</text>
+<rect x="26" y="398" width="944" height="62" rx="8" fill="#F1FAF5" stroke="#009E73" stroke-width="1.2"/>
+<text x="44" y="422" font-size="12.5" fill="#141414" text-anchor="start">Aturan buku ini: setiap field di kamus harus menyebut kejadian missing yang mungkin -</text>
+<text x="44" y="444" font-size="12.5" fill="#141414" text-anchor="start">null yang sah, field yang bisa absent, atau metrik yang hanya diberikan per window waktu.</text>
+</svg>
+<figcaption><b>Gambar 5.</b> Tiga jenis kejadian missing di data social media — konten terhapus, field tidak dijamin ada, dan jendela metrik terbatas — beserta mitigasinya. Setiap kolom kamus harus menyatakan kejadian missingnya.</figcaption>
+</figure>
+
+<table>
+<caption>Tabel 7.1 — Implementasi mitigasi untuk setiap tipe missing</caption>
+<thead><tr><th>Jenis</th><th>Contoh di lapangan</th><th>Catatan di kamus</th><th>Penanganan di kode</th></tr></thead>
+<tbody>
+<tr><td>Konten terhapus</td><td>post yang dihapus admin/pengguna sebelum snapshot</td><td><code>missing_reason = deleted</code></td><td>wajib lapor jendela snapshot untuk mengurangi bias</td></tr>
+<tr><td>Field menghilang</td><td>geotag &amp; lang sesuai preferensi pengguna</td><td><code>missing_reason = optout</code></td><td>lapor persentase null per field</td></tr>
+<tr><td>Jendela time-limit</td><td>engagement log sering diberikan dalam batch</td><td><code>missing_reason = window</code></td><td>jendela waktu dicantumkan di metadata batch</td></tr>
+</tbody>
+</table>
+
+<h2>8. Implementasi: lab klasifikasi data</h2>
+
+<div class="box">
+<span class="h">Lapis implementasi (60 menit lab)</span>
+<ol>
+<li>Ambil 500 objek platform yang sudah dipakai di pertemuan 2 (versi raw JSON, jangan diedit lebih dulu).</li>
+<li><b>Daftarkan</b> semua field yang muncul di <code>500 objek</code> — beri <b>tipe</b> data sesuai hasil inspeksi.</li>
+<li>Klasifikasikan tiap field ke lima keluarga (teks / media / interaksi / metadata / log).</li>
+<li><b>Kamus field</b> — 12–15 baris field yang paling penting untuk riset group Anda (seperti Tabel 6.1).</li>
+<li>Granularitas — pilih <code>row per post</code> atau <code>row per event</code>; sebabkan alasannya.</li>
+</ol>
+</div>
+
+<p>Deliverable yang dinilai: <b>kamus field</b> satu platform (12–15 baris, file Markdown/CSV) yang ≥3 baris menyentuh keluarga <b>log engagement</b> atau <b>media</b> — supaya penilaian tidak berfokus pada teks saja.</p>
+
+<h2>9. Studi kasus terpandu: dataset kampanye TikTok vs X</h2>
+
+<p>Pertanyaan kasus: <b>"Merancang dataset penilaian performa satu kampanye pemasaran di TikTok versus X — apa unit data, apa field, dan bagaimana keduanya dibandingkan?"</b> Diskusi bersama; dosen memandu:</p>
+
+<table>
+<caption>Tabel 9.1 — Rencana dataset kampanye dua platform</caption>
+<thead><tr><th>Perhatian</th><th>TikTok</th><th>X</th></tr></thead>
+<tbody>
+<tr><td>Keluarga data khas</td><td>media + log engagement (watch time, save, share)</td><td>teks + graf retweet/quote + interaksi</td></tr>
+<tr><td>Unit dasar</td><td>satu video短 &mdash; caption/audio/on-screen log timestamps</td><td>satu post teks + reply chain</td></tr>
+<tr><td>Sampling</td><td>hashtag + audio, feed deterministic rerank sampel POV</td><td>kata kunci/hashtag; feed kronologis per pengguna tak tersedia</td></tr>
+<tr><td>Field mutlak</td><td>title, duration, view/watch metrics, hashtag list</td><td>id, text, entities, reply/quote/like counts</td></tr>
+<tr><td>Perbandingan</td><td>normalisasi per 1.000 tontonan</td><td>normalisasi per 1.000 followers</td></tr>
+<tr><td>Hukum &amp; etika</td><td>akun riset TikTok Research API, UU PDP</td><td>API berbayar, API berbayar, ToS, UU PDP</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+<span class="h">Lapis artefak (di kelas, bersama)</span>
+Satu spesifikasi dataset gabungan, di kertas mahasiswa: kolom <i>unit data</i>, <i>field wajib</i>, <i>granularitas</i>, <i>metode pembersihan</i>, <i>risiko missing</i>, dan <i>preferensi etik</i>. Spesifikasi cukup 1 halaman; catat juga variabel yang berbeda antar dua platform.
+</div>
+
+<h2>10. Sepuluh kesalahan umum mahasiswa</h2>
+
+<table>
+<caption>Tabel 10.1 — Kesalahan umum saat merancang dan mengumpulkan data</caption>
+<thead><tr><th>#</th><th>Kesalahan</th><th>Konsekuensi</th><th>Cara mencegah</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Menyimpan hanya hasil tabulasi, bukan raw JSON</td><td>tabulasi bisa diulang, tetapi field yang tak tersimpan tak bisa dibangun kembali</td><td>simpan raw + checksum</td></tr>
+<tr><td>2</td><td><code>null</code> dan <code>absent</code> diperlakukan sama</td><td>metadata missing salah saat analisis</td><td>binarikan kolom presence (0/1)</td></tr>
+<tr><td>3</td><td>Timestamp tak diberi timezone</td><td>waktu tayang vs UTC bergeser hingga 7–8 jam</td><td>standarkan ISO 8601 UTC-0</td></tr>
+<tr><td>4</td><td>Field nested tidak dipetakan ke kolom</td><td>tabel tidak rapi; risiko duplikasi</td><td>normalisasi path)-> kolom (>1 kelas)</td></tr>
+<tr><td>5</td><td>Row per post dan row per event tercampur</td><td>penghitungan engagement ganda tanpa dasar yang jelas</td><td>pilih dan dokumentasikan granularitas</td></tr>
+<tr><td>6</td><td>Media disimpan berseliweran di folder riset</td><td>penyimpanan terampung berat dan berulang</td><td>simpan media di folder media/, jangan di folder riset</td></tr>
+<tr><td>7</td><td>Kamus field yang tidak bisa dipahami mahasiswa lain</td><td>kolaborasi gagal; kolom muncul tidak diketahui maknanya</td><td>tulis dalam istilah sederhana</td></tr>
+<tr><td>8</td><td>Unit analisis tidak disebut di kamus</td><td>unit analisis kabur antar metode (post/user/event)</td><td>tulis unit analisis di awal kamus</td></tr>
+<tr><td>9</td><td>Log engagement dibandingkan antar batch berkala</td><td>trend menyesatkan dari jendela yang tidak sama</td><td>dokumentasikan jendela di metadata dataset</td></tr>
+<tr><td>10</td><td>Field pribadi disimpan tanpa anonimisasi</td><td>risiko PDP dan sensitivitas sepanjang riset</td><td>hash dulu field identitas</td></tr>
+</tbody>
+</table>
+
+<h2>11. Etika: anonimisasi di tingkat field</h2>
+
+<p>Materi ini pendokumen kesepata transparan riset <b>UU PDP</b> dan etik riset: anonimisasi di tingkat <b>kolom</b>, bukan hanya menyembunyikan nama di display. Praktik pertama yang kedengarannya hideiak zaman-jauz:</p>
+
+<ul>
+<li>Modifikasikan field yang berpotensi identifikasi: <code>author.id</code> di-hash, <code>geo</code> dihapus atau digenereralisasi ke wilayah luas, timezone disimpan UTC.</li>
+<li>Simpan mapping ID&rarr;hash hanya di penyimpanan terkunci yang tak ikut dipublikasikan.</li>
+<li>Berikan tinjauan etik sebelum data keluar dari lab; folder penyimpanan diberi label privasi.</li>
+</ul>
+
+<div class="box warn">
+<span class="h">Prinsip yang tidak bisa dilanggar</span>
+Sebelum data dipublish/diupload ke tempat publik, <b>semua</b> field yang berpotensi identifikator pribadi (author ID, geo, timestamplist komponen yang dapat di-<i>de-anonymize</i>) harus dicoret atau disha-kin. Ini aturan yang dijalankan di Pertemuan 14 (capstone ethics note).
+</div>
+
+<h2>12. Latihan mandiri dan ringkasan</h2>
+
+<div class="box ok">
+<span class="h">Latihan mandiri</span>
+<ol>
+<li>Buat kamus field lengkap satu platform yang berbeda dengan pilihan lab (misal: lab Bluesky → latihan TikTok) 12 baris, tinjauan dosen.</li>
+<li>Desain dataset row-per-event untuk beberapa metrik short-video berbasis perilaku; gambar struktur tabelnya.</li>
+<li>Audit missingness: hitung persentase null tiap field di 500 objek dari Lab; tunjukkan field dengan lebih dari 20% null.</li>
+<li>Standarkan satu tipe data yang salah (misal timestamp ISO vs epoch) pada data dari Pertemuan 2, dengan skrip validasi.</li>
+</ol>
+</div>
+
+<p>Ringkasan inti. <b>Lima keluarga data</b> (teks, media, interaksi, metadata, log) hadir bersamaan karena <b>post adalah objek kaya</b>, bukan teks saja. <b>Spektrum struktur</b> menentukan metode dan penyimpanan; tiap band punya tooling pilihan. <b>Field dictionary</b> adalah dokumen hidup yang mencakup <b>objek API, granularitas, jendela waktu, dan missingness</b>. Data <b>raw</b> selalu disimpan dulu — tabulasi bisa dibuat ulang, raw yang hilang tidak bisa dibangun kembali.</p>
+
+<h2>13. Glosarium</h2>
+
+<ol>
+<li><b>Field dictionary</b> — dokumen kamus dataset: field, tipe, contoh, arti, missingness.</li>
+<li><b>Objek API</b> — satu paket field yang dikirim platform (post / user / media dll.).</li>
+<li><b>Nested field</b> — field bersarang; ditulis sebagai jalur penuh (<code>metrics.like</code>).</li>
+<li><b>Granularitas</b> — satuan satu baris: <i>row per post</i> atau <i>row per event</i>.</li>
+<li><b>Schema</b> — struktur resmi field yang disimpan platform &mdash; bisa berubah antar versi API.</li>
+<li><b>Unit multimodal</b> — satu konten yang pakai beberapa modalitas di post ID yang sama.</li>
+<li><b>On-screen text</b> — teks yang muncul di bingkai video atau sekitarnya.</li>
+<li><b>Watch time</b> — durasi tiap tontonan; kadang dijual sebagai detail ke-platform.</li>
+<li><b>Completion rate</b> — persentase video yg ditonton sampai akhir; produksi short-video.</li>
+<li><b>Retensi</b> — kurva jumlah penonton bertahan saat video berjalan.</li>
+<li><b>Jendela snapshot</b> — interval waktu kapan data benar-benar diberikan.</li>
+<li><b>Anonimisasi field</b> — menghapus/menghash field identitas pribadi sebelum dataset dipublikasikan.</li>
+<li><b>Checksum</b> — sidik digital file (SHA-256) yang membuktikan file tak rusak.</li>
+<li><b>ISO 8601</b> — format standard timestamp (YYYY-MM-DDTHH:MM:SSZ) dengan timezone.</li>
+<li><b>Normalization</b> — mengubah nilai ke satu skala agar revita bisa di pompale.</li>
+<li><b>Kolom identitas</b> — field yang bisa mengidentifikasi pengguna; wajib di-hash atau dihapus.</li>
+</ol>
+
+<h2>14. Referensi pokok</h2>
+
+<ol>
+<li>Zafarani, Abbasi, &amp; Liu (2014). <i>Social Media Mining</i>, ch. 2 — unit data dan skema platform.</li>
+<li>Russell (2019). <i>Mining the Social Web</i> (O&rsquo;Reilly) — data-model dan penyimpanan.</li>
+<li>Dokumen resmi dari objek API: <b>X API v2</b>, <b>TikTok Research API</b>, <b>Reddit API</b>, <b>Bluesky (AT Protocol)</b> — field konteks UI dan missingness.</li>
+<li>Dokumentasi Meta Content Library (2024–2026) — field arsip skala besar.</li>
+<li>MDPI (2026). <i>SMATM</i> — studi topic modeling multimodal untuk akun sosial.</li>
+<li>Wickham, Çetinkaya-Rundel &amp; Grolemund (2023). <i>R for Data Science</i>, ch. 12–13 — tidy data dan granularitas.</li>
+<li>UU PDP No. 27 Tahun 2022 — fondasi etika dataset dengan field identitas.</li>
+</ol>
+
+<div class="box">
+<span class="h">Jembatan ke Materi 4</span>
+Materi 4 memperluas akuisisi: bagaimana kelima-kelima field dictionary dari pertemuan ini dijejak sistem koleksi — <b>pagination, rate limit, quota, dan checksum</b> — plus praktik arsip yang reprodukibel.
+</div>
+
+</div>
+</body>
+</html>

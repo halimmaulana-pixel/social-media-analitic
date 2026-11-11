@@ -1,0 +1,81 @@
+topic: Isi Mata Kuliah Social Media Analytics di Era Tren Terkini (2024–2026)
+date: 2026-10-28
+locale: id-ID
+
+items:
+  # --- A. Fondasi & Platform ---
+  - id: fondasi
+    name: Fondasi & Ruang Lingkup Social Media Analytics
+  - id: ekosistem-platform
+    name: Ekosistem Platform Media Sosial (X, TikTok, Instagram, Reddit, Bluesky/AT Protocol, Threads)
+  - id: jenis-data
+    name: Jenis Data Sosial Media (teks, gambar, video, interaksi/graph, metadata, engagement log)
+
+  # --- B. Akuisisi Data ---
+  - id: akuisisi-api
+    name: Akses Data via API Resmi (X API v2, TikTok Research API, YouTube Data API, Reddit API, Bluesky)
+  - id: akuisisi-meta-fb
+    name: Meta Content Library & SOMAR Virtual Data Enclave (akses akademik gratis vs berbayar sejak 2026)
+  - id: scraping-legalitas
+    name: Web Scraping & Legalitas/ToS Platform
+  - id: preprocessing
+    name: Preprocessing Data Sosial (normalisasi, dedup, bot filtering, emoji/hashtag/slang, language detection)
+
+  # --- C. Analitik Teks & Konten ---
+  - id: text-mining-dasar
+    name: Text Mining Dasar (TF-IDF, n-gram, lexicon/dictionary)
+  - id: sentiment-analysis
+    name: Sentiment & Emotion Analysis (VADER, aspect-based, multibahasa)
+  - id: nlp-indonesia
+    name: Lokalisasi Bahasa Indonesia (IndoBERT, IndoRoBERTa, NusaBERT, InSet, dataset SMSS/hoaks ID)
+  - id: topic-modeling
+    name: Topic Modeling (LDA, NMF, BERTopic, Structural Topic Model/STM)
+  - id: nlp-modern-llm
+    name: NLP Modern berbasis Transformer & Foundation Model (BERT/RoBERTa/XLM-R, embeddings, semantic search)
+  - id: llm-as-annotator
+    name: LLM sebagai Annotator/Coder (zero-shot, prompt coding, reliability gate κ, human-in-the-loop, bias)
+  - id: agentic-ai-social-listening
+    name: Agentic AI untuk Social Listening & Market Research (agent workflows, MCP connectors, otomatisasi insight)
+  - id: analitik-multimodal
+    name: Analitik Multimodal (CLIP, OCR, audio Whisper, video LLM untuk short video)
+
+  # --- D. Jaringan, Difusi & Perilaku ---
+  - id: sna-dasar
+    name: Social Network Analysis (centrality, community detection Louvain/Leiden, brokerage)
+  - id: difusi-viralitas
+    name: Difusi Informasi & Viralitas (cascade modeling, epidemic models, trending prediction)
+  - id: influence-coordinated
+    name: Influence Maximization, Bot/Troll & Coordinated Inauthentic Behavior
+  - id: misinformation
+    name: Misinformation, Rumor Detection & Trust/Safety
+  - id: synthetic-content
+    name: Deteksi Konten Sintetis & AI-generated Misinformation
+  - id: engagement-perilaku
+    name: Perilaku & Engagement Analytics (prediksi engagement, temporal patterns, churn)
+  - id: audience-profiling
+    name: Audience Profiling, Demografi & Social Audience Measurement
+
+  # --- E. Domain Terapan Era 2024–2026 ---
+  - id: short-video-analytics
+    name: Short-Video Analytics (watch time/completion, saves/shares, hook & retention curve, Reels/Shorts/TikTok)
+  - id: creator-economy-commerce
+    name: Creator Economy & Social Commerce Analytics (TikTok Shop, live commerce, influencer/fake followers)
+  - id: data-access-governance
+    name: Data Access Politics & Platform Governance (X API pricing, Meta gated access, SOMAR berbayar 2026, DSA)
+
+  # --- F. Visualisasi, Tools, Etika ---
+  - id: visualisasi-dashboard
+    name: Visualisasi & Dashboard (Gephi, igraph, Streamlit/Shiny, Tableau/Power BI, data storytelling)
+  - id: tools-stack
+    name: Tools Stack Praktis (Python: pandas/transformers/networkx/bertopic/praw; R: rtweet/tidytext/quanteda; komersial: Brandwatch/Meltwater/Talkwalker/Sprout Social/Pulsar)
+  - id: etika-legal
+    name: Etika, Legal & Governance (IRB, GDPR/UU PDP Indonesia, data minimization, algorithmic accountability, bias NLP)
+
+  # --- G. Capstone ---
+  - id: studi-kasus-capstone
+    name: Studi Kasus & Capstone Project (dataset publik: wacana pilpres, brand sentiment TikTok, deteksi hoaks, election integrity)
+
+execution:
+  batch_size: 3
+  items_per_agent: 4
+  output_dir: ./results

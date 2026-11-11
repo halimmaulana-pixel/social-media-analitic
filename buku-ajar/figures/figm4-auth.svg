@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="470" viewBox="0 0 1000 470" role="img" aria-label="figm4 auth" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="ahb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 z" fill="#141414"/></marker></defs>
+<text x="22" y="30" font-size="15" fill="#0072B2" font-weight="bold" text-anchor="start">Tiga pola autentikasi API — siapa yang membawa identitas</text>
+<rect x="30" y="64" width="296" height="300" rx="10" fill="#F2F8FD" stroke="#0072B2" stroke-width="1.6"/>
+<text x="44" y="90" font-size="12.5" fill="#0072B2" font-weight="bold" text-anchor="start">A. BEARER TOKEN (APP-ONLY)</text>
+<rect x="46" y="134" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="178" y="154" font-size="12" fill="#141414" text-anchor="middle">Aplikasi riset</text>
+<line x1="178" y1="164" x2="178" y2="182" stroke="#0072B2" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="46" y="186" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="178" y="206" font-size="12" fill="#141414" text-anchor="middle">↓ header: Authorization: Bearer</text>
+<line x1="178" y1="216" x2="178" y2="234" stroke="#0072B2" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="46" y="238" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="178" y="258" font-size="12" fill="#141414" text-anchor="middle">Endpoint API platform</text>
+<text x="44" y="304" font-size="11.5" fill="#5A5A5A" text-anchor="start">Mudah untuk data publik; kuota paling tipis;</text>
+<text x="44" y="322" font-size="11.5" fill="#5A5A5A" text-anchor="start">tidak membawa akun user.</text>
+<text x="44" y="352" font-size="11.5" fill="#0072B2" font-weight="bold" text-anchor="start">contoh: X API v2 app-only</text>
+<rect x="348" y="64" width="296" height="300" rx="10" fill="#FDF1EA" stroke="#D55E00" stroke-width="1.6"/>
+<text x="362" y="90" font-size="12.5" fill="#D55E00" font-weight="bold" text-anchor="start">B. OAUTH 2.0 (USER CONTEXT)</text>
+<rect x="364" y="134" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="496" y="154" font-size="12" fill="#141414" text-anchor="middle">Aplikasi riset</text>
+<line x1="496" y1="164" x2="496" y2="182" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="364" y="186" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="496" y="206" font-size="12" fill="#141414" text-anchor="middle">↓ login + consent user</text>
+<line x1="496" y1="216" x2="496" y2="234" stroke="#D55E00" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="364" y="238" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="496" y="258" font-size="12" fill="#141414" text-anchor="middle">Access token (+ refresh)</text>
+<text x="362" y="304" font-size="11.5" fill="#5A5A5A" text-anchor="start">Aksi atas nama user; scope diberikan setipis</text>
+<text x="362" y="322" font-size="11.5" fill="#5A5A5A" text-anchor="start">mungkin.</text>
+<text x="362" y="352" font-size="11.5" fill="#D55E00" font-weight="bold" text-anchor="start">contoh: YouTube Data API v3</text>
+<rect x="666" y="64" width="296" height="300" rx="10" fill="#F7F2FC" stroke="#7A4FA0" stroke-width="1.6"/>
+<text x="680" y="90" font-size="12.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">C. APP PASSWORD (AT PROTOCOL)</text>
+<rect x="682" y="134" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="814" y="154" font-size="12" fill="#141414" text-anchor="middle">Aplikasi riset</text>
+<line x1="814" y1="164" x2="814" y2="182" stroke="#7A4FA0" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="682" y="186" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="814" y="206" font-size="12" fill="#141414" text-anchor="middle">↓ app-password khusus riset</text>
+<line x1="814" y1="216" x2="814" y2="234" stroke="#7A4FA0" stroke-width="1.6" marker-end="url(#ahb)"/>
+<rect x="682" y="238" width="264" height="30" rx="6" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="1.2"/>
+<text x="814" y="258" font-size="12" fill="#141414" text-anchor="middle">PDC server / firehose</text>
+<text x="680" y="304" font-size="11.5" fill="#5A5A5A" text-anchor="start">User tetap memegang kendali; bisa dicabut</text>
+<text x="680" y="322" font-size="11.5" fill="#5A5A5A" text-anchor="start">kapan saja.</text>
+<text x="680" y="352" font-size="11.5" fill="#7A4FA0" font-weight="bold" text-anchor="start">contoh: Bluesky AT Protocol</text>
+<rect x="30" y="382" width="940" height="62" rx="8" fill="#FFFFFF" stroke="#009E73" stroke-width="1.4"/>
+<text x="46" y="404" font-size="12.5" fill="#009E73" font-weight="bold" text-anchor="start">Aturan kredensial yang dipakai di lab</text>
+<text x="46" y="426" font-size="12.5" fill="#141414" text-anchor="start">•  Kredensial di file .env (di-gitignore); scope minimum; versi API dicantumkan di collection log.</text>
+<text x="46" y="444" font-size="12.5" fill="#141414" text-anchor="start">•  Secret pernah bocor = asumsi bocor: regenerate, jangan hanya menghapus dari repo.</text>
+</svg>

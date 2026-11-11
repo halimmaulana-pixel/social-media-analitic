@@ -1,0 +1,49 @@
+{
+  "module_name": "Short-Video Analytics: Watch Time, Completion, Saves, Hooks, Retention Curves",
+  "module_description": "Module 23 is the platform-mode module for the 2026 content default: TikTok/Reels/Shorts. It teaches the metrics that matter (watch time and completion rate, shares/saves/comments quality, retention curves, hooks in first 1-3 seconds), how ranking algorithms amplify these, and how to analyze them. Students analyze retention curves and hook structures of a set of short videos.",
+  "duration_weeks": 3,
+  "core_concepts": [
+    "Short-video ranking signals (watch time, completion, saves)",
+    "Retention curves and drop-off analysis",
+    "Hook and structure patterns",
+    "Cross-video comparison with audience normalization",
+    "Creator analytics definitions"
+  ],
+  "learning_outcomes": [
+    "C3 Extract and interpret retention and engagement metrics for short videos",
+    "C4 Compare video performance with audience-normalized metrics",
+    "C5 Translate video metrics into strategy recommendations"
+  ],
+  "methods_models": [
+    "Retention-curve feature extraction, hook classification (manual + model), engagement-rate normalization, regression on video features",
+    "A/B interpretation without running experiments"
+  ],
+  "evaluation_metrics": "Completion rate, average watch time, engagement-per-follower, correlation of features with retention, confidence intervals on small samples",
+  "pitfalls_limitations": "Metrics not comparable across creators without normalization, autoplay bias, sampling of only successful videos, engagement ≠ quality or truth",
+  "tools_stack": "yt-dlp for media, ffmpeg for frames, pandas, Whisper for audio, CLIP for frames, TikTok/YouTube analytics definitions",
+  "commercial_platforms": "Native creator analytics demos (TikTok Creator Marketplace, YouTube Studio)",
+  "tools_access_cost": "Media processing is free; native analytics need creator accounts",
+  "lab_activities": "Analyze 30 short videos: retention curves, hook patterns, and which features predict completion",
+  "datasets_apis": "Short-video sample with public metrics and downloadable media",
+  "assessment_methods": "Lab submission plus a short strategy recommendation memo; graded on metric validity and quality of reasoning",
+  "data_collection_workflow": "Collect short-video metadata and media -> transcribe/OCR -> extract retention and engagement features -> normalise by follower base -> analyse and report",
+  "textbooks": [
+    "Industry guides to short-video analytics (2025-2026)",
+    "Platform creator documentation"
+  ],
+  "key_papers": [
+    "2025-2026 creator-economy and TikTok analytics guides",
+    "Papers on short-video retention prediction"
+  ],
+  "trends_2024_2026": "2024-2026: TikTok overtook Instagram in several markets; short video became the default unit of social content, so SMA curricula must center video metrics, not just text",
+  "industry_relevance": "Directly used in short-form content strategy, creator-marketing measurement, and social-commerce analytics teams; the metrics in this module (watch time, completion, saves, CTR via video) are the same KPIs agencies report to clients.",
+  "localization_context": "Taught against the Indonesian short-video and live-commerce ecosystem (TikTok Shop, live shopping sessions, Shopee/Tokopedia live), which has different content formats and monetization mechanics from the US market.",
+  "ethics_regulation": "Disclosure of paid partnerships, sponsored content and affiliate links; UU PDP and platform rules on scraping engagement data; caution when profiling creators and audiences from public metrics.",
+  "case_study_scenarios": "Compare two local creators' retention patterns and recommend content changes.",
+  "deliverable_format": "Video analytics dataset + retention figures + recommendations memo",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "module_name": "Agentic AI for Social Listening and Market Research",
+  "module_description": "Module 14 covers agentic workflows: AI agents and connectors that plan, fetch, analyze and report (social-listening agents, MCP connectors, orchestration frameworks). It teaches how to build a reproducible multi-step research agent, evaluate outputs, and keep human oversight - the 2025-2026 skill shift for analysts from 'operating the tool' to 'specifying and auditing the agent'.",
+  "duration_weeks": 2,
+  "core_concepts": [
+    "Agent architectures: planner, tools, memory, evaluation",
+    "MCP-style tool connectors and APIs for research pipelines",
+    "Orchestration frameworks (LangGraph, CrewAI-style)",
+    "Human-in-the-loop and audit trails",
+    "Failure modes: hallucinated numbers, silent scope drift"
+  ],
+  "learning_outcomes": [
+    "C3 Build a scripted agent pipeline for a listening question",
+    "C4 Audit agent output and quantify error",
+    "C5 Design oversight and logging for a research assistant"
+  ],
+  "methods_models": "Tool-use patterns, structured outputs, deterministic QA checks on numbers, evaluation harness for agent output",
+  "evaluation_metrics": "Task-completion accuracy, hallucination rate, cost per completed task, time saved, reviewer agreement",
+  "pitfalls_limitations": "Hallucinated metrics, scope creep, unreproducible non-determinism, cost overruns, opaque prompts and no logging",
+  "tools_stack": "MCP servers, Claude/GPT SDKs with tool use, LangGraph/CrewAI, Python notebooks as deterministic fallback",
+  "commercial_platforms": "Industry comparison: Pulsar/Talkwalker AI agents, Meta agentic business tools (2026 announcements)",
+  "tools_access_cost": "Agent API costs scale with tool calls; keep deterministic steps in Python",
+  "lab_activities": "Build a two-step agent (retrieve + summarize + chart) for a fixed question and audit its numeric claims",
+  "datasets_apis": "Public data (Bluesky/Reddit) plus a fixed question brief",
+  "assessment_methods": "Lab notebook submission plus a 1-page interpretation with error analysis; graded on correctness, interpretation and documentation",
+  "data_collection_workflow": "Collect posts -> clean text -> build annotation/codebook (human + LLM) -> validate with kappa -> train/evaluate -> archive labelled data and prompts",
+  "textbooks": [
+    "Insight Platforms guides on AI agents for researchers (2025-2026)"
+  ],
+  "key_papers": [
+    "2025-2026 practitioner comparisons of social-listening AI agents",
+    "MRS training course on AI agents in market research (2026)"
+  ],
+  "trends_2024_2026": "2024-2026: agentic analytics moved into market research products; the analyst job shifted to specification, evaluation and governance of agents",
+  "industry_relevance": "Social media analyst, market-insights researcher, and data-journalist roles; this module is used for social listening, brand/issue monitoring, and audience research, and is referenced by industry certifications such as Meta Blueprint, Hootsuite Social Marketing, and Google Analytics.",
+  "localization_context": "Taught with Indonesian-language material (IndoBERT/IndoRoBERTa/NusaBERT, InSet lexicon, Indonesian social datasets) so students can reproduce the analysis on local corpora; comparisons are made against Anglocentric benchmarks whose labels often transfer poorly.",
+  "ethics_regulation": "Platform Terms of Service, UU PDP No. 27/2022 (Indonesian personal data protection), GDPR for EU-origin data, and IRB-style review for any data involving private individuals; public is not the same as consentable for social data.",
+  "case_study_scenarios": "Automate a weekly brand-mention digest with an agent, then audit a week of its numbers.",
+  "deliverable_format": "Agent pipeline code + audit report",
+  "uncertain": [
+    "exact_pricing_x_api_2026",
+    "somar_vde_fee_2026_in_idr",
+    "jumlah_minggu_tepat_per_modul"
+  ]
+}
