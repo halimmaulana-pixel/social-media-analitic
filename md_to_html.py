@@ -2,6 +2,7 @@
 """md_to_html.py: konversi tugas-mandiri-m1-6.md menjadi satu berkas HTML
 dengan gaya yang sama seperti buku ajar (karena markupnya dikendalikan:
 h1-h3, tabel, bold, blockquote, list, kode, hr)."""
+import os
 import re
 import sys
 
@@ -19,6 +20,8 @@ th,td{border:1px solid #cbd5e1;padding:7px 9px;text-align:left;vertical-align:to
 th{background:#e2e8f0}
 blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:1.1em 0;padding:10px 14px;border-radius:0 8px 8px 0}
 code{font-family:'DejaVu Sans Mono',monospace;font-size:.88em;background:#eef2ff;padding:1px 5px;border-radius:4px}
+pre{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:.85em}
+pre code{background:none;color:inherit;padding:0}
 strong{color:#0f172a}
 ol,ul{padding-left:1.4em}
 li{margin:.3em 0}
@@ -44,6 +47,11 @@ def rows_of(lines):
 
 
 def main():
+    import sys
+    global SRC, DST
+    if len(sys.argv) > 1:
+        SRC = sys.argv[1]
+        DST = os.path.splitext(SRC)[0] + ".html"
     md = open(SRC, encoding="utf-8").read().split("\n")
     body = []
     i, n = 0, len(md)
@@ -62,6 +70,16 @@ def main():
         elif t == "---":
             body.append("<hr/>")
             i += 1
+        elif t.startswith("```"):
+            i += 1
+            code = []
+            while i < n and not md[i].strip().startswith("```"):
+                code.append(md[i])
+                i += 1
+            i += 1
+            body.append("<pre><code>%s</code></pre>" %
+                        ("\n".join(code).replace("&", "&amp;")
+                         .replace("<", "&lt;").replace(">", "&gt;")))
         elif t.startswith("|"):
             tbl = []
             while i < n and md[i].strip().startswith("|"):
